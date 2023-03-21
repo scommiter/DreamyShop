@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "4mFyVvooGv29LsgabhJD1Fkzo7Te1cttuKelSFHkr6oMYc/91k22MyAmQo1HQa3OgJldAOIU7k3BrrzfYdw3Eg==",
+  "dgSpecHash": "fSuy58Vee0apyK/rv+BW+xC+Aqs+jySu/PQvB/rOZs+5CneX5uRr31+bXXr47TowwfMnKschzVBMTFMBF4W+Lw==",
   "success": true,
-  "projectFilePath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Authentication\\DreamyShop.Authentication.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\linh.nguyen22\\Desktop\\Tpl\\DreamyShop\\BE\\DreamyShop.Authentication\\DreamyShop.Authentication.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.12\\microsoft.aspnetcore.app.ref.6.0.12.nupkg.sha512",
+    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.12\\microsoft.windowsdesktop.app.ref.6.0.12.nupkg.sha512",
+    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.12\\microsoft.netcore.app.ref.6.0.12.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -22,3 +22,15 @@ E:\MyProject\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\DreamyShop.
 E:\MyProject\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\refint\DreamyShop.Domain.Shared.dll
 E:\MyProject\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\DreamyShop.Domain.Shared.pdb
 E:\MyProject\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\ref\DreamyShop.Domain.Shared.dll
+C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Domain.Shared\bin\Debug\net6.0\DreamyShop.Domain.Shared.deps.json
+C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Domain.Shared\bin\Debug\net6.0\DreamyShop.Domain.Shared.dll
+C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Domain.Shared\bin\Debug\net6.0\DreamyShop.Domain.Shared.pdb
+C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\DreamyShop.Domain.Shared.csproj.AssemblyReference.cache
+C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\DreamyShop.Domain.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\DreamyShop.Domain.Shared.AssemblyInfoInputs.cache
+C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\DreamyShop.Domain.Shared.AssemblyInfo.cs
+C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\DreamyShop.Domain.Shared.csproj.CoreCompileInputs.cache
+C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\DreamyShop.Domain.Shared.dll
+C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\refint\DreamyShop.Domain.Shared.dll
+C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\DreamyShop.Domain.Shared.pdb
+C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\ref\DreamyShop.Domain.Shared.dll

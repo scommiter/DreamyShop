@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="BussinessLogic\**" />
+    <Compile Remove="Repository\**" />
+    <Content Remove="BussinessLogic\**" />
+    <Content Remove="Repository\**" />
+    <EmbeddedResource Remove="BussinessLogic\**" />
+    <EmbeddedResource Remove="Repository\**" />
+    <None Remove="BussinessLogic\**" />
+    <None Remove="Repository\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.15">
       <PrivateAssets>all</PrivateAssets>
@@ -22,8 +33,6 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="BussinessLogic\" />
-    <Folder Include="Repository\" />
   </ItemGroup>
 
   <ItemGroup>
