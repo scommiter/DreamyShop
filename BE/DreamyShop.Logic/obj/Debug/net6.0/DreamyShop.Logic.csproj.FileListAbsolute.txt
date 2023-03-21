@@ -10,3 +10,15 @@ C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Logic\obj\Debug\net6
 C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Logic\obj\Debug\net6.0\refint\DreamyShop.Logic.dll
 C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Logic\obj\Debug\net6.0\DreamyShop.Logic.pdb
 C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Logic\obj\Debug\net6.0\ref\DreamyShop.Logic.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\bin\Debug\net6.0\DreamyShop.Logic.deps.json
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\bin\Debug\net6.0\DreamyShop.Logic.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\bin\Debug\net6.0\DreamyShop.Logic.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\obj\Debug\net6.0\DreamyShop.Logic.csproj.AssemblyReference.cache
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\obj\Debug\net6.0\DreamyShop.Logic.GeneratedMSBuildEditorConfig.editorconfig
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\obj\Debug\net6.0\DreamyShop.Logic.AssemblyInfoInputs.cache
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\obj\Debug\net6.0\DreamyShop.Logic.AssemblyInfo.cs
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\obj\Debug\net6.0\DreamyShop.Logic.csproj.CoreCompileInputs.cache
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\obj\Debug\net6.0\DreamyShop.Logic.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\obj\Debug\net6.0\refint\DreamyShop.Logic.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\obj\Debug\net6.0\DreamyShop.Logic.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\obj\Debug\net6.0\ref\DreamyShop.Logic.dll

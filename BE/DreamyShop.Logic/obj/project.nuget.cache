@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gYCjtD6dxNGnKFrLC2AOgn6sy7kcp4If5HYfHIsKXgKhMKxgnhaRzzZCDedmH0PqJ3ncrO0MRwJSqbumvfMPkw==",
+  "dgSpecHash": "RXfHkvYWVzCgAgzoVbn9EYNYyu8rDVj1uO7cvSNW/wXUlUbN8LuBrDGOiJrNJlL5P580SBgthGIF1VsIdhHIJQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\linh.nguyen22\\Desktop\\Tpl\\DreamyShop\\BE\\DreamyShop.Logic\\DreamyShop.Logic.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.12\\microsoft.aspnetcore.app.ref.6.0.12.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.12\\microsoft.windowsdesktop.app.ref.6.0.12.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.12\\microsoft.netcore.app.ref.6.0.12.nupkg.sha512"
-  ],
+  "projectFilePath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Logic\\DreamyShop.Logic.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

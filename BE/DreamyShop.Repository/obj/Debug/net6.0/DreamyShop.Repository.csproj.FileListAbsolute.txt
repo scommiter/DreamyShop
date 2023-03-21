@@ -10,3 +10,15 @@ C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Repository\obj\Debug
 C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Repository\obj\Debug\net6.0\refint\DreamyShop.Repository.dll
 C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Repository\obj\Debug\net6.0\DreamyShop.Repository.pdb
 C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Repository\obj\Debug\net6.0\ref\DreamyShop.Repository.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\bin\Debug\net6.0\DreamyShop.Repository.deps.json
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\bin\Debug\net6.0\DreamyShop.Repository.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\bin\Debug\net6.0\DreamyShop.Repository.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\obj\Debug\net6.0\DreamyShop.Repository.csproj.AssemblyReference.cache
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\obj\Debug\net6.0\DreamyShop.Repository.GeneratedMSBuildEditorConfig.editorconfig
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\obj\Debug\net6.0\DreamyShop.Repository.AssemblyInfoInputs.cache
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\obj\Debug\net6.0\DreamyShop.Repository.AssemblyInfo.cs
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\obj\Debug\net6.0\DreamyShop.Repository.csproj.CoreCompileInputs.cache
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\obj\Debug\net6.0\DreamyShop.Repository.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\obj\Debug\net6.0\refint\DreamyShop.Repository.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\obj\Debug\net6.0\DreamyShop.Repository.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\obj\Debug\net6.0\ref\DreamyShop.Repository.dll
