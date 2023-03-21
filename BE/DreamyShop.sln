@@ -22,8 +22,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Const", "Const", "{B7C89EDA-8540-4EF3-8886-AB0BBC462077}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Exceptions", "Exceptions", "{1FC44B41-6B1F-4787-A4B9-D5EF86A0D089}"
+	ProjectSection(SolutionItems) = preProject
+		ErrorMessages.cs = ErrorMessages.cs
+	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Log", "Log", "{01CFA10C-F29C-44E2-8EE4-9072D97BEF0B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logs", "Logs", "{01CFA10C-F29C-44E2-8EE4-9072D97BEF0B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BussinessLogic", "BussinessLogic", "{E48C6916-DE0A-4368-99BF-16AA971535EB}"
 EndProject
@@ -32,6 +35,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{955BE3A7-8E67-43F6-AE44-C8557532EB13}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DreamyShop.Repository", "DreamyShop.Repository\DreamyShop.Repository.csproj", "{098B3CCF-3496-4C6A-A816-63EC486A162C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{79730C2E-B7ED-4053-BF49-49F5331A36E0}"
+	ProjectSection(SolutionItems) = preProject
+		ErrorMessages.resx = ErrorMessages.resx
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +85,7 @@ Global
 		{01CFA10C-F29C-44E2-8EE4-9072D97BEF0B} = {D39373E5-06D1-4827-89DB-E380A31C1817}
 		{9793DD53-1CD3-479F-BB9B-E9825612A90C} = {E48C6916-DE0A-4368-99BF-16AA971535EB}
 		{098B3CCF-3496-4C6A-A816-63EC486A162C} = {955BE3A7-8E67-43F6-AE44-C8557532EB13}
+		{79730C2E-B7ED-4053-BF49-49F5331A36E0} = {D39373E5-06D1-4827-89DB-E380A31C1817}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {24B0160A-8959-42F5-B056-CDFD184B3AD1}
