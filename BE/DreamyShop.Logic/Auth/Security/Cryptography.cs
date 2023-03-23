@@ -12,26 +12,23 @@ namespace DreamyShop.Logic.Auth.Security
             {
                 rng.GetBytes(salt);
             }
-            string encryptedPassw = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+            return new HashSalt { Hash = EncryptedPassw(password, salt), Salt = salt };
+        }
+
+        public static bool VerifyPassword(string enteredPassword, byte[] salt, string storedPassword)
+        {
+            return EncryptedPassw(enteredPassword, salt) == storedPassword;
+        }
+
+        private static string EncryptedPassw(string password, byte[] salt)
+        {
+            return Convert.ToBase64String(KeyDerivation.Pbkdf2(
                 password: password,
                 salt: salt,
                 prf: KeyDerivationPrf.HMACSHA512,
                 iterationCount: 10000,
                 numBytesRequested: 256 / 8
             ));
-            return new HashSalt { Hash = encryptedPassw, Salt = salt };
-        }
-
-        public static bool VerifyPassword(string enteredPassword, byte[] salt, string storedPassword)
-        {
-            string encryptedPassw = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: enteredPassword,
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA512,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8
-            ));
-            return encryptedPassw == storedPassword;
         }
     }
 }
