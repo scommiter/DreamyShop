@@ -40,3 +40,17 @@ C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net
 C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.pdb
 C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.genruntimeconfig.cache
 C:\Users\linh.nguyen22\Desktop\Tpl\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\ref\DreamyShop.Domain.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Domain\bin\Debug\net6.0\DreamyShop.Domain.deps.json
+Z:\Project\DreamyShop\BE\DreamyShop.Domain\bin\Debug\net6.0\DreamyShop.Domain.runtimeconfig.json
+Z:\Project\DreamyShop\BE\DreamyShop.Domain\bin\Debug\net6.0\DreamyShop.Domain.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Domain\bin\Debug\net6.0\DreamyShop.Domain.pdb
+Z:\Project\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.csproj.AssemblyReference.cache
+Z:\Project\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.GeneratedMSBuildEditorConfig.editorconfig
+Z:\Project\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.AssemblyInfoInputs.cache
+Z:\Project\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.AssemblyInfo.cs
+Z:\Project\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.csproj.CoreCompileInputs.cache
+Z:\Project\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\refint\DreamyShop.Domain.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.pdb
+Z:\Project\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.genruntimeconfig.cache
+Z:\Project\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\ref\DreamyShop.Domain.dll

@@ -20,21 +20,22 @@ namespace DreamyShop.Domain
         [Column(TypeName = "date")]
         public DateTime? Dob { get; set; }
         [StringLength(250)]
-        public string Avatar { get; set; }
+        public string? Avatar { get; set; }
         [StringLength(150)]
         public string Email { get; set; }
         [StringLength(50)]
         public string Phone { get; set; }
         [StringLength(50)]
-        public string IdentityID { get; set; }
+        public string? IdentityID { get; set; }
         [StringLength(250)]
-        public string Address { get; set; }
+        public string? Address { get; set; }
         [StringLength(150)]
-        public string Occupation { get; set; }
+        public string? Occupation { get; set; }
         [StringLength(150)]
-        public string Country { get; set; }
+        public string? Country { get; set; }
         [StringLength(50)]
         public string Password { get; set; }
+        public byte[] StoredSalt { get; set; }
 
         [InverseProperty(nameof(Role.User))]
         public virtual ICollection<Role> Roles { get; set; }

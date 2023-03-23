@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DreamyShop.EntityFrameworkCore.Migrations
 {
-    public partial class initialDreamyShopDb : Migration
+    public partial class initDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -100,14 +100,15 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     FullName = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     GenderType = table.Column<bool>(type: "bit", nullable: true),
                     Dob = table.Column<DateTime>(type: "date", nullable: true),
-                    Avatar = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Avatar = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    IdentityID = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    Occupation = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    IdentityID = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Occupation = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
+                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    StoredSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
                 },
                 constraints: table =>
                 {

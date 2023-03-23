@@ -32,11 +32,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DreamyShop.Infrastructure\DreamyShop.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\DreamyShop.Logic\DreamyShop.Logic.csproj" />
+    <ProjectReference Include="..\DreamyShop.Repository\DreamyShop.Repository.csproj" />
   </ItemGroup>
 
 </Project>

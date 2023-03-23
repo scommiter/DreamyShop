@@ -6,4 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="7.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DreamyShop.Common\DreamyShop.Common.csproj" />
+    <ProjectReference Include="..\DreamyShop.Domain.Shared\DreamyShop.Domain.Shared.csproj" />
+    <ProjectReference Include="..\DreamyShop.Infrastructure\DreamyShop.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\DreamyShop.Repository\DreamyShop.Repository.csproj" />
+  </ItemGroup>
+
 </Project>
