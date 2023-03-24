@@ -287,3 +287,4 @@ Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.Domain.Share
 Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.Logic.dll
 Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.Logic.pdb
 Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.Domain.Shared.pdb
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

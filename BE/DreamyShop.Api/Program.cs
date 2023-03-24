@@ -1,7 +1,11 @@
 using DreamyShop.Api.Configurations;
+using DreamyShop.Api.Middleware;
 using DreamyShop.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,12 +16,32 @@ builder.Services.AddDbContext<DreamyShopDbContext>(options => options.UseSqlServ
 builder.Services.MapServices();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                    ValidAudience = builder.Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:AccessTokenEncriptionKey"])),
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger eShop Solution", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Dreamy", Version = "v1" });
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -49,7 +73,6 @@ builder.Services.AddSwaggerGen(c =>
                         });
 });
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -58,14 +81,26 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseAuthentication();
+
+app.UseCors("AllowAll");
+
+app.UseRouting();
 
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
+app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<JwtMiddleware>();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapDefaultControllerRoute();
+});
 
 app.Run();

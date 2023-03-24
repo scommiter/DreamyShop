@@ -11,6 +11,7 @@ namespace DreamyShop.Api.Configurations
         public static void MapServices(this IServiceCollection services)
         {
             services.AddSingleton<AccessToken>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();

@@ -2,31 +2,31 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "Microsoft.AspNetCore.Cryptography.Internal/7.0.4": {
+      "Microsoft.AspNetCore.Cryptography.Internal/6.0.15": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.Internal.dll": {
+          "lib/net6.0/Microsoft.AspNetCore.Cryptography.Internal.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.Internal.dll": {
+          "lib/net6.0/Microsoft.AspNetCore.Cryptography.Internal.dll": {
             "related": ".xml"
           }
         }
       },
-      "Microsoft.AspNetCore.Cryptography.KeyDerivation/7.0.4": {
+      "Microsoft.AspNetCore.Cryptography.KeyDerivation/6.0.15": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Cryptography.Internal": "7.0.4"
+          "Microsoft.AspNetCore.Cryptography.Internal": "6.0.15"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {
+          "lib/net6.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {
+          "lib/net6.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {
             "related": ".xml"
           }
         }
@@ -853,41 +853,41 @@
     }
   },
   "libraries": {
-    "Microsoft.AspNetCore.Cryptography.Internal/7.0.4": {
-      "sha512": "DmdKVBQCY34nO9pm1CijbT+AZc8tndD1uGXLUySaznl63i+xTe4PB0Gl5hQY+XMdEpjGN1ShER1ULYuAnOl6Fw==",
+    "Microsoft.AspNetCore.Cryptography.Internal/6.0.15": {
+      "sha512": "Vbz5FvG1T5i4Y/gdHRmrWxtrLNNGkQvbs+tq1yivdwI1idXAX1JmVrwX0m060OClOTcjgwEzE5ljWz9grkMtHQ==",
       "type": "package",
-      "path": "microsoft.aspnetcore.cryptography.internal/7.0.4",
+      "path": "microsoft.aspnetcore.cryptography.internal/6.0.15",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "THIRD-PARTY-NOTICES.TXT",
-        "lib/net462/Microsoft.AspNetCore.Cryptography.Internal.dll",
-        "lib/net462/Microsoft.AspNetCore.Cryptography.Internal.xml",
-        "lib/net7.0/Microsoft.AspNetCore.Cryptography.Internal.dll",
-        "lib/net7.0/Microsoft.AspNetCore.Cryptography.Internal.xml",
+        "lib/net461/Microsoft.AspNetCore.Cryptography.Internal.dll",
+        "lib/net461/Microsoft.AspNetCore.Cryptography.Internal.xml",
+        "lib/net6.0/Microsoft.AspNetCore.Cryptography.Internal.dll",
+        "lib/net6.0/Microsoft.AspNetCore.Cryptography.Internal.xml",
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.Internal.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.Internal.xml",
-        "microsoft.aspnetcore.cryptography.internal.7.0.4.nupkg.sha512",
+        "microsoft.aspnetcore.cryptography.internal.6.0.15.nupkg.sha512",
         "microsoft.aspnetcore.cryptography.internal.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Cryptography.KeyDerivation/7.0.4": {
-      "sha512": "LeUReW5ArMgKDmoQuuVNf7mee2K57hwhBsavNkLqlmZvGOCWdj1ySHQewQeRrletHtpXgeOZp2B67YZYMUYa6Q==",
+    "Microsoft.AspNetCore.Cryptography.KeyDerivation/6.0.15": {
+      "sha512": "tAl4/XiTQ0YU27arnxe/PbRJzHteMm3aGy9EjONoRJlhyy8wOrEfzxTmezSyXJktN0tu4wSoeal7h9apoyREIg==",
       "type": "package",
-      "path": "microsoft.aspnetcore.cryptography.keyderivation/7.0.4",
+      "path": "microsoft.aspnetcore.cryptography.keyderivation/6.0.15",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "THIRD-PARTY-NOTICES.TXT",
-        "lib/net462/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll",
-        "lib/net462/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
-        "lib/net7.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll",
-        "lib/net7.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
+        "lib/net461/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll",
+        "lib/net461/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
+        "lib/net6.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll",
+        "lib/net6.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
-        "microsoft.aspnetcore.cryptography.keyderivation.7.0.4.nupkg.sha512",
+        "microsoft.aspnetcore.cryptography.keyderivation.6.0.15.nupkg.sha512",
         "microsoft.aspnetcore.cryptography.keyderivation.nuspec"
       ]
     },
@@ -2115,7 +2115,7 @@
       "DreamyShop.Domain.Shared >= 1.0.0",
       "DreamyShop.EntityFrameworkCore >= 1.0.0",
       "DreamyShop.Repository >= 1.0.0",
-      "Microsoft.AspNetCore.Cryptography.KeyDerivation >= 7.0.4"
+      "Microsoft.AspNetCore.Cryptography.KeyDerivation >= 6.0.15"
     ]
   },
   "packageFolders": {
@@ -2179,7 +2179,7 @@
         "dependencies": {
           "Microsoft.AspNetCore.Cryptography.KeyDerivation": {
             "target": "Package",
-            "version": "[7.0.4, )"
+            "version": "[6.0.15, )"
           }
         },
         "imports": [

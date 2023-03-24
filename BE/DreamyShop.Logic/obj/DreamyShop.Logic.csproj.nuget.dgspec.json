@@ -398,7 +398,7 @@
           "dependencies": {
             "Microsoft.AspNetCore.Cryptography.KeyDerivation": {
               "target": "Package",
-              "version": "[7.0.4, )"
+              "version": "[6.0.15, )"
             }
           },
           "imports": [

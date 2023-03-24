@@ -8,5 +8,6 @@ namespace DreamyShop.Logic.Auth
     {
         Task<ApiResult<AuthResult>> Register(RegisterDto registerDto);
         Task<ApiResult<AuthResult>> Login(LoginDto loginDto);
+        Task<ApiResult<bool>> ChangePassword(string email, UserChangePassword userChangePassword);
     }
 }

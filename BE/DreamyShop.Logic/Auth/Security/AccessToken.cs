@@ -10,11 +10,11 @@ namespace DreamyShop.Logic.Auth.Security
 {
     public class AccessToken
     {
-        private readonly string _EncriptionKey;
+        private readonly IConfiguration _config;
 
-        public AccessToken(IConfiguration Configuration)
+        public AccessToken(IConfiguration config)
         {
-            _EncriptionKey = Configuration["AccessTokenEncriptionKey"];
+            _config = config;
         }
 
         public string GenerateJwtToken(AuthEntity auth)
@@ -24,30 +24,30 @@ namespace DreamyShop.Logic.Auth.Security
             var email = auth.Email;
             var phone = auth.Phone;
             var roleTypesStr = auth.RoleTypes.ToJsonString();
-
-            // generate token that is valid for 7 days
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_EncriptionKey);
-            var tokenDescriptor = new SecurityTokenDescriptor
+            var claims = new[]
             {
-                Subject = new ClaimsIdentity(new[] {
-                    new Claim("FullName", fullName),
-                    new Claim("UserID", userID),
-                    new Claim("Email", email),
-                    new Claim("Phone", phone),
-                    new Claim("RoleTypes", roleTypesStr),
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                new Claim("FullName", fullName),
+                new Claim("UserID", userID),
+                new Claim("Email", email),
+                new Claim("Phone", phone),
+                new Claim("RoleTypes", roleTypesStr)
             };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:AccessTokenEncriptionKey"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: _config["Jwt:Issuer"],
+                audience: _config["Jwt:Audience"],
+                claims,
+                expires: DateTime.Now.AddHours(3),
+                signingCredentials: creds);
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
         public AuthEntity ParseJwtToken(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_EncriptionKey);
+            var key = Encoding.UTF8.GetBytes(_config["Jwt:AccessTokenEncriptionKey"]);
             tokenHandler.ValidateToken(token, new TokenValidationParameters
             {
                 ValidateIssuerSigningKey = true,

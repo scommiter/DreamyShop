@@ -19,8 +19,8 @@ namespace DreamyShop.Logic.Auth
         private readonly AccessToken _tokenService;
 
         public AuthLogic(
-            DreamyShopDbContext context, 
-            IRepositoryWrapper repository, 
+            DreamyShopDbContext context,
+            IRepositoryWrapper repository,
             AccessToken tokenService)
         {
             _context = context;
@@ -37,6 +37,10 @@ namespace DreamyShop.Logic.Auth
                 return new ApiErrorResult<AuthResult>((int)ErrorCodes.CredentialsInvalid);
             }
             var user = _context.Users.FirstOrDefault(u => u.Email == loginDto.Email);
+            if (user == null)
+            {
+                return new ApiErrorResult<AuthResult>((int)ErrorCodes.DataEntryIsNotExisted);
+            }
             var isPasswordMatched = Cryptography.VerifyPassword(loginDto.Password, user.StoredSalt, user.Password);
             if (isPasswordMatched)
             {
@@ -62,7 +66,7 @@ namespace DreamyShop.Logic.Auth
             {
                 return new ApiErrorResult<AuthResult>((int)ErrorCodes.CredentialsInvalid);
             }
-           
+
         }
 
         public async Task<ApiResult<AuthResult>> Register(RegisterDto registerDto)
@@ -99,6 +103,25 @@ namespace DreamyShop.Logic.Auth
                 User = userResult,
             };
             return new ApiSuccessResult<AuthResult>(result);
+        }
+
+        public async Task<ApiResult<bool>> ChangePassword(string email, UserChangePassword userChangePassword)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Email == email);
+            if(user == null)
+            {
+                return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
+            }
+            var isPasswordMatched = Cryptography.VerifyPassword(userChangePassword.OldPassword, user.StoredSalt, user.Password);
+            if (isPasswordMatched)
+            {
+                var hashsalt = Cryptography.EncryptPassword(userChangePassword.NewPassword);
+                user.Password = hashsalt.Hash;
+                user.StoredSalt = hashsalt.Salt;
+                _context.SaveChanges();
+                return new ApiSuccessResult<bool>(true);
+            }
+            return new ApiErrorResult<bool>((int)ErrorCodes.CredentialsInvalid);
         }
     }
 }

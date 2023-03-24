@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "uLo5FOrAdMq9rL+sw9yawMM4koZBGK8cGQwWIwwHMwYKjeEKUXovuqXDuCTNCPX1WRcRxKmXWVLUQj+/VWVJtg==",
+  "dgSpecHash": "KvER6tfm4RJZKDHUljb+f17c2PCCvfk/zPL2XLKvKxa3Wo14tjgnkx9OQxoiD0+rq1LnTMBOHHV6JhCMka/oAQ==",
   "success": true,
   "projectFilePath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Logic\\DreamyShop.Logic.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\7.0.4\\microsoft.aspnetcore.cryptography.internal.7.0.4.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\7.0.4\\microsoft.aspnetcore.cryptography.keyderivation.7.0.4.nupkg.sha512",
+    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.15\\microsoft.aspnetcore.cryptography.internal.6.0.15.nupkg.sha512",
+    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.15\\microsoft.aspnetcore.cryptography.keyderivation.6.0.15.nupkg.sha512",
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
