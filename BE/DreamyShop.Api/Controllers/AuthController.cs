@@ -48,6 +48,10 @@ namespace DreamyShop.Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             var user = (AuthEntity)HttpContext.Items["Auth"];
+            if(user == null)
+            {
+                return NotFound(user);
+            }
             var result = await _authService.ChangePassword(user.Email, userLoginDto);
             if (result.Result == null)
             {
