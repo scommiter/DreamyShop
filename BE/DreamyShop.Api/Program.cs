@@ -1,5 +1,6 @@
 using DreamyShop.Api.Configurations;
 using DreamyShop.Api.Middleware;
+using DreamyShop.Domain.Shared.AutoMapper;
 using DreamyShop.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,8 @@ builder.Services.AddDbContext<DreamyShopDbContext>(options => options.UseSqlServ
     builder.Configuration.GetConnectionString("DreamyShopDBContext")
     ));
 builder.Services.MapServices();
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services.AddControllers();
 

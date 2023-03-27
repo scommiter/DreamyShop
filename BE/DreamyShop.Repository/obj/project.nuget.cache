@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "rm4sA1K1g6xycDHHPsFfOz7/B+J1/Xon1lE7p2iXJert2WBCik6GGJ9xjuBu7bRCm5w3l6oX0IGVyRkz7L5+vQ==",
+  "dgSpecHash": "mT4Tm8lmxqfxbSVQhs5JUDmGeBVV+096uA62LIBlHX/ib7rzYsoiD58r4oSA19sSxJ6w+i8+L6XJZTKceHlsqQ==",
   "success": true,
   "projectFilePath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.15\\microsoft.entityframeworkcore.6.0.15.nupkg.sha512",

@@ -1,4 +1,5 @@
-﻿using DreamyShop.Common.Exceptions;
+﻿using AutoMapper;
+using DreamyShop.Common.Exceptions;
 using DreamyShop.Common.Results;
 using DreamyShop.Domain;
 using DreamyShop.Domain.Shared.Dtos;
@@ -17,15 +18,18 @@ namespace DreamyShop.Logic.Auth
         private readonly DreamyShopDbContext _context;
         private readonly IRepositoryWrapper _repository;
         private readonly AccessToken _tokenService;
+        private readonly IMapper _mapper;
 
         public AuthLogic(
             DreamyShopDbContext context,
             IRepositoryWrapper repository,
-            AccessToken tokenService)
+            AccessToken tokenService,
+            IMapper mapper)
         {
             _context = context;
             _repository = repository;
             _tokenService = tokenService;
+            _mapper = mapper;
         }
 
         public async Task<ApiResult<AuthResult>> Login(LoginDto loginDto)
@@ -122,6 +126,29 @@ namespace DreamyShop.Logic.Auth
                 return new ApiSuccessResult<bool>(true);
             }
             return new ApiErrorResult<bool>((int)ErrorCodes.CredentialsInvalid);
+        }
+
+        public async Task<ApiResult<bool>> UpdateUser(string userId, UserUpdateDto userUpdateDto)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Id == Guid.Parse(userId));
+            if (user == null)
+            {
+                return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
+            }
+            //user.FullName = userUpdateDto.FullName;
+            //user.Email = userUpdateDto.Email;
+            //user.GenderType = userUpdateDto.GenderType;
+            //user.Dob = userUpdateDto.Dob;
+            //user.Avatar = userUpdateDto.Avatar;
+            //user.Phone = userUpdateDto.Phone;
+            //user.IdentityID = userUpdateDto.IdentityID;
+            //user.Address = userUpdateDto.Address;
+            //user.Occupation = userUpdateDto.Occupation;
+            //user.Country = userUpdateDto.Country;
+            var updateUser = _mapper.Map(userUpdateDto, user);
+            _repository.Auth.Update(updateUser);
+            _context.SaveChanges();
+            return new ApiSuccessResult<bool>(true);
         }
     }
 }
