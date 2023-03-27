@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DreamyShop.EntityFrameworkCore.Migrations
 {
-    public partial class initDB : Migration
+    public partial class InitDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,9 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -73,7 +75,10 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     DiscountAmount = table.Column<double>(type: "float", nullable: false),
                     LimitedUsageTimes = table.Column<bool>(type: "bit", nullable: false),
                     MaximumDiscountAmount = table.Column<long>(type: "bigint", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    StatusID = table.Column<byte>(type: "tinyint", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -108,7 +113,10 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     Occupation = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
                     Country = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
                     Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    StoredSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: false)
+                    StoredSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    StatusID = table.Column<byte>(type: "tinyint", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -155,7 +163,10 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     ThumbnailPicture = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     CategoryName = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    CategorySlug = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                    CategorySlug = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    StatusID = table.Column<byte>(type: "tinyint", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -238,7 +249,10 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RoleType = table.Column<byte>(type: "tinyint", nullable: false),
-                    ProfileUrl = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false)
+                    ProfileUrl = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
+                    StatusID = table.Column<byte>(type: "tinyint", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -571,6 +571,7 @@
       },
       "DreamyShop.Domain/1.0.0": {
         "dependencies": {
+          "DreamyShop.Domain.Shared": "1.0.0",
           "Microsoft.EntityFrameworkCore": "6.0.15",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.15"
         },
@@ -580,8 +581,7 @@
       },
       "DreamyShop.Domain.Shared/1.0.0": {
         "dependencies": {
-          "AutoMapper": "12.0.1",
-          "DreamyShop.Domain": "1.0.0"
+          "AutoMapper": "12.0.1"
         },
         "runtime": {
           "DreamyShop.Domain.Shared.dll": {}

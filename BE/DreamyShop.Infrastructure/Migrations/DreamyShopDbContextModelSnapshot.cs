@@ -28,6 +28,12 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
@@ -157,6 +163,12 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -189,6 +201,9 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
 
                     b.Property<int>("SortOrder")
                         .HasColumnType("int");
+
+                    b.Property<byte>("StatusID")
+                        .HasColumnType("tinyint");
 
                     b.Property<string>("ThumbnailPicture")
                         .IsRequired()
@@ -483,6 +498,12 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime2");
+
                     b.Property<double>("DiscountAmount")
                         .HasColumnType("float");
 
@@ -505,6 +526,9 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
 
                     b.Property<bool>("RequireUseCouponCode")
                         .HasColumnType("bit");
+
+                    b.Property<byte>("StatusID")
+                        .HasColumnType("tinyint");
 
                     b.Property<DateTime>("ValidDate")
                         .HasColumnType("datetime2");
@@ -577,12 +601,21 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ProfileUrl")
                         .IsRequired()
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
                     b.Property<byte>("RoleType")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("StatusID")
                         .HasColumnType("tinyint");
 
                     b.Property<Guid>("UserID")
@@ -628,6 +661,12 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("Dob")
                         .HasColumnType("date");
 
@@ -661,6 +700,9 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<byte>("StatusID")
+                        .HasColumnType("tinyint");
 
                     b.Property<byte[]>("StoredSalt")
                         .IsRequired()

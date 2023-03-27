@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using DreamyShop.Common.Exceptions;
 using DreamyShop.Common.Results;
-using DreamyShop.Domain;
 using DreamyShop.Domain.Shared.Dtos;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Logic.Auth.Result;
@@ -9,7 +8,6 @@ using DreamyShop.Logic.Auth.Security;
 using DreamyShop.Repository.Helpers;
 using DreamyShop.Repository.RepositoryWrapper;
 using Microsoft.EntityFrameworkCore;
-using System.Numerics;
 
 namespace DreamyShop.Logic.Auth
 {
@@ -18,7 +16,6 @@ namespace DreamyShop.Logic.Auth
         private readonly DreamyShopDbContext _context;
         private readonly IRepositoryWrapper _repository;
         private readonly AccessToken _tokenService;
-        private readonly IMapper _mapper;
 
         public AuthLogic(
             DreamyShopDbContext context,
@@ -29,7 +26,6 @@ namespace DreamyShop.Logic.Auth
             _context = context;
             _repository = repository;
             _tokenService = tokenService;
-            _mapper = mapper;
         }
 
         public async Task<ApiResult<AuthResult>> Login(LoginDto loginDto)
@@ -75,12 +71,12 @@ namespace DreamyShop.Logic.Auth
 
         public async Task<ApiResult<AuthResult>> Register(RegisterDto registerDto)
         {
-            if (_context.Users.IsEmailExist(registerDto.Email) || _context.Users.IsEmailExist(registerDto.Phone))
+            if (_context.Users.IsEmailExist(registerDto.Email) || _context.Users.IsPhoneExist(registerDto.Phone))
             {
                 return new ApiErrorResult<AuthResult>((int)ErrorCodes.DuplicatedData);
             }
 
-            var user = new User()
+            var user = new DreamyShop.Domain.User()
             {
                 FullName = registerDto.FullName,
                 GenderType = registerDto.GenderType,
@@ -126,29 +122,6 @@ namespace DreamyShop.Logic.Auth
                 return new ApiSuccessResult<bool>(true);
             }
             return new ApiErrorResult<bool>((int)ErrorCodes.CredentialsInvalid);
-        }
-
-        public async Task<ApiResult<bool>> UpdateUser(string userId, UserUpdateDto userUpdateDto)
-        {
-            var user = _context.Users.FirstOrDefault(u => u.Id == Guid.Parse(userId));
-            if (user == null)
-            {
-                return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
-            }
-            //user.FullName = userUpdateDto.FullName;
-            //user.Email = userUpdateDto.Email;
-            //user.GenderType = userUpdateDto.GenderType;
-            //user.Dob = userUpdateDto.Dob;
-            //user.Avatar = userUpdateDto.Avatar;
-            //user.Phone = userUpdateDto.Phone;
-            //user.IdentityID = userUpdateDto.IdentityID;
-            //user.Address = userUpdateDto.Address;
-            //user.Occupation = userUpdateDto.Occupation;
-            //user.Country = userUpdateDto.Country;
-            var updateUser = _mapper.Map(userUpdateDto, user);
-            _repository.Auth.Update(updateUser);
-            _context.SaveChanges();
-            return new ApiSuccessResult<bool>(true);
         }
     }
 }

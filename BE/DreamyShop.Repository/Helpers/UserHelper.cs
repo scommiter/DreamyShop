@@ -7,7 +7,7 @@ using DreamyShop.Domain.Shared.Types;
 
 namespace DreamyShop.Repository.Helpers
 {
-    public static class AuthHelper
+    public static class UserHelper
     {
         /// <summary>
         /// Check phone exist or not in table User
@@ -18,7 +18,7 @@ namespace DreamyShop.Repository.Helpers
         public static bool IsEmailExist(this IQueryable<User> query, string email)
         {
             if (String.IsNullOrEmpty(email)) return false;
-            return query.Any(e => e.Phone.Contains(email));
+            return query.Any(e => e.Email.Contains(email));
         }
 
         /// <summary>

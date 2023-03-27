@@ -2,7 +2,6 @@
 using DreamyShop.Logic.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.CompilerServices;
 
 namespace DreamyShop.Api.Controllers
 {
@@ -54,25 +53,6 @@ namespace DreamyShop.Api.Controllers
                 return NotFound(user);
             }
             var result = await _authService.ChangePassword(user.Email, userLoginDto);
-            if (result.Result == null)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result);
-        }
-
-        [Authorize]
-        [HttpPut("UpdateProfile")]
-        public async Task<IActionResult> UpdateUser([FromForm] UserUpdateDto userUpdateDto)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            var user = (AuthEntity)HttpContext.Items["Auth"];
-            if (user == null)
-            {
-                return NotFound(user);
-            }
-            var result = await _authService.UpdateUser(user.UserID, userUpdateDto);
             if (result.Result == null)
             {
                 return BadRequest(result);

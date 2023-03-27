@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace DreamyShop.Domain.Shared.AutoMapper
+namespace DreamyShop.Repository.AutoMapper
 {
     public class AutoMapperProfile
     {

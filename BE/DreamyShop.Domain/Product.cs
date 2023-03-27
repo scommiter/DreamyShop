@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DreamyShop.Domain
 {
     [Table("Products")]
-    public class Product
+    public class Product : AuditEntity
     {
         public Product(
             Guid id, 

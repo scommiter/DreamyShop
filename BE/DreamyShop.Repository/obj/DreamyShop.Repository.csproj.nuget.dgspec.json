@@ -112,11 +112,7 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {
-              "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj": {
-                "projectPath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -196,7 +192,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj": {
+                "projectPath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
