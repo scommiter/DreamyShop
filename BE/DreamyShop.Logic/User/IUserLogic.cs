@@ -1,5 +1,6 @@
 ﻿using DreamyShop.Common.Results;
 using DreamyShop.Domain.Shared.Dtos;
+using DreamyShop.Logic.Conditions;
 
 namespace DreamyShop.Logic.User
 {
@@ -7,5 +8,7 @@ namespace DreamyShop.Logic.User
     {
         Task<ApiResult<PageResult<UserDto>>> GetAllUser(int page, int limit);
         Task<ApiResult<bool>> UpdateUser(string userId, UserUpdateDto userUpdateDto);
+        Task<ApiResult<IList<UserDto>>> Search(SearchUserCondition condition);
+        Task<ApiResult<bool>> DeleteUser(string userId);
     }
 }

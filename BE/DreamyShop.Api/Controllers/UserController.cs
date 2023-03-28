@@ -1,6 +1,7 @@
 ﻿using DreamyShop.Domain;
 using DreamyShop.Domain.Shared.Dtos;
 using DreamyShop.Logic.Auth;
+using DreamyShop.Logic.Conditions;
 using DreamyShop.Logic.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -39,11 +40,32 @@ namespace DreamyShop.Api.Controllers
         }
 
         [Authorize]
-        [HttpGet("user/getAll")]
-        public async Task<IActionResult> GetAllUser()
+        [HttpPut("user/searchCondition")]
+        public async Task<IActionResult> SearchUser([FromForm] SearchUserCondition searchUserCondition)
         {
-            int page = 1; int limit = 10;
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var result = await _userService.Search(searchUserCondition);
+            if (result.Result == null)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet("user/getAll")]
+        public async Task<IActionResult> GetAllUser([FromHeader] int page = 1, [FromHeader] int limit = 10)
+        {
             var result = await _userService.GetAllUser(page, limit);
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet("user/delete")]
+        public async Task<IActionResult> DeleteUser(string userId)
+        {
+            var result = await _userService.DeleteUser(userId);
             return Ok(result);
         }
     }

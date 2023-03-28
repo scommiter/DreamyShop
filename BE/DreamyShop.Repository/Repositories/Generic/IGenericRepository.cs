@@ -9,7 +9,7 @@ namespace DreamyShop.Repository.Repositories.Generic
         Task RollbackTransactionAsync();
         Task<IDbContextTransaction> BeginTransactionAsync();
 
-        Task<T> GetByIdAsync(T id);
+        Task<T> GetByIdAsync(Guid id);
 
         IQueryable<T> GetAll();
 
@@ -23,7 +23,7 @@ namespace DreamyShop.Repository.Repositories.Generic
 
         void Update(T entity);
 
-        void Remove(T id);
+        void Remove(Guid id);
 
         void RemoveMultiple(List<T> entities);
     }

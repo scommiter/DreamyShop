@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DreamyShop.Repository", "DreamyShop.Repository\DreamyShop.Repository.csproj", "{098B3CCF-3496-4C6A-A816-63EC486A162C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DreamyShop.Common", "DreamyShop.Common\DreamyShop.Common.csproj", "{D4AA5A62-16AA-40D9-8A76-8111B8A032C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DreamyShop.Common", "DreamyShop.Common\DreamyShop.Common.csproj", "{D4AA5A62-16AA-40D9-8A76-8111B8A032C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
