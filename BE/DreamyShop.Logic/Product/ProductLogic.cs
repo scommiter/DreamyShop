@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using DreamyShop.Common.Results;
 using DreamyShop.Domain.Shared.Dtos;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Repository.RepositoryWrapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,30 +36,14 @@ namespace DreamyShop.Logic.Product
 
         public async Task<ApiResult<PageResult<ProductDto>>> GetAllProduct(int page, int limit)
         {
-            var productPagings = (from p in _context.Products
-                                  join m in _context.Manufacturers
-                                  on p.ManufacturerId equals m.Id
-                                  join c in _context.ProductCategories
-                                  on p.CategoryId equals c.Id
-                                  select new ProductDto
-                                  {
-                                      Id = p.Id,
-                                      Name = p.Name,
-                                      Code = p.Code,
-                                      ThumbnailPicture = p.ThumbnailPicture,
-                                      Price = p.Price,
-                                      ProductType = p.ProductType,
-                                      CategoryName = c.Name,
-                                      ManufacturerName = p.Name,
-                                      Description = p.Description,
-                                      IsActive = p.IsActive,
-                                      DateCreated = p.DateCreated,
-                                      DateUpdated = p.DateUpdated
-                                  })
-                                  .Skip((page - 1) * limit)
-                                  .Take(limit)
-                                  .OrderByDescending(u => u.DateCreated)
-                                  .ToList();
+            var productPagings = _context.Products
+                                .Include(opt => opt.Manufacturer)
+                                .Include(opt => opt.ProductCategory)
+                                .OrderByDescending(p => p.DateCreated)
+                                .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
+                                .Skip((page - 1) * limit)
+                                .Take(limit)
+                                .ToList();
             var pageResult = new PageResult<ProductDto>()
             {
                 Items = productPagings,

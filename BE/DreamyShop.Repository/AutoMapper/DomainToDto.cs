@@ -13,6 +13,11 @@ namespace DreamyShop.Repository.AutoMapper
                            act => act.MapFrom(src => src.Roles.Select(e => e.RoleType)));
             CreateMap<User, UserUpdateDto>();
             CreateMap<Product, ProductCreateUpdateDto>();
+            CreateMap<Product, ProductDto>()
+                .ForMember(pt => pt.CategoryName, opt => 
+                    opt.MapFrom(src => src.ProductCategory.Name))
+                .ForMember(pt => pt.ManufacturerName, opt =>
+                    opt.MapFrom(src => src.Manufacturer.Name));
         }
     }
 }

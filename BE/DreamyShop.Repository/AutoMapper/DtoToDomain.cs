@@ -28,6 +28,14 @@ namespace DreamyShop.Repository.AutoMapper
                 .ForMember(u => u.ProductAttributes, option => option.Ignore())
                 .ForMember(u => u.ProductReviews, option => option.Ignore())
                 .ForMember(u => u.ProductTags, option => option.Ignore());
+
+            CreateMap<ProductDto, Product>()
+                .ForMember(u => u.Manufacturer, option => option.Ignore())
+                .ForMember(u => u.ProductCategory, option => option.Ignore())
+                .ForMember(u => u.ProductAttributes, option => option.Ignore())
+                .ForMember(u => u.ProductReviews, option => option.Ignore())
+                .ForMember(u => u.ProductTags, option => option.Ignore());
+
         }
     }
 }
