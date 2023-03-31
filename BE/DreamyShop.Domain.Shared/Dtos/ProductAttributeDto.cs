@@ -9,7 +9,7 @@ namespace DreamyShop.Domain.Shared.Dtos
         public Guid AttributeId { get; set; }
         public string Code { get; set; }
         public AttributeType DataType { get; set; }
-        public string Label { get; set; }
+        public string Name { get; set; }
 
         public DateTime? DateTimeValue { get; set; }
         public decimal? DecimalValue { get; set; }
