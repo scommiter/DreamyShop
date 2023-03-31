@@ -1,5 +1,6 @@
 ﻿using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Repository.Repositories.Auth;
+using DreamyShop.Repository.Repositories.Product;
 using DreamyShop.Repository.Repositories.User;
 
 namespace DreamyShop.Repository.RepositoryWrapper
@@ -9,14 +10,17 @@ namespace DreamyShop.Repository.RepositoryWrapper
         private readonly DreamyShopDbContext _context;
         private IAuthRepository _auth;
         private IUserRepository _user;
+        private IProductRepository _product;
         public RepositoryWrapper(
             DreamyShopDbContext context, 
             IAuthRepository auth,
-            IUserRepository user)
+            IUserRepository user,
+            IProductRepository product)
         {
             _context = context;
             _auth = auth;
             _user = user;
+            _product = product;
         }
 
         public IAuthRepository Auth
@@ -41,6 +45,29 @@ namespace DreamyShop.Repository.RepositoryWrapper
                 }
                 return _user;
             }
+        }
+
+        public IProductRepository Product
+        {
+            get
+            {
+                if (_product == null)
+                {
+                    _product = new ProductRepository(_context);
+                }
+                return _product;
+            }
+        }
+
+
+        public void Dispose()
+        {
+            _context.Dispose();
+        }
+
+        public void Save()
+        {
+            _context.SaveChanges();
         }
     }
 }

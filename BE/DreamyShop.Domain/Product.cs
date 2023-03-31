@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DreamyShop.Domain.Shared.Types;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -23,9 +24,8 @@ namespace DreamyShop.Domain
             string seoMetaDescription, 
             string description, 
             string thumbnailPicture, 
-            double price, 
-            string categoryName, 
-            string categorySlug)
+            double price,
+            ProductType productType)
         {
             Id = id;
             ManufacturerId = manufacturerId;
@@ -40,8 +40,7 @@ namespace DreamyShop.Domain
             Description = description;
             ThumbnailPicture = thumbnailPicture;
             Price = price;
-            CategoryName = categoryName;
-            CategorySlug = categorySlug;
+            ProductType = productType;
         }
         [Key]
         public Guid Id { get; set; }
@@ -54,6 +53,7 @@ namespace DreamyShop.Domain
         public string Code { get; set; }
         public string Slug { get; set; }
         public int SortOrder { get; set; }
+        public ProductType ProductType { get; set; }
         public bool IsVisibility { get; set; }
         public bool IsActive { get; set; }
         public Guid CategoryId { get; set; }
@@ -63,10 +63,6 @@ namespace DreamyShop.Domain
         [StringLength(250)]
         public string ThumbnailPicture { get; set; }
         public double Price { get; set; }
-        [StringLength(250)]
-        public string CategoryName { get; set; }
-        [StringLength(250)]
-        public string CategorySlug { get; set; }
 
         [ForeignKey(nameof(ManufacturerId))]
         [InverseProperty("Products")]

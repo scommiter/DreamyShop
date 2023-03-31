@@ -148,16 +148,6 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("CategorySlug")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -189,6 +179,9 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
+
+                    b.Property<int>("ProductType")
+                        .HasColumnType("int");
 
                     b.Property<string>("SeoMetaDescription")
                         .IsRequired()
@@ -239,7 +232,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.Property<bool>("IsVisibility")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Label")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");

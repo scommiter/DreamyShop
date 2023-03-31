@@ -102,7 +102,7 @@ namespace DreamyShop.Logic.User
             }
             var updateUser = _mapper.Map(userUpdateDto, user);
             _repository.Auth.Update(updateUser);
-            _context.SaveChanges();
+            _repository.Save();
             return new ApiSuccessResult<bool>(true);
         }
 
@@ -123,6 +123,7 @@ namespace DreamyShop.Logic.User
                 return new ApiErrorResult<bool>((int)ErrorCodes.UserIsUnauthorized);
             }
             _repository.User.Remove(Guid.Parse(userId));
+            _repository.Save();
             return new ApiSuccessResult<bool>(true);
         }
     }

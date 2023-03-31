@@ -92,6 +92,7 @@ namespace DreamyShop.Logic.Auth
                 user.StoredSalt = hashsalt.Salt;
             }
             await _repository.Auth.AddAsync(user);
+            _repository.Save();
             var userResult = _context.Users
                .Include(u => u.Roles)
                .AsNoTracking()
@@ -118,7 +119,7 @@ namespace DreamyShop.Logic.Auth
                 var hashsalt = Cryptography.EncryptPassword(userChangePassword.NewPassword);
                 user.Password = hashsalt.Hash;
                 user.StoredSalt = hashsalt.Salt;
-                _context.SaveChanges();
+                _repository.Save();
                 return new ApiSuccessResult<bool>(true);
             }
             return new ApiErrorResult<bool>((int)ErrorCodes.CredentialsInvalid);

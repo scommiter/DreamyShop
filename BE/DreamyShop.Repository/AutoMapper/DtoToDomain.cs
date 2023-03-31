@@ -21,6 +21,13 @@ namespace DreamyShop.Repository.AutoMapper
                 .ForMember(u => u.Password, option => option.DoNotUseDestinationValue())
                 .ForMember(u => u.StoredSalt, option => option.DoNotUseDestinationValue())
                 .ForMember(u => u.Roles, option => option.DoNotUseDestinationValue());
+
+            CreateMap<ProductCreateUpdateDto, Product>()
+                .ForMember(u => u.Id, option => option.Ignore())
+                .ForMember(u => u.ProductCategory, option => option.Ignore())
+                .ForMember(u => u.ProductAttributes, option => option.Ignore())
+                .ForMember(u => u.ProductReviews, option => option.Ignore())
+                .ForMember(u => u.ProductTags, option => option.Ignore());
         }
     }
 }

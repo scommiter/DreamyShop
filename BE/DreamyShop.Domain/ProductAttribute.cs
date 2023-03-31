@@ -9,7 +9,7 @@ namespace DreamyShop.Domain
         public ProductAttribute(
             Guid id, 
             string code, 
-            string label, 
+            string name, 
             int sortOrder, 
             bool isVisibility, 
             bool isActive, 
@@ -18,7 +18,7 @@ namespace DreamyShop.Domain
         {
             Id = id;
             Code = code;
-            Label = label;
+            Name = name;
             SortOrder = sortOrder;
             IsVisibility = isVisibility;
             IsActive = isActive;
@@ -31,7 +31,7 @@ namespace DreamyShop.Domain
         [StringLength(50)]
         public string Code { get; set; }
         [StringLength(50)]
-        public string Label { get; set; }
+        public string Name { get; set; }
         public int SortOrder { get; set; }
         public bool IsVisibility { get; set; }
         public bool IsActive { get; set; }

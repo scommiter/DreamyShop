@@ -26,13 +26,11 @@ namespace DreamyShop.Repository.Repositories.Generic
         public async Task AddAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
-            _context.SaveChanges();
         }
 
         public async Task AddRangeAsync(IEnumerable<T> entities)
         {
             await _dbSet.AddRangeAsync(entities);
-            _context.SaveChanges();
         }
 
         public async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
@@ -60,7 +58,6 @@ namespace DreamyShop.Repository.Repositories.Generic
             try
             {
                 _dbSet.Remove(result);
-                _context.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -71,7 +68,6 @@ namespace DreamyShop.Repository.Repositories.Generic
         public void RemoveMultiple(List<T> entities)
         {
             _context.Set<T>().RemoveRange(entities);
-            _context.SaveChanges();
         }
 
         public void Update(T entity)
@@ -79,7 +75,6 @@ namespace DreamyShop.Repository.Repositories.Generic
             try
             {
                 _dbSet.Update(entity);
-                _context.SaveChanges();
             }
             catch (Exception ex)
             {
