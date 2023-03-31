@@ -12,6 +12,6 @@ namespace DreamyShop.Logic.Product
     {
         Task<ApiResult<PageResult<ProductDto>>> GetAllProduct(int page, int limit);
         Task<ApiResult<ProductDto>> CreateProduct(ProductCreateUpdateDto productCreateUpdateDto);
-        Task<ApiResult<ProductDto>> CreateAtributeProduct(ProductAttributeDto productAttributeDto);
+        Task<ApiResult<bool>> CreateAtributeProduct(ProductAttributeDto productAttributeDto);
     }
 }

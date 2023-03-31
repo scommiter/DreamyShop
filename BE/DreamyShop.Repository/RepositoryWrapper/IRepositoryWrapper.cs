@@ -10,6 +10,11 @@ namespace DreamyShop.Repository.RepositoryWrapper
         IUserRepository User { get; }
         IProductRepository Product { get; }
         IProductAttributeRepository ProductAttribute { get; }
+        IProductAttributeDateTimeRepository ProductAttributeDateTime { get; }
+        IProductAttributeDecimalRepository ProductAttributeDecimal { get; }
+        IProductAttributeIntRepository ProductAttributeInt { get; }
+        IProductAttributeTextRepository ProductAttributeText { get; }
+        IProductAttributeVarcharRepository ProductAttributeVarchar { get; }
         void Save();
     }
 }

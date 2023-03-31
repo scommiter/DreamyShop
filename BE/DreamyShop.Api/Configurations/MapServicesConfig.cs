@@ -19,14 +19,25 @@ namespace DreamyShop.Api.Configurations
             services.AddSingleton(AutoMapperProfile.RegisterMappings().CreateMapper());
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+            #region REPOSITORY
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductAttributeRepository, ProductAttributeRepository>();
+            services.AddScoped<IProductAttributeDateTimeRepository, ProductAttributeDateTimeRepository>();
+            services.AddScoped<IProductAttributeDecimalRepository, ProductAttributeDecimalRepository>();
+            services.AddScoped<IProductAttributeIntRepository, ProductAttributeIntRepository>();
+            services.AddScoped<IProductAttributeTextRepository, ProductAttributeTextRepository>();
+            services.AddScoped<IProductAttributeVarcharRepository, ProductAttributeVarcharRepository>();
+            #endregion
+
+            #region Logic
             services.AddScoped<IAuthLogic, AuthLogic>();
             services.AddScoped<IUserLogic, UserLogic>();
             services.AddScoped<IProductLogic, ProductLogic>();
+            #endregion
         }
     }
 }
