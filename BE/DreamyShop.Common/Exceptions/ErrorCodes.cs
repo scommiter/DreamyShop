@@ -45,5 +45,8 @@ namespace DreamyShop.Common.Exceptions
 
         [Display(Description = "Cannot Delete Order Because Belong To Service!")]
         CannotDeleteOrderBecauseBelongToService,
+
+        [Display(Description = "Cannot Delete!")]
+        DeleteFailed,
     }
 }

@@ -6,14 +6,10 @@ using DreamyShop.Domain;
 using DreamyShop.Domain.Shared.Dtos;
 using DreamyShop.Domain.Shared.Types;
 using DreamyShop.EntityFrameworkCore;
-using DreamyShop.Logic.Auth.Result;
 using DreamyShop.Repository.RepositoryWrapper;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DreamyShop.Logic.Product
 {
@@ -31,65 +27,6 @@ namespace DreamyShop.Logic.Product
             _context = context;
             _repository = repository;
             _mapper = mapper;
-        }
-
-        public async Task<ApiResult<bool>> CreateAtributeProduct(ProductAttributeDto productAttributeDto)
-        {
-            var product = _repository.Product.GetByIdAsync(productAttributeDto.ProductId);
-            if (product == null)
-            {
-                return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
-            }
-            var attribute = await _repository.ProductAttribute.GetByIdAsync(productAttributeDto.AttributeId);
-            if (attribute == null)
-                return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
-            var attributeDto = _mapper.Map<ProductAttributeDto>(attribute);
-            var newAttributeId = Guid.NewGuid();
-            switch (attributeDto.DataType)
-            {
-                case AttributeType.Date:
-                    if (productAttributeDto.DateTimeValue == null)
-                    {
-                        return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotValid);
-                    }
-                    var productAttributeDateTime = new ProductAttributeDateTime(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.DateTimeValue);
-                    await _repository.ProductAttributeDateTime.AddAsync(productAttributeDateTime);
-                    break;
-                case AttributeType.Int:
-                    if (productAttributeDto.IntValue == null)
-                    {
-                        return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotValid);
-                    }
-                    var productAttributeInt = new ProductAttributeInt(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.IntValue.Value);
-                    await _repository.ProductAttributeInt.AddAsync(productAttributeInt);
-                    break;
-                case AttributeType.Decimal:
-                    if (productAttributeDto.DecimalValue == null)
-                    {
-                        return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotValid);
-                    }
-                    var productAttributeDecimal = new ProductAttributeDecimal(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.DecimalValue.Value);
-                    await _repository.ProductAttributeDecimal.AddAsync(productAttributeDecimal);
-                    break;
-                case AttributeType.Varchar:
-                    if (productAttributeDto.VarcharValue == null)
-                    {
-                        return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotValid);
-                    }
-                    var productAttributeVarchar = new ProductAttributeVarchar(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.VarcharValue);
-                    await _repository.ProductAttributeVarchar.AddAsync(productAttributeVarchar);
-                    break;
-                case AttributeType.Text:
-                    if (productAttributeDto.TextValue == null)
-                    {
-                        return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotValid);
-                    }
-                    var productAttributeText = new ProductAttributeText(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.TextValue);
-                    await _repository.ProductAttributeText.AddAsync(productAttributeText);
-                    break;
-            }
-            _repository.Save();
-            return new ApiSuccessResult<bool>(true);
         }
 
         public async Task<ApiResult<ProductDto>> CreateProduct(ProductCreateUpdateDto productCreateUpdateDto)
@@ -116,6 +53,202 @@ namespace DreamyShop.Logic.Product
                 Totals = productPagings.Count()
             };
             return new ApiSuccessResult<PageResult<ProductDto>>(pageResult);
+        }
+
+        public async Task<ApiResult<PageResult<ProductAttributeDto>>> GetListProductAttribute(Guid productId)
+        {
+            var product = _repository.Product.GetByIdAsync(productId);
+            var productAttributes = from pa in _context.ProductAttributes
+                                    join padt in _context.ProductAttributeDateTimes on pa.Id equals padt.AttributeId into aDateTimeTable
+                                    from padt in aDateTimeTable.DefaultIfEmpty()
+                                    join pad in _context.ProductAttributeDecimals on pa.Id equals pad.AttributeId into aDecimalTable
+                                    from pad in aDecimalTable.DefaultIfEmpty()
+                                    join pai in _context.ProductAttributeInts on pa.Id equals pai.AttributeId into aIntTable
+                                    from pai in aIntTable.DefaultIfEmpty()
+                                    join pat in _context.ProductAttributeTexts on pa.Id equals pat.AttributeId into aTextTable
+                                    from pat in aTextTable.DefaultIfEmpty()
+                                    join pavc in _context.ProductAttributeVarchars on pa.Id equals pavc.AttributeId into aVarcharTable
+                                    from pavc in aVarcharTable.DefaultIfEmpty()
+                                    where (padt == null || padt.ProductId == productId)
+                                    && (pad == null || pad.ProductId == productId)
+                                    && (pai == null || pai.ProductId == productId)
+                                    && (pat == null || pat.ProductId == productId)
+                                    && (pavc == null || pavc.ProductId == productId)
+                                    select new ProductAttributeDto()
+                                    {
+                                        Label = pa.Name,
+                                        AttributeId = pa.Id,
+                                        DataType = pa.DataType,
+                                        Code = pa.Code,
+                                        ProductId = productId,
+                                        DateTimeValue = padt != null ? padt.Value : null,
+                                        DecimalValue = pad != null ? pad.Value : null,
+                                        IntValue = pai != null ? pai.Value : null,
+                                        TextValue = pat != null ? pat.Value : null,
+                                        VarcharValue = pavc != null ? pavc.Value : null,
+                                        DateTimeId = padt != null ? padt.Id : null,
+                                        DecimalId = pad != null ? pad.Id : null,
+                                        IntId = pai != null ? pai.Id : null,
+                                        TextId = pat != null ? pat.Id : null,
+                                        VarcharId = pavc != null ? pavc.Id : null,
+                                    };
+            productAttributes = productAttributes.Where(x => x.DateTimeId != null
+                           || x.DecimalId != null
+                           || x.IntValue != null
+                           || x.TextId != null
+                           || x.VarcharId != null);
+
+            var pageResult = new PageResult<ProductAttributeDto>()
+            {
+                Items = productAttributes.ToList() ?? new List<ProductAttributeDto>(),
+                Totals = productAttributes.Count()
+            };
+            return new ApiSuccessResult<PageResult<ProductAttributeDto>>(pageResult);
+        }
+
+        public async Task<ApiResult<bool>> CreateAtributeProduct(ProductAttributeDto productAttributeDto)
+        {
+            var product = _repository.Product.GetByIdAsync(productAttributeDto.ProductId);
+            if (product == null)
+            {
+                return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
+            }
+            var attribute = await _repository.ProductAttribute.GetByIdAsync(productAttributeDto.AttributeId);
+            if (attribute == null)
+                return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
+            var attributeDto = _mapper.Map<ProductAttributeDto>(attribute);
+            var newAttributeId = Guid.NewGuid();
+            switch (attributeDto.DataType)
+            {
+                case AttributeType.Date:
+                    if (productAttributeDto.DateTimeValue == null)
+                    {
+                        return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
+                    }
+                    var productAttributeDateTime = new ProductAttributeDateTime(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.DateTimeValue);
+                    await _repository.ProductAttributeDateTime.AddAsync(productAttributeDateTime);
+                    break;
+
+                case AttributeType.Int:
+                    if (productAttributeDto.IntValue == null)
+                    {
+                        return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
+                    }
+                    var productAttributeInt = new ProductAttributeInt(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.IntValue.Value);
+                    await _repository.ProductAttributeInt.AddAsync(productAttributeInt);
+                    break;
+
+                case AttributeType.Decimal:
+                    if (productAttributeDto.DecimalValue == null)
+                    {
+                        return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
+                    }
+                    var productAttributeDecimal = new ProductAttributeDecimal(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.DecimalValue.Value);
+                    await _repository.ProductAttributeDecimal.AddAsync(productAttributeDecimal);
+                    break;
+
+                case AttributeType.Varchar:
+                    if (productAttributeDto.VarcharValue == null)
+                    {
+                        return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
+                    }
+                    var productAttributeVarchar = new ProductAttributeVarchar(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.VarcharValue);
+                    await _repository.ProductAttributeVarchar.AddAsync(productAttributeVarchar);
+                    break;
+
+                case AttributeType.Text:
+                    if (productAttributeDto.TextValue == null)
+                    {
+                        return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
+                    }
+                    var productAttributeText = new ProductAttributeText(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.TextValue);
+                    await _repository.ProductAttributeText.AddAsync(productAttributeText);
+                    break;
+            }
+            _repository.Save();
+            return new ApiSuccessResult<bool>(true);
+        }
+
+        public async Task<ApiResult<bool>> RemoveAtributeProduct(Guid attributeId, Guid attributeTypeId)
+        {
+            var attribute = await _repository.ProductAttribute.GetByIdAsync(attributeId);
+            if (attribute == null)
+                return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
+            var attributeDto = _mapper.Map<ProductAttributeDto>(attribute);
+            switch (attributeDto.DataType)
+            {
+                case AttributeType.Date:
+                    try
+                    {
+                        await _repository.ProductAttributeDateTime.BeginTransactionAsync();
+                        _repository.ProductAttributeDateTime.Remove(attributeTypeId);
+                        await _repository.ProductAttributeDateTime.EndTransactionAsync();
+                    }
+                    catch
+                    {
+                        await _repository.ProductAttributeDateTime.RollbackTransactionAsync();
+                        return new ApiErrorResult<bool>((int)ErrorCodes.DeleteFailed);
+                    }
+                    break;
+
+                case AttributeType.Int:
+                    try
+                    {
+                        await _repository.ProductAttributeInt.BeginTransactionAsync();
+                        _repository.ProductAttributeInt.Remove(attributeTypeId);
+                        await _repository.ProductAttributeInt.EndTransactionAsync();
+                    }
+                    catch
+                    {
+                        await _repository.ProductAttributeInt.RollbackTransactionAsync();
+                        return new ApiErrorResult<bool>((int)ErrorCodes.DeleteFailed);
+                    }
+                    break;
+
+                case AttributeType.Decimal:
+                    try
+                    {
+                        await _repository.ProductAttributeDecimal.BeginTransactionAsync();
+                        _repository.ProductAttributeDecimal.Remove(attributeTypeId);
+                        await _repository.ProductAttributeDecimal.EndTransactionAsync();
+                    }
+                    catch
+                    {
+                        await _repository.ProductAttributeDecimal.RollbackTransactionAsync();
+                        return new ApiErrorResult<bool>((int)ErrorCodes.DeleteFailed);
+                    }
+                    break;
+
+                case AttributeType.Varchar:
+                    try
+                    {
+                        await _repository.ProductAttributeVarchar.BeginTransactionAsync();
+                        _repository.ProductAttributeVarchar.Remove(attributeTypeId);
+                        await _repository.ProductAttributeVarchar.EndTransactionAsync();
+                    }
+                    catch
+                    {
+                        await _repository.ProductAttributeVarchar.RollbackTransactionAsync();
+                        return new ApiErrorResult<bool>((int)ErrorCodes.DeleteFailed);
+                    }
+                    break;
+
+                case AttributeType.Text:
+                    try
+                    {
+                        await _repository.ProductAttributeText.BeginTransactionAsync();
+                        _repository.ProductAttributeText.Remove(attributeTypeId);
+                        await _repository.ProductAttributeText.EndTransactionAsync();
+                    }
+                    catch
+                    {
+                        await _repository.ProductAttributeText.RollbackTransactionAsync();
+                        return new ApiErrorResult<bool>((int)ErrorCodes.DeleteFailed);
+                    }
+                    break;
+            }
+            _repository.Save();
+            return new ApiSuccessResult<bool>(true);
         }
     }
 }

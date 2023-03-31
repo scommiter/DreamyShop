@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DreamyShop.Domain.Shared.Types;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DreamyShop.Domain
@@ -32,6 +33,7 @@ namespace DreamyShop.Domain
         public string Code { get; set; }
         [StringLength(50)]
         public string Name { get; set; }
+        public AttributeType DataType { get; set; }
         public int SortOrder { get; set; }
         public bool IsVisibility { get; set; }
         public bool IsActive { get; set; }
