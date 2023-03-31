@@ -9,6 +9,7 @@ namespace DreamyShop.Repository.RepositoryWrapper
         IAuthRepository Auth { get; }
         IUserRepository User { get; }
         IProductRepository Product { get; }
+        IProductAttributeRepository ProductAttribute { get; }
         void Save();
     }
 }

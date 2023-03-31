@@ -11,16 +11,19 @@ namespace DreamyShop.Repository.RepositoryWrapper
         private IAuthRepository _auth;
         private IUserRepository _user;
         private IProductRepository _product;
+        private IProductAttributeRepository _productAttribute;
         public RepositoryWrapper(
             DreamyShopDbContext context, 
             IAuthRepository auth,
             IUserRepository user,
-            IProductRepository product)
+            IProductRepository product,
+            IProductAttributeRepository productAttribute)
         {
             _context = context;
             _auth = auth;
             _user = user;
             _product = product;
+            _productAttribute = productAttribute;
         }
 
         public IAuthRepository Auth
@@ -59,6 +62,17 @@ namespace DreamyShop.Repository.RepositoryWrapper
             }
         }
 
+        public IProductAttributeRepository ProductAttribute
+        {
+            get
+            {
+                if (_productAttribute == null)
+                {
+                    _productAttribute = new ProductAttributeRepository(_context);
+                }
+                return _productAttribute;
+            }
+        }
 
         public void Dispose()
         {

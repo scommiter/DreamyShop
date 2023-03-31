@@ -31,6 +31,9 @@ namespace DreamyShop.Common.Exceptions
         [Display(Description = "Data Entry Cannot Be Found!")]
         DataEntryIsNotExisted,
 
+        [Display(Description = "Data Entry Is Not Valid!")]
+        DataEntryIsNotValid,
+
         [Display(Description = "Data Validation Is Failed!")]
         FailedValidationData,
 
