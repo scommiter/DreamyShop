@@ -68,3 +68,5 @@ Z:\Project\DreamyShop\BE\DreamyShop.Infrastructure\obj\Debug\net6.0\DreamyShop.E
 Z:\Project\DreamyShop\BE\DreamyShop.Infrastructure\obj\Debug\net6.0\ref\DreamyShop.EntityFrameworkCore.dll
 Z:\Project\DreamyShop\BE\DreamyShop.Infrastructure\bin\Debug\net6.0\DreamyShop.Domain.Shared.dll
 Z:\Project\DreamyShop\BE\DreamyShop.Infrastructure\bin\Debug\net6.0\DreamyShop.Domain.Shared.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Infrastructure\bin\Debug\net6.0\DreamyShop.Domain.Shared.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Infrastructure\bin\Debug\net6.0\DreamyShop.Domain.Shared.pdb

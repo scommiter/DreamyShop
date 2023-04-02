@@ -10,3 +10,15 @@ Z:\Project\DreamyShop\BE\DreamyShop.Common\obj\Debug\net6.0\DreamyShop.Common.dl
 Z:\Project\DreamyShop\BE\DreamyShop.Common\obj\Debug\net6.0\refint\DreamyShop.Common.dll
 Z:\Project\DreamyShop\BE\DreamyShop.Common\obj\Debug\net6.0\DreamyShop.Common.pdb
 Z:\Project\DreamyShop\BE\DreamyShop.Common\obj\Debug\net6.0\ref\DreamyShop.Common.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Common\bin\Debug\net6.0\DreamyShop.Common.deps.json
+E:\MyProject\DreamyShop\BE\DreamyShop.Common\bin\Debug\net6.0\DreamyShop.Common.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Common\bin\Debug\net6.0\DreamyShop.Common.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Common\obj\Debug\net6.0\DreamyShop.Common.csproj.AssemblyReference.cache
+E:\MyProject\DreamyShop\BE\DreamyShop.Common\obj\Debug\net6.0\DreamyShop.Common.GeneratedMSBuildEditorConfig.editorconfig
+E:\MyProject\DreamyShop\BE\DreamyShop.Common\obj\Debug\net6.0\DreamyShop.Common.AssemblyInfoInputs.cache
+E:\MyProject\DreamyShop\BE\DreamyShop.Common\obj\Debug\net6.0\DreamyShop.Common.AssemblyInfo.cs
+E:\MyProject\DreamyShop\BE\DreamyShop.Common\obj\Debug\net6.0\DreamyShop.Common.csproj.CoreCompileInputs.cache
+E:\MyProject\DreamyShop\BE\DreamyShop.Common\obj\Debug\net6.0\DreamyShop.Common.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Common\obj\Debug\net6.0\refint\DreamyShop.Common.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Common\obj\Debug\net6.0\DreamyShop.Common.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Common\obj\Debug\net6.0\ref\DreamyShop.Common.dll

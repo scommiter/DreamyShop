@@ -122,6 +122,9 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsVisibility")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(250)
@@ -131,12 +134,55 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Visibility")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.ToTable("Manufacturers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("57a5f678-43f0-4648-92d8-16bd09d7143e"),
+                            Code = "SN",
+                            Country = "Japan",
+                            CoverPicture = "",
+                            IsActive = true,
+                            IsVisibility = true,
+                            Name = "Sony",
+                            Slug = "sony"
+                        },
+                        new
+                        {
+                            Id = new Guid("80cad838-29c7-4a02-81c0-9ebe78a0a273"),
+                            Code = "IPAPL",
+                            Country = "US",
+                            CoverPicture = "",
+                            IsActive = true,
+                            IsVisibility = true,
+                            Name = "Apple",
+                            Slug = "apple"
+                        },
+                        new
+                        {
+                            Id = new Guid("b9be517b-72aa-46f1-9a98-a0b993cd2cf7"),
+                            Code = "dell",
+                            Country = "Texas-USA",
+                            CoverPicture = "",
+                            IsActive = true,
+                            IsVisibility = true,
+                            Name = "DELL",
+                            Slug = "dell"
+                        },
+                        new
+                        {
+                            Id = new Guid("69d0372b-dbf5-4b70-9beb-0e4ea77f243a"),
+                            Code = "asus",
+                            Country = "Taiwan",
+                            CoverPicture = "",
+                            IsActive = true,
+                            IsVisibility = true,
+                            Name = "ASUS",
+                            Slug = "asus"
+                        });
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.Product", b =>
@@ -210,6 +256,88 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.HasIndex("ManufacturerId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("1747cdf9-3acb-4001-8f52-ee7f387f8efb"),
+                            CategoryId = new Guid("96bff1b2-3715-4f10-90d3-aaabb332e0e9"),
+                            Code = "CMRSKS",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring",
+                            IsActive = true,
+                            IsVisibility = true,
+                            ManufacturerId = new Guid("57a5f678-43f0-4648-92d8-16bd09d7143e"),
+                            Name = "Camera-SKS",
+                            Price = 1200.0,
+                            ProductType = 1,
+                            SeoMetaDescription = "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring",
+                            Slug = "camera-sks",
+                            SortOrder = 1,
+                            StatusID = (byte)0,
+                            ThumbnailPicture = ""
+                        },
+                        new
+                        {
+                            Id = new Guid("85f8b0c3-cb8d-4ccb-9544-19daad6ef352"),
+                            CategoryId = new Guid("96bff1b2-3715-4f10-90d3-aaabb332e0e9"),
+                            Code = "CMRUFG",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "XYZ wireless security camera with high resolution.",
+                            IsActive = true,
+                            IsVisibility = true,
+                            ManufacturerId = new Guid("57a5f678-43f0-4648-92d8-16bd09d7143e"),
+                            Name = "Camera-UFG",
+                            Price = 1999.0,
+                            ProductType = 1,
+                            SeoMetaDescription = "XYZ wireless security camera with high resolution, built-in motion sensor, supports wifi connection, helps you observe your family, home, shop, office whenever and wherever.",
+                            Slug = "camera-ufg",
+                            SortOrder = 2,
+                            StatusID = (byte)0,
+                            ThumbnailPicture = ""
+                        },
+                        new
+                        {
+                            Id = new Guid("30299235-6937-41b7-a76d-14584f5f856a"),
+                            CategoryId = new Guid("efd560a8-c65b-439c-af43-765da733f3c1"),
+                            Code = "IP14XSM",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "",
+                            IsActive = true,
+                            IsVisibility = true,
+                            ManufacturerId = new Guid("80cad838-29c7-4a02-81c0-9ebe78a0a273"),
+                            Name = "Iphone 14 XSMax",
+                            Price = 3000.0,
+                            ProductType = 2,
+                            SeoMetaDescription = "Find out about Apple's latest line of iPhones at Apple Store Vietnam. Order online and get instant deals.",
+                            Slug = "ip14-xsmax",
+                            SortOrder = 1,
+                            StatusID = (byte)0,
+                            ThumbnailPicture = ""
+                        },
+                        new
+                        {
+                            Id = new Guid("215e9dee-1d6c-40f4-9233-bb810509adaa"),
+                            CategoryId = new Guid("2ed8e62d-2f2e-4957-ae81-8a07b0bcd443"),
+                            Code = "DELLDEMON",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Buy genuine Laptop at our store with best quality and affordable price. We supply laptop products from reputable brands. Order now to get a free laptop backpack!",
+                            IsActive = true,
+                            IsVisibility = true,
+                            ManufacturerId = new Guid("b9be517b-72aa-46f1-9a98-a0b993cd2cf7"),
+                            Name = "Laptop DELL DEMON",
+                            Price = 2500.0,
+                            ProductType = 2,
+                            SeoMetaDescription = "",
+                            Slug = "dell-demon",
+                            SortOrder = 1,
+                            StatusID = (byte)0,
+                            ThumbnailPicture = ""
+                        });
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.ProductAttribute", b =>
@@ -222,6 +350,9 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("DataType")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -399,6 +530,9 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsVisibility")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(250)
@@ -419,12 +553,47 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.Property<int>("SortOrder")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Visibility")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.ToTable("ProductCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("96bff1b2-3715-4f10-90d3-aaabb332e0e9"),
+                            Code = "CMR",
+                            CoverPicture = "",
+                            IsActive = true,
+                            IsVisibility = true,
+                            Name = "Camera",
+                            SeoMetaDescription = "",
+                            Slug = "camera",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("efd560a8-c65b-439c-af43-765da733f3c1"),
+                            Code = "IP",
+                            CoverPicture = "",
+                            IsActive = true,
+                            IsVisibility = true,
+                            Name = "Iphone",
+                            SeoMetaDescription = "",
+                            Slug = "iphone",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("2ed8e62d-2f2e-4957-ae81-8a07b0bcd443"),
+                            Code = "LP",
+                            CoverPicture = "",
+                            IsActive = true,
+                            IsVisibility = true,
+                            Name = "Laptop",
+                            SeoMetaDescription = "",
+                            Slug = "laptop",
+                            SortOrder = 1
+                        });
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.ProductReview", b =>

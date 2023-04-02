@@ -40,6 +40,7 @@ namespace DreamyShop.EntityFrameworkCore
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProductTag>().HasKey(x => new { x.ProductId, x.TagId });
+            modelBuilder.Seed();
         }
     }
 }

@@ -11,6 +11,7 @@ namespace DreamyShop.Domain
     [Table("ProductAttributeVarchars")]
     public class ProductAttributeVarchar
     {
+        public ProductAttributeVarchar() { }
         public ProductAttributeVarchar(Guid id, Guid attributeId, Guid productId, string value)
         {
             Id = id;

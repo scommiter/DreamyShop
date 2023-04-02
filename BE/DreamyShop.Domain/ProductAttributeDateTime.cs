@@ -6,6 +6,7 @@ namespace DreamyShop.Domain
     [Table("ProductAttributeDateTimes")]
     public class ProductAttributeDateTime
     {
+        public ProductAttributeDateTime() { }
         public ProductAttributeDateTime(Guid id, Guid attributeId, Guid productId, DateTime? value)
         {
             Id = id;

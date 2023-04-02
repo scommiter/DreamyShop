@@ -12,18 +12,20 @@ namespace DreamyShop.Domain
     [Table("Products")]
     public class Product : AuditEntity
     {
+        public Product() { }
         public Product(
-            Guid id, 
-            Guid manufacturerId, 
-            string name, string code, 
-            string slug, 
-            int sortOrder, 
-            bool isVisibility, 
-            bool isActive, 
-            Guid categoryId, 
-            string seoMetaDescription, 
-            string description, 
-            string thumbnailPicture, 
+            Guid id,
+            Guid manufacturerId,
+            string name,
+            string code,
+            string slug,
+            int sortOrder,
+            bool isVisibility,
+            bool isActive,
+            Guid categoryId,
+            string seoMetaDescription,
+            string description,
+            string thumbnailPicture,
             double price,
             ProductType productType)
         {

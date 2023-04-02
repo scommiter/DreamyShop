@@ -45,3 +45,14 @@ Z:\Project\DreamyShop\BE\DreamyShop.Repository\bin\Debug\net6.0\DreamyShop.Domai
 Z:\Project\DreamyShop\BE\DreamyShop.Repository\bin\Debug\net6.0\DreamyShop.Domain.Shared.pdb
 Z:\Project\DreamyShop\BE\DreamyShop.Repository\bin\Debug\net6.0\DreamyShop.Repository.runtimeconfig.json
 Z:\Project\DreamyShop\BE\DreamyShop.Repository\obj\Debug\net6.0\DreamyShop.Repository.genruntimeconfig.cache
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\bin\Debug\net6.0\DreamyShop.Repository.runtimeconfig.json
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\bin\Debug\net6.0\DreamyShop.Common.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\bin\Debug\net6.0\DreamyShop.Domain.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\bin\Debug\net6.0\DreamyShop.Domain.Shared.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\bin\Debug\net6.0\DreamyShop.EntityFrameworkCore.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\bin\Debug\net6.0\DreamyShop.Common.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\bin\Debug\net6.0\DreamyShop.Domain.Shared.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\bin\Debug\net6.0\DreamyShop.Domain.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\bin\Debug\net6.0\DreamyShop.EntityFrameworkCore.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\obj\Debug\net6.0\DreamyShop.Repository.csproj.CopyComplete
+E:\MyProject\DreamyShop\BE\DreamyShop.Repository\obj\Debug\net6.0\DreamyShop.Repository.genruntimeconfig.cache

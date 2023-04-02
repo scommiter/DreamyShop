@@ -45,3 +45,14 @@ Z:\Project\DreamyShop\BE\DreamyShop.Logic\bin\Debug\net6.0\DreamyShop.EntityFram
 Z:\Project\DreamyShop\BE\DreamyShop.Logic\bin\Debug\net6.0\DreamyShop.Repository.pdb
 Z:\Project\DreamyShop\BE\DreamyShop.Logic\bin\Debug\net6.0\DreamyShop.Domain.pdb
 Z:\Project\DreamyShop\BE\DreamyShop.Logic\obj\Debug\net6.0\DreamyShop.Logic.csproj.CopyComplete
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\bin\Debug\net6.0\DreamyShop.Common.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\bin\Debug\net6.0\DreamyShop.Domain.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\bin\Debug\net6.0\DreamyShop.Domain.Shared.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\bin\Debug\net6.0\DreamyShop.EntityFrameworkCore.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\bin\Debug\net6.0\DreamyShop.Repository.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\bin\Debug\net6.0\DreamyShop.Common.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\bin\Debug\net6.0\DreamyShop.Domain.Shared.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\bin\Debug\net6.0\DreamyShop.EntityFrameworkCore.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\bin\Debug\net6.0\DreamyShop.Repository.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\bin\Debug\net6.0\DreamyShop.Domain.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Logic\obj\Debug\net6.0\DreamyShop.Logic.csproj.CopyComplete

@@ -6,6 +6,7 @@ namespace DreamyShop.Domain
     [Table("ProductAttributeInts")]
     public class ProductAttributeInt
     {
+        public ProductAttributeInt() { }
         public ProductAttributeInt(Guid id, Guid attributeId, Guid productId, int value)
         {
             Id = id;

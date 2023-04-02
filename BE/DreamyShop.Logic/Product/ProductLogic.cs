@@ -8,8 +8,6 @@ using DreamyShop.Domain.Shared.Types;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Repository.RepositoryWrapper;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using System;
 
 namespace DreamyShop.Logic.Product
 {
@@ -57,7 +55,7 @@ namespace DreamyShop.Logic.Product
 
         public async Task<ApiResult<PageResult<ProductAttributeDto>>> GetListProductAttribute(Guid productId)
         {
-            var product = _repository.Product.GetByIdAsync(productId);
+            var product = await _repository.Product.GetByIdAsync(productId);
             var productAttributes = from pa in _context.ProductAttributes
                                     join padt in _context.ProductAttributeDateTimes on pa.Id equals padt.AttributeId into aDateTimeTable
                                     from padt in aDateTimeTable.DefaultIfEmpty()
@@ -108,7 +106,7 @@ namespace DreamyShop.Logic.Product
 
         public async Task<ApiResult<bool>> CreateAtributeProduct(CreateProductAttributeDto productAttributeDto)
         {
-            var product = _repository.Product.GetByIdAsync(productAttributeDto.ProductId);
+            var product = await _repository.Product.GetByIdAsync(productAttributeDto.ProductId);
             if (product == null)
             {
                 return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
@@ -116,9 +114,8 @@ namespace DreamyShop.Logic.Product
             var attribute = await _repository.ProductAttribute.GetByIdAsync(productAttributeDto.AttributeId);
             if (attribute == null)
                 return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
-            var attributeDto = _mapper.Map<ProductAttributeDto>(attribute);
             var newAttributeId = Guid.NewGuid();
-            switch (attributeDto.DataType)
+            switch (attribute.DataType)
             {
                 case AttributeType.Date:
                     if (productAttributeDto.DateTimeValue == null)
@@ -161,7 +158,7 @@ namespace DreamyShop.Logic.Product
                     {
                         return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
                     }
-                    var productAttributeText = new ProductAttributeText(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.TextValue);
+                    var productAttributeText = new ProductAttributeText(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.TextValue, attribute);
                     await _repository.ProductAttributeText.AddAsync(productAttributeText);
                     break;
             }
@@ -170,7 +167,7 @@ namespace DreamyShop.Logic.Product
         }
         public async Task<ApiResult<ProductAttributeDto>> UpdateProductAttributeAsync(Guid attributeId, CreateProductAttributeDto updateProductAttributeDto)
         {
-            var product = _repository.Product.GetByIdAsync(updateProductAttributeDto.ProductId);
+            var product = await _repository.Product.GetByIdAsync(updateProductAttributeDto.ProductId);
             if (product == null)
             {
                 return new ApiErrorResult<ProductAttributeDto>((int)ErrorCodes.DataEntryIsNotExisted);
@@ -178,8 +175,7 @@ namespace DreamyShop.Logic.Product
             var attribute = await _repository.ProductAttribute.GetByIdAsync(updateProductAttributeDto.AttributeId);
             if (attribute == null)
                 return new ApiErrorResult<ProductAttributeDto>((int)ErrorCodes.DataEntryIsNotExisted);
-            var attributeDto = _mapper.Map<ProductAttributeDto>(attribute);
-            switch (attributeDto.DataType)
+            switch (attribute.DataType)
             {
                 case AttributeType.Date:
                     var attributeDateTime = await _repository.ProductAttributeDateTime.GetByIdAsync(attributeId);

@@ -6,12 +6,19 @@ namespace DreamyShop.Domain
     [Table("ProductAttributeTexts")]
     public class ProductAttributeText
     {
-        public ProductAttributeText(Guid id, Guid attributeId, Guid productId, string value)
+        public ProductAttributeText() { }
+        public ProductAttributeText(
+            Guid id, 
+            Guid attributeId, 
+            Guid productId, 
+            string value, 
+            ProductAttribute productAttribute)
         {
             Id = id;
             AttributeId = attributeId;
             ProductId = productId;
             Value = value;
+            ProductAttribute = productAttribute;
         }
 
         [Key]

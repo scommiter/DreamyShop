@@ -7,14 +7,15 @@ namespace DreamyShop.Domain
     [Table("ProductAttributes")]
     public class ProductAttribute
     {
+        public ProductAttribute() { }
         public ProductAttribute(
-            Guid id, 
-            string code, 
-            string name, 
-            int sortOrder, 
-            bool isVisibility, 
-            bool isActive, 
-            bool isUnique, 
+            Guid id,
+            string code,
+            string name,
+            int sortOrder,
+            bool isVisibility,
+            bool isActive,
+            bool isUnique,
             string note)
         {
             Id = id;

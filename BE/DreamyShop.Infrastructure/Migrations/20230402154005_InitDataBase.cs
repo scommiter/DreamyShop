@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DreamyShop.EntityFrameworkCore.Migrations
 {
-    public partial class InitDB : Migration
+    public partial class InitDataBase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,7 +33,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Slug = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CoverPicture = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Visibility = table.Column<bool>(type: "bit", nullable: false),
+                    IsVisibility = table.Column<bool>(type: "bit", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     Country = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -52,7 +52,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     Slug = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     CoverPicture = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Visibility = table.Column<bool>(type: "bit", nullable: false),
+                    IsVisibility = table.Column<bool>(type: "bit", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     ParentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     SeoMetaDescription = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
@@ -155,6 +155,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Slug = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
+                    ProductType = table.Column<int>(type: "int", nullable: false),
                     IsVisibility = table.Column<bool>(type: "bit", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -162,8 +163,6 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ThumbnailPicture = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    CategoryName = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    CategorySlug = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     StatusID = table.Column<byte>(type: "tinyint", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -292,7 +291,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Label = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    DataType = table.Column<int>(type: "int", nullable: false),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     IsVisibility = table.Column<bool>(type: "bit", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
@@ -462,6 +462,38 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         principalTable: "ProductAttributes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Manufacturers",
+                columns: new[] { "Id", "Code", "Country", "CoverPicture", "IsActive", "IsVisibility", "Name", "Slug" },
+                values: new object[,]
+                {
+                    { new Guid("57a5f678-43f0-4648-92d8-16bd09d7143e"), "SN", "Japan", "", true, true, "Sony", "sony" },
+                    { new Guid("69d0372b-dbf5-4b70-9beb-0e4ea77f243a"), "asus", "Taiwan", "", true, true, "ASUS", "asus" },
+                    { new Guid("80cad838-29c7-4a02-81c0-9ebe78a0a273"), "IPAPL", "US", "", true, true, "Apple", "apple" },
+                    { new Guid("b9be517b-72aa-46f1-9a98-a0b993cd2cf7"), "dell", "Texas-USA", "", true, true, "DELL", "dell" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductCategories",
+                columns: new[] { "Id", "Code", "CoverPicture", "IsActive", "IsVisibility", "Name", "ParentId", "SeoMetaDescription", "Slug", "SortOrder" },
+                values: new object[,]
+                {
+                    { new Guid("2ed8e62d-2f2e-4957-ae81-8a07b0bcd443"), "LP", "", true, true, "Laptop", null, "", "laptop", 1 },
+                    { new Guid("96bff1b2-3715-4f10-90d3-aaabb332e0e9"), "CMR", "", true, true, "Camera", null, "", "camera", 1 },
+                    { new Guid("efd560a8-c65b-439c-af43-765da733f3c1"), "IP", "", true, true, "Iphone", null, "", "iphone", 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "Id", "CategoryId", "Code", "DateCreated", "DateUpdated", "Description", "IsActive", "IsVisibility", "ManufacturerId", "Name", "Price", "ProductType", "SeoMetaDescription", "Slug", "SortOrder", "StatusID", "ThumbnailPicture" },
+                values: new object[,]
+                {
+                    { new Guid("1747cdf9-3acb-4001-8f52-ee7f387f8efb"), new Guid("96bff1b2-3715-4f10-90d3-aaabb332e0e9"), "CMRSKS", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring", true, true, new Guid("57a5f678-43f0-4648-92d8-16bd09d7143e"), "Camera-SKS", 1200.0, 1, "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring", "camera-sks", 1, (byte)0, "" },
+                    { new Guid("215e9dee-1d6c-40f4-9233-bb810509adaa"), new Guid("2ed8e62d-2f2e-4957-ae81-8a07b0bcd443"), "DELLDEMON", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Buy genuine Laptop at our store with best quality and affordable price. We supply laptop products from reputable brands. Order now to get a free laptop backpack!", true, true, new Guid("b9be517b-72aa-46f1-9a98-a0b993cd2cf7"), "Laptop DELL DEMON", 2500.0, 2, "", "dell-demon", 1, (byte)0, "" },
+                    { new Guid("30299235-6937-41b7-a76d-14584f5f856a"), new Guid("efd560a8-c65b-439c-af43-765da733f3c1"), "IP14XSM", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, new Guid("80cad838-29c7-4a02-81c0-9ebe78a0a273"), "Iphone 14 XSMax", 3000.0, 2, "Find out about Apple's latest line of iPhones at Apple Store Vietnam. Order online and get instant deals.", "ip14-xsmax", 1, (byte)0, "" },
+                    { new Guid("85f8b0c3-cb8d-4ccb-9544-19daad6ef352"), new Guid("96bff1b2-3715-4f10-90d3-aaabb332e0e9"), "CMRUFG", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "XYZ wireless security camera with high resolution.", true, true, new Guid("57a5f678-43f0-4648-92d8-16bd09d7143e"), "Camera-UFG", 1999.0, 1, "XYZ wireless security camera with high resolution, built-in motion sensor, supports wifi connection, helps you observe your family, home, shop, office whenever and wherever.", "camera-ufg", 2, (byte)0, "" }
                 });
 
             migrationBuilder.CreateIndex(

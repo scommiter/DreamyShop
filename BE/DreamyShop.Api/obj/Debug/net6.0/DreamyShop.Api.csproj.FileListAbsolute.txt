@@ -290,3 +290,17 @@ Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.Domain.Share
 Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\AutoMapper.dll
 Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\AutoMapper.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Newtonsoft.Json.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.Common.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.Domain.Shared.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.Logic.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.Repository.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.Logic.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.Repository.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.Common.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.Domain.Shared.pdb

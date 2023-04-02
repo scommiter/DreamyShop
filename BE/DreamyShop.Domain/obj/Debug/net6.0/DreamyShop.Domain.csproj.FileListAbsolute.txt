@@ -57,3 +57,6 @@ Z:\Project\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\ref\DreamyShop.Domai
 Z:\Project\DreamyShop\BE\DreamyShop.Domain\bin\Debug\net6.0\DreamyShop.Domain.Shared.dll
 Z:\Project\DreamyShop\BE\DreamyShop.Domain\bin\Debug\net6.0\DreamyShop.Domain.Shared.pdb
 Z:\Project\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.csproj.CopyComplete
+E:\MyProject\DreamyShop\BE\DreamyShop.Domain\bin\Debug\net6.0\DreamyShop.Domain.Shared.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Domain\bin\Debug\net6.0\DreamyShop.Domain.Shared.pdb
+E:\MyProject\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.csproj.CopyComplete

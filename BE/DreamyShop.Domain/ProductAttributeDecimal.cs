@@ -6,6 +6,7 @@ namespace DreamyShop.Domain
     [Table("ProductAttributeDecimals")]
     public class ProductAttributeDecimal
     {
+        public ProductAttributeDecimal() { }
         public ProductAttributeDecimal(Guid id, Guid attributeId, Guid productId, decimal value)
         {
             Id = id;

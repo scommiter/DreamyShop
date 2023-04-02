@@ -6,13 +6,14 @@ namespace DreamyShop.Domain
     [Table("Manufacturers")]
     public class Manufacturer
     {
+        public Manufacturer() { }
         public Manufacturer(
             Guid id,
             string name,
             string code,
             string slug,
             string coverPicture,
-            bool visibility,
+            bool isVisibility,
             bool isActive,
             string country)
         {
@@ -21,7 +22,7 @@ namespace DreamyShop.Domain
             Code = code;
             Slug = slug;
             CoverPicture = coverPicture;
-            Visibility = visibility;
+            IsVisibility = isVisibility;
             IsActive = isActive;
             Country = country;
         }
@@ -36,7 +37,7 @@ namespace DreamyShop.Domain
         public string Code { get; set; }
         public string Slug { get; set; }
         public string CoverPicture { get; set; }
-        public bool Visibility { get; set; }
+        public bool IsVisibility { get; set; }
         public bool IsActive { get; set; }
         public string Country { get; set; }
 

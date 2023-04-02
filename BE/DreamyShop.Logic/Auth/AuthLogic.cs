@@ -76,7 +76,7 @@ namespace DreamyShop.Logic.Auth
                 return new ApiErrorResult<AuthResult>((int)ErrorCodes.DuplicatedData);
             }
 
-            var user = new DreamyShop.Domain.User()
+            var user = new Domain.User()
             {
                 FullName = registerDto.FullName,
                 GenderType = registerDto.GenderType,
