@@ -1,7 +1,9 @@
 ﻿using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Repository.Repositories.Auth;
+using DreamyShop.Repository.Repositories.Category;
 using DreamyShop.Repository.Repositories.Manufacturer;
 using DreamyShop.Repository.Repositories.Product;
+using DreamyShop.Repository.Repositories.Role;
 using DreamyShop.Repository.Repositories.User;
 
 namespace DreamyShop.Repository.RepositoryWrapper
@@ -19,10 +21,13 @@ namespace DreamyShop.Repository.RepositoryWrapper
         private IProductAttributeTextRepository _productAttributeText;
         private IProductAttributeVarcharRepository _productAttributeVarchar;
         private IManufacturerRepository _manufacturer;
+        private ICategoryRepository _category;
+        private IRoleRepository _role;
         public RepositoryWrapper(
             DreamyShopDbContext context, 
             IAuthRepository auth,
             IUserRepository user,
+            IRoleRepository role,
             IProductRepository product,
             IProductAttributeRepository productAttribute,
             IProductAttributeDateTimeRepository productAttributeDateTime,
@@ -30,7 +35,8 @@ namespace DreamyShop.Repository.RepositoryWrapper
             IProductAttributeIntRepository productAttributeInt,
             IProductAttributeTextRepository productAttributeText,
             IProductAttributeVarcharRepository productAttributeVarchar,
-            IManufacturerRepository manufacturer)
+            IManufacturerRepository manufacturer,
+            ICategoryRepository category)
         {
             _context = context;
             _auth = auth;
@@ -43,6 +49,8 @@ namespace DreamyShop.Repository.RepositoryWrapper
             _productAttributeText = productAttributeText;
             _productAttributeVarchar = productAttributeVarchar;
             _manufacturer = manufacturer;
+            _category = category;
+            _role = role;
         }
 
         public IAuthRepository Auth
@@ -66,6 +74,18 @@ namespace DreamyShop.Repository.RepositoryWrapper
                     _user = new UserRepository(_context);
                 }
                 return _user;
+            }
+        }
+
+        public IRoleRepository Role
+        {
+            get
+            {
+                if (_role == null)
+                {
+                    _role = new RoleRepository(_context);
+                }
+                return _role;
             }
         }
 
@@ -164,6 +184,19 @@ namespace DreamyShop.Repository.RepositoryWrapper
                 return _manufacturer;
             }
         }
+
+        public ICategoryRepository Category
+        {
+            get
+            {
+                if (_category == null)
+                {
+                    _category = new CategoryRepository(_context);
+                }
+                return _category;
+            }
+        }
+
 
         public void Dispose()
         {

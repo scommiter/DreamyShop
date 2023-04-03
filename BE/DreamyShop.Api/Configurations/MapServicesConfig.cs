@@ -10,6 +10,10 @@ using DreamyShop.Repository.Repositories.User;
 using DreamyShop.Repository.RepositoryWrapper;
 using DreamyShop.Repository.Repositories.Manufacturer;
 using DreamyShop.Logic.Manufacturer;
+using DreamyShop.Repository.Repositories.Role;
+using DreamyShop.Repository.Repositories.Category;
+using DreamyShop.Logic.Role;
+using DreamyShop.Logic.Category;
 
 namespace DreamyShop.Api.Configurations
 {
@@ -26,6 +30,7 @@ namespace DreamyShop.Api.Configurations
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProductAttributeRepository, ProductAttributeRepository>();
             services.AddScoped<IProductAttributeDateTimeRepository, ProductAttributeDateTimeRepository>();
@@ -34,13 +39,16 @@ namespace DreamyShop.Api.Configurations
             services.AddScoped<IProductAttributeTextRepository, ProductAttributeTextRepository>();
             services.AddScoped<IProductAttributeVarcharRepository, ProductAttributeVarcharRepository>();
             services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             #endregion
 
             #region Logic
             services.AddScoped<IAuthLogic, AuthLogic>();
             services.AddScoped<IUserLogic, UserLogic>();
+            services.AddScoped<IRoleLogic, RoleLogic>();
             services.AddScoped<IProductLogic, ProductLogic>();
             services.AddScoped<IManufacturerLogic, ManufacturerLogic>();
+            services.AddScoped<ICategoryLogic, CategoryLogic>();
             #endregion
         }
     }
