@@ -39,10 +39,10 @@ namespace DreamyShop.Api.Authorization
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var staffRoles = new List<byte?>() { (int)RoleType.Administrator, (int)RoleType.Customer};
+            var memberRoles = new List<byte?>() { (int)RoleType.Administrator, (int)RoleType.Customer};
             var auth = (AuthEntity)context.HttpContext.Items["Auth"];
 
-            if (!(auth.RoleTypes.Any(roleType => staffRoles.Contains(roleType))))
+            if (!(auth.RoleTypes.Any(roleType => memberRoles.Contains(roleType))))
             {
                 context.Result = new JsonResult(new { message = "Forbidden" }) { StatusCode = StatusCodes.Status403Forbidden };
             }
