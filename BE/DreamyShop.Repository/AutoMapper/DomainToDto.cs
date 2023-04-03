@@ -18,6 +18,8 @@ namespace DreamyShop.Repository.AutoMapper
                     opt.MapFrom(src => src.ProductCategory.Name))
                 .ForMember(pt => pt.ManufacturerName, opt =>
                     opt.MapFrom(src => src.Manufacturer.Name));
+            CreateMap<Manufacturer, ManufacturerDto>();
+
         }
     }
 }

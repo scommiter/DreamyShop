@@ -8,6 +8,8 @@ using DreamyShop.Repository.Repositories.Generic;
 using DreamyShop.Repository.Repositories.Product;
 using DreamyShop.Repository.Repositories.User;
 using DreamyShop.Repository.RepositoryWrapper;
+using DreamyShop.Repository.Repositories.Manufacturer;
+using DreamyShop.Logic.Manufacturer;
 
 namespace DreamyShop.Api.Configurations
 {
@@ -31,12 +33,14 @@ namespace DreamyShop.Api.Configurations
             services.AddScoped<IProductAttributeIntRepository, ProductAttributeIntRepository>();
             services.AddScoped<IProductAttributeTextRepository, ProductAttributeTextRepository>();
             services.AddScoped<IProductAttributeVarcharRepository, ProductAttributeVarcharRepository>();
+            services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
             #endregion
 
             #region Logic
             services.AddScoped<IAuthLogic, AuthLogic>();
             services.AddScoped<IUserLogic, UserLogic>();
             services.AddScoped<IProductLogic, ProductLogic>();
+            services.AddScoped<IManufacturerLogic, ManufacturerLogic>();
             #endregion
         }
     }

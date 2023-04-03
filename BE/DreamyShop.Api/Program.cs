@@ -1,5 +1,5 @@
+using DreamyShop.Api.Authorization;
 using DreamyShop.Api.Configurations;
-using DreamyShop.Api.Middleware;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Repository.AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

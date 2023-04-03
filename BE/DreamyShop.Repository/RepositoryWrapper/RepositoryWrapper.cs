@@ -1,5 +1,6 @@
 ﻿using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Repository.Repositories.Auth;
+using DreamyShop.Repository.Repositories.Manufacturer;
 using DreamyShop.Repository.Repositories.Product;
 using DreamyShop.Repository.Repositories.User;
 
@@ -17,6 +18,7 @@ namespace DreamyShop.Repository.RepositoryWrapper
         private IProductAttributeIntRepository _productAttributeInt;
         private IProductAttributeTextRepository _productAttributeText;
         private IProductAttributeVarcharRepository _productAttributeVarchar;
+        private IManufacturerRepository _manufacturer;
         public RepositoryWrapper(
             DreamyShopDbContext context, 
             IAuthRepository auth,
@@ -27,7 +29,8 @@ namespace DreamyShop.Repository.RepositoryWrapper
             IProductAttributeDecimalRepository productAttributeDecimal,
             IProductAttributeIntRepository productAttributeInt,
             IProductAttributeTextRepository productAttributeText,
-            IProductAttributeVarcharRepository productAttributeVarchar)
+            IProductAttributeVarcharRepository productAttributeVarchar,
+            IManufacturerRepository manufacturer)
         {
             _context = context;
             _auth = auth;
@@ -39,6 +42,7 @@ namespace DreamyShop.Repository.RepositoryWrapper
             _productAttributeInt = productAttributeInt;
             _productAttributeText = productAttributeText;
             _productAttributeVarchar = productAttributeVarchar;
+            _manufacturer = manufacturer;
         }
 
         public IAuthRepository Auth
@@ -146,6 +150,18 @@ namespace DreamyShop.Repository.RepositoryWrapper
                     _productAttributeVarchar = new ProductAttributeVarcharRepository(_context);
                 }
                 return _productAttributeVarchar;
+            }
+        }
+
+        public IManufacturerRepository Manufacturer
+        {
+            get
+            {
+                if (_manufacturer == null)
+                {
+                    _manufacturer = new ManufacturerRepository(_context);
+                }
+                return _manufacturer;
             }
         }
 

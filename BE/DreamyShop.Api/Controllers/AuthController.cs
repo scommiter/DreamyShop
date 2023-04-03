@@ -1,7 +1,9 @@
-﻿using DreamyShop.Domain.Shared.Dtos;
+﻿using DreamyShop.Api.Authorization;
+using DreamyShop.Domain.Shared.Dtos;
 using DreamyShop.Logic.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using AuthorizeAttribute = DreamyShop.Api.Authorization.AuthorizeAttribute;
 
 namespace DreamyShop.Api.Controllers
 {
@@ -42,6 +44,7 @@ namespace DreamyShop.Api.Controllers
         }
 
         [Authorize]
+        [Member]
         [HttpPut("ChangePassword")]
         public async Task<IActionResult> ChangePassword([FromForm] UserChangePassword userLoginDto)
         {

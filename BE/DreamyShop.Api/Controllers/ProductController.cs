@@ -1,13 +1,16 @@
-﻿using DreamyShop.Domain.Shared.Dtos;
+﻿using DreamyShop.Api.Authorization;
+using DreamyShop.Domain.Shared.Dtos;
 using DreamyShop.Logic.Conditions;
 using DreamyShop.Logic.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using AuthorizeAttribute = DreamyShop.Api.Authorization.AuthorizeAttribute;
 
 namespace DreamyShop.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IProductLogic _productService;
@@ -17,6 +20,7 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpGet("product/getAll")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllProduct([FromHeader] int page = 1, [FromHeader] int limit = 10)
         {
             var result = await _productService.GetAllProduct(page, limit);
@@ -24,7 +28,7 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpPost("product/create")]
-        [Authorize]
+        [Member]
         public async Task<IActionResult> CreateProduct([FromForm] ProductCreateUpdateDto productCreateUpdateDto)
         {
             if (!ModelState.IsValid)
@@ -36,7 +40,7 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpPut("product/updateProduct")]
-        [Authorize]
+        [Member]
         public async Task<IActionResult> UpdateProduct(Guid id, [FromForm] ProductCreateUpdateDto productCreateUpdateDto)
         {
             if (!ModelState.IsValid)
@@ -48,8 +52,8 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpDelete("product/removeProduct")]
-        [Authorize]
-        public async Task<IActionResult> RemoveAtributeProduct(Guid id)
+        [Member]
+        public async Task<IActionResult> RemoveProduct(Guid id)
         {
             if (!ModelState.IsValid)
             {
@@ -60,7 +64,7 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpGet("product/getListProductAttribute")]
-        [Authorize]
+        [Member]
         public async Task<IActionResult> GetListProductAttribute(Guid productId)
         {
             var result = await _productService.GetListProductAttribute(productId);
@@ -68,7 +72,7 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpPost("product/createAtributeProduct")]
-        [Authorize]
+        [Member]
         public async Task<IActionResult> CreateAtributeProduct([FromForm] CreateProductAttributeDto productAttributeDto)
         {
             if (!ModelState.IsValid)
@@ -80,7 +84,7 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpPut("product/updateProductAttribute")]
-        [Authorize]
+        [Member]
         public async Task<IActionResult> UpdateProductAttributeAsync(Guid id, [FromForm] CreateProductAttributeDto productAttributeDto)
         {
             if (!ModelState.IsValid)
@@ -92,7 +96,7 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpDelete("product/removeAtributeProduct")]
-        [Authorize]
+        [Member]
         public async Task<IActionResult> RemoveAtributeProduct(Guid attributeId, Guid attributeTypeId)
         {
             if (!ModelState.IsValid)
@@ -105,7 +109,7 @@ namespace DreamyShop.Api.Controllers
 
 
         [HttpPut("product/searchCondition")]
-        [Authorize]
+        [AllowAnonymous]
         public async Task<IActionResult> SearchProduct([FromForm] SearchProductCondition searchProductCondition)
         {
             if (!ModelState.IsValid)

@@ -1,4 +1,5 @@
 ﻿using DreamyShop.Repository.Repositories.Auth;
+using DreamyShop.Repository.Repositories.Manufacturer;
 using DreamyShop.Repository.Repositories.Product;
 using DreamyShop.Repository.Repositories.User;
 
@@ -15,6 +16,8 @@ namespace DreamyShop.Repository.RepositoryWrapper
         IProductAttributeIntRepository ProductAttributeInt { get; }
         IProductAttributeTextRepository ProductAttributeText { get; }
         IProductAttributeVarcharRepository ProductAttributeVarchar { get; }
+        IManufacturerRepository Manufacturer { get; }
+
         void Save();
     }
 }

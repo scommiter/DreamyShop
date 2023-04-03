@@ -1,6 +1,6 @@
 ﻿using DreamyShop.Logic.Auth.Security;
 
-namespace DreamyShop.Api.Middleware
+namespace DreamyShop.Api.Authorization
 {
     public class JwtMiddleware
     {
