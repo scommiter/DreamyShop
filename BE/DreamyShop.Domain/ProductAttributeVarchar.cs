@@ -12,12 +12,18 @@ namespace DreamyShop.Domain
     public class ProductAttributeVarchar
     {
         public ProductAttributeVarchar() { }
-        public ProductAttributeVarchar(Guid id, Guid attributeId, Guid productId, string value)
+        public ProductAttributeVarchar(
+            Guid id, 
+            Guid attributeId, 
+            Guid productId, 
+            string value,
+            ProductAttribute productAttribute)
         {
             Id = id;
             AttributeId = attributeId;
             ProductId = productId;
             Value = value;
+            ProductAttribute = productAttribute;
         }
         [Key]
         public Guid Id { get; set; }

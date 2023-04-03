@@ -20,6 +20,7 @@ namespace DreamyShop.Domain.Shared.Dtos
         public string ManufacturerName { get; set; }
         public string Description { get; set; }
         public bool IsActive { get; set; }
+        public bool IsVisibility { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
     }

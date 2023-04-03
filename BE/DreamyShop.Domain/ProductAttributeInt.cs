@@ -7,12 +7,18 @@ namespace DreamyShop.Domain
     public class ProductAttributeInt
     {
         public ProductAttributeInt() { }
-        public ProductAttributeInt(Guid id, Guid attributeId, Guid productId, int value)
+        public ProductAttributeInt(
+            Guid id, 
+            Guid attributeId, 
+            Guid productId, 
+            int value,
+            ProductAttribute productAttribute)
         {
             Id = id;
             AttributeId = attributeId;
             ProductId = productId;
             Value = value;
+            ProductAttribute = productAttribute;
         }
 
         [Key]

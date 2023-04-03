@@ -7,12 +7,18 @@ namespace DreamyShop.Domain
     public class ProductAttributeDecimal
     {
         public ProductAttributeDecimal() { }
-        public ProductAttributeDecimal(Guid id, Guid attributeId, Guid productId, decimal value)
+        public ProductAttributeDecimal(
+            Guid id, 
+            Guid attributeId, 
+            Guid productId, 
+            decimal value,
+            ProductAttribute productAttribute)
         {
             Id = id;
             AttributeId = attributeId;
             ProductId = productId;
             Value = value;
+            ProductAttribute = productAttribute;
         }
 
         [Key]

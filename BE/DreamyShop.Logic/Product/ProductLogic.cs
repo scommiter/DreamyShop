@@ -6,8 +6,10 @@ using DreamyShop.Domain;
 using DreamyShop.Domain.Shared.Dtos;
 using DreamyShop.Domain.Shared.Types;
 using DreamyShop.EntityFrameworkCore;
+using DreamyShop.Logic.Conditions;
 using DreamyShop.Repository.RepositoryWrapper;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace DreamyShop.Logic.Product
 {
@@ -27,14 +29,6 @@ namespace DreamyShop.Logic.Product
             _mapper = mapper;
         }
 
-        public async Task<ApiResult<ProductDto>> CreateProduct(ProductCreateUpdateDto productCreateUpdateDto)
-        {
-            var newProduct = _mapper.Map<Domain.Product>(productCreateUpdateDto);
-            await _repository.Product.AddAsync(newProduct);
-            _repository.Save();
-            return new ApiSuccessResult<ProductDto>(_mapper.Map<ProductDto>(newProduct));
-        }
-
         public async Task<ApiResult<PageResult<ProductDto>>> GetAllProduct(int page, int limit)
         {
             var productPagings = _context.Products
@@ -52,7 +46,39 @@ namespace DreamyShop.Logic.Product
             };
             return new ApiSuccessResult<PageResult<ProductDto>>(pageResult);
         }
-
+        public async Task<ApiResult<ProductDto>> CreateProduct(ProductCreateUpdateDto productCreateUpdateDto)
+        {
+            var newProduct = _mapper.Map<Domain.Product>(productCreateUpdateDto);
+            await _repository.Product.AddAsync(newProduct);
+            _repository.Save();
+            return new ApiSuccessResult<ProductDto>(_mapper.Map<ProductDto>(newProduct));
+        }
+        public async Task<ApiResult<ProductDto>> UpdateProduct(Guid id, ProductCreateUpdateDto productCreateUpdateDto)
+        {
+            var product = await _repository.Product.GetByIdAsync(id);
+            if(product == null)
+            {
+                return new ApiErrorResult<ProductDto>((int)ErrorCodes.DataEntryIsNotExisted);
+            }
+            _repository.Product.Update(_mapper.Map<Domain.Product>(product));
+            _repository.Save();
+            return new ApiSuccessResult<ProductDto>(_mapper.Map<ProductDto>(product));
+        }
+        public async Task<ApiResult<bool>> RemoveProduct(Guid id)
+        {
+            try
+            {
+                await _repository.Product.BeginTransactionAsync();
+                _repository.Product.Remove(id);
+                await _repository.Product.EndTransactionAsync();
+            }
+            catch
+            {
+                await _repository.Product.RollbackTransactionAsync();
+                return new ApiErrorResult<bool>((int)ErrorCodes.DeleteFailed);
+            }
+            return new ApiSuccessResult<bool>(true);
+        }
         public async Task<ApiResult<PageResult<ProductAttributeDto>>> GetListProductAttribute(Guid productId)
         {
             var product = await _repository.Product.GetByIdAsync(productId);
@@ -122,7 +148,7 @@ namespace DreamyShop.Logic.Product
                     {
                         return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
                     }
-                    var productAttributeDateTime = new ProductAttributeDateTime(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.DateTimeValue);
+                    var productAttributeDateTime = new ProductAttributeDateTime(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.DateTimeValue, attribute);
                     await _repository.ProductAttributeDateTime.AddAsync(productAttributeDateTime);
                     break;
 
@@ -131,7 +157,7 @@ namespace DreamyShop.Logic.Product
                     {
                         return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
                     }
-                    var productAttributeInt = new ProductAttributeInt(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.IntValue.Value);
+                    var productAttributeInt = new ProductAttributeInt(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.IntValue.Value, attribute);
                     await _repository.ProductAttributeInt.AddAsync(productAttributeInt);
                     break;
 
@@ -140,7 +166,7 @@ namespace DreamyShop.Logic.Product
                     {
                         return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
                     }
-                    var productAttributeDecimal = new ProductAttributeDecimal(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.DecimalValue.Value);
+                    var productAttributeDecimal = new ProductAttributeDecimal(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.DecimalValue.Value, attribute);
                     await _repository.ProductAttributeDecimal.AddAsync(productAttributeDecimal);
                     break;
 
@@ -149,7 +175,7 @@ namespace DreamyShop.Logic.Product
                     {
                         return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
                     }
-                    var productAttributeVarchar = new ProductAttributeVarchar(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.VarcharValue);
+                    var productAttributeVarchar = new ProductAttributeVarchar(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.VarcharValue, attribute);
                     await _repository.ProductAttributeVarchar.AddAsync(productAttributeVarchar);
                     break;
 
@@ -234,8 +260,7 @@ namespace DreamyShop.Logic.Product
             var attribute = await _repository.ProductAttribute.GetByIdAsync(attributeId);
             if (attribute == null)
                 return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
-            var attributeDto = _mapper.Map<ProductAttributeDto>(attribute);
-            switch (attributeDto.DataType)
+            switch (attribute.DataType)
             {
                 case AttributeType.Date:
                     try
@@ -309,6 +334,65 @@ namespace DreamyShop.Logic.Product
             }
             _repository.Save();
             return new ApiSuccessResult<bool>(true);
+        }
+
+        public async Task<ApiResult<IList<ProductDto>>> SearchProduct(SearchProductCondition condition)
+        {
+            int page = 1, limit = 10;
+            var products = _context.Products
+                                .Include(opt => opt.Manufacturer)
+                                .Include(opt => opt.ProductCategory)
+                                .OrderByDescending(p => p.DateCreated)
+                                .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
+                                .ToList();
+            if (condition == null)
+            {
+                return new ApiSuccessResult<IList<ProductDto>>(GetAllProduct(page, limit).Result.Result.Items);
+            }
+            if(condition.ProductName != null)
+            {
+                products = products.Where(p => p.Name.ToLower() == condition.ProductName.ToLower()).ToList();
+            }
+            if (condition.Code != null)
+            {
+                products = products.Where(p => p.Code == condition.Code).ToList();
+            }
+            if (condition.Price != null)
+            {
+                products = products.Where(p => p.Price == condition.Price).ToList();
+            }
+            if (condition.ProductType != null)
+            {
+                products = products.Where(p => p.ProductType == condition.ProductType).ToList();
+            }
+            if (condition.CategoryName != null)
+            {
+                products = products.Where(p => p.CategoryName == condition.CategoryName).ToList();
+            }
+            if (condition.ManufacturerName != null)
+            {
+                products = products.Where(p => p.ManufacturerName == condition.ManufacturerName).ToList();
+            }
+            if (condition.IsActive != null)
+            {
+                products = products.Where(p => p.IsActive == condition.IsActive).ToList();
+            }
+            if (condition.IsVisibility != null)
+            {
+                products = products.Where(p => p.IsVisibility == condition.IsVisibility).ToList();
+            }
+            if (condition.DateCreated != null)
+            {
+                products = products.Where(p => p.DateCreated == condition.DateCreated).ToList();
+            }
+            if (condition.DateUpdated != null)
+            {
+                products = products.Where(p => p.DateUpdated == condition.DateUpdated).ToList();
+            }
+            var productPagingsResult = products.Skip((page - 1) * limit)
+                                    .Take(limit)
+                                    .ToList(); ;
+            return new ApiSuccessResult<IList<ProductDto>>(_mapper.Map<List<ProductDto>>(productPagingsResult));
         }
     }
 }

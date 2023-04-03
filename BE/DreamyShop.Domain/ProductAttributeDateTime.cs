@@ -7,12 +7,18 @@ namespace DreamyShop.Domain
     public class ProductAttributeDateTime
     {
         public ProductAttributeDateTime() { }
-        public ProductAttributeDateTime(Guid id, Guid attributeId, Guid productId, DateTime? value)
+        public ProductAttributeDateTime(
+            Guid id, 
+            Guid attributeId, 
+            Guid productId, 
+            DateTime? value, 
+            ProductAttribute productAttribute)
         {
             Id = id;
             AttributeId = attributeId;
             ProductId = productId;
             Value = value;
+            ProductAttribute = productAttribute;
         }
 
         [Key]
