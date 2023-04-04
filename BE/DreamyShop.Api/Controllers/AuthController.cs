@@ -12,8 +12,12 @@ namespace DreamyShop.Api.Controllers
     public class AuthController : Controller
     {
         private readonly IAuthLogic _authService;
-        public AuthController(IAuthLogic authenService)
+        private readonly ILogger<AuthController> _logger;
+        public AuthController(
+            IAuthLogic authenService, 
+            ILogger<AuthController> logger)
         {
+            _logger = logger;
             _authService = authenService;
         }
 

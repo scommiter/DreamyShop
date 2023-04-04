@@ -304,3 +304,6 @@ E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.Logic.pdb
 E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.Repository.pdb
 E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.Common.pdb
 E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.Domain.Shared.pdb
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\log4net.config
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\log4net.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.Extensions.Logging.Log4Net.AspNetCore.dll

@@ -14,8 +14,12 @@ namespace DreamyShop.Api.Controllers
     public class ProductController : Controller
     {
         private readonly IProductLogic _productService;
-        public ProductController(IProductLogic productService)
+        private readonly ILogger<ProductController> _logger;
+        public ProductController(
+            IProductLogic productService, 
+            ILogger<ProductController> logger)
         {
+            _logger = logger;
             _productService = productService;
         }
 

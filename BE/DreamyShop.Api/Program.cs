@@ -1,7 +1,9 @@
 using DreamyShop.Api.Authorization;
 using DreamyShop.Api.Configurations;
+using DreamyShop.Api.Middleware;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Repository.AutoMapper;
+using log4net.Config;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -19,6 +21,11 @@ builder.Services.MapServices();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services.AddControllers();
+
+builder.Services.AddHttpContextAccessor();
+
+builder.Logging.AddLog4Net(); //provedor
+XmlConfigurator.Configure(new FileInfo("log4net.config"));
 
 builder.Services.AddEndpointsApiExplorer();
 
@@ -100,6 +107,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseMiddleware<JwtMiddleware>();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseEndpoints(endpoints =>
 {

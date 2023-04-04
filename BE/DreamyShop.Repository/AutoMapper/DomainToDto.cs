@@ -19,7 +19,7 @@ namespace DreamyShop.Repository.AutoMapper
                 .ForMember(pt => pt.ManufacturerName, opt =>
                     opt.MapFrom(src => src.Manufacturer.Name));
             CreateMap<Manufacturer, ManufacturerDto>();
-
+            CreateMap<Manufacturer, ManufacturerCreateUpdateDto>();
         }
     }
 }

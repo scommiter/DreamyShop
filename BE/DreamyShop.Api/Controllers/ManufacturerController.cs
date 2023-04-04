@@ -14,8 +14,12 @@ namespace DreamyShop.Api.Controllers
     public class ManufacturerController : Controller
     {
         private readonly IManufacturerLogic _manufacturerService;
-        public ManufacturerController(IManufacturerLogic manufacturerService)
+        private readonly ILogger<ManufacturerController> _logger;
+        public ManufacturerController(
+            IManufacturerLogic manufacturerService, 
+            ILogger<ManufacturerController> logger)
         {
+            _logger = logger;
             _manufacturerService = manufacturerService;
         }
 

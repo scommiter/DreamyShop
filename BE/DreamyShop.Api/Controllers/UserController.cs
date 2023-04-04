@@ -13,8 +13,12 @@ namespace DreamyShop.Api.Controllers
     public class UserController : Controller
     {
         private readonly IUserLogic _userService;
-        public UserController(IUserLogic userService)
+        private readonly ILogger<UserController> _logger;
+        public UserController(
+            IUserLogic userService, 
+            ILogger<UserController> logger)
         {
+            _logger = logger;
             _userService = userService;
         }
 
