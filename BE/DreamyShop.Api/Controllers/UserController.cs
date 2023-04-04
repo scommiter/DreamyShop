@@ -9,7 +9,6 @@ namespace DreamyShop.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class UserController : Controller
     {
         private readonly IUserLogic _userService;
@@ -22,7 +21,8 @@ namespace DreamyShop.Api.Controllers
             _userService = userService;
         }
 
-        [HttpPut("user/update")]
+        [HttpPut("update")]
+        [Authorize]
         [Admin]
         public async Task<IActionResult> UpdateUser([FromForm] UserUpdateDto userUpdateDto)
         {
@@ -41,7 +41,8 @@ namespace DreamyShop.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPut("user/searchCondition")]
+        [HttpPut("searchCondition")]
+        [Authorize]
         [Member]
         public async Task<IActionResult> SearchUser([FromForm] SearchUserCondition searchUserCondition)
         {
@@ -55,7 +56,8 @@ namespace DreamyShop.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("user/getAll")]
+        [HttpGet("getAll")]
+        [Authorize]
         [Admin]
         public async Task<IActionResult> GetAllUser([FromHeader] int page = 1, [FromHeader] int limit = 10)
         {
@@ -63,7 +65,8 @@ namespace DreamyShop.Api.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("user/delete")]
+        [HttpDelete("delete")]
+        [Authorize]
         [Admin]
         public async Task<IActionResult> DeleteUser(string userId)
         {

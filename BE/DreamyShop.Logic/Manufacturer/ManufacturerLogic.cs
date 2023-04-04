@@ -65,8 +65,8 @@ namespace DreamyShop.Logic.Manufacturer
             var manufacturer = await _repository.Manufacturer.GetByIdAsync(id);
             if (manufacturer == null)
                 return new ApiErrorResult<ManufacturerDto>((int)ErrorCodes.DataEntryIsNotExisted);
-
-            _repository.Manufacturer.Update(_mapper.Map<Domain.Manufacturer>(manufacturer));
+            var newManufacturer = _mapper.Map<Domain.Manufacturer>(manufacturerCreateUpdateDto);
+            _repository.Manufacturer.Update(newManufacturer);
             _repository.Save();
             return new ApiSuccessResult<ManufacturerDto>(_mapper.Map<ManufacturerDto>(manufacturer));
         }

@@ -7,25 +7,6 @@ namespace DreamyShop.Domain
     public class Manufacturer
     {
         public Manufacturer() { }
-        public Manufacturer(
-            Guid id,
-            string name,
-            string code,
-            string slug,
-            string coverPicture,
-            bool isVisibility,
-            bool isActive,
-            string country)
-        {
-            Id = id;
-            Name = name;
-            Code = code;
-            Slug = slug;
-            CoverPicture = coverPicture;
-            IsVisibility = isVisibility;
-            IsActive = isActive;
-            Country = country;
-        }
 
         [Key]
         public Guid Id { get; set; }

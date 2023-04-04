@@ -10,7 +10,6 @@ namespace DreamyShop.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class ManufacturerController : Controller
     {
         private readonly IManufacturerLogic _manufacturerService;
@@ -23,15 +22,15 @@ namespace DreamyShop.Api.Controllers
             _manufacturerService = manufacturerService;
         }
 
-        [HttpGet("manufacturer/getAll")]
-        [AllowAnonymous]
+        [HttpGet("getAll")]
         public async Task<IActionResult> GetAllManufacturer([FromHeader] int page = 1, [FromHeader] int limit = 10)
         {
             var result = await _manufacturerService.GetAllManufacturer(page, limit);
             return Ok(result);
         }
 
-        [HttpPost("manufacturer/create")]
+        [HttpPost("create")]
+        [Authorize]
         [Member]
         public async Task<IActionResult> CreateManufacturer([FromForm] ManufacturerCreateUpdateDto manufacturerCreateUpdateDto)
         {
@@ -43,8 +42,9 @@ namespace DreamyShop.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPut("manufacturer/updateManufacturer")]
-        [Member]
+        [HttpPut("updateManufacturer")]
+        //[Authorize]
+        //[Member]
         public async Task<IActionResult> UpdateManufacturer(Guid id, [FromForm] ManufacturerCreateUpdateDto manufacturerCreateUpdateDto)
         {
             if (!ModelState.IsValid)
@@ -55,7 +55,8 @@ namespace DreamyShop.Api.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("manufacturer/removeManufacturer")]
+        [HttpDelete("removeManufacturer")]
+        [Authorize]
         [Member]
         public async Task<IActionResult> RemoveManufacturer(Guid id)
         {

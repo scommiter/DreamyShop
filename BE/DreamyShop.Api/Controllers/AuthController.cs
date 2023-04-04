@@ -47,9 +47,9 @@ namespace DreamyShop.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPut("ChangePassword")]
         [Authorize]
         [Member]
-        [HttpPut("ChangePassword")]
         public async Task<IActionResult> ChangePassword([FromForm] UserChangePassword userLoginDto)
         {
             if (!ModelState.IsValid)
