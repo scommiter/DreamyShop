@@ -60,16 +60,20 @@ namespace DreamyShop.Logic.Product
             {
                 return new ApiErrorResult<ProductDto>((int)ErrorCodes.DataEntryIsNotExisted);
             }
-            _repository.Product.Update(_mapper.Map<Domain.Product>(product));
+            _repository.Product.Update(_mapper.Map(productCreateUpdateDto, product));
             _repository.Save();
             return new ApiSuccessResult<ProductDto>(_mapper.Map<ProductDto>(product));
         }
         public async Task<ApiResult<bool>> RemoveProduct(Guid id)
         {
+            var product = await _repository.Product.GetByIdAsync(id);
+            if (product == null)
+                return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
             try
             {
                 await _repository.Product.BeginTransactionAsync();
                 _repository.Product.Remove(id);
+                _repository.Save();
                 await _repository.Product.EndTransactionAsync();
             }
             catch
@@ -130,7 +134,7 @@ namespace DreamyShop.Logic.Product
             return new ApiSuccessResult<PageResult<ProductAttributeDto>>(pageResult);
         }
 
-        public async Task<ApiResult<bool>> CreateAtributeProduct(CreateProductAttributeDto productAttributeDto)
+        public async Task<ApiResult<bool>> CreateAtributeValueProduct(CreateProductAttributeDto productAttributeDto)
         {
             var product = await _repository.Product.GetByIdAsync(productAttributeDto.ProductId);
             if (product == null)
@@ -267,6 +271,7 @@ namespace DreamyShop.Logic.Product
                     {
                         await _repository.ProductAttributeDateTime.BeginTransactionAsync();
                         _repository.ProductAttributeDateTime.Remove(attributeTypeId);
+                        _repository.Save();
                         await _repository.ProductAttributeDateTime.EndTransactionAsync();
                     }
                     catch
@@ -281,6 +286,7 @@ namespace DreamyShop.Logic.Product
                     {
                         await _repository.ProductAttributeInt.BeginTransactionAsync();
                         _repository.ProductAttributeInt.Remove(attributeTypeId);
+                        _repository.Save();
                         await _repository.ProductAttributeInt.EndTransactionAsync();
                     }
                     catch
@@ -295,6 +301,7 @@ namespace DreamyShop.Logic.Product
                     {
                         await _repository.ProductAttributeDecimal.BeginTransactionAsync();
                         _repository.ProductAttributeDecimal.Remove(attributeTypeId);
+                        _repository.Save();
                         await _repository.ProductAttributeDecimal.EndTransactionAsync();
                     }
                     catch
@@ -309,6 +316,7 @@ namespace DreamyShop.Logic.Product
                     {
                         await _repository.ProductAttributeVarchar.BeginTransactionAsync();
                         _repository.ProductAttributeVarchar.Remove(attributeTypeId);
+                        _repository.Save();
                         await _repository.ProductAttributeVarchar.EndTransactionAsync();
                     }
                     catch
@@ -323,6 +331,7 @@ namespace DreamyShop.Logic.Product
                     {
                         await _repository.ProductAttributeText.BeginTransactionAsync();
                         _repository.ProductAttributeText.Remove(attributeTypeId);
+                        _repository.Save();
                         await _repository.ProductAttributeText.EndTransactionAsync();
                     }
                     catch

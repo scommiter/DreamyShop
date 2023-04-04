@@ -17,7 +17,7 @@ namespace DreamyShop.Logic.Product
         Task<ApiResult<bool>> RemoveProduct(Guid id);
 
         Task<ApiResult<PageResult<ProductAttributeDto>>> GetListProductAttribute(Guid productId);
-        Task<ApiResult<bool>> CreateAtributeProduct(CreateProductAttributeDto productAttributeDto);
+        Task<ApiResult<bool>> CreateAtributeValueProduct(CreateProductAttributeDto productAttributeDto);
         Task<ApiResult<ProductAttributeDto>> UpdateProductAttributeAsync(Guid id, CreateProductAttributeDto updateProductAttributeDto);
         Task<ApiResult<bool>> RemoveAtributeProduct(Guid attributeId, Guid attributeTypeId);
 

@@ -43,8 +43,8 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpPut("updateProduct")]
-        //[Authorize]
-        //[Member]
+        [Authorize]
+        [Member]
         public async Task<IActionResult> UpdateProduct(Guid id, [FromForm] ProductCreateUpdateDto productCreateUpdateDto)
         {
             if (!ModelState.IsValid)
@@ -56,8 +56,8 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpDelete("removeProduct")]
-        [Authorize]
-        [Member]
+        //[Authorize]
+        //[Member]
         public async Task<IActionResult> RemoveProduct(Guid id)
         {
             if (!ModelState.IsValid)
@@ -80,13 +80,13 @@ namespace DreamyShop.Api.Controllers
         [HttpPost("createAtributeProduct")]
         [Authorize]
         [Member]
-        public async Task<IActionResult> CreateAtributeProduct([FromForm] CreateProductAttributeDto productAttributeDto)
+        public async Task<IActionResult> CreateAtributeValueProduct([FromForm] CreateProductAttributeDto productAttributeDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var result = await _productService.CreateAtributeProduct(productAttributeDto);
+            var result = await _productService.CreateAtributeValueProduct(productAttributeDto);
             return Ok(result);
         }
 

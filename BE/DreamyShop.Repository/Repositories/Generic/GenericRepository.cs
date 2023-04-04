@@ -18,7 +18,7 @@ namespace DreamyShop.Repository.Repositories.Generic
             _dbSet = _context.Set<T>();
         }
 
-        public Task<IDbContextTransaction> BeginTransactionAsync() => _context.Database.BeginTransactionAsync();
+        public async Task<IDbContextTransaction> BeginTransactionAsync() => await _context.Database.BeginTransactionAsync();
 
         public Task RollbackTransactionAsync() => _context.Database.RollbackTransactionAsync();
 
@@ -75,7 +75,7 @@ namespace DreamyShop.Repository.Repositories.Generic
         {
             try
             {
-                _dbSet.Update(entity);
+                _dbSet.Attach(entity);
             }
             catch (Exception ex)
             {
