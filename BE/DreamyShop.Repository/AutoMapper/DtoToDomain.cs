@@ -35,6 +35,8 @@ namespace DreamyShop.Repository.AutoMapper
                 .ForMember(u => u.ProductReviews, option => option.Ignore())
                 .ForMember(u => u.ProductTags, option => option.Ignore());
 
+            CreateMap<ProductAttributeDto, ProductAttribute>();
+
             CreateMap<ManufacturerDto, Manufacturer>()
                 .ForMember(u => u.Products, option => option.DoNotUseDestinationValue());
 

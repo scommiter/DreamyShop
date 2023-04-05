@@ -19,6 +19,13 @@ namespace DreamyShop.Logic.Product
         Task<ApiResult<IList<ProductDto>>> SearchProduct(SearchProductCondition condition);
         #endregion
 
+        #region ProductAttribute
+        Task<ApiResult<PageResult<ProductAttributeDto>>> GetListProductAttribute(int page, int limit);
+        Task<ApiResult<ProductAttributeDto>> CreateAtributeProduct(CreateProductAttributeDto productAttributeDto);
+        Task<ApiResult<ProductAttributeDto>> UpdateProductAttribute(Guid id, CreateProductAttributeDto updateProductAttributeDto);
+        Task<ApiResult<bool>> RemoveProductAttribute(Guid attributeId);
+        #endregion
+
         #region ProductAttributeValue
         Task<ApiResult<PageResult<ProductAttributeValueDto>>> GetListProductAttributeValue(Guid productId);
         Task<ApiResult<bool>> CreateAtributeValueProduct(CreateProductAttributeValueDto productAttributeDto);

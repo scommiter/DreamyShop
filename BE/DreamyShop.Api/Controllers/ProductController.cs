@@ -56,8 +56,8 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpDelete("removeProduct")]
-        //[Authorize]
-        //[Member]
+        [Authorize]
+        [Member]
         public async Task<IActionResult> RemoveProduct(Guid id)
         {
             if (!ModelState.IsValid)
@@ -127,6 +127,54 @@ namespace DreamyShop.Api.Controllers
             {
                 return BadRequest(result);
             }
+            return Ok(result);
+        }
+
+        [HttpGet("getAllProductAttribute")]
+        [Authorize]
+        [Member]
+        public async Task<IActionResult> GetAllProductAttribute([FromHeader] int page = 1, [FromHeader] int limit = 10)
+        {
+            var result = await _productService.GetListProductAttribute(page, limit);
+            return Ok(result);
+        }
+
+        [HttpPost("createProductAttribute")]
+        [Authorize]
+        [Member]
+        public async Task<IActionResult> CreateProductAttribute([FromForm] CreateProductAttributeDto productCreateUpdateDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _productService.CreateAtributeProduct(productCreateUpdateDto);
+            return Ok(result);
+        }
+
+        [HttpPut("updateProductAttribute")]
+        [Authorize]
+        [Member]
+        public async Task<IActionResult> UpdateProductAttribute(Guid id, [FromForm] CreateProductAttributeDto productCreateUpdateDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _productService.UpdateProductAttribute(id, productCreateUpdateDto);
+            return Ok(result);
+        }
+
+        [HttpDelete("removeProductAttribute")]
+        [Authorize]
+        [Member]
+        public async Task<IActionResult> RemoveProductAttribute(Guid id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _productService.RemoveProductAttribute(id);
             return Ok(result);
         }
     }
