@@ -41,6 +41,11 @@ namespace DreamyShop.Repository.AutoMapper
                 .ForMember(u => u.Products, option => option.DoNotUseDestinationValue());
 
             CreateMap<ManufacturerCreateUpdateDto, Manufacturer>();
+
+            CreateMap<CategoryDto, ProductCategory>()
+               .ForMember(u => u.Products, option => option.DoNotUseDestinationValue());
+
+            CreateMap<CategoryCreateUpdateDto, ProductCategory>();
         }
     }
 }

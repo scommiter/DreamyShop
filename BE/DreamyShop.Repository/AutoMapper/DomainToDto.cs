@@ -23,6 +23,9 @@ namespace DreamyShop.Repository.AutoMapper
 
             CreateMap<Manufacturer, ManufacturerDto>();
             CreateMap<Manufacturer, ManufacturerCreateUpdateDto>();
+
+            CreateMap<ProductCategory, CategoryDto>();
+            CreateMap<ProductCategory, CategoryCreateUpdateDto>();
         }
     }
 }
