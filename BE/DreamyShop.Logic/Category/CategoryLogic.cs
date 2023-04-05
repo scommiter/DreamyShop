@@ -24,13 +24,13 @@ namespace DreamyShop.Logic.Category
             _repository = repository;
             _mapper = mapper;
         }
-        public async Task<ApiResult<PageResult<CategoryDto>>> GetAllCategory(int page, int limit)
+        public async Task<ApiResult<PageResult<CategoryDto>>> GetAllCategory(PagingRequest pagingRequest)
         {
             var categoryPagings = _context.Products
                                 .OrderByDescending(p => p.DateCreated)
                                 .ProjectTo<CategoryDto>(_mapper.ConfigurationProvider)
-                                .Skip((page - 1) * limit)
-                                .Take(limit)
+                                .Skip((pagingRequest.Page - 1) * pagingRequest.Limit)
+                                .Take(pagingRequest.Limit)
                                 .ToList();
             var pageResult = new PageResult<CategoryDto>()
             {

@@ -59,9 +59,9 @@ namespace DreamyShop.Api.Controllers
         [HttpGet("getAll")]
         [Authorize]
         [Admin]
-        public async Task<IActionResult> GetAllUser([FromHeader] int page = 1, [FromHeader] int limit = 10)
+        public async Task<IActionResult> GetAllUser(PagingRequest pagingRequest)
         {
-            var result = await _userService.GetAllUser(page, limit);
+            var result = await _userService.GetAllUser(pagingRequest);
             return Ok(result);
         }
 

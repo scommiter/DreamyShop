@@ -23,9 +23,9 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpGet("getAll")]
-        public async Task<IActionResult> GetAllManufacturer([FromHeader] int page = 1, [FromHeader] int limit = 10)
+        public async Task<IActionResult> GetAllManufacturer(PagingRequest pagingRequest)
         {
-            var result = await _manufacturerService.GetAllManufacturer(page, limit);
+            var result = await _manufacturerService.GetAllManufacturer(pagingRequest);
             return Ok(result);
         }
 

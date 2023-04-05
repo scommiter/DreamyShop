@@ -310,3 +310,4 @@ Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.Extensions.Lo
 E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\log4net.config
 E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\log4net.dll
 E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.Extensions.Logging.Log4Net.AspNetCore.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Google.dll

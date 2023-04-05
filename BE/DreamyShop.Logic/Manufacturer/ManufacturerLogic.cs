@@ -32,12 +32,12 @@ namespace DreamyShop.Logic.Manufacturer
             return new ApiSuccessResult<ManufacturerDto>(_mapper.Map<ManufacturerDto>(newManufacturer));
         }
 
-        public async Task<ApiResult<PageResult<ManufacturerDto>>> GetAllManufacturer(int page, int limit)
+        public async Task<ApiResult<PageResult<ManufacturerDto>>> GetAllManufacturer(PagingRequest pagingRequest)
         {
             var manufacturerPagings = _repository.Manufacturer.GetAll()
                                 .ProjectTo<ManufacturerDto>(_mapper.ConfigurationProvider)
-                                .Skip((page - 1) * limit)
-                                .Take(limit)
+                                .Skip((pagingRequest.Page - 1) * pagingRequest.Limit)
+                                .Take(pagingRequest.Limit)
                                 .ToList();
             var pageResult = new PageResult<ManufacturerDto>()
             {

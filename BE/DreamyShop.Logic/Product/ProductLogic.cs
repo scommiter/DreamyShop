@@ -9,6 +9,7 @@ using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Logic.Conditions;
 using DreamyShop.Repository.RepositoryWrapper;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace DreamyShop.Logic.Product
 {
@@ -29,15 +30,15 @@ namespace DreamyShop.Logic.Product
         }
 
         #region Product
-        public async Task<ApiResult<PageResult<ProductDto>>> GetAllProduct(int page, int limit)
+        public async Task<ApiResult<PageResult<ProductDto>>> GetAllProduct(PagingRequest pagingRequest)
         {
             var productPagings = _context.Products
                                 .Include(opt => opt.Manufacturer)
                                 .Include(opt => opt.ProductCategory)
                                 .OrderByDescending(p => p.DateCreated)
                                 .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
-                                .Skip((page - 1) * limit)
-                                .Take(limit)
+                                .Skip((pagingRequest.Page - 1) * pagingRequest.Limit)
+                                .Take(pagingRequest.Limit)
                                 .ToList();
             var pageResult = new PageResult<ProductDto>()
             {
@@ -85,7 +86,7 @@ namespace DreamyShop.Logic.Product
         }
         public async Task<ApiResult<IList<ProductDto>>> SearchProduct(SearchProductCondition condition)
         {
-            int page = 1, limit = 10;
+            var pagingRequest = new PagingRequest() { Page = 1, Limit = 10 };
             var products = _context.Products
                                 .Include(opt => opt.Manufacturer)
                                 .Include(opt => opt.ProductCategory)
@@ -94,7 +95,7 @@ namespace DreamyShop.Logic.Product
                                 .ToList();
             if (condition == null)
             {
-                return new ApiSuccessResult<IList<ProductDto>>(GetAllProduct(page, limit).Result.Result.Items);
+                return new ApiSuccessResult<IList<ProductDto>>(GetAllProduct(pagingRequest).Result.Result.Items);
             }
             if (condition.ProductName != null)
             {
@@ -136,15 +137,15 @@ namespace DreamyShop.Logic.Product
             {
                 products = products.Where(p => p.DateUpdated == condition.DateUpdated).ToList();
             }
-            var productPagingsResult = products.Skip((page - 1) * limit)
-                                    .Take(limit)
+            var productPagingsResult = products.Skip((pagingRequest.Page - 1) * pagingRequest.Limit)
+                                    .Take(pagingRequest.Limit)
                                     .ToList(); ;
             return new ApiSuccessResult<IList<ProductDto>>(_mapper.Map<List<ProductDto>>(productPagingsResult));
         }
         #endregion
 
         #region ProductAttribute
-        public async Task<ApiResult<PageResult<ProductAttributeValueDto>>> GetListProductAttributeValue(Guid productId)
+        public async Task<ApiResult<PageResult<ProductAttributeValueDto>>> GetListProductAttributeValue(Guid productId, PagingRequest pagingRequest)
         {
             var product = await _repository.Product.GetByIdAsync(productId);
             var productAttributes = from pa in _context.ProductAttributes
@@ -438,12 +439,12 @@ namespace DreamyShop.Logic.Product
         #endregion
 
         #region ProductAttributeValue
-        public async Task<ApiResult<PageResult<ProductAttributeDto>>> GetListProductAttribute(int page, int limit)
+        public async Task<ApiResult<PageResult<ProductAttributeDto>>> GetListProductAttribute(PagingRequest pagingRequest)
         {
             var productAttributes = _repository.ProductAttribute.GetAll()
                                     .ProjectTo<ProductAttributeDto>(_mapper.ConfigurationProvider)
-                                    .Skip((page - 1) * limit)
-                                    .Take(limit)
+                                    .Skip((pagingRequest.Page - 1) * pagingRequest.Limit)
+                                    .Take(pagingRequest.Limit)
                                     .ToList();
             var pageResult = new PageResult<ProductAttributeDto>()
             {

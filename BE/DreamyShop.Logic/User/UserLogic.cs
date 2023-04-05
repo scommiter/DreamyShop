@@ -28,34 +28,35 @@ namespace DreamyShop.Logic.User
             _mapper = mapper;
         }
 
-        public async Task<ApiResult<PageResult<UserDto>>> GetAllUser(int page = 1, int limit = 10)
+        public async Task<ApiResult<PageResult<UserDto>>> GetAllUser(PagingRequest pagingRequest)
         {
             var userPagings = _context.Users
                 .Include(u => u.Roles)
                 .OrderByDescending(u => u.DateCreated).ToList();
             var pageResult = new PageResult<UserDto>()
             {
-                Items = _mapper.Map<List<UserDto>>(GetPagingUsers(userPagings, page, limit)),
+                Items = _mapper.Map<List<UserDto>>(GetPagingUsers(userPagings, pagingRequest)),
                 Totals = userPagings.Count()
             };
             return new ApiSuccessResult<PageResult<UserDto>>(pageResult);
         }
 
-        private List<Domain.User> GetPagingUsers(List<Domain.User> userList, int page, int limit)
+        private List<Domain.User> GetPagingUsers(List<Domain.User> userList, PagingRequest pagingRequest)
         {
-            return userList.Skip((page - 1) * limit)
-                .Take(limit)
-                .ToList();
+            return userList.Skip((pagingRequest.Page - 1) * pagingRequest.Limit)
+                                .Take(pagingRequest.Limit)
+                                .ToList();
         }
 
         public async Task<ApiResult<IList<UserDto>>> Search(SearchUserCondition condition)
         {
+            var pagingRequest = new PagingRequest() { Page = 1, Limit = 10 };
             var usersResult = _context.Users
                 .Include(u => u.Roles)
                 .OrderByDescending(u => u.DateCreated).ToList();
             if (condition == null)
             {
-                return new ApiSuccessResult<IList<UserDto>>(GetAllUser().Result.Result.Items);
+                return new ApiSuccessResult<IList<UserDto>>(GetAllUser(pagingRequest).Result.Result.Items);
             }
             if(condition.FullName != null)
             {
@@ -85,7 +86,7 @@ namespace DreamyShop.Logic.User
             {
                 usersResult = usersResult.Where(u => condition.RoleTypes.All(role => u.Roles.Any(r => r.RoleType == role))).ToList();
             }
-            var userPagingsResult = GetPagingUsers(usersResult, 1, 10);
+            var userPagingsResult = GetPagingUsers(usersResult, pagingRequest);
             return new ApiSuccessResult<IList<UserDto>>(_mapper.Map<List<UserDto>>(userPagingsResult));
         }
 

@@ -47,6 +47,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 };
             });
 
+builder.Services.AddAuthentication().AddGoogle(googleOptions =>
+{
+    googleOptions.ClientId = builder.Configuration.GetSection("GoogleAuthSettings")
+.GetValue<string>("ClientId");
+    googleOptions.ClientSecret = builder.Configuration.GetSection("GoogleAuthSettings")
+.GetValue<string>("ClientSecret");
+});
+
 builder.Services.AddAuthorization();
 
 builder.Services.AddSwaggerGen(c =>

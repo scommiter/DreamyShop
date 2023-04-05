@@ -23,9 +23,9 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpGet("getAll")]
-        public async Task<IActionResult> GetAllProduct([FromHeader] int page = 1, [FromHeader] int limit = 10)
+        public async Task<IActionResult> GetAllProduct(PagingRequest pagingRequest)
         {
-            var result = await _productService.GetAllProduct(page, limit);
+            var result = await _productService.GetAllProduct(pagingRequest);
             return Ok(result);
         }
 
@@ -71,9 +71,9 @@ namespace DreamyShop.Api.Controllers
         [HttpGet("getListProductAttributeValue")]
         [Authorize]
         [Member]
-        public async Task<IActionResult> GetListProductAttributeValue(Guid productId)
+        public async Task<IActionResult> GetListProductAttributeValue(Guid productId, PagingRequest pagingRequest)
         {
-            var result = await _productService.GetListProductAttributeValue(productId);
+            var result = await _productService.GetListProductAttributeValue(productId, pagingRequest);
             return Ok(result);
         }
 
@@ -133,9 +133,9 @@ namespace DreamyShop.Api.Controllers
         [HttpGet("getAllProductAttribute")]
         [Authorize]
         [Member]
-        public async Task<IActionResult> GetAllProductAttribute([FromHeader] int page = 1, [FromHeader] int limit = 10)
+        public async Task<IActionResult> GetAllProductAttribute(PagingRequest pagingRequest)
         {
-            var result = await _productService.GetListProductAttribute(page, limit);
+            var result = await _productService.GetListProductAttribute(pagingRequest);
             return Ok(result);
         }
 

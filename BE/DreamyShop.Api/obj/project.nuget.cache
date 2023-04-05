@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "tXF/zRfDW/TCNg88tNClZmZ7SREokQ8635GAFdeWS0L6wJ+0stDtkOgVpTSyaXrvaRGibX9nRi7f++X+2xkQBQ==",
+  "dgSpecHash": "08yw2Fktn8O2xkuc6/Cgs9f0b0HRahQq8Ixs71n7Aj2hwGhoz3gMJtL54W1ua4gz4LNMe6rvF/fDTRTkcznd+g==",
   "success": true,
   "projectFilePath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Api\\DreamyShop.Api.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\log4net\\2.0.13\\log4net.2.0.13.nupkg.sha512",
+    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\6.0.15\\microsoft.aspnetcore.authentication.google.6.0.15.nupkg.sha512",
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.15\\microsoft.aspnetcore.authentication.jwtbearer.6.0.15.nupkg.sha512",
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.15\\microsoft.aspnetcore.cryptography.internal.6.0.15.nupkg.sha512",
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.15\\microsoft.aspnetcore.cryptography.keyderivation.6.0.15.nupkg.sha512",

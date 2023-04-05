@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Const\" />
-    <Folder Include="Logs\" />
+    <Compile Remove="Const\**" />
+    <EmbeddedResource Remove="Const\**" />
+    <None Remove="Const\**" />
   </ItemGroup>
 
   <ItemGroup>
