@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DreamyShop.Domain.Shared.Dtos
 {
-    public class CreateProductAttributeDto
+    public class CreateProductAttributeValueDto
     {
         public Guid ProductId { get; set; }
         public Guid AttributeId { get; set; }

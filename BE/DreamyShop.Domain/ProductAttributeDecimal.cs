@@ -8,17 +8,19 @@ namespace DreamyShop.Domain
     {
         public ProductAttributeDecimal() { }
         public ProductAttributeDecimal(
-            Guid id, 
-            Guid attributeId, 
-            Guid productId, 
+            Guid id,
+            Guid attributeId,
+            Guid productId,
             decimal value,
-            ProductAttribute productAttribute)
+            ProductAttribute productAttribute,
+            Product product)
         {
             Id = id;
             AttributeId = attributeId;
             ProductId = productId;
             Value = value;
             ProductAttribute = productAttribute;
+            Product = product;
         }
 
         [Key]
@@ -28,7 +30,12 @@ namespace DreamyShop.Domain
         public Guid ProductId { get; set; }
         public decimal Value { get; set; }
 
+        [ForeignKey(nameof(AttributeId))]
         [InverseProperty("ProductAttributeDecimals")]
         public virtual ProductAttribute ProductAttribute { get; set; }
+
+        [ForeignKey(nameof(ProductId))]
+        [InverseProperty("ProductAttributeDecimals")]
+        public virtual Product Product { get; set; }
     }
 }

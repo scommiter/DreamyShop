@@ -25,7 +25,6 @@ namespace DreamyShop.Repository.AutoMapper
             CreateMap<ProductCreateUpdateDto, Product>()
                 .ForMember(u => u.Id, option => option.DoNotUseDestinationValue())
                 .ForMember(u => u.ProductCategory, option => option.DoNotUseDestinationValue())
-                .ForMember(u => u.ProductAttributes, option => option.DoNotUseDestinationValue())
                 .ForMember(u => u.ProductReviews, option => option.DoNotUseDestinationValue())
                 .ForMember(u => u.ProductTags, option => option.DoNotUseDestinationValue())
                 .ForMember(u => u.Manufacturer, option => option.DoNotUseDestinationValue());
@@ -33,7 +32,6 @@ namespace DreamyShop.Repository.AutoMapper
             CreateMap<ProductDto, Product>()
                 .ForMember(u => u.Manufacturer, option => option.Ignore())
                 .ForMember(u => u.ProductCategory, option => option.Ignore())
-                .ForMember(u => u.ProductAttributes, option => option.Ignore())
                 .ForMember(u => u.ProductReviews, option => option.Ignore())
                 .ForMember(u => u.ProductTags, option => option.Ignore());
 

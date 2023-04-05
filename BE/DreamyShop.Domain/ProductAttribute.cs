@@ -41,9 +41,6 @@ namespace DreamyShop.Domain
         public bool IsUnique { get; set; }
         public string Note { get; set; }
 
-        [InverseProperty("ProductAttributes")]
-        public virtual Product Product { get; set; }
-
         [InverseProperty(nameof(ProductAttributeDateTime.ProductAttribute))]
         public virtual ICollection<ProductAttributeDateTime> ProductAttributeDateTimes { get; set; }
 

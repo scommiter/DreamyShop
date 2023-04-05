@@ -8,17 +8,19 @@ namespace DreamyShop.Domain
     {
         public ProductAttributeText() { }
         public ProductAttributeText(
-            Guid id, 
-            Guid attributeId, 
-            Guid productId, 
-            string value, 
-            ProductAttribute productAttribute)
+            Guid id,
+            Guid attributeId,
+            Guid productId,
+            string value,
+            ProductAttribute productAttribute,
+            Product product)
         {
             Id = id;
             AttributeId = attributeId;
             ProductId = productId;
             Value = value;
             ProductAttribute = productAttribute;
+            Product = product;
         }
 
         [Key]
@@ -28,7 +30,12 @@ namespace DreamyShop.Domain
         public Guid ProductId { get; set; }
         public string Value { get; set; }
 
+        [ForeignKey(nameof(AttributeId))]
         [InverseProperty("ProductAttributeTexts")]
         public virtual ProductAttribute ProductAttribute { get; set; }
+
+        [ForeignKey(nameof(ProductId))]
+        [InverseProperty("ProductAttributeTexts")]
+        public virtual Product Product { get; set; }
     }
 }

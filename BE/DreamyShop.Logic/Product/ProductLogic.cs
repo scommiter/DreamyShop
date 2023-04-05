@@ -83,7 +83,7 @@ namespace DreamyShop.Logic.Product
             }
             return new ApiSuccessResult<bool>(true);
         }
-        public async Task<ApiResult<PageResult<ProductAttributeDto>>> GetListProductAttribute(Guid productId)
+        public async Task<ApiResult<PageResult<ProductAttributeValueDto>>> GetListProductAttributeValue(Guid productId)
         {
             var product = await _repository.Product.GetByIdAsync(productId);
             var productAttributes = from pa in _context.ProductAttributes
@@ -102,7 +102,7 @@ namespace DreamyShop.Logic.Product
                                     && (pai == null || pai.ProductId == productId)
                                     && (pat == null || pat.ProductId == productId)
                                     && (pavc == null || pavc.ProductId == productId)
-                                    select new ProductAttributeDto()
+                                    select new ProductAttributeValueDto()
                                     {
                                         Name = pa.Name,
                                         AttributeId = pa.Id,
@@ -126,15 +126,15 @@ namespace DreamyShop.Logic.Product
                            || x.TextId != null
                            || x.VarcharId != null);
 
-            var pageResult = new PageResult<ProductAttributeDto>()
+            var pageResult = new PageResult<ProductAttributeValueDto>()
             {
-                Items = productAttributes.ToList() ?? new List<ProductAttributeDto>(),
+                Items = productAttributes.ToList() ?? new List<ProductAttributeValueDto>(),
                 Totals = productAttributes.Count()
             };
-            return new ApiSuccessResult<PageResult<ProductAttributeDto>>(pageResult);
+            return new ApiSuccessResult<PageResult<ProductAttributeValueDto>>(pageResult);
         }
 
-        public async Task<ApiResult<bool>> CreateAtributeValueProduct(CreateProductAttributeDto productAttributeDto)
+        public async Task<ApiResult<bool>> CreateAtributeValueProduct(CreateProductAttributeValueDto productAttributeDto)
         {
             var product = await _repository.Product.GetByIdAsync(productAttributeDto.ProductId);
             if (product == null)
@@ -152,7 +152,13 @@ namespace DreamyShop.Logic.Product
                     {
                         return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
                     }
-                    var productAttributeDateTime = new ProductAttributeDateTime(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.DateTimeValue, attribute);
+                    var productAttributeDateTime = new ProductAttributeDateTime
+                                                        (newAttributeId, 
+                                                        productAttributeDto.AttributeId, 
+                                                        productAttributeDto.ProductId, 
+                                                        productAttributeDto.DateTimeValue, 
+                                                        attribute, 
+                                                        product);
                     await _repository.ProductAttributeDateTime.AddAsync(productAttributeDateTime);
                     break;
 
@@ -161,7 +167,13 @@ namespace DreamyShop.Logic.Product
                     {
                         return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
                     }
-                    var productAttributeInt = new ProductAttributeInt(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.IntValue.Value, attribute);
+                    var productAttributeInt = new ProductAttributeInt
+                                                    (newAttributeId, 
+                                                    productAttributeDto.AttributeId, 
+                                                    productAttributeDto.ProductId, 
+                                                    productAttributeDto.IntValue.Value, 
+                                                    attribute, 
+                                                    product);
                     await _repository.ProductAttributeInt.AddAsync(productAttributeInt);
                     break;
 
@@ -170,7 +182,13 @@ namespace DreamyShop.Logic.Product
                     {
                         return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
                     }
-                    var productAttributeDecimal = new ProductAttributeDecimal(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.DecimalValue.Value, attribute);
+                    var productAttributeDecimal = new ProductAttributeDecimal
+                                                    (newAttributeId, 
+                                                    productAttributeDto.AttributeId, 
+                                                    productAttributeDto.ProductId, 
+                                                    productAttributeDto.DecimalValue.Value, 
+                                                    attribute, 
+                                                    product);
                     await _repository.ProductAttributeDecimal.AddAsync(productAttributeDecimal);
                     break;
 
@@ -179,7 +197,13 @@ namespace DreamyShop.Logic.Product
                     {
                         return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
                     }
-                    var productAttributeVarchar = new ProductAttributeVarchar(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.VarcharValue, attribute);
+                    var productAttributeVarchar = new ProductAttributeVarchar
+                                                    (newAttributeId, 
+                                                    productAttributeDto.AttributeId, 
+                                                    productAttributeDto.ProductId, 
+                                                    productAttributeDto.VarcharValue, 
+                                                    attribute, 
+                                                    product);
                     await _repository.ProductAttributeVarchar.AddAsync(productAttributeVarchar);
                     break;
 
@@ -188,63 +212,69 @@ namespace DreamyShop.Logic.Product
                     {
                         return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
                     }
-                    var productAttributeText = new ProductAttributeText(newAttributeId, productAttributeDto.AttributeId, productAttributeDto.ProductId, productAttributeDto.TextValue, attribute);
+                    var productAttributeText = new ProductAttributeText
+                                                    (newAttributeId, 
+                                                    productAttributeDto.AttributeId, 
+                                                    productAttributeDto.ProductId, 
+                                                    productAttributeDto.TextValue, 
+                                                    attribute, 
+                                                    product);
                     await _repository.ProductAttributeText.AddAsync(productAttributeText);
                     break;
             }
             _repository.Save();
             return new ApiSuccessResult<bool>(true);
         }
-        public async Task<ApiResult<ProductAttributeDto>> UpdateProductAttributeAsync(Guid attributeId, CreateProductAttributeDto updateProductAttributeDto)
+        public async Task<ApiResult<ProductAttributeValueDto>> UpdateProductAttributeValue(Guid attributeId, CreateProductAttributeValueDto updateProductAttributeDto)
         {
             var product = await _repository.Product.GetByIdAsync(updateProductAttributeDto.ProductId);
             if (product == null)
             {
-                return new ApiErrorResult<ProductAttributeDto>((int)ErrorCodes.DataEntryIsNotExisted);
+                return new ApiErrorResult<ProductAttributeValueDto>((int)ErrorCodes.DataEntryIsNotExisted);
             }
             var attribute = await _repository.ProductAttribute.GetByIdAsync(updateProductAttributeDto.AttributeId);
             if (attribute == null)
-                return new ApiErrorResult<ProductAttributeDto>((int)ErrorCodes.DataEntryIsNotExisted);
+                return new ApiErrorResult<ProductAttributeValueDto>((int)ErrorCodes.DataEntryIsNotExisted);
             switch (attribute.DataType)
             {
                 case AttributeType.Date:
                     var attributeDateTime = await _repository.ProductAttributeDateTime.GetByIdAsync(attributeId);
                     if (attributeDateTime == null || updateProductAttributeDto.DateTimeValue == null)
-                        return new ApiErrorResult<ProductAttributeDto>((int)ErrorCodes.DataEntryIsNotExisted);
+                        return new ApiErrorResult<ProductAttributeValueDto>((int)ErrorCodes.DataEntryIsNotExisted);
                     attributeDateTime.Value = updateProductAttributeDto.DateTimeValue.Value;
                     _repository.ProductAttributeDateTime.Update(attributeDateTime);
                     break;
                 case AttributeType.Int:
                     var attributeInt = await _repository.ProductAttributeInt.GetByIdAsync(attributeId);
                     if (attributeInt == null || updateProductAttributeDto.IntValue == null)
-                        return new ApiErrorResult<ProductAttributeDto>((int)ErrorCodes.DataEntryIsNotExisted);
+                        return new ApiErrorResult<ProductAttributeValueDto>((int)ErrorCodes.DataEntryIsNotExisted);
                     attributeInt.Value = updateProductAttributeDto.IntValue.Value;
                     _repository.ProductAttributeInt.Update(attributeInt);
                     break;
                 case AttributeType.Decimal:
                     var attributeDecimal = await _repository.ProductAttributeDecimal.GetByIdAsync(attributeId);
                     if (attributeDecimal == null || updateProductAttributeDto.DecimalValue == null)
-                        return new ApiErrorResult<ProductAttributeDto>((int)ErrorCodes.DataEntryIsNotExisted);
+                        return new ApiErrorResult<ProductAttributeValueDto>((int)ErrorCodes.DataEntryIsNotExisted);
                     attributeDecimal.Value = updateProductAttributeDto.DecimalValue.Value;
                     _repository.ProductAttributeDecimal.Update(attributeDecimal);
                     break;
                 case AttributeType.Varchar:
                     var attributeVarchar = await _repository.ProductAttributeVarchar.GetByIdAsync(attributeId);
                     if (attributeVarchar == null || updateProductAttributeDto.VarcharValue == null)
-                        return new ApiErrorResult<ProductAttributeDto>((int)ErrorCodes.DataEntryIsNotExisted);
+                        return new ApiErrorResult<ProductAttributeValueDto>((int)ErrorCodes.DataEntryIsNotExisted);
                     attributeVarchar.Value = updateProductAttributeDto.VarcharValue;
                     _repository.ProductAttributeVarchar.Update(attributeVarchar);
                     break;
                 case AttributeType.Text:
                     var attributeText = await _repository.ProductAttributeText.GetByIdAsync(attributeId);
                     if (attributeText == null || updateProductAttributeDto.TextValue == null)
-                        return new ApiErrorResult<ProductAttributeDto>((int)ErrorCodes.DataEntryIsNotExisted);
+                        return new ApiErrorResult<ProductAttributeValueDto>((int)ErrorCodes.DataEntryIsNotExisted);
                     attributeText.Value = updateProductAttributeDto.TextValue;
                     _repository.ProductAttributeText.Update(attributeText);
                     break;
             }
             _repository.Save();
-            return new ApiSuccessResult<ProductAttributeDto>(new ProductAttributeDto
+            return new ApiSuccessResult<ProductAttributeValueDto>(new ProductAttributeValueDto
             {
                 AttributeId = updateProductAttributeDto.AttributeId,
                 Code = attribute.Code,
@@ -259,7 +289,7 @@ namespace DreamyShop.Logic.Product
             });
         }
 
-        public async Task<ApiResult<bool>> RemoveAtributeProduct(Guid attributeId, Guid attributeTypeId)
+        public async Task<ApiResult<bool>> RemoveProductAttributeValue(Guid attributeId, Guid attributeTypeId)
         {
             var attribute = await _repository.ProductAttribute.GetByIdAsync(attributeId);
             if (attribute == null)

@@ -2,7 +2,7 @@
 
 namespace DreamyShop.Domain.Shared.Dtos
 {
-    public class ProductAttributeDto
+    public class ProductAttributeValueDto
     {
         public Guid Id { get; set; }
         public Guid ProductId { get; set; }

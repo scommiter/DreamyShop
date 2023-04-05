@@ -68,19 +68,19 @@ namespace DreamyShop.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("getListProductAttribute")]
+        [HttpGet("getListProductAttributeValue")]
         [Authorize]
         [Member]
-        public async Task<IActionResult> GetListProductAttribute(Guid productId)
+        public async Task<IActionResult> GetListProductAttributeValue(Guid productId)
         {
-            var result = await _productService.GetListProductAttribute(productId);
+            var result = await _productService.GetListProductAttributeValue(productId);
             return Ok(result);
         }
 
-        [HttpPost("createAtributeProduct")]
+        [HttpPost("createAtributeValueProduct")]
         [Authorize]
         [Member]
-        public async Task<IActionResult> CreateAtributeValueProduct([FromForm] CreateProductAttributeDto productAttributeDto)
+        public async Task<IActionResult> CreateAtributeValueProduct([FromForm] CreateProductAttributeValueDto productAttributeDto)
         {
             if (!ModelState.IsValid)
             {
@@ -90,29 +90,29 @@ namespace DreamyShop.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPut("updateProductAttribute")]
+        [HttpPut("updateProductAttributeValue")]
         [Authorize]
         [Member]
-        public async Task<IActionResult> UpdateProductAttributeAsync(Guid id, [FromForm] CreateProductAttributeDto productAttributeDto)
+        public async Task<IActionResult> UpdateProductAttributeValue(Guid id, [FromForm] CreateProductAttributeValueDto productAttributeDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var result = await _productService.UpdateProductAttributeAsync(id, productAttributeDto);
+            var result = await _productService.UpdateProductAttributeValue(id, productAttributeDto);
             return Ok(result);
         }
 
-        [HttpDelete("removeAtributeProduct")]
+        [HttpDelete("removeProductAttributeValue")]
         [Authorize]
         [Member]
-        public async Task<IActionResult> RemoveAtributeProduct(Guid attributeId, Guid attributeTypeId)
+        public async Task<IActionResult> RemoveProductAttributeValue(Guid attributeId, Guid attributeTypeId)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var result = await _productService.RemoveAtributeProduct(attributeId, attributeTypeId);
+            var result = await _productService.RemoveProductAttributeValue(attributeId, attributeTypeId);
             return Ok(result);
         }
 

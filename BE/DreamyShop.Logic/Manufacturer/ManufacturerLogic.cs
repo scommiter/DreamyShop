@@ -2,12 +2,9 @@
 using AutoMapper.QueryableExtensions;
 using DreamyShop.Common.Exceptions;
 using DreamyShop.Common.Results;
-using DreamyShop.Domain;
 using DreamyShop.Domain.Shared.Dtos;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Repository.RepositoryWrapper;
-using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace DreamyShop.Logic.Manufacturer
 {

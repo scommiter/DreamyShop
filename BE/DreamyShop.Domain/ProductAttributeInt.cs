@@ -8,17 +8,19 @@ namespace DreamyShop.Domain
     {
         public ProductAttributeInt() { }
         public ProductAttributeInt(
-            Guid id, 
-            Guid attributeId, 
-            Guid productId, 
+            Guid id,
+            Guid attributeId,
+            Guid productId,
             int value,
-            ProductAttribute productAttribute)
+            ProductAttribute productAttribute,
+            Product product)
         {
             Id = id;
             AttributeId = attributeId;
             ProductId = productId;
             Value = value;
             ProductAttribute = productAttribute;
+            Product = product;
         }
 
         [Key]
@@ -28,7 +30,12 @@ namespace DreamyShop.Domain
         public Guid ProductId { get; set; }
         public int Value { get; set; }
 
+        [ForeignKey(nameof(AttributeId))]
         [InverseProperty("ProductAttributeInts")]
         public virtual ProductAttribute ProductAttribute { get; set; }
+
+        [ForeignKey(nameof(ProductId))]
+        [InverseProperty("ProductAttributeInts")]
+        public virtual Product Product { get; set; }
     }
 }

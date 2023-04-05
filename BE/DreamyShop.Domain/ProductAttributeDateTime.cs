@@ -12,13 +12,15 @@ namespace DreamyShop.Domain
             Guid attributeId, 
             Guid productId, 
             DateTime? value, 
-            ProductAttribute productAttribute)
+            ProductAttribute productAttribute, 
+            Product product)
         {
             Id = id;
             AttributeId = attributeId;
             ProductId = productId;
             Value = value;
             ProductAttribute = productAttribute;
+            Product = product;
         }
 
         [Key]
@@ -28,7 +30,12 @@ namespace DreamyShop.Domain
         public Guid ProductId { get; set; }
         public DateTime? Value { get; set; }
 
+        [ForeignKey(nameof(AttributeId))]
         [InverseProperty("ProductAttributeDateTimes")]
         public virtual ProductAttribute ProductAttribute { get; set; }
+
+        [ForeignKey(nameof(ProductId))]
+        [InverseProperty("ProductAttributeDateTimes")]
+        public virtual Product Product{ get; set; }
     }
 }

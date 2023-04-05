@@ -74,8 +74,20 @@ namespace DreamyShop.Domain
         [InverseProperty("Products")]
         public virtual ProductCategory ProductCategory { get; set; }
 
-        [InverseProperty(nameof(ProductAttribute.Product))]
-        public virtual ICollection<ProductAttribute> ProductAttributes { get; set; }
+        [InverseProperty(nameof(ProductAttributeDateTime.Product))]
+        public virtual ICollection<ProductAttributeDateTime> ProductAttributeDateTimes { get; set; }
+
+        [InverseProperty(nameof(ProductAttributeDecimal.Product))]
+        public virtual ICollection<ProductAttributeDecimal> ProductAttributeDecimals { get; set; }
+
+        [InverseProperty(nameof(ProductAttributeInt.Product))]
+        public virtual ICollection<ProductAttributeInt> ProductAttributeInts { get; set; }
+
+        [InverseProperty(nameof(ProductAttributeText.Product))]
+        public virtual ICollection<ProductAttributeText> ProductAttributeTexts { get; set; }
+
+        [InverseProperty(nameof(ProductAttributeVarchar.Product))]
+        public virtual ICollection<ProductAttributeVarchar> ProductAttributeVarchars { get; set; }
 
         [InverseProperty(nameof(ProductReview.Product))]
         public virtual ICollection<ProductReview> ProductReviews { get; set; }
