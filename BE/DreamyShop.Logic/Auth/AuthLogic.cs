@@ -58,6 +58,7 @@ namespace DreamyShop.Logic.Auth
                 var result = new AuthResult()
                 {
                     Token = _tokenService.GenerateJwtToken(userResult),
+                    IsAuthSuccessful = true,
                     User = userResult,
                 };
                 return new ApiSuccessResult<AuthResult>(result);
@@ -101,6 +102,7 @@ namespace DreamyShop.Logic.Auth
             var result = new AuthResult()
             {
                 Token = _tokenService.GenerateJwtToken(userResult),
+                IsAuthSuccessful = true,
                 User = userResult,
             };
             return new ApiSuccessResult<AuthResult>(result);

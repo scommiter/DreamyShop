@@ -1,5 +1,5 @@
 #wrapper{
-    background: url('../../shared/images/backgroundLogin.jpg');
+    background: url('../../../shared/images/backgroundLogin.jpg');
     background-size: cover;
     min-height: 100vh;
     display: flex;
@@ -108,4 +108,19 @@ button:hover{
 .register p a:hover{
     text-decoration: underline;
     color: blue;
+}
+
+@media screen and (max-width: 767.98px){
+    #form-login{
+        margin: 20px 20px;     
+    }
+    .btn-button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    button{
+        width: 80%;
+        height: 40px;
+    }
 }

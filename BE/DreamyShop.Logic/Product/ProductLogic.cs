@@ -9,7 +9,6 @@ using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Logic.Conditions;
 using DreamyShop.Repository.RepositoryWrapper;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace DreamyShop.Logic.Product
 {

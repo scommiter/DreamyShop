@@ -1,15 +1,27 @@
 <div id="wrapper">
-  <form action="" id="form-login">
+  <form
+    id="form-login"
+    [formGroup]="loginForm"
+    (ngSubmit)="loginUser(loginForm)"
+  >
     <h1 class="form-heading">Login</h1>
     <div class="form-group">
       <i class="fa fa-envelope-o" aria-hidden="true"></i>
-      <input type="email" class="form-input" placeholder="Email" />
+      <input
+        type="email"
+        class="form-input"
+        id="username"
+        formControlName="username"
+        placeholder="Email"
+      />
     </div>
     <div class="form-group">
       <i class="fa fa-key" aria-hidden="true"></i>
       <input
         class="form-input"
+        id="password"
         placeholder="Password"
+        formControlName="password"
         [type]="show ? '' : 'password'"
       />
       <i
@@ -23,7 +35,10 @@
       <label> <input type="checkbox" />Remember me </label
       ><a href="#">Forget Password</a>
     </div>
-    <button>Login</button>
+    <div class="btn-button">
+      <button type="submit" [disabled]="!loginForm.valid">Login</button>
+    </div>
+
     <div class="register">
       <p>Don't have a account? <a href="#">Register</a></p>
     </div>
