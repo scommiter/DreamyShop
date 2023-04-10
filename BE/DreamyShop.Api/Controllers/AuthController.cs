@@ -22,7 +22,7 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromForm] RegisterDto userRegisterDto)
+        public async Task<IActionResult> Register([FromBody] RegisterDto userRegisterDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -35,7 +35,7 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromForm] LoginDto userLoginDto)
+        public async Task<IActionResult> Login([FromBody] LoginDto userLoginDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -44,13 +44,13 @@ namespace DreamyShop.Api.Controllers
             {
                 return BadRequest(result);
             }
-            return Ok(result);
+            return Ok(result.Result);
         }
 
         [HttpPut("ChangePassword")]
         [Authorize]
         [Member]
-        public async Task<IActionResult> ChangePassword([FromForm] UserChangePassword userLoginDto)
+        public async Task<IActionResult> ChangePassword([FromBody] UserChangePassword userLoginDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

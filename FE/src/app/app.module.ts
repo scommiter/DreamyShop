@@ -5,23 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './catalog/home/home.component';
+import { AdminPageComponent } from './catalog/admin-page/admin-page.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    RouterModule.forRoot([
-      {
-        path: 'authentication',
-        loadChildren: () =>
-          import('./catalog/authentication/authentication.module').then(
-            (m) => m.AuthenticationModule
-          ),
-      },
-    ]),
-  ],
+  declarations: [AppComponent, HomeComponent, AdminPageComponent],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule, RouterModule],
   providers: [],
   bootstrap: [AppComponent],
 })

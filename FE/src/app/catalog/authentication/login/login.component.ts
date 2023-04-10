@@ -1,8 +1,15 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Subject, takeUntil } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
+import { TOKEN } from 'src/app/shared/constants/keys.const';
 import { LoginRequestDto } from 'src/app/shared/models/login-request.dto';
 import { LoginResponseDto } from 'src/app/shared/models/login-response.dto';
 
@@ -11,30 +18,23 @@ import { LoginResponseDto } from 'src/app/shared/models/login-response.dto';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
-  private returnUrl: string = '';
-
-  loginForm = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-  });
+export class LoginComponent implements OnDestroy {
+  private ngUnsubsribe = new Subject<void>();
+  loginForm: FormGroup;
 
   errorMessage: string = '';
   showError: boolean = false;
   show: boolean = false;
 
   constructor(
-    private authService: AuthenticationService,
+    private authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute
-  ) {}
-
-  ngOnInit(): void {
-    this.loginForm = new FormGroup({
-      username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
+    private fb: FormBuilder
+  ) {
+    this.loginForm = this.fb.group({
+      email: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
     });
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   password() {
@@ -46,21 +46,31 @@ export class LoginComponent implements OnInit {
     const login = { ...loginFormValue };
 
     const userForAuth: LoginRequestDto = {
-      username: login.value.username,
+      email: login.value.email,
       password: login.value.password,
     };
 
     //next là một callback function sẽ được gọi khi Observable phát ra một giá trị mới.
-    this.authService.loginUser('api/auth/login', userForAuth).subscribe({
-      next: (res: LoginResponseDto) => {
-        localStorage.setItem('access_token', res.access_token);
-        this.authService.sendAuthStateChangeNotification(res.isAuthSuccessful);
-        this.router.navigate([this.returnUrl]);
-      },
-      error: (err: HttpErrorResponse) => {
-        this.errorMessage = err.message;
-        this.showError = true;
-      },
-    });
+    this.authService
+      .loginUser('api/auth/login', userForAuth)
+      .pipe(takeUntil(this.ngUnsubsribe))
+      .subscribe({
+        next: (res: LoginResponseDto) => {
+          localStorage.setItem(TOKEN, res.token);
+          this.authService.sendAuthStateChangeNotification(
+            res.isAuthSuccessful
+          );
+          this.router.navigate(['']);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.errorMessage = err.message;
+          this.showError = true;
+        },
+      });
   };
+
+  ngOnDestroy(): void {
+    this.ngUnsubsribe.next();
+    this.ngUnsubsribe.complete();
+  }
 }
