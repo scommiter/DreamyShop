@@ -60,7 +60,7 @@ export class LoginComponent implements OnDestroy {
           this.authService.sendAuthStateChangeNotification(
             res.isAuthSuccessful
           );
-          this.router.navigate(['']);
+          this.router.navigate(['/admin']);
         },
         error: (err: HttpErrorResponse) => {
           this.errorMessage = err.message;
