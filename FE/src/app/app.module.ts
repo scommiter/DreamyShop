@@ -10,7 +10,7 @@ import { AdminPageComponent } from './catalog/admin-page/admin-page.component';
 import { AppLayoutModule } from './layout/app.layout.module';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, AdminPageComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

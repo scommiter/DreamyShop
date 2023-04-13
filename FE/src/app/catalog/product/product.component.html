@@ -1,0 +1,48 @@
+<p-panel header="PRODUCT">
+  <p-tabMenu [model]="items" [activeItem]="activeItem"></p-tabMenu>
+  <p-table [value]="cars">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 3rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th>Name</th>
+        <th>SKU</th>
+        <th>Categorization</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Price</th>
+        <th>Revenue</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-car>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="car"></p-tableCheckbox>
+        </td>
+        <td>{{ car.vin }}</td>
+        <td>{{ car.year }}</td>
+        <td>{{ car.brand }}</td>
+        <td>{{ car.color }}</td>
+        <td>{{ car.color }}</td>
+        <td>{{ car.color }}</td>
+        <td>{{ car.color }}</td>
+        <td>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-success mr-2"
+          ></button>
+          <button
+            pButton
+            pRipple
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-warning"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-panel>
