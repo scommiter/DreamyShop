@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DreamyShop.Domain
 {
     [Table("PromotionCategories")]
-    public class PromotionCategory
+    public class PromotionCategory : AuditEntity
     {
         [Key]
         public Guid Id { get; set; }

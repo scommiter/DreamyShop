@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DreamyShop.Domain
 {
     [Table("ProductAttributeVarchars")]
-    public class ProductAttributeVarchar
+    public class ProductAttributeVarchar : TrackEntity
     {
         public ProductAttributeVarchar() { }
         public ProductAttributeVarchar(
@@ -17,14 +17,14 @@ namespace DreamyShop.Domain
             Guid attributeId,
             Guid productId,
             string value,
-            ProductAttribute productAttribute,
+            Attribute attribute,
             Product product)
         {
             Id = id;
             AttributeId = attributeId;
             ProductId = productId;
             Value = value;
-            ProductAttribute = productAttribute;
+            Attribute = attribute;
             Product = product;
         }
         [Key]
@@ -35,10 +35,13 @@ namespace DreamyShop.Domain
 
         [ForeignKey(nameof(AttributeId))]
         [InverseProperty("ProductAttributeVarchars")]
-        public virtual ProductAttribute ProductAttribute { get; set; }
+        public virtual Attribute Attribute { get; set; }
 
         [ForeignKey(nameof(ProductId))]
         [InverseProperty("ProductAttributeVarchars")]
         public virtual Product Product { get; set; }
+
+        [InverseProperty(nameof(ProductVariantValue.ProductAttributeVarchar))]
+        public virtual ICollection<ProductVariantValue> ProductVariantValues { get; set; }
     }
 }

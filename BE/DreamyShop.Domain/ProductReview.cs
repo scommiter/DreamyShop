@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DreamyShop.Domain
 {
     [Table("ProductReviews")]
-    public class ProductReview
+    public class ProductReview : TrackEntity
     {
         public ProductReview(
             Guid id,

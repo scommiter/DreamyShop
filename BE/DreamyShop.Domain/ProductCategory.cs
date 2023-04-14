@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DreamyShop.Domain
 {
     [Table("ProductCategories")]
-    public class ProductCategory
+    public class ProductCategory : AuditEntity
     {
         public ProductCategory() { }
         public ProductCategory(

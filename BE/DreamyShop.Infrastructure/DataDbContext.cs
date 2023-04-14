@@ -18,13 +18,10 @@ namespace DreamyShop.EntityFrameworkCore
                    Slug = "camera-sks",
                    SortOrder = 1,
                    ProductType = ProductType.Single,
-                   IsVisibility = true,
-                   IsActive = true,
                    CategoryId = new Guid("96BFF1B2-3715-4F10-90D3-AAABB332E0E9"),
                    SeoMetaDescription = "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring",
                    Description = "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring",
-                   ThumbnailPicture = "",
-                   Price = 1200
+                   ThumbnailPicture = ""
                },
                new Product()
                {
@@ -35,13 +32,10 @@ namespace DreamyShop.EntityFrameworkCore
                    Slug = "camera-ufg",
                    SortOrder = 2,
                    ProductType = ProductType.Single,
-                   IsVisibility = true,
-                   IsActive = true,
                    CategoryId = new Guid("96BFF1B2-3715-4F10-90D3-AAABB332E0E9"),
                    SeoMetaDescription = "XYZ wireless security camera with high resolution, built-in motion sensor, supports wifi connection, helps you observe your family, home, shop, office whenever and wherever.",
                    Description = "XYZ wireless security camera with high resolution.",
-                   ThumbnailPicture = "",
-                   Price = 1999
+                   ThumbnailPicture = ""
                },
                new Product()
                {
@@ -52,13 +46,10 @@ namespace DreamyShop.EntityFrameworkCore
                    Slug = "ip14-xsmax",
                    SortOrder = 1,
                    ProductType = ProductType.Grouped,
-                   IsVisibility = true,
-                   IsActive = true,
                    CategoryId = new Guid("EFD560A8-C65B-439C-AF43-765DA733F3C1"),
                    SeoMetaDescription = "Find out about Apple's latest line of iPhones at Apple Store Vietnam. Order online and get instant deals.",
                    Description = "",
-                   ThumbnailPicture = "",
-                   Price = 3000
+                   ThumbnailPicture = ""
                },
                new Product()
                {
@@ -69,13 +60,10 @@ namespace DreamyShop.EntityFrameworkCore
                    Slug = "dell-demon",
                    SortOrder = 1,
                    ProductType = ProductType.Grouped,
-                   IsVisibility = true,
-                   IsActive = true,
                    CategoryId = new Guid("2ED8E62D-2F2E-4957-AE81-8A07B0BCD443"),
                    SeoMetaDescription = "",
                    Description = "Buy genuine Laptop at our store with best quality and affordable price. We supply laptop products from reputable brands. Order now to get a free laptop backpack!",
-                   ThumbnailPicture = "",
-                   Price = 2500
+                   ThumbnailPicture = ""
                });
             modelBuilder.Entity<Manufacturer>().HasData(
                new Manufacturer()

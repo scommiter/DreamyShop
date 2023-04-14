@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DreamyShop.Domain
 {
     [Table("InventoryTicketItems")]
-    public class InventoryTicketItem
+    public class InventoryTicketItem : TrackEntity
     {
         [Key]
         public Guid Id { get; set; }

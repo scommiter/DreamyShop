@@ -22,20 +22,20 @@ namespace DreamyShop.Repository.AutoMapper
                 .ForMember(u => u.StoredSalt, option => option.DoNotUseDestinationValue())
                 .ForMember(u => u.Roles, option => option.DoNotUseDestinationValue());
 
-            CreateMap<ProductCreateUpdateDto, Product>()
-                .ForMember(u => u.Id, option => option.DoNotUseDestinationValue())
-                .ForMember(u => u.ProductCategory, option => option.DoNotUseDestinationValue())
-                .ForMember(u => u.ProductReviews, option => option.DoNotUseDestinationValue())
-                .ForMember(u => u.ProductTags, option => option.DoNotUseDestinationValue())
-                .ForMember(u => u.Manufacturer, option => option.DoNotUseDestinationValue());
+            //CreateMap<ProductCreateUpdateDto, Product>()
+            //    .ForMember(u => u.Id, option => option.DoNotUseDestinationValue())
+            //    .ForMember(u => u.ProductCategory, option => option.DoNotUseDestinationValue())
+            //    .ForMember(u => u.ProductReviews, option => option.DoNotUseDestinationValue())
+            //    .ForMember(u => u.ProductTags, option => option.DoNotUseDestinationValue())
+            //    .ForMember(u => u.Manufacturer, option => option.DoNotUseDestinationValue());
 
-            CreateMap<ProductDto, Product>()
-                .ForMember(u => u.Manufacturer, option => option.Ignore())
-                .ForMember(u => u.ProductCategory, option => option.Ignore())
-                .ForMember(u => u.ProductReviews, option => option.Ignore())
-                .ForMember(u => u.ProductTags, option => option.Ignore());
+            //CreateMap<ProductDto, Product>()
+            //    .ForMember(u => u.Manufacturer, option => option.Ignore())
+            //    .ForMember(u => u.ProductCategory, option => option.Ignore())
+            //    .ForMember(u => u.ProductReviews, option => option.Ignore())
+            //    .ForMember(u => u.ProductTags, option => option.Ignore());
 
-            CreateMap<ProductAttributeDto, ProductAttribute>();
+            CreateMap<ProductAttributeDto, Domain.Attribute>();
 
             CreateMap<ManufacturerDto, Manufacturer>()
                 .ForMember(u => u.Products, option => option.DoNotUseDestinationValue());

@@ -9,7 +9,7 @@ using System.Data;
 namespace DreamyShop.Api.Authorization
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public class AuthorizeAttribute : Attribute, IAuthorizationFilter
+    public class AuthorizeAttribute : System.Attribute, IAuthorizationFilter
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
@@ -22,7 +22,7 @@ namespace DreamyShop.Api.Authorization
         }
     }
 
-    public class AdminAttribute : Attribute, IAuthorizationFilter
+    public class AdminAttribute : System.Attribute, IAuthorizationFilter
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
@@ -35,7 +35,7 @@ namespace DreamyShop.Api.Authorization
         }
     }
 
-    public class MemberAttribute : Attribute, IAuthorizationFilter
+    public class MemberAttribute : System.Attribute, IAuthorizationFilter
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {

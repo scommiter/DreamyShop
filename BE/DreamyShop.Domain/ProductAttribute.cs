@@ -1,59 +1,30 @@
-﻿using DreamyShop.Domain.Shared.Types;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DreamyShop.Domain
 {
     [Table("ProductAttributes")]
-    public class ProductAttribute
+    public class ProductAttribute : AuditEntity
     {
-        public ProductAttribute() { }
-        public ProductAttribute(
-            Guid id,
-            string code,
-            string name,
-            int sortOrder,
-            bool isVisibility,
-            bool isActive,
-            bool isUnique,
-            string note)
-        {
-            Id = id;
-            Code = code;
-            Name = name;
-            SortOrder = sortOrder;
-            IsVisibility = isVisibility;
-            IsActive = isActive;
-            IsUnique = isUnique;
-            Note = note;
-        }
         [Key]
-        public Guid Id { get; set; }
-        [Required]
-        [StringLength(50)]
-        public string Code { get; set; }
-        [StringLength(50)]
-        public string Name { get; set; }
-        public AttributeType DataType { get; set; }
-        public int SortOrder { get; set; }
-        public bool IsVisibility { get; set; }
-        public bool IsActive { get; set; }
-        public bool IsUnique { get; set; }
-        public string Note { get; set; }
+        [Column(Order = 1)]
+        public Guid ProductId { get; set; }
 
-        [InverseProperty(nameof(ProductAttributeDateTime.ProductAttribute))]
-        public virtual ICollection<ProductAttributeDateTime> ProductAttributeDateTimes { get; set; }
+        [Key]
+        [Column(Order = 2)]
+        public Guid AttributeId { get; set; }
 
-        [InverseProperty(nameof(ProductAttributeDecimal.ProductAttribute))]
-        public virtual ICollection<ProductAttributeDecimal> ProductAttributeDecimals { get; set; }
+        [ForeignKey(nameof(ProductId))]
+        [InverseProperty("ProductAttributes")]
+        public virtual Product Product { get; set; }
 
-        [InverseProperty(nameof(ProductAttributeInt.ProductAttribute))]
-        public virtual ICollection<ProductAttributeInt> ProductAttributeInts { get; set; }
-
-        [InverseProperty(nameof(ProductAttributeText.ProductAttribute))]
-        public virtual ICollection<ProductAttributeText> ProductAttributeTexts { get; set; }
-
-        [InverseProperty(nameof(ProductAttributeVarchar.ProductAttribute))]
-        public virtual ICollection<ProductAttributeVarchar> ProductAttributeVarchars { get; set; }
+        [ForeignKey(nameof(AttributeId))]
+        [InverseProperty("ProductAttributes")]
+        public virtual Attribute Attribute { get; set; }
     }
 }

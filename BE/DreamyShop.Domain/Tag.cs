@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DreamyShop.Domain
 {
     [Table("Tags")]
-    public class Tag
+    public class Tag : TrackEntity
     {
         [Key]
         public string Id { get; set; }

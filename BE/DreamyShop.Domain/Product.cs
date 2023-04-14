@@ -13,37 +13,6 @@ namespace DreamyShop.Domain
     public class Product : AuditEntity
     {
         public Product() { }
-        public Product(
-            Guid id,
-            Guid manufacturerId,
-            string name,
-            string code,
-            string slug,
-            int sortOrder,
-            bool isVisibility,
-            bool isActive,
-            Guid categoryId,
-            string seoMetaDescription,
-            string description,
-            string thumbnailPicture,
-            double price,
-            ProductType productType)
-        {
-            Id = id;
-            ManufacturerId = manufacturerId;
-            Name = name;
-            Code = code;
-            Slug = slug;
-            SortOrder = sortOrder;
-            IsVisibility = isVisibility;
-            IsActive = isActive;
-            CategoryId = categoryId;
-            SeoMetaDescription = seoMetaDescription;
-            Description = description;
-            ThumbnailPicture = thumbnailPicture;
-            Price = price;
-            ProductType = productType;
-        }
         [Key]
         public Guid Id { get; set; }
         public Guid ManufacturerId { get; set; }
@@ -56,23 +25,23 @@ namespace DreamyShop.Domain
         public string Slug { get; set; }
         public int SortOrder { get; set; }
         public ProductType ProductType { get; set; }
-        public bool IsVisibility { get; set; }
-        public bool IsActive { get; set; }
         public Guid CategoryId { get; set; }
         [StringLength(250)]
         public string SeoMetaDescription { get; set; }
         public string Description { get; set; }
         [StringLength(250)]
         public string ThumbnailPicture { get; set; }
-        public double Price { get; set; }
+
 
         [ForeignKey(nameof(ManufacturerId))]
         [InverseProperty("Products")]
         public virtual Manufacturer Manufacturer { get; set; }
-
         [ForeignKey(nameof(CategoryId))]
         [InverseProperty("Products")]
         public virtual ProductCategory ProductCategory { get; set; }
+
+        [InverseProperty(nameof(ProductVariant.Product))]
+        public virtual ICollection<ProductVariant> ProductVariants { get; set; }
 
         [InverseProperty(nameof(ProductAttributeDateTime.Product))]
         public virtual ICollection<ProductAttributeDateTime> ProductAttributeDateTimes { get; set; }
@@ -91,6 +60,12 @@ namespace DreamyShop.Domain
 
         [InverseProperty(nameof(ProductReview.Product))]
         public virtual ICollection<ProductReview> ProductReviews { get; set; }
+
+        [InverseProperty(nameof(ProductAttribute.Product))]
+        public virtual ICollection<ProductAttribute> ProductAttributes { get; set; }
+
+        [InverseProperty(nameof(ProductVariantValue.Product))]
+        public virtual ICollection<ProductVariantValue> ProductVariantValues { get; set; }
 
         [InverseProperty(nameof(ProductTag.Product))]
         public virtual ICollection<ProductTag> ProductTags { get; set; }

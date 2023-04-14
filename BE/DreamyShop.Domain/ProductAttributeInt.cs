@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DreamyShop.Domain
 {
     [Table("ProductAttributeInts")]
-    public class ProductAttributeInt
+    public class ProductAttributeInt : TrackEntity
     {
         public ProductAttributeInt() { }
         public ProductAttributeInt(
@@ -12,14 +12,14 @@ namespace DreamyShop.Domain
             Guid attributeId,
             Guid productId,
             int value,
-            ProductAttribute productAttribute,
+            Attribute attribute,
             Product product)
         {
             Id = id;
             AttributeId = attributeId;
             ProductId = productId;
             Value = value;
-            ProductAttribute = productAttribute;
+            Attribute = attribute;
             Product = product;
         }
 
@@ -32,10 +32,13 @@ namespace DreamyShop.Domain
 
         [ForeignKey(nameof(AttributeId))]
         [InverseProperty("ProductAttributeInts")]
-        public virtual ProductAttribute ProductAttribute { get; set; }
+        public virtual Attribute Attribute { get; set; }
 
         [ForeignKey(nameof(ProductId))]
         [InverseProperty("ProductAttributeInts")]
         public virtual Product Product { get; set; }
+
+        [InverseProperty(nameof(ProductVariantValue.ProductAttributeInt))]
+        public virtual ICollection<ProductVariantValue> ProductVariantValues { get; set; }
     }
 }

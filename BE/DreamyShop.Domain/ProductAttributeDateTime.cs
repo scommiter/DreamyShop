@@ -4,24 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DreamyShop.Domain
 {
     [Table("ProductAttributeDateTimes")]
-    public class ProductAttributeDateTime
+    public class ProductAttributeDateTime : TrackEntity
     {
         public ProductAttributeDateTime() { }
-        public ProductAttributeDateTime(
-            Guid id, 
-            Guid attributeId, 
-            Guid productId, 
-            DateTime? value, 
-            ProductAttribute productAttribute, 
-            Product product)
-        {
-            Id = id;
-            AttributeId = attributeId;
-            ProductId = productId;
-            Value = value;
-            ProductAttribute = productAttribute;
-            Product = product;
-        }
 
         [Key]
         public Guid Id { get; set; }
@@ -32,10 +17,13 @@ namespace DreamyShop.Domain
 
         [ForeignKey(nameof(AttributeId))]
         [InverseProperty("ProductAttributeDateTimes")]
-        public virtual ProductAttribute ProductAttribute { get; set; }
+        public virtual Attribute Attribute { get; set; }
 
         [ForeignKey(nameof(ProductId))]
         [InverseProperty("ProductAttributeDateTimes")]
         public virtual Product Product{ get; set; }
+
+        [InverseProperty(nameof(ProductVariantValue.ProductAttributeDateTime))]
+        public virtual ICollection<ProductVariantValue> ProductVariantValues { get; set; }
     }
 }

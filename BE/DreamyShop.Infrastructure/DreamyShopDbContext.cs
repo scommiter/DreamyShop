@@ -21,6 +21,9 @@ namespace DreamyShop.EntityFrameworkCore
         public virtual DbSet<Manufacturer> Manufacturers { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductAttribute> ProductAttributes { get; set; }
+        public virtual DbSet<ProductVariant> ProductVariants { get; set; }
+        public virtual DbSet<ProductVariantValue> ProductVariantValues { get; set; }
+        public virtual DbSet<Domain.Attribute> Attributes { get; set; }
         public virtual DbSet<ProductAttributeDateTime> ProductAttributeDateTimes { get; set; }
         public virtual DbSet<ProductAttributeDecimal> ProductAttributeDecimals { get; set; }
         public virtual DbSet<ProductAttributeInt> ProductAttributeInts { get; set; }
@@ -39,7 +42,47 @@ namespace DreamyShop.EntityFrameworkCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ProductVariantValue>()
+                .HasKey(pvv => new { pvv.ProductVariantId, pvv.ProductId, pvv.AttributeId });
             modelBuilder.Entity<ProductTag>().HasKey(x => new { x.ProductId, x.TagId });
+            modelBuilder.Entity<ProductAttribute>().HasKey(x => new { x.ProductId, x.AttributeId });
+
+            modelBuilder.Entity<ProductVariantValue>()
+               .HasOne(pvv => pvv.ProductAttributeDateTime)
+               .WithMany(pad => pad.ProductVariantValues)
+               .HasForeignKey(pvv => pvv.ProductAttributeDateTimeId)
+               .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ProductVariantValue>()
+               .HasOne(pvv => pvv.ProductAttributeDecimal)
+               .WithMany(pad => pad.ProductVariantValues)
+               .HasForeignKey(pvv => pvv.ProductAttributeDecimalId)
+               .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ProductVariantValue>()
+               .HasOne(pvv => pvv.ProductAttributeInt)
+               .WithMany(pad => pad.ProductVariantValues)
+               .HasForeignKey(pvv => pvv.ProductAttributeIntId)
+               .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ProductVariantValue>()
+               .HasOne(pvv => pvv.ProductAttributeText)
+               .WithMany(pad => pad.ProductVariantValues)
+               .HasForeignKey(pvv => pvv.ProductAttributeTextId)
+               .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ProductVariantValue>()
+               .HasOne(pvv => pvv.ProductAttributeVarchar)
+               .WithMany(pad => pad.ProductVariantValues)
+               .HasForeignKey(pvv => pvv.ProductAttributeVarcharId)
+               .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ProductVariantValue>()
+               .HasOne(pvv => pvv.ProductVariant)
+               .WithMany(pad => pad.ProductVariantValues)
+               .HasForeignKey(pvv => pvv.ProductVariantId)
+               .OnDelete(DeleteBehavior.NoAction);
+
             modelBuilder.Seed();
         }
     }
