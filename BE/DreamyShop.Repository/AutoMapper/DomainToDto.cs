@@ -14,11 +14,14 @@ namespace DreamyShop.Repository.AutoMapper
             CreateMap<User, UserUpdateDto>();
 
             //CreateMap<Product, ProductCreateUpdateDto>();
-            //CreateMap<Product, ProductDto>()
-            //    .ForMember(pt => pt.CategoryName, opt => 
-            //        opt.MapFrom(src => src.ProductCategory.Name))
-            //    .ForMember(pt => pt.ManufacturerName, opt =>
-            //        opt.MapFrom(src => src.Manufacturer.Name));
+            CreateMap<Product, ProductDto>()
+                .ForMember(pt => pt.CategoryName, opt =>
+                    opt.MapFrom(src => src.ProductCategory.Name))
+                .ForMember(pt => pt.ManufacturerName, opt =>
+                    opt.MapFrom(src => src.Manufacturer.Name))
+                .ForMember(pt => pt.ProductVariants, opt => 
+                    opt.MapFrom(src => src.ProductVariants));
+
             CreateMap<Domain.Attribute, ProductAttributeDto>();
 
             CreateMap<Manufacturer, ManufacturerDto>();

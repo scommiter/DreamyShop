@@ -11,13 +11,13 @@ namespace DreamyShop.Logic.Product
 {
     public interface IProductLogic
     {
-        //#region Product
-        //Task<ApiResult<PageResult<ProductDto>>> GetAllProduct(PagingRequest pagingRequest);
+        #region Product
+        Task<ApiResult<PageResult<ProductDto>>> GetAllProduct(PagingRequest pagingRequest);
         //Task<ApiResult<ProductDto>> CreateProduct(ProductCreateUpdateDto productCreateUpdateDto);
         //Task<ApiResult<ProductDto>> UpdateProduct(Guid id, ProductCreateUpdateDto productCreateUpdateDto);
         //Task<ApiResult<bool>> RemoveProduct(Guid id);
         //Task<ApiResult<IList<ProductDto>>> SearchProduct(SearchProductCondition condition);
-        //#endregion
+        #endregion
 
         //#region ProductAttribute
         //Task<ApiResult<PageResult<ProductAttributeDto>>> GetListProductAttribute(PagingRequest pagingRequest);

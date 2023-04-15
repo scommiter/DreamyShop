@@ -12,22 +12,22 @@ namespace DreamyShop.Api.Controllers
     [ApiController]
     public class ProductController : Controller
     {
-        //private readonly IProductLogic _productService;
-        //private readonly ILogger<ProductController> _logger;
-        //public ProductController(
-        //    IProductLogic productService, 
-        //    ILogger<ProductController> logger)
-        //{
-        //    _logger = logger;
-        //    _productService = productService;
-        //}
+        private readonly IProductLogic _productService;
+        private readonly ILogger<ProductController> _logger;
+        public ProductController(
+            IProductLogic productService,
+            ILogger<ProductController> logger)
+        {
+            _logger = logger;
+            _productService = productService;
+        }
 
-        //[HttpGet("getAll")]
-        //public async Task<IActionResult> GetAllProduct(PagingRequest pagingRequest)
-        //{
-        //    var result = await _productService.GetAllProduct(pagingRequest);
-        //    return Ok(result);
-        //}
+        [HttpGet("getAll")]
+        public async Task<IActionResult> GetAllProduct(PagingRequest pagingRequest)
+        {
+            var result = await _productService.GetAllProduct(pagingRequest);
+            return Ok(result);
+        }
 
         //[HttpPost("create")]
         //[Authorize]

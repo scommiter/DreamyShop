@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DreamyShop.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(DreamyShopDbContext))]
-    [Migration("20230414090417_initDB")]
-    partial class initDB
+    [Migration("20230415103725_InitDataBase")]
+    partial class InitDataBase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,6 +71,68 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Attributes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"),
+                            Code = "COLOR",
+                            DataType = 3,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            IsUnique = true,
+                            IsVisibility = true,
+                            Name = "COLOR",
+                            Note = "Product color",
+                            SortOrder = 1,
+                            StatusID = (byte)0
+                        },
+                        new
+                        {
+                            Id = new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"),
+                            Code = "SIZEText",
+                            DataType = 3,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            IsUnique = true,
+                            IsVisibility = true,
+                            Name = "SIZEText",
+                            Note = "",
+                            SortOrder = 2,
+                            StatusID = (byte)0
+                        },
+                        new
+                        {
+                            Id = new Guid("65a2fb41-f2c8-47c5-8e3d-ae4eb1913d08"),
+                            Code = "SIZEInt",
+                            DataType = 1,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            IsUnique = true,
+                            IsVisibility = true,
+                            Name = "SIZEInt",
+                            Note = "",
+                            SortOrder = 3,
+                            StatusID = (byte)0
+                        },
+                        new
+                        {
+                            Id = new Guid("827ca5b7-0087-4256-bec0-399199a518d9"),
+                            Code = "MATERIAL",
+                            DataType = 3,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            IsUnique = true,
+                            IsVisibility = true,
+                            Name = "MATERIAL",
+                            Note = "",
+                            SortOrder = 4,
+                            StatusID = (byte)0
+                        });
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.Inventory", b =>
@@ -218,6 +280,17 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         },
                         new
                         {
+                            Id = new Guid("41c2c299-ea5f-4c23-992d-e6f043f1b26f"),
+                            Code = "GCCI",
+                            Country = "Italy",
+                            CoverPicture = "",
+                            IsActive = true,
+                            IsVisibility = true,
+                            Name = "Gucci",
+                            Slug = "gucci"
+                        },
+                        new
+                        {
                             Id = new Guid("80cad838-29c7-4a02-81c0-9ebe78a0a273"),
                             Code = "IPAPL",
                             Country = "US",
@@ -362,7 +435,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             ProductType = 2,
                             SeoMetaDescription = "Find out about Apple's latest line of iPhones at Apple Store Vietnam. Order online and get instant deals.",
                             Slug = "ip14-xsmax",
-                            SortOrder = 1,
+                            SortOrder = 3,
                             StatusID = (byte)0,
                             ThumbnailPicture = ""
                         },
@@ -379,7 +452,24 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             ProductType = 2,
                             SeoMetaDescription = "",
                             Slug = "dell-demon",
-                            SortOrder = 1,
+                            SortOrder = 4,
+                            StatusID = (byte)0,
+                            ThumbnailPicture = ""
+                        },
+                        new
+                        {
+                            Id = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            CategoryId = new Guid("7375fab5-4ff3-43d0-a707-a56062e161be"),
+                            Code = "CLBGCCI",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "",
+                            ManufacturerId = new Guid("41c2c299-ea5f-4c23-992d-e6f043f1b26f"),
+                            Name = "Crocodile leather bag",
+                            ProductType = 2,
+                            SeoMetaDescription = "",
+                            Slug = "clbcci",
+                            SortOrder = 4,
                             StatusID = (byte)0,
                             ThumbnailPicture = ""
                         });
@@ -409,6 +499,32 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.HasIndex("AttributeId");
 
                     b.ToTable("ProductAttributes");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            AttributeId = new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StatusID = (byte)0
+                        },
+                        new
+                        {
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            AttributeId = new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StatusID = (byte)0
+                        },
+                        new
+                        {
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            AttributeId = new Guid("827ca5b7-0087-4256-bec0-399199a518d9"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StatusID = (byte)0
+                        });
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.ProductAttributeDateTime", b =>
@@ -499,6 +615,62 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductAttributeInts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("3d44b2ac-0bd6-433b-9858-abb84d74ea2e"),
+                            AttributeId = new Guid("65a2fb41-f2c8-47c5-8e3d-ae4eb1913d08"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            Value = 35
+                        },
+                        new
+                        {
+                            Id = new Guid("3d369a2c-6bcb-468c-b296-64d96a84258a"),
+                            AttributeId = new Guid("65a2fb41-f2c8-47c5-8e3d-ae4eb1913d08"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            Value = 36
+                        },
+                        new
+                        {
+                            Id = new Guid("dfdbe11d-c978-4cc4-9a9e-cafc19805ac8"),
+                            AttributeId = new Guid("65a2fb41-f2c8-47c5-8e3d-ae4eb1913d08"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            Value = 37
+                        },
+                        new
+                        {
+                            Id = new Guid("6bb0a02b-d294-496a-b496-994d3dfaa6f2"),
+                            AttributeId = new Guid("65a2fb41-f2c8-47c5-8e3d-ae4eb1913d08"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            Value = 38
+                        },
+                        new
+                        {
+                            Id = new Guid("a2ee0ac5-663d-4d97-b449-ed8fe48fada3"),
+                            AttributeId = new Guid("65a2fb41-f2c8-47c5-8e3d-ae4eb1913d08"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            Value = 39
+                        },
+                        new
+                        {
+                            Id = new Guid("2c2fcf7c-fa5a-4b6f-ac30-48a2a6bdb4b5"),
+                            AttributeId = new Guid("65a2fb41-f2c8-47c5-8e3d-ae4eb1913d08"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            Value = 40
+                        });
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.ProductAttributeText", b =>
@@ -530,6 +702,62 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductAttributeTexts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("0f3c7208-6bdf-44f4-b08e-1760cb559bce"),
+                            AttributeId = new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            Value = "Red"
+                        },
+                        new
+                        {
+                            Id = new Guid("74e81a62-40c5-4d90-a9d9-fcafbe7ad2ed"),
+                            AttributeId = new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            Value = "Black"
+                        },
+                        new
+                        {
+                            Id = new Guid("1b345d3e-67b2-4ab8-92ef-8790de816f7e"),
+                            AttributeId = new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            Value = "White"
+                        },
+                        new
+                        {
+                            Id = new Guid("f5a43aab-5e0e-4ee7-8497-ecf6e8571e23"),
+                            AttributeId = new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            Value = "M"
+                        },
+                        new
+                        {
+                            Id = new Guid("0eeaacee-3129-4c64-bdf6-54d76a84b9f6"),
+                            AttributeId = new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            Value = "L"
+                        },
+                        new
+                        {
+                            Id = new Guid("aa1d46b2-f2e8-4547-b36d-500d57029423"),
+                            AttributeId = new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            Value = "XL"
+                        });
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.ProductAttributeVarchar", b =>
@@ -645,7 +873,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             Name = "Iphone",
                             SeoMetaDescription = "",
                             Slug = "iphone",
-                            SortOrder = 1,
+                            SortOrder = 2,
                             StatusID = (byte)0
                         },
                         new
@@ -660,7 +888,22 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             Name = "Laptop",
                             SeoMetaDescription = "",
                             Slug = "laptop",
-                            SortOrder = 1,
+                            SortOrder = 3,
+                            StatusID = (byte)0
+                        },
+                        new
+                        {
+                            Id = new Guid("7375fab5-4ff3-43d0-a707-a56062e161be"),
+                            Code = "JLY",
+                            CoverPicture = "",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = true,
+                            IsVisibility = true,
+                            Name = "Jewelry",
+                            SeoMetaDescription = "",
+                            Slug = "jly",
+                            SortOrder = 4,
                             StatusID = (byte)0
                         });
                 });
@@ -779,9 +1022,71 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductVariants");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("fc364f29-fcb9-44b7-8854-dfce09824c35"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "",
+                            IsActive = true,
+                            IsVisibility = true,
+                            Price = 1200.0,
+                            ProductId = new Guid("30299235-6937-41b7-a76d-14584f5f856a"),
+                            Quantity = 12,
+                            SKU = "IP14",
+                            StatusID = (byte)0,
+                            ThumbnailPicture = ""
+                        },
+                        new
+                        {
+                            Id = new Guid("064357a3-f816-44b6-9b06-a58660f26763"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "",
+                            IsActive = true,
+                            IsVisibility = true,
+                            Price = 1500.0,
+                            ProductId = new Guid("85f8b0c3-cb8d-4ccb-9544-19daad6ef352"),
+                            Quantity = 32,
+                            SKU = "CAMERA",
+                            StatusID = (byte)0,
+                            ThumbnailPicture = ""
+                        },
+                        new
+                        {
+                            Id = new Guid("0a134c80-0493-458a-9f02-16361f0df5c7"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "",
+                            IsActive = true,
+                            IsVisibility = true,
+                            Price = 1250.0,
+                            ProductId = new Guid("30299235-6937-41b7-a76d-14584f5f856a"),
+                            Quantity = 20,
+                            SKU = "IP14",
+                            StatusID = (byte)0,
+                            ThumbnailPicture = ""
+                        },
+                        new
+                        {
+                            Id = new Guid("afd19304-3a45-4304-b2bb-1040f000c369"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "",
+                            IsActive = true,
+                            IsVisibility = true,
+                            Price = 5000.0,
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            Quantity = 5,
+                            SKU = "BAGGUCCI",
+                            StatusID = (byte)0,
+                            ThumbnailPicture = ""
+                        });
                 });
 
-            modelBuilder.Entity("DreamyShop.Domain.ProductVariantValue", b =>
+            modelBuilder.Entity("DreamyShop.Domain.ProductVariantValueDateTime", b =>
                 {
                     b.Property<Guid>("ProductVariantId")
                         .HasColumnType("uniqueidentifier")
@@ -795,47 +1100,212 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnOrder(2);
 
+                    b.Property<Guid>("ProductAttributeDateTimeId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(3);
+
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateUpdated")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("ProductAttributeDateTimeId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProductAttributeDecimalId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProductAttributeIntId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProductAttributeTextId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ProductAttributeVarcharId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<byte>("StatusID")
                         .HasColumnType("tinyint");
 
-                    b.HasKey("ProductVariantId", "ProductId", "AttributeId");
+                    b.HasKey("ProductVariantId", "ProductId", "AttributeId", "ProductAttributeDateTimeId");
 
                     b.HasIndex("AttributeId");
 
                     b.HasIndex("ProductAttributeDateTimeId");
 
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductVariantValueDateTimes");
+                });
+
+            modelBuilder.Entity("DreamyShop.Domain.ProductVariantValueDecimal", b =>
+                {
+                    b.Property<Guid>("ProductVariantId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(1);
+
+                    b.Property<Guid>("AttributeId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(2);
+
+                    b.Property<Guid>("ProductAttributeDecimalId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(3);
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte>("StatusID")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("ProductVariantId", "ProductId", "AttributeId", "ProductAttributeDecimalId");
+
+                    b.HasIndex("AttributeId");
+
                     b.HasIndex("ProductAttributeDecimalId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductVariantValueDecimals");
+                });
+
+            modelBuilder.Entity("DreamyShop.Domain.ProductVariantValueInt", b =>
+                {
+                    b.Property<Guid>("ProductVariantId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(1);
+
+                    b.Property<Guid>("AttributeId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(2);
+
+                    b.Property<Guid>("ProductAttributeIntId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(3);
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte>("StatusID")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("ProductVariantId", "ProductId", "AttributeId", "ProductAttributeIntId");
+
+                    b.HasIndex("AttributeId");
 
                     b.HasIndex("ProductAttributeIntId");
 
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductVariantValueInts");
+                });
+
+            modelBuilder.Entity("DreamyShop.Domain.ProductVariantValueText", b =>
+                {
+                    b.Property<Guid>("ProductVariantId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(1);
+
+                    b.Property<Guid>("AttributeId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(2);
+
+                    b.Property<Guid>("ProductAttributeTextId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(3);
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte>("StatusID")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("ProductVariantId", "ProductId", "AttributeId", "ProductAttributeTextId");
+
+                    b.HasIndex("AttributeId");
+
                     b.HasIndex("ProductAttributeTextId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductVariantValueTexts");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductVariantId = new Guid("afd19304-3a45-4304-b2bb-1040f000c369"),
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            AttributeId = new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"),
+                            ProductAttributeTextId = new Guid("1b345d3e-67b2-4ab8-92ef-8790de816f7e"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StatusID = (byte)0
+                        },
+                        new
+                        {
+                            ProductVariantId = new Guid("afd19304-3a45-4304-b2bb-1040f000c369"),
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            AttributeId = new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"),
+                            ProductAttributeTextId = new Guid("74e81a62-40c5-4d90-a9d9-fcafbe7ad2ed"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StatusID = (byte)0
+                        },
+                        new
+                        {
+                            ProductVariantId = new Guid("afd19304-3a45-4304-b2bb-1040f000c369"),
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            AttributeId = new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"),
+                            ProductAttributeTextId = new Guid("f5a43aab-5e0e-4ee7-8497-ecf6e8571e23"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StatusID = (byte)0
+                        });
+                });
+
+            modelBuilder.Entity("DreamyShop.Domain.ProductVariantValueVarchar", b =>
+                {
+                    b.Property<Guid>("ProductVariantId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(0);
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(1);
+
+                    b.Property<Guid>("AttributeId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(2);
+
+                    b.Property<Guid>("ProductAttributeVarcharId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnOrder(3);
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte>("StatusID")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("ProductVariantId", "ProductId", "AttributeId", "ProductAttributeVarcharId");
+
+                    b.HasIndex("AttributeId");
 
                     b.HasIndex("ProductAttributeVarcharId");
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductVariantValues");
+                    b.ToTable("ProductVariantValueVarchars");
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.Promotion", b =>
@@ -1292,52 +1762,28 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("DreamyShop.Domain.ProductVariantValue", b =>
+            modelBuilder.Entity("DreamyShop.Domain.ProductVariantValueDateTime", b =>
                 {
                     b.HasOne("DreamyShop.Domain.Attribute", "Attribute")
-                        .WithMany("ProductVariantValues")
+                        .WithMany("ProductVariantValueDateTimes")
                         .HasForeignKey("AttributeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DreamyShop.Domain.ProductAttributeDateTime", "ProductAttributeDateTime")
-                        .WithMany("ProductVariantValues")
+                        .WithMany("ProductVariantValueDateTimes")
                         .HasForeignKey("ProductAttributeDateTimeId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("DreamyShop.Domain.ProductAttributeDecimal", "ProductAttributeDecimal")
-                        .WithMany("ProductVariantValues")
-                        .HasForeignKey("ProductAttributeDecimalId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("DreamyShop.Domain.ProductAttributeInt", "ProductAttributeInt")
-                        .WithMany("ProductVariantValues")
-                        .HasForeignKey("ProductAttributeIntId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("DreamyShop.Domain.ProductAttributeText", "ProductAttributeText")
-                        .WithMany("ProductVariantValues")
-                        .HasForeignKey("ProductAttributeTextId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("DreamyShop.Domain.ProductAttributeVarchar", "ProductAttributeVarchar")
-                        .WithMany("ProductVariantValues")
-                        .HasForeignKey("ProductAttributeVarcharId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("DreamyShop.Domain.Product", "Product")
-                        .WithMany("ProductVariantValues")
+                        .WithMany("ProductVariantValueDateTimes")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DreamyShop.Domain.ProductVariant", "ProductVariant")
-                        .WithMany("ProductVariantValues")
+                        .WithMany("ProductVariantValueDateTimes")
                         .HasForeignKey("ProductVariantId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -1348,11 +1794,143 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
 
                     b.Navigation("ProductAttributeDateTime");
 
+                    b.Navigation("ProductVariant");
+                });
+
+            modelBuilder.Entity("DreamyShop.Domain.ProductVariantValueDecimal", b =>
+                {
+                    b.HasOne("DreamyShop.Domain.Attribute", "Attribute")
+                        .WithMany("ProductVariantValueDecimals")
+                        .HasForeignKey("AttributeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DreamyShop.Domain.ProductAttributeDecimal", "ProductAttributeDecimal")
+                        .WithMany("ProductVariantValueDecimals")
+                        .HasForeignKey("ProductAttributeDecimalId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("DreamyShop.Domain.Product", "Product")
+                        .WithMany("ProductVariantValueDecimals")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DreamyShop.Domain.ProductVariant", "ProductVariant")
+                        .WithMany("ProductVariantValueDecimals")
+                        .HasForeignKey("ProductVariantId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Attribute");
+
+                    b.Navigation("Product");
+
                     b.Navigation("ProductAttributeDecimal");
+
+                    b.Navigation("ProductVariant");
+                });
+
+            modelBuilder.Entity("DreamyShop.Domain.ProductVariantValueInt", b =>
+                {
+                    b.HasOne("DreamyShop.Domain.Attribute", "Attribute")
+                        .WithMany("ProductVariantValueInts")
+                        .HasForeignKey("AttributeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DreamyShop.Domain.ProductAttributeInt", "ProductAttributeInt")
+                        .WithMany("ProductVariantValueInts")
+                        .HasForeignKey("ProductAttributeIntId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("DreamyShop.Domain.Product", "Product")
+                        .WithMany("ProductVariantValueInts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DreamyShop.Domain.ProductVariant", "ProductVariant")
+                        .WithMany("ProductVariantValueInts")
+                        .HasForeignKey("ProductVariantId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Attribute");
+
+                    b.Navigation("Product");
 
                     b.Navigation("ProductAttributeInt");
 
+                    b.Navigation("ProductVariant");
+                });
+
+            modelBuilder.Entity("DreamyShop.Domain.ProductVariantValueText", b =>
+                {
+                    b.HasOne("DreamyShop.Domain.Attribute", "Attribute")
+                        .WithMany("ProductVariantValueTexts")
+                        .HasForeignKey("AttributeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DreamyShop.Domain.ProductAttributeText", "ProductAttributeText")
+                        .WithMany("ProductVariantValueTexts")
+                        .HasForeignKey("ProductAttributeTextId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("DreamyShop.Domain.Product", "Product")
+                        .WithMany("ProductVariantValueTexts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DreamyShop.Domain.ProductVariant", "ProductVariant")
+                        .WithMany("ProductVariantValueTexts")
+                        .HasForeignKey("ProductVariantId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Attribute");
+
+                    b.Navigation("Product");
+
                     b.Navigation("ProductAttributeText");
+
+                    b.Navigation("ProductVariant");
+                });
+
+            modelBuilder.Entity("DreamyShop.Domain.ProductVariantValueVarchar", b =>
+                {
+                    b.HasOne("DreamyShop.Domain.Attribute", "Attribute")
+                        .WithMany("ProductVariantValueVarchars")
+                        .HasForeignKey("AttributeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DreamyShop.Domain.ProductAttributeVarchar", "ProductAttributeVarchar")
+                        .WithMany("ProductVariantValueVarchars")
+                        .HasForeignKey("ProductAttributeVarcharId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("DreamyShop.Domain.Product", "Product")
+                        .WithMany("ProductVariantValueVarchars")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DreamyShop.Domain.ProductVariant", "ProductVariant")
+                        .WithMany("ProductVariantValueVarchars")
+                        .HasForeignKey("ProductVariantId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Attribute");
+
+                    b.Navigation("Product");
 
                     b.Navigation("ProductAttributeVarchar");
 
@@ -1417,7 +1995,15 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
 
                     b.Navigation("ProductAttributes");
 
-                    b.Navigation("ProductVariantValues");
+                    b.Navigation("ProductVariantValueDateTimes");
+
+                    b.Navigation("ProductVariantValueDecimals");
+
+                    b.Navigation("ProductVariantValueInts");
+
+                    b.Navigation("ProductVariantValueTexts");
+
+                    b.Navigation("ProductVariantValueVarchars");
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.Inventory", b =>
@@ -1453,34 +2039,42 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
 
                     b.Navigation("ProductTags");
 
-                    b.Navigation("ProductVariantValues");
+                    b.Navigation("ProductVariantValueDateTimes");
+
+                    b.Navigation("ProductVariantValueDecimals");
+
+                    b.Navigation("ProductVariantValueInts");
+
+                    b.Navigation("ProductVariantValueTexts");
+
+                    b.Navigation("ProductVariantValueVarchars");
 
                     b.Navigation("ProductVariants");
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.ProductAttributeDateTime", b =>
                 {
-                    b.Navigation("ProductVariantValues");
+                    b.Navigation("ProductVariantValueDateTimes");
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.ProductAttributeDecimal", b =>
                 {
-                    b.Navigation("ProductVariantValues");
+                    b.Navigation("ProductVariantValueDecimals");
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.ProductAttributeInt", b =>
                 {
-                    b.Navigation("ProductVariantValues");
+                    b.Navigation("ProductVariantValueInts");
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.ProductAttributeText", b =>
                 {
-                    b.Navigation("ProductVariantValues");
+                    b.Navigation("ProductVariantValueTexts");
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.ProductAttributeVarchar", b =>
                 {
-                    b.Navigation("ProductVariantValues");
+                    b.Navigation("ProductVariantValueVarchars");
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.ProductCategory", b =>
@@ -1490,7 +2084,15 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("DreamyShop.Domain.ProductVariant", b =>
                 {
-                    b.Navigation("ProductVariantValues");
+                    b.Navigation("ProductVariantValueDateTimes");
+
+                    b.Navigation("ProductVariantValueDecimals");
+
+                    b.Navigation("ProductVariantValueInts");
+
+                    b.Navigation("ProductVariantValueTexts");
+
+                    b.Navigation("ProductVariantValueVarchars");
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.Promotion", b =>

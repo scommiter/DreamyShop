@@ -38,7 +38,7 @@ namespace DreamyShop.Domain
         [InverseProperty("ProductAttributeDecimals")]
         public virtual Product Product { get; set; }
 
-        [InverseProperty(nameof(ProductVariantValue.ProductAttributeDecimal))]
-        public virtual ICollection<ProductVariantValue> ProductVariantValues { get; set; }
+        [InverseProperty(nameof(ProductVariantValueDecimal.ProductAttributeDecimal))]
+        public virtual ICollection<ProductVariantValueDecimal> ProductVariantValueDecimals { get; set; }
     }
 }

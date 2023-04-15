@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DreamyShop.EntityFrameworkCore.Migrations
 {
-    public partial class initDB : Migration
+    public partial class InitDataBase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -571,16 +571,168 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductVariantValues",
+                name: "ProductVariantValueDateTimes",
                 columns: table => new
                 {
                     ProductVariantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AttributeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductAttributeDateTimeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StatusID = table.Column<byte>(type: "tinyint", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductVariantValueDateTimes", x => new { x.ProductVariantId, x.ProductId, x.AttributeId, x.ProductAttributeDateTimeId });
+                    table.ForeignKey(
+                        name: "FK_ProductVariantValueDateTimes_Attributes_AttributeId",
+                        column: x => x.AttributeId,
+                        principalTable: "Attributes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductVariantValueDateTimes_ProductAttributeDateTimes_ProductAttributeDateTimeId",
+                        column: x => x.ProductAttributeDateTimeId,
+                        principalTable: "ProductAttributeDateTimes",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ProductVariantValueDateTimes_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductVariantValueDateTimes_ProductVariants_ProductVariantId",
+                        column: x => x.ProductVariantId,
+                        principalTable: "ProductVariants",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductVariantValueDecimals",
+                columns: table => new
+                {
+                    ProductVariantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AttributeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductAttributeDecimalId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StatusID = table.Column<byte>(type: "tinyint", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductVariantValueDecimals", x => new { x.ProductVariantId, x.ProductId, x.AttributeId, x.ProductAttributeDecimalId });
+                    table.ForeignKey(
+                        name: "FK_ProductVariantValueDecimals_Attributes_AttributeId",
+                        column: x => x.AttributeId,
+                        principalTable: "Attributes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductVariantValueDecimals_ProductAttributeDecimals_ProductAttributeDecimalId",
+                        column: x => x.ProductAttributeDecimalId,
+                        principalTable: "ProductAttributeDecimals",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ProductVariantValueDecimals_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductVariantValueDecimals_ProductVariants_ProductVariantId",
+                        column: x => x.ProductVariantId,
+                        principalTable: "ProductVariants",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductVariantValueInts",
+                columns: table => new
+                {
+                    ProductVariantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AttributeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductAttributeIntId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StatusID = table.Column<byte>(type: "tinyint", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductVariantValueInts", x => new { x.ProductVariantId, x.ProductId, x.AttributeId, x.ProductAttributeIntId });
+                    table.ForeignKey(
+                        name: "FK_ProductVariantValueInts_Attributes_AttributeId",
+                        column: x => x.AttributeId,
+                        principalTable: "Attributes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductVariantValueInts_ProductAttributeInts_ProductAttributeIntId",
+                        column: x => x.ProductAttributeIntId,
+                        principalTable: "ProductAttributeInts",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ProductVariantValueInts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductVariantValueInts_ProductVariants_ProductVariantId",
+                        column: x => x.ProductVariantId,
+                        principalTable: "ProductVariants",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductVariantValueTexts",
+                columns: table => new
+                {
+                    ProductVariantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AttributeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductAttributeTextId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StatusID = table.Column<byte>(type: "tinyint", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductVariantValueTexts", x => new { x.ProductVariantId, x.ProductId, x.AttributeId, x.ProductAttributeTextId });
+                    table.ForeignKey(
+                        name: "FK_ProductVariantValueTexts_Attributes_AttributeId",
+                        column: x => x.AttributeId,
+                        principalTable: "Attributes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductVariantValueTexts_ProductAttributeTexts_ProductAttributeTextId",
+                        column: x => x.ProductAttributeTextId,
+                        principalTable: "ProductAttributeTexts",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ProductVariantValueTexts_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductVariantValueTexts_ProductVariants_ProductVariantId",
+                        column: x => x.ProductVariantId,
+                        principalTable: "ProductVariants",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductVariantValueVarchars",
+                columns: table => new
+                {
+                    ProductVariantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AttributeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ProductAttributeVarcharId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     StatusID = table.Column<byte>(type: "tinyint", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -588,49 +740,40 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductVariantValues", x => new { x.ProductVariantId, x.ProductId, x.AttributeId });
+                    table.PrimaryKey("PK_ProductVariantValueVarchars", x => new { x.ProductVariantId, x.ProductId, x.AttributeId, x.ProductAttributeVarcharId });
                     table.ForeignKey(
-                        name: "FK_ProductVariantValues_Attributes_AttributeId",
+                        name: "FK_ProductVariantValueVarchars_Attributes_AttributeId",
                         column: x => x.AttributeId,
                         principalTable: "Attributes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductVariantValues_ProductAttributeDateTimes_ProductAttributeDateTimeId",
-                        column: x => x.ProductAttributeDateTimeId,
-                        principalTable: "ProductAttributeDateTimes",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ProductVariantValues_ProductAttributeDecimals_ProductAttributeDecimalId",
-                        column: x => x.ProductAttributeDecimalId,
-                        principalTable: "ProductAttributeDecimals",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ProductVariantValues_ProductAttributeInts_ProductAttributeIntId",
-                        column: x => x.ProductAttributeIntId,
-                        principalTable: "ProductAttributeInts",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ProductVariantValues_ProductAttributeTexts_ProductAttributeTextId",
-                        column: x => x.ProductAttributeTextId,
-                        principalTable: "ProductAttributeTexts",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ProductVariantValues_ProductAttributeVarchars_ProductAttributeVarcharId",
+                        name: "FK_ProductVariantValueVarchars_ProductAttributeVarchars_ProductAttributeVarcharId",
                         column: x => x.ProductAttributeVarcharId,
                         principalTable: "ProductAttributeVarchars",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ProductVariantValues_Products_ProductId",
+                        name: "FK_ProductVariantValueVarchars_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductVariantValues_ProductVariants_ProductVariantId",
+                        name: "FK_ProductVariantValueVarchars_ProductVariants_ProductVariantId",
                         column: x => x.ProductVariantId,
                         principalTable: "ProductVariants",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "Attributes",
+                columns: new[] { "Id", "Code", "DataType", "DateCreated", "DateUpdated", "IsActive", "IsUnique", "IsVisibility", "Name", "Note", "SortOrder", "StatusID" },
+                values: new object[,]
+                {
+                    { new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"), "COLOR", 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, true, "COLOR", "Product color", 1, (byte)0 },
+                    { new Guid("65a2fb41-f2c8-47c5-8e3d-ae4eb1913d08"), "SIZEInt", 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, true, "SIZEInt", "", 3, (byte)0 },
+                    { new Guid("827ca5b7-0087-4256-bec0-399199a518d9"), "MATERIAL", 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, true, "MATERIAL", "", 4, (byte)0 },
+                    { new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"), "SIZEText", 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, true, "SIZEText", "", 2, (byte)0 }
                 });
 
             migrationBuilder.InsertData(
@@ -638,6 +781,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "Country", "CoverPicture", "IsActive", "IsVisibility", "Name", "Slug" },
                 values: new object[,]
                 {
+                    { new Guid("41c2c299-ea5f-4c23-992d-e6f043f1b26f"), "GCCI", "Italy", "", true, true, "Gucci", "gucci" },
                     { new Guid("57a5f678-43f0-4648-92d8-16bd09d7143e"), "SN", "Japan", "", true, true, "Sony", "sony" },
                     { new Guid("69d0372b-dbf5-4b70-9beb-0e4ea77f243a"), "asus", "Taiwan", "", true, true, "ASUS", "asus" },
                     { new Guid("80cad838-29c7-4a02-81c0-9ebe78a0a273"), "IPAPL", "US", "", true, true, "Apple", "apple" },
@@ -649,9 +793,10 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CoverPicture", "DateCreated", "DateUpdated", "IsActive", "IsVisibility", "Name", "ParentId", "SeoMetaDescription", "Slug", "SortOrder", "StatusID" },
                 values: new object[,]
                 {
-                    { new Guid("2ed8e62d-2f2e-4957-ae81-8a07b0bcd443"), "LP", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, "Laptop", null, "", "laptop", 1, (byte)0 },
+                    { new Guid("2ed8e62d-2f2e-4957-ae81-8a07b0bcd443"), "LP", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, "Laptop", null, "", "laptop", 3, (byte)0 },
+                    { new Guid("7375fab5-4ff3-43d0-a707-a56062e161be"), "JLY", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, "Jewelry", null, "", "jly", 4, (byte)0 },
                     { new Guid("96bff1b2-3715-4f10-90d3-aaabb332e0e9"), "CMR", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, "Camera", null, "", "camera", 1, (byte)0 },
-                    { new Guid("efd560a8-c65b-439c-af43-765da733f3c1"), "IP", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, "Iphone", null, "", "iphone", 1, (byte)0 }
+                    { new Guid("efd560a8-c65b-439c-af43-765da733f3c1"), "IP", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, "Iphone", null, "", "iphone", 2, (byte)0 }
                 });
 
             migrationBuilder.InsertData(
@@ -660,10 +805,73 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 values: new object[,]
                 {
                     { new Guid("1747cdf9-3acb-4001-8f52-ee7f387f8efb"), new Guid("96bff1b2-3715-4f10-90d3-aaabb332e0e9"), "CMRSKS", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring", new Guid("57a5f678-43f0-4648-92d8-16bd09d7143e"), "Camera-SKS", 1, "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring", "camera-sks", 1, (byte)0, "" },
-                    { new Guid("215e9dee-1d6c-40f4-9233-bb810509adaa"), new Guid("2ed8e62d-2f2e-4957-ae81-8a07b0bcd443"), "DELLDEMON", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Buy genuine Laptop at our store with best quality and affordable price. We supply laptop products from reputable brands. Order now to get a free laptop backpack!", new Guid("b9be517b-72aa-46f1-9a98-a0b993cd2cf7"), "Laptop DELL DEMON", 2, "", "dell-demon", 1, (byte)0, "" },
-                    { new Guid("30299235-6937-41b7-a76d-14584f5f856a"), new Guid("efd560a8-c65b-439c-af43-765da733f3c1"), "IP14XSM", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", new Guid("80cad838-29c7-4a02-81c0-9ebe78a0a273"), "Iphone 14 XSMax", 2, "Find out about Apple's latest line of iPhones at Apple Store Vietnam. Order online and get instant deals.", "ip14-xsmax", 1, (byte)0, "" },
-                    { new Guid("85f8b0c3-cb8d-4ccb-9544-19daad6ef352"), new Guid("96bff1b2-3715-4f10-90d3-aaabb332e0e9"), "CMRUFG", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "XYZ wireless security camera with high resolution.", new Guid("57a5f678-43f0-4648-92d8-16bd09d7143e"), "Camera-UFG", 1, "XYZ wireless security camera with high resolution, built-in motion sensor, supports wifi connection, helps you observe your family, home, shop, office whenever and wherever.", "camera-ufg", 2, (byte)0, "" }
+                    { new Guid("215e9dee-1d6c-40f4-9233-bb810509adaa"), new Guid("2ed8e62d-2f2e-4957-ae81-8a07b0bcd443"), "DELLDEMON", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Buy genuine Laptop at our store with best quality and affordable price. We supply laptop products from reputable brands. Order now to get a free laptop backpack!", new Guid("b9be517b-72aa-46f1-9a98-a0b993cd2cf7"), "Laptop DELL DEMON", 2, "", "dell-demon", 4, (byte)0, "" },
+                    { new Guid("30299235-6937-41b7-a76d-14584f5f856a"), new Guid("efd560a8-c65b-439c-af43-765da733f3c1"), "IP14XSM", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", new Guid("80cad838-29c7-4a02-81c0-9ebe78a0a273"), "Iphone 14 XSMax", 2, "Find out about Apple's latest line of iPhones at Apple Store Vietnam. Order online and get instant deals.", "ip14-xsmax", 3, (byte)0, "" },
+                    { new Guid("85f8b0c3-cb8d-4ccb-9544-19daad6ef352"), new Guid("96bff1b2-3715-4f10-90d3-aaabb332e0e9"), "CMRUFG", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "XYZ wireless security camera with high resolution.", new Guid("57a5f678-43f0-4648-92d8-16bd09d7143e"), "Camera-UFG", 1, "XYZ wireless security camera with high resolution, built-in motion sensor, supports wifi connection, helps you observe your family, home, shop, office whenever and wherever.", "camera-ufg", 2, (byte)0, "" },
+                    { new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new Guid("7375fab5-4ff3-43d0-a707-a56062e161be"), "CLBGCCI", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", new Guid("41c2c299-ea5f-4c23-992d-e6f043f1b26f"), "Crocodile leather bag", 2, "", "clbcci", 4, (byte)0, "" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "ProductAttributeInts",
+                columns: new[] { "Id", "AttributeId", "DateCreated", "DateUpdated", "ProductId", "Value" },
+                values: new object[,]
+                {
+                    { new Guid("2c2fcf7c-fa5a-4b6f-ac30-48a2a6bdb4b5"), new Guid("65a2fb41-f2c8-47c5-8e3d-ae4eb1913d08"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), 40 },
+                    { new Guid("3d369a2c-6bcb-468c-b296-64d96a84258a"), new Guid("65a2fb41-f2c8-47c5-8e3d-ae4eb1913d08"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), 36 },
+                    { new Guid("3d44b2ac-0bd6-433b-9858-abb84d74ea2e"), new Guid("65a2fb41-f2c8-47c5-8e3d-ae4eb1913d08"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), 35 },
+                    { new Guid("6bb0a02b-d294-496a-b496-994d3dfaa6f2"), new Guid("65a2fb41-f2c8-47c5-8e3d-ae4eb1913d08"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), 38 },
+                    { new Guid("a2ee0ac5-663d-4d97-b449-ed8fe48fada3"), new Guid("65a2fb41-f2c8-47c5-8e3d-ae4eb1913d08"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), 39 },
+                    { new Guid("dfdbe11d-c978-4cc4-9a9e-cafc19805ac8"), new Guid("65a2fb41-f2c8-47c5-8e3d-ae4eb1913d08"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), 37 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductAttributeTexts",
+                columns: new[] { "Id", "AttributeId", "DateCreated", "DateUpdated", "ProductId", "Value" },
+                values: new object[,]
+                {
+                    { new Guid("0eeaacee-3129-4c64-bdf6-54d76a84b9f6"), new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), "L" },
+                    { new Guid("0f3c7208-6bdf-44f4-b08e-1760cb559bce"), new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), "Red" },
+                    { new Guid("1b345d3e-67b2-4ab8-92ef-8790de816f7e"), new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), "White" },
+                    { new Guid("74e81a62-40c5-4d90-a9d9-fcafbe7ad2ed"), new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), "Black" },
+                    { new Guid("aa1d46b2-f2e8-4547-b36d-500d57029423"), new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), "XL" },
+                    { new Guid("f5a43aab-5e0e-4ee7-8497-ecf6e8571e23"), new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), "M" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductAttributes",
+                columns: new[] { "AttributeId", "ProductId", "DateCreated", "DateUpdated", "StatusID" },
+                values: new object[,]
+                {
+                    { new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
+                    { new Guid("827ca5b7-0087-4256-bec0-399199a518d9"), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
+                    { new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductVariants",
+                columns: new[] { "Id", "DateCreated", "DateUpdated", "Description", "IsActive", "IsVisibility", "Price", "ProductId", "Quantity", "SKU", "StatusID", "ThumbnailPicture" },
+                values: new object[,]
+                {
+                    { new Guid("064357a3-f816-44b6-9b06-a58660f26763"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 1500.0, new Guid("85f8b0c3-cb8d-4ccb-9544-19daad6ef352"), 32, "CAMERA", (byte)0, "" },
+                    { new Guid("0a134c80-0493-458a-9f02-16361f0df5c7"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 1250.0, new Guid("30299235-6937-41b7-a76d-14584f5f856a"), 20, "IP14", (byte)0, "" },
+                    { new Guid("afd19304-3a45-4304-b2bb-1040f000c369"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 5000.0, new Guid("e914fd7b-9af8-403e-9f32-803346659264"), 5, "BAGGUCCI", (byte)0, "" },
+                    { new Guid("fc364f29-fcb9-44b7-8854-dfce09824c35"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 1200.0, new Guid("30299235-6937-41b7-a76d-14584f5f856a"), 12, "IP14", (byte)0, "" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductVariantValueTexts",
+                columns: new[] { "AttributeId", "ProductAttributeTextId", "ProductId", "ProductVariantId", "DateCreated", "DateUpdated", "StatusID" },
+                values: new object[] { new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"), new Guid("1b345d3e-67b2-4ab8-92ef-8790de816f7e"), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new Guid("afd19304-3a45-4304-b2bb-1040f000c369"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 });
+
+            migrationBuilder.InsertData(
+                table: "ProductVariantValueTexts",
+                columns: new[] { "AttributeId", "ProductAttributeTextId", "ProductId", "ProductVariantId", "DateCreated", "DateUpdated", "StatusID" },
+                values: new object[] { new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"), new Guid("74e81a62-40c5-4d90-a9d9-fcafbe7ad2ed"), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new Guid("afd19304-3a45-4304-b2bb-1040f000c369"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 });
+
+            migrationBuilder.InsertData(
+                table: "ProductVariantValueTexts",
+                columns: new[] { "AttributeId", "ProductAttributeTextId", "ProductId", "ProductVariantId", "DateCreated", "DateUpdated", "StatusID" },
+                values: new object[] { new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"), new Guid("f5a43aab-5e0e-4ee7-8497-ecf6e8571e23"), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new Guid("afd19304-3a45-4304-b2bb-1040f000c369"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_InventoryTicketItems_InventionTicketId",
@@ -756,38 +964,78 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductVariantValues_AttributeId",
-                table: "ProductVariantValues",
+                name: "IX_ProductVariantValueDateTimes_AttributeId",
+                table: "ProductVariantValueDateTimes",
                 column: "AttributeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductVariantValues_ProductAttributeDateTimeId",
-                table: "ProductVariantValues",
+                name: "IX_ProductVariantValueDateTimes_ProductAttributeDateTimeId",
+                table: "ProductVariantValueDateTimes",
                 column: "ProductAttributeDateTimeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductVariantValues_ProductAttributeDecimalId",
-                table: "ProductVariantValues",
+                name: "IX_ProductVariantValueDateTimes_ProductId",
+                table: "ProductVariantValueDateTimes",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductVariantValueDecimals_AttributeId",
+                table: "ProductVariantValueDecimals",
+                column: "AttributeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductVariantValueDecimals_ProductAttributeDecimalId",
+                table: "ProductVariantValueDecimals",
                 column: "ProductAttributeDecimalId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductVariantValues_ProductAttributeIntId",
-                table: "ProductVariantValues",
+                name: "IX_ProductVariantValueDecimals_ProductId",
+                table: "ProductVariantValueDecimals",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductVariantValueInts_AttributeId",
+                table: "ProductVariantValueInts",
+                column: "AttributeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductVariantValueInts_ProductAttributeIntId",
+                table: "ProductVariantValueInts",
                 column: "ProductAttributeIntId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductVariantValues_ProductAttributeTextId",
-                table: "ProductVariantValues",
+                name: "IX_ProductVariantValueInts_ProductId",
+                table: "ProductVariantValueInts",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductVariantValueTexts_AttributeId",
+                table: "ProductVariantValueTexts",
+                column: "AttributeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductVariantValueTexts_ProductAttributeTextId",
+                table: "ProductVariantValueTexts",
                 column: "ProductAttributeTextId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductVariantValues_ProductAttributeVarcharId",
-                table: "ProductVariantValues",
+                name: "IX_ProductVariantValueTexts_ProductId",
+                table: "ProductVariantValueTexts",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductVariantValueVarchars_AttributeId",
+                table: "ProductVariantValueVarchars",
+                column: "AttributeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductVariantValueVarchars_ProductAttributeVarcharId",
+                table: "ProductVariantValueVarchars",
                 column: "ProductAttributeVarcharId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductVariantValues_ProductId",
-                table: "ProductVariantValues",
+                name: "IX_ProductVariantValueVarchars_ProductId",
+                table: "ProductVariantValueVarchars",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
@@ -826,7 +1074,19 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "ProductTags");
 
             migrationBuilder.DropTable(
-                name: "ProductVariantValues");
+                name: "ProductVariantValueDateTimes");
+
+            migrationBuilder.DropTable(
+                name: "ProductVariantValueDecimals");
+
+            migrationBuilder.DropTable(
+                name: "ProductVariantValueInts");
+
+            migrationBuilder.DropTable(
+                name: "ProductVariantValueTexts");
+
+            migrationBuilder.DropTable(
+                name: "ProductVariantValueVarchars");
 
             migrationBuilder.DropTable(
                 name: "PromotionCategories");

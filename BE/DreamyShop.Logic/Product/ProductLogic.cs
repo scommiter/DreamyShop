@@ -14,38 +14,40 @@ namespace DreamyShop.Logic.Product
 {
     public class ProductLogic : IProductLogic
     {
-        //private readonly DreamyShopDbContext _context;
-        //private readonly IRepositoryWrapper _repository;
-        //private readonly IMapper _mapper;
+        private readonly DreamyShopDbContext _context;
+        private readonly IRepositoryWrapper _repository;
+        private readonly IMapper _mapper;
 
-        //public ProductLogic(
-        //    DreamyShopDbContext context,
-        //    IRepositoryWrapper repository,
-        //    IMapper mapper)
-        //{
-        //    _context = context;
-        //    _repository = repository;
-        //    _mapper = mapper;
-        //}
+        public ProductLogic(
+            DreamyShopDbContext context,
+            IRepositoryWrapper repository,
+            IMapper mapper)
+        {
+            _context = context;
+            _repository = repository;
+            _mapper = mapper;
+        }
 
         //#region Product
-        //public async Task<ApiResult<PageResult<ProductDto>>> GetAllProduct(PagingRequest pagingRequest)
-        //{
-        //    var productPagings = _context.Products
-        //                        .Include(opt => opt.Manufacturer)
-        //                        .Include(opt => opt.ProductCategory)
-        //                        .OrderByDescending(p => p.DateCreated)
-        //                        .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
-        //                        .Skip((pagingRequest.Page - 1) * pagingRequest.Limit)
-        //                        .Take(pagingRequest.Limit)
-        //                        .ToList();
-        //    var pageResult = new PageResult<ProductDto>()
-        //    {
-        //        Items = productPagings,
-        //        Totals = productPagings.Count()
-        //    };
-        //    return new ApiSuccessResult<PageResult<ProductDto>>(pageResult);
-        //}
+        public async Task<ApiResult<PageResult<ProductDto>>> GetAllProduct(PagingRequest pagingRequest)
+        {
+            var productPagings = _context.Products
+                                .Include(opt => opt.Manufacturer)
+                                .Include(opt => opt.ProductCategory)
+                                .Include(opt => opt.ProductVariants)
+                                .OrderByDescending(p => p.DateCreated)
+                                .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
+                                .Skip((pagingRequest.Page - 1) * pagingRequest.Limit)
+                                .Take(pagingRequest.Limit)
+                                .ToList();
+            var pageResult = new PageResult<ProductDto>()
+            {
+                Items = productPagings,
+                Totals = productPagings.Count()
+            };
+            return new ApiSuccessResult<PageResult<ProductDto>>(pageResult);
+        }
+
         //public async Task<ApiResult<ProductDto>> CreateProduct(ProductCreateUpdateDto productCreateUpdateDto)
         //{
         //    var newProduct = _mapper.Map<Domain.Product>(productCreateUpdateDto);

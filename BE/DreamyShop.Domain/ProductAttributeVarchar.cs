@@ -41,7 +41,7 @@ namespace DreamyShop.Domain
         [InverseProperty("ProductAttributeVarchars")]
         public virtual Product Product { get; set; }
 
-        [InverseProperty(nameof(ProductVariantValue.ProductAttributeVarchar))]
-        public virtual ICollection<ProductVariantValue> ProductVariantValues { get; set; }
+        [InverseProperty(nameof(ProductVariantValueVarchar.ProductAttributeVarchar))]
+        public virtual ICollection<ProductVariantValueVarchar> ProductVariantValueVarchars { get; set; }
     }
 }
