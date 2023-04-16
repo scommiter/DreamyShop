@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { ProductService } from 'src/app/services/product.service';
+import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
+import { ProductVariantDto } from 'src/app/shared/models/product-variant.dto';
+import { ProductDto } from 'src/app/shared/models/product.dto';
 
 @Component({
   selector: 'app-product',
@@ -9,10 +13,9 @@ import { MenuItem } from 'primeng/api';
 export class ProductComponent implements OnInit {
   items: MenuItem[] = [];
   activeItem!: MenuItem;
-  cars!: Car[];
-  car!: Car;
+  products: ProductDto[] = [];
 
-  constructor() {}
+  constructor(private productService: ProductService) {}
 
   ngOnInit() {
     this.items = [
@@ -23,20 +26,15 @@ export class ProductComponent implements OnInit {
       { label: 'On promotion', icon: 'fa fa-bullhorn' },
       { label: 'Hidden', icon: 'fa fa-ban' },
     ];
-    this.cars = [
-      { vin: 'vip', year: '1023', brand: 'asdf', color: '12s' },
-      { vin: 'vip', year: '1023', brand: 'asdf', color: '12s' },
-      { vin: 'vip', year: '1023', brand: 'asdf', color: '12s' },
-      { vin: 'vip', year: '1023', brand: 'asdf', color: '12s' },
-      { vin: 'vip', year: '1023', brand: 'asdf', color: '12s' },
-    ];
+    this.getAllProducts();
     this.activeItem = this.items[0];
+    console.log('products :>> ', this.products);
   }
-}
 
-export interface Car {
-  vin: string;
-  year: string;
-  brand: string;
-  color: string;
+  getAllProducts() {
+    this.productService.getProducts().subscribe((data) => {
+      this.products = data;
+      console.log('data :>> ', this.products);
+    });
+  }
 }

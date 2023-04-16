@@ -21,6 +21,7 @@ namespace DreamyShop.Repository.AutoMapper
                     opt.MapFrom(src => src.Manufacturer.Name))
                 .ForMember(pt => pt.ProductVariants, opt => 
                     opt.MapFrom(src => src.ProductVariants));
+            CreateMap<ProductVariant, ProductVariantDto>();
 
             CreateMap<Domain.Attribute, ProductAttributeDto>();
 

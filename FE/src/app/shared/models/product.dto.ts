@@ -1,3 +1,6 @@
+import { ProductVariantDto } from './product-variant.dto';
+import { ProductTypes } from '../enums/product-types.enum';
+
 export interface ProductDto {
   id: string;
   name: string;
@@ -10,6 +13,7 @@ export interface ProductDto {
   description: string;
   is_active: boolean;
   is_visibility: boolean;
-  date_created: Date;
-  date_updated: Date;
+  product_variants: Array<ProductVariantDto>;
+  date_created: string;
+  date_updated: string;
 }

@@ -18,8 +18,9 @@ namespace DreamyShop.Api.Controllers
             _logger = logger;
             _categoryService = categoryService;
         }
+
         [HttpGet("getAll")]
-        public async Task<IActionResult> GetAllCategory(PagingRequest pagingRequest)
+        public async Task<IActionResult> GetAllCategory([FromQuery] PagingRequest pagingRequest)
         {
             var result = await _categoryService.GetAllCategory(pagingRequest);
             return Ok(result);

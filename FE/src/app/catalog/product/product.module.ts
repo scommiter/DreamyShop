@@ -7,6 +7,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { ButtonModule } from 'primeng/button';
+import { ProductService } from 'src/app/services/product.service';
 
 @NgModule({
   declarations: [ProductComponent],
@@ -19,5 +20,6 @@ import { ButtonModule } from 'primeng/button';
     TabMenuModule,
     ButtonModule,
   ],
+  providers: [ProductService],
 })
 export class ProductModule {}

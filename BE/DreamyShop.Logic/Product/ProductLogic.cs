@@ -28,7 +28,7 @@ namespace DreamyShop.Logic.Product
             _mapper = mapper;
         }
 
-        //#region Product
+        #region Product
         public async Task<ApiResult<PageResult<ProductDto>>> GetAllProduct(PagingRequest pagingRequest)
         {
             var productPagings = _context.Products
@@ -143,7 +143,7 @@ namespace DreamyShop.Logic.Product
         //                            .ToList(); ;
         //    return new ApiSuccessResult<IList<ProductDto>>(_mapper.Map<List<ProductDto>>(productPagingsResult));
         //}
-        //#endregion
+        #endregion
 
         //#region ProductAttribute
         //public async Task<ApiResult<PageResult<ProductAttributeValueDto>>> GetListProductAttributeValue(Guid productId, PagingRequest pagingRequest)

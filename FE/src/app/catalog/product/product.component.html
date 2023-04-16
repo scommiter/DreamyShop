@@ -1,33 +1,39 @@
 <p-panel header="PRODUCT">
   <p-tabMenu [model]="items" [activeItem]="activeItem"></p-tabMenu>
-  <p-table [value]="cars">
+  <p-table [value]="products">
     <ng-template pTemplate="header">
       <tr>
         <th style="width: 3rem">
           <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
         </th>
         <th>Name</th>
-        <th>SKU</th>
-        <th>Categorization</th>
-        <th>Price</th>
-        <th>Stock</th>
-        <th>Price</th>
-        <th>Revenue</th>
+        <th>Picture</th>
+        <th>Code</th>
+        <th>
+          <tr>
+            <th>Categorization</th>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+        </th>
         <th></th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-car>
+    <ng-template pTemplate="body" let-product>
       <tr>
         <td>
-          <p-tableCheckbox [value]="car"></p-tableCheckbox>
+          <p-tableCheckbox [value]="product"></p-tableCheckbox>
         </td>
-        <td>{{ car.vin }}</td>
-        <td>{{ car.year }}</td>
-        <td>{{ car.brand }}</td>
-        <td>{{ car.color }}</td>
-        <td>{{ car.color }}</td>
-        <td>{{ car.color }}</td>
-        <td>{{ car.color }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.thumbnail_picture }}</td>
+        <td>{{ product.code }}</td>
+        <td>
+          <tr *ngFor="let productVariant of product.product_variants">
+            <td></td>
+            <td>{{ productVariant.price }}</td>
+            <td>{{ productVariant.quantity }}</td>
+          </tr>
+        </td>
         <td>
           <button
             pButton
