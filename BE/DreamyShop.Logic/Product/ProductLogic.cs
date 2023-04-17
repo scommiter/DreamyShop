@@ -31,6 +31,90 @@ namespace DreamyShop.Logic.Product
         #region Product
         public async Task<ApiResult<PageResult<ProductDto>>> GetAllProduct(PagingRequest pagingRequest)
         {
+            //var products = _context.Products
+            //        .Include(p => p.ProductVariants)
+            //        .Include(p => p.ProductVariantValueTexts)
+            //        .Include(p => p.ProductVariantValueInts)
+            //        .Include(p => p.ProductAttributeTexts)
+            //        .Include(p => p.ProductAttributeInts)
+            //        .Select(p => new ProductDto
+            //        {
+            //            Id = p.Id,
+            //            Name = p.Name,
+            //            ProductAttributeDisplayDtos = p.ProductAttributeTexts
+            //                .Select(a => new ProductAttributeDisplayDto
+            //                {
+            //                    AttributeName = a.Value,
+            //                    Quantity = p.ProductVariants.Where(p => p.ProductId == a.ProductId).,
+            //                    Price = p.ProductVariants.Average(v => v.Price)
+            //                })
+            //                .Concat(p.ProductVariantValueInts
+            //                    .Select(a => new ProductAttributeDisplayDto
+            //                    {
+            //                        AttributeName = a.Value.ToString(),
+            //                        Quantity = p.Variants.Sum(v => v.Quantity),
+            //                        Price = p.Variants.Average(v => v.Price)
+            //                    }))
+            //                .ToList()
+            //        })
+            //        .ToList();
+                    ;
+
+            //var productPagingsas = _context.Products
+            //                    .OrderByDescending(p => p.DateCreated)
+            //                    .Join(_context.Manufacturers, p => p.ManufacturerId, m => m.Id, (p, m) => new { Product = p, Manufacturer = m })
+            //                    .Join(_context.ProductCategories, p => p.Product.CategoryId, pc => pc.Id, (p, pc) => new { p.Product, p.Manufacturer, ProductCategory = pc })
+            //                    .Join(_context.ProductVariants, p => p.Product.Id, pv => pv.ProductId, (p, pv) => new { p.Product, p.Manufacturer, p.ProductCategory, ProductVariant = pv })
+            //                    .Select(p => new ProductDto
+            //                    {
+            //                        Id = p.Product.Id,
+            //                        Name = p.Product.Name,
+            //                        ManufacturerName = p.Manufacturer.Name,
+            //                        CategoryName = p.ProductCategory.Name,
+            //                        ProductAttributeDisplayDtos = p.Product.ProductVariants.Select(padd => new ProductAttributeDisplayDto
+            //                        {
+
+            //                        }).ToList()
+            //                    });
+
+
+            //var productIncludeVariantValue = _context.Products
+            //            .Include(opt => opt.Manufacturer)
+            //            .Include(opt => opt.ProductCategory)
+            //            .Include(opt => opt.ProductVariants)
+            //            .Include(opt => opt.ProductVariantValueDateTimes)
+            //            .Include(opt => opt.ProductVariantValueDecimals)
+            //            .Include(opt => opt.ProductVariantValueTexts)
+            //            .Include(opt => opt.ProductVariantValueInts)
+            //            .Include(opt => opt.ProductVariantValueVarchars)
+            //            .ToList();
+            //var listProductDtos = new List<ProductDto>();
+            //foreach (var p in productIncludeVariantValue)
+            //{
+            //    listProductDtos.Add(new ProductDto
+            //    {
+            //        Id = p.Id,
+            //        Name = p.Name,
+            //        Code = p.Code,
+            //        ThumbnailPicture = p.ThumbnailPicture,
+            //        ProductType = p.ProductType,
+            //        ManufacturerName = p.Manufacturer.Name,
+            //        CategoryName = p.ProductCategory.Name,
+            //        Description = p.Description,
+            //        IsActive = true,
+            //        IsVisibility = true,
+            //        DateCreated = p.DateCreated,
+            //        DateUpdated = p.DateUpdated
+            //    });
+            //    var t = p.ProductVariants
+            //            .Where(p => p.ProductVariantValueTexts.Count > 0)
+            //            .Join(p.ProductVariantValueTexts,
+            //                pVariant => pVariant.ProductId,
+            //                pVariantValue => pVariantValue.ProductId,
+            //                (pVariant, pVariantValue) => new { pVariant = pVariant, pVariantValue = pVariantValue });
+
+            //};
+
             var productPagings = _context.Products
                                 .Include(opt => opt.Manufacturer)
                                 .Include(opt => opt.ProductCategory)
@@ -40,6 +124,7 @@ namespace DreamyShop.Logic.Product
                                 .Skip((pagingRequest.Page - 1) * pagingRequest.Limit)
                                 .Take(pagingRequest.Limit)
                                 .ToList();
+
             var pageResult = new PageResult<ProductDto>()
             {
                 Items = productPagings,

@@ -755,6 +755,15 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
                             Value = "XL"
+                        },
+                        new
+                        {
+                            Id = new Guid("7d62e34f-32bd-4a07-8e9e-def1e7840576"),
+                            AttributeId = new Guid("827ca5b7-0087-4256-bec0-399199a518d9"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            Value = "Leather"
                         });
                 });
 
@@ -1078,7 +1087,22 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             Price = 5000.0,
                             ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
                             Quantity = 5,
-                            SKU = "BAGGUCCI",
+                            SKU = "BAGGUCCI-A",
+                            StatusID = (byte)0,
+                            ThumbnailPicture = ""
+                        },
+                        new
+                        {
+                            Id = new Guid("35b39a36-5970-42aa-b996-55170555f85b"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "",
+                            IsActive = true,
+                            IsVisibility = true,
+                            Price = 4500.0,
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            Quantity = 5,
+                            SKU = "BAGGUCCI-B",
                             StatusID = (byte)0,
                             ThumbnailPicture = ""
                         });
@@ -1196,6 +1220,18 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductVariantValueInts");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductVariantId = new Guid("35b39a36-5970-42aa-b996-55170555f85b"),
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            AttributeId = new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"),
+                            ProductAttributeIntId = new Guid("6bb0a02b-d294-496a-b496-994d3dfaa6f2"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StatusID = (byte)0
+                        });
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.ProductVariantValueText", b =>
@@ -1240,7 +1276,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         {
                             ProductVariantId = new Guid("afd19304-3a45-4304-b2bb-1040f000c369"),
                             ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
-                            AttributeId = new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"),
+                            AttributeId = new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"),
                             ProductAttributeTextId = new Guid("1b345d3e-67b2-4ab8-92ef-8790de816f7e"),
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -1251,7 +1287,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             ProductVariantId = new Guid("afd19304-3a45-4304-b2bb-1040f000c369"),
                             ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
                             AttributeId = new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"),
-                            ProductAttributeTextId = new Guid("74e81a62-40c5-4d90-a9d9-fcafbe7ad2ed"),
+                            ProductAttributeTextId = new Guid("0eeaacee-3129-4c64-bdf6-54d76a84b9f6"),
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StatusID = (byte)0
@@ -1260,8 +1296,18 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         {
                             ProductVariantId = new Guid("afd19304-3a45-4304-b2bb-1040f000c369"),
                             ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
-                            AttributeId = new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"),
-                            ProductAttributeTextId = new Guid("f5a43aab-5e0e-4ee7-8497-ecf6e8571e23"),
+                            AttributeId = new Guid("827ca5b7-0087-4256-bec0-399199a518d9"),
+                            ProductAttributeTextId = new Guid("7d62e34f-32bd-4a07-8e9e-def1e7840576"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StatusID = (byte)0
+                        },
+                        new
+                        {
+                            ProductVariantId = new Guid("35b39a36-5970-42aa-b996-55170555f85b"),
+                            ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
+                            AttributeId = new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"),
+                            ProductAttributeTextId = new Guid("0f3c7208-6bdf-44f4-b08e-1760cb559bce"),
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StatusID = (byte)0
