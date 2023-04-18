@@ -15,11 +15,7 @@ namespace DreamyShop.Repository.RepositoryWrapper
         private IUserRepository _user;
         private IProductRepository _product;
         private IProductAttributeRepository _productAttribute;
-        private IProductAttributeDateTimeRepository _productAttributeDateTime;
-        private IProductAttributeDecimalRepository _productAttributeDecimal;
-        private IProductAttributeIntRepository _productAttributeInt;
-        private IProductAttributeTextRepository _productAttributeText;
-        private IProductAttributeVarcharRepository _productAttributeVarchar;
+        private IProductAttributeValueRepository _productAttributeValue;
         private IManufacturerRepository _manufacturer;
         private ICategoryRepository _category;
         private IRoleRepository _role;
@@ -30,11 +26,7 @@ namespace DreamyShop.Repository.RepositoryWrapper
             IRoleRepository role,
             IProductRepository product,
             IProductAttributeRepository productAttribute,
-            IProductAttributeDateTimeRepository productAttributeDateTime,
-            IProductAttributeDecimalRepository productAttributeDecimal,
-            IProductAttributeIntRepository productAttributeInt,
-            IProductAttributeTextRepository productAttributeText,
-            IProductAttributeVarcharRepository productAttributeVarchar,
+            IProductAttributeValueRepository productAttributeValue,
             IManufacturerRepository manufacturer,
             ICategoryRepository category)
         {
@@ -43,11 +35,7 @@ namespace DreamyShop.Repository.RepositoryWrapper
             _user = user;
             _product = product;
             _productAttribute = productAttribute;
-            _productAttributeDateTime = productAttributeDateTime;
-            _productAttributeDecimal = productAttributeDecimal;
-            _productAttributeInt = productAttributeInt;
-            _productAttributeText = productAttributeText;
-            _productAttributeVarchar = productAttributeVarchar;
+            _productAttributeValue = productAttributeValue;
             _manufacturer = manufacturer;
             _category = category;
             _role = role;
@@ -113,66 +101,17 @@ namespace DreamyShop.Repository.RepositoryWrapper
             }
         }
 
-        public IProductAttributeDateTimeRepository ProductAttributeDateTime
+        public IProductAttributeValueRepository ProductAttributeValue
         {
             get
             {
-                if (_productAttributeDateTime == null)
+                if (_productAttributeValue == null)
                 {
-                    _productAttributeDateTime = new ProductAttributeDateTimeRepository(_context);
+                    _productAttributeValue = new ProductAttributeValueRepository(_context);
                 }
-                return _productAttributeDateTime;
+                return _productAttributeValue;
             }
         }
-
-        public IProductAttributeDecimalRepository ProductAttributeDecimal
-        {
-            get
-            {
-                if (_productAttributeDecimal == null)
-                {
-                    _productAttributeDecimal = new ProductAttributeDecimalRepository(_context);
-                }
-                return _productAttributeDecimal;
-            }
-        }
-
-        public IProductAttributeIntRepository ProductAttributeInt
-        {
-            get
-            {
-                if (_productAttributeInt == null)
-                {
-                    _productAttributeInt = new ProductAttributeIntRepository(_context);
-                }
-                return _productAttributeInt;
-            }
-        }
-
-        public IProductAttributeTextRepository ProductAttributeText
-        {
-            get
-            {
-                if (_productAttributeText == null)
-                {
-                    _productAttributeText = new ProductAttributeTextRepository(_context);
-                }
-                return _productAttributeText;
-            }
-        }
-
-        public IProductAttributeVarcharRepository ProductAttributeVarchar
-        {
-            get
-            {
-                if (_productAttributeVarchar == null)
-                {
-                    _productAttributeVarchar = new ProductAttributeVarcharRepository(_context);
-                }
-                return _productAttributeVarchar;
-            }
-        }
-
         public IManufacturerRepository Manufacturer
         {
             get

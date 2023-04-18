@@ -22,19 +22,7 @@ namespace DreamyShop.Domain
         [ForeignKey(nameof(ProductId))]
         public virtual Product Product { get; set; }
 
-        [InverseProperty(nameof(ProductVariantValueDecimal.ProductVariant))]
-        public virtual ICollection<ProductVariantValueDecimal> ProductVariantValueDecimals { get; set; }
-
-        [InverseProperty(nameof(ProductVariantValueInt.ProductVariant))]
-        public virtual ICollection<ProductVariantValueInt> ProductVariantValueInts { get; set; }
-
-        [InverseProperty(nameof(ProductVariantValueVarchar.ProductVariant))]
-        public virtual ICollection<ProductVariantValueVarchar> ProductVariantValueVarchars { get; set; }
-
-        [InverseProperty(nameof(ProductVariantValueDateTime.ProductVariant))]
-        public virtual ICollection<ProductVariantValueDateTime> ProductVariantValueDateTimes { get; set; }
-
-        [InverseProperty(nameof(ProductVariantValueText.ProductVariant))]
-        public virtual ICollection<ProductVariantValueText> ProductVariantValueTexts { get; set; }
+        [InverseProperty(nameof(ProductVariantValue.ProductVariant))]
+        public virtual ICollection<ProductVariantValue> ProductVariantValues { get; set; }
     }
 }

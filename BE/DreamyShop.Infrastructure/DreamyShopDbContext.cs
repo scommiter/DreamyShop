@@ -22,17 +22,9 @@ namespace DreamyShop.EntityFrameworkCore
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductAttribute> ProductAttributes { get; set; }
         public virtual DbSet<ProductVariant> ProductVariants { get; set; }
-        public virtual DbSet<ProductVariantValueDecimal> ProductVariantValueDecimals { get; set; }
-        public virtual DbSet<ProductVariantValueDateTime> ProductVariantValueDateTimes { get; set; }
-        public virtual DbSet<ProductVariantValueInt> ProductVariantValueInts { get; set; }
-        public virtual DbSet<ProductVariantValueText> ProductVariantValueTexts { get; set; }
-        public virtual DbSet<ProductVariantValueVarchar> ProductVariantValueVarchars { get; set; }
+        public virtual DbSet<ProductVariantValue> ProductVariantValues { get; set; }
         public virtual DbSet<Domain.Attribute> Attributes { get; set; }
-        public virtual DbSet<ProductAttributeDateTime> ProductAttributeDateTimes { get; set; }
-        public virtual DbSet<ProductAttributeDecimal> ProductAttributeDecimals { get; set; }
-        public virtual DbSet<ProductAttributeInt> ProductAttributeInts { get; set; }
-        public virtual DbSet<ProductAttributeText> ProductAttributeTexts { get; set; }
-        public virtual DbSet<ProductAttributeVarchar> ProductAttributeVarchars { get; set; }
+        public virtual DbSet<ProductAttributeValue> ProductAttributeValues { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<ProductReview> ProductReviews { get; set; }
         public virtual DbSet<ProductTag> ProductTags { get; set; }
@@ -46,98 +38,34 @@ namespace DreamyShop.EntityFrameworkCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProductVariantValueDecimal>()
+            modelBuilder.Entity<ProductVariantValue>()
                 .HasKey(pvv => new { 
                     pvv.ProductVariantId, 
                     pvv.ProductId, 
                     pvv.AttributeId,
-                    pvv.ProductAttributeDecimalId});
-            modelBuilder.Entity<ProductVariantValueDateTime>()
+                    pvv.ProductAttributeValueId
+                });
+            modelBuilder.Entity<ProductVariantValue>()
                .HasKey(pvv => new {
                    pvv.ProductVariantId,
                    pvv.ProductId,
                    pvv.AttributeId,
-                   pvv.ProductAttributeDateTimeId
+                   pvv.ProductAttributeValueId
                });
-            modelBuilder.Entity<ProductVariantValueText>()
-               .HasKey(pvv => new {
-                   pvv.ProductVariantId,
-                   pvv.ProductId,
-                   pvv.AttributeId,
-                   pvv.ProductAttributeTextId
-               });
-            modelBuilder.Entity<ProductVariantValueVarchar>()
-               .HasKey(pvv => new {
-                   pvv.ProductVariantId,
-                   pvv.ProductId,
-                   pvv.AttributeId,
-                   pvv.ProductAttributeVarcharId
-               });
-            modelBuilder.Entity<ProductVariantValueInt>()
-               .HasKey(pvv => new {
-                   pvv.ProductVariantId,
-                   pvv.ProductId,
-                   pvv.AttributeId,
-                   pvv.ProductAttributeIntId
-               });
+           
             modelBuilder.Entity<ProductTag>().HasKey(x => new { x.ProductId, x.TagId });
             modelBuilder.Entity<ProductAttribute>().HasKey(x => new { x.ProductId, x.AttributeId });
 
-            modelBuilder.Entity<ProductVariantValueDecimal>()
-               .HasOne(pvv => pvv.ProductAttributeDecimal)
-               .WithMany(pad => pad.ProductVariantValueDecimals)
-               .HasForeignKey(pvv => pvv.ProductAttributeDecimalId)
+            modelBuilder.Entity<ProductVariantValue>()
+               .HasOne(pvv => pvv.ProductAttributeValues)
+               .WithMany(pad => pad.ProductVariantValues)
+               .HasForeignKey(pvv => pvv.ProductAttributeValueId)
                .OnDelete(DeleteBehavior.NoAction);
-            modelBuilder.Entity<ProductVariantValueDecimal>()
+            modelBuilder.Entity<ProductVariantValue>()
                .HasOne(pv => pv.ProductVariant)
-               .WithMany(p => p.ProductVariantValueDecimals)
+               .WithMany(p => p.ProductVariantValues)
                .HasForeignKey(pv => pv.ProductVariantId)
                .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<ProductVariantValueDateTime>()
-               .HasOne(pvv => pvv.ProductAttributeDateTime)
-               .WithMany(pad => pad.ProductVariantValueDateTimes)
-               .HasForeignKey(pvv => pvv.ProductAttributeDateTimeId)
-               .OnDelete(DeleteBehavior.NoAction);
-            modelBuilder.Entity<ProductVariantValueDateTime>()
-                .HasOne(pv => pv.ProductVariant)
-                .WithMany(p => p.ProductVariantValueDateTimes)
-                .HasForeignKey(pv => pv.ProductVariantId)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<ProductVariantValueText>()
-              .HasOne(pvv => pvv.ProductAttributeText)
-              .WithMany(pad => pad.ProductVariantValueTexts)
-              .HasForeignKey(pvv => pvv.ProductAttributeTextId)
-              .OnDelete(DeleteBehavior.NoAction);
-            modelBuilder.Entity<ProductVariantValueText>()
-              .HasOne(pv => pv.ProductVariant)
-              .WithMany(p => p.ProductVariantValueTexts)
-              .HasForeignKey(pv => pv.ProductVariantId)
-              .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<ProductVariantValueInt>()
-               .HasOne(pvv => pvv.ProductAttributeInt)
-               .WithMany(pad => pad.ProductVariantValueInts)
-               .HasForeignKey(pvv => pvv.ProductAttributeIntId)
-               .OnDelete(DeleteBehavior.NoAction);
-            modelBuilder.Entity<ProductVariantValueInt>()
-             .HasOne(pv => pv.ProductVariant)
-             .WithMany(p => p.ProductVariantValueInts)
-             .HasForeignKey(pv => pv.ProductVariantId)
-             .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<ProductVariantValueVarchar>()
-              .HasOne(pvv => pvv.ProductAttributeVarchar)
-              .WithMany(pad => pad.ProductVariantValueVarchars)
-              .HasForeignKey(pvv => pvv.ProductAttributeVarcharId)
-              .OnDelete(DeleteBehavior.NoAction);
-            modelBuilder.Entity<ProductVariantValueVarchar>()
-             .HasOne(pv => pv.ProductVariant)
-             .WithMany(p => p.ProductVariantValueVarchars)
-             .HasForeignKey(pv => pv.ProductVariantId)
-             .OnDelete(DeleteBehavior.NoAction);
-
             modelBuilder.Seed();
         }
     }

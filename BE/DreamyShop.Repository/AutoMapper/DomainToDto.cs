@@ -21,9 +21,9 @@ namespace DreamyShop.Repository.AutoMapper
                 .ForMember(dest => dest.ProductAttributeDisplayDtos, opt => opt.MapFrom(src => src.ProductVariants
                     .Select(variant => new ProductAttributeDisplayDto
                     {
-                        AttributeName = string.Join(" ", src.ProductAttributeTexts
-                                        .Where(d => src.ProductVariantValueTexts.Any(pvvt => pvvt.ProductAttributeTextId == d.Id && pvvt.ProductId == d.ProductId))
-                                        .Select(pai => pai.Value)),
+                        //AttributeName = string.Join(" ", src.ProductAttributeTexts
+                        //                .Where(d => src.ProductVariantValueTexts.Any(pvvt => pvvt.ProductAttributeTextId == d.Id && pvvt.ProductId == d.ProductId))
+                        //                .Select(pai => pai.Value)),
                         Quantity = variant.Quantity,
                         Price = variant.Price
                     }).ToList()));

@@ -33,11 +33,7 @@ namespace DreamyShop.Api.Configurations
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProductAttributeRepository, ProductAttributeRepository>();
-            services.AddScoped<IProductAttributeDateTimeRepository, ProductAttributeDateTimeRepository>();
-            services.AddScoped<IProductAttributeDecimalRepository, ProductAttributeDecimalRepository>();
-            services.AddScoped<IProductAttributeIntRepository, ProductAttributeIntRepository>();
-            services.AddScoped<IProductAttributeTextRepository, ProductAttributeTextRepository>();
-            services.AddScoped<IProductAttributeVarcharRepository, ProductAttributeVarcharRepository>();
+            services.AddScoped<IProductAttributeValueRepository, ProductAttributeValueRepository>();
             services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             #endregion

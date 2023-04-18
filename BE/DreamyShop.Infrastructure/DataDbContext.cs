@@ -197,7 +197,6 @@ namespace DreamyShop.EntityFrameworkCore
                     Id = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),
                     Code = "COLOR",
                     Name = "COLOR",
-                    DataType = AttributeType.Text,
                     SortOrder = 1,
                     IsVisibility = true,
                     IsActive = true,
@@ -207,22 +206,9 @@ namespace DreamyShop.EntityFrameworkCore
                 new Domain.Attribute()
                 {
                     Id = new Guid("F9885DFB-02A8-4065-A4AA-18B29E48EE89"),
-                    Code = "SIZEText",
-                    Name = "SIZEText",
-                    DataType = AttributeType.Text,
+                    Code = "SIZE",
+                    Name = "SIZE",
                     SortOrder = 2,
-                    IsVisibility = true,
-                    IsActive = true,
-                    IsUnique = true,
-                    Note = ""
-                },
-                new Domain.Attribute()
-                {
-                    Id = new Guid("65A2FB41-F2C8-47C5-8E3D-AE4EB1913D08"),
-                    Code = "SIZEInt",
-                    Name = "SIZEInt",
-                    DataType = AttributeType.Int,
-                    SortOrder = 3,
                     IsVisibility = true,
                     IsActive = true,
                     IsUnique = true,
@@ -233,108 +219,12 @@ namespace DreamyShop.EntityFrameworkCore
                     Id = new Guid("827CA5B7-0087-4256-BEC0-399199A518D9"),
                     Code = "MATERIAL",
                     Name = "MATERIAL",
-                    DataType = AttributeType.Text,
-                    SortOrder = 4,
+                    SortOrder = 3,
                     IsVisibility = true,
                     IsActive = true,
                     IsUnique = true,
                     Note = ""
                 });
-
-            modelBuilder.Entity<ProductAttributeText>().HasData(
-               new ProductAttributeText()
-               {
-                   Id = new Guid("0F3C7208-6BDF-44F4-B08E-1760CB559BCE"),
-                   AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),
-                   ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                   Value = "Red"
-               },
-               new ProductAttributeText()
-               {
-                   Id = new Guid("74E81A62-40C5-4D90-A9D9-FCAFBE7AD2ED"),
-                   AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),
-                   ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                   Value = "Black"
-               },
-               new ProductAttributeText()
-               {
-                   Id = new Guid("1B345D3E-67B2-4AB8-92EF-8790DE816F7E"),
-                   AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),
-                   ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                   Value = "White"
-               },
-               new ProductAttributeText()
-               {
-                   Id = new Guid("F5A43AAB-5E0E-4EE7-8497-ECF6E8571E23"),
-                   AttributeId = new Guid("F9885DFB-02A8-4065-A4AA-18B29E48EE89"),
-                   ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                   Value = "M"
-               },
-               new ProductAttributeText()
-               {
-                   Id = new Guid("0EEAACEE-3129-4C64-BDF6-54D76A84B9F6"),
-                   AttributeId = new Guid("F9885DFB-02A8-4065-A4AA-18B29E48EE89"),
-                   ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                   Value = "L"
-               },
-               new ProductAttributeText()
-               {
-                   Id = new Guid("AA1D46B2-F2E8-4547-B36D-500D57029423"),
-                   AttributeId = new Guid("F9885DFB-02A8-4065-A4AA-18B29E48EE89"),
-                   ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                   Value = "XL"
-               },
-               new ProductAttributeText()
-               {
-                   Id = new Guid("7D62E34F-32BD-4A07-8E9E-DEF1E7840576"),
-                   AttributeId = new Guid("827CA5B7-0087-4256-BEC0-399199A518D9"),
-                   ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                   Value = "Leather"
-               });
-
-            modelBuilder.Entity<ProductAttributeInt>().HasData(
-              new ProductAttributeInt()
-              {
-                  Id = new Guid("3D44B2AC-0BD6-433B-9858-ABB84D74EA2E"),
-                  AttributeId = new Guid("65A2FB41-F2C8-47C5-8E3D-AE4EB1913D08"),
-                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                  Value = 35
-              },
-              new ProductAttributeInt()
-              {
-                  Id = new Guid("3D369A2C-6BCB-468C-B296-64D96A84258A"),
-                  AttributeId = new Guid("65A2FB41-F2C8-47C5-8E3D-AE4EB1913D08"),
-                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                  Value = 36
-              },
-              new ProductAttributeInt()
-              {
-                  Id = new Guid("DFDBE11D-C978-4CC4-9A9E-CAFC19805AC8"),
-                  AttributeId = new Guid("65A2FB41-F2C8-47C5-8E3D-AE4EB1913D08"),
-                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                  Value = 37
-              },
-              new ProductAttributeInt()
-              {
-                  Id = new Guid("6BB0A02B-D294-496A-B496-994D3DFAA6F2"),
-                  AttributeId = new Guid("65A2FB41-F2C8-47C5-8E3D-AE4EB1913D08"),
-                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                  Value = 38
-              },
-              new ProductAttributeInt()
-              {
-                  Id = new Guid("A2EE0AC5-663D-4D97-B449-ED8FE48FADA3"),
-                  AttributeId = new Guid("65A2FB41-F2C8-47C5-8E3D-AE4EB1913D08"),
-                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                  Value = 39
-              },
-              new ProductAttributeInt()
-              {
-                  Id = new Guid("2C2FCF7C-FA5A-4B6F-AC30-48A2A6BDB4B5"),
-                  AttributeId = new Guid("65A2FB41-F2C8-47C5-8E3D-AE4EB1913D08"),
-                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                  Value = 40
-              });
 
             modelBuilder.Entity<ProductAttribute>().HasData(
                 //Bag -  Color
@@ -346,7 +236,7 @@ namespace DreamyShop.EntityFrameworkCore
                 //Bag - SIZE
                 new ProductAttribute()
                 {
-                    ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                    ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"), 
                     AttributeId = new Guid("F9885DFB-02A8-4065-A4AA-18B29E48EE89")
                 },
                 //Bag - Material
@@ -402,7 +292,7 @@ namespace DreamyShop.EntityFrameworkCore
                      IsActive = true,
                      Description = "",
                      ThumbnailPicture = "",
-                     Quantity = 5,
+                     Quantity = 10,
                      Price = 5000
                  },
                  new ProductVariant()
@@ -414,51 +304,137 @@ namespace DreamyShop.EntityFrameworkCore
                      IsActive = true,
                      Description = "",
                      ThumbnailPicture = "",
-                     Quantity = 5,
+                     Quantity = 15,
                      Price = 4500
+                 },
+                 new ProductVariant()
+                 {
+                     Id = new Guid("F2BA4AB5-46C4-4CE9-BAAF-2C98972D45B0"),
+                     ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                     SKU = "BAGGUCCI-VIP",
+                     IsVisibility = true,
+                     IsActive = true,
+                     Description = "",
+                     ThumbnailPicture = "",
+                     Quantity = 5,
+                     Price = 9500
                  });
 
-            modelBuilder.Entity<ProductVariantValueText>().HasData(
-            #region  Crocodile leather bag - 5000 - white - L - Leather
-                 new ProductVariantValueText()
+            modelBuilder.Entity<ProductAttributeValue>().HasData(
+              new ProductAttributeValue()
+              {
+                  Id = new Guid("3D44B2AC-0BD6-433B-9858-ABB84D74EA2E"),
+                  AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),
+                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                  Value = "Red"
+              },
+              new ProductAttributeValue()
+              {
+                  Id = new Guid("3D369A2C-6BCB-468C-B296-64D96A84258A"),
+                  AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),
+                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                  Value = "Blue"
+              },
+              new ProductAttributeValue()
+              {
+                  Id = new Guid("DFDBE11D-C978-4CC4-9A9E-CAFC19805AC8"),
+                  AttributeId = new Guid("F9885DFB-02A8-4065-A4AA-18B29E48EE89"),
+                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                  Value = "M"
+              },
+              new ProductAttributeValue()
+              {
+                  Id = new Guid("6BB0A02B-D294-496A-B496-994D3DFAA6F2"),
+                  AttributeId = new Guid("F9885DFB-02A8-4065-A4AA-18B29E48EE89"),
+                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                  Value = "L"
+              },
+              new ProductAttributeValue()
+              {
+                  Id = new Guid("A2EE0AC5-663D-4D97-B449-ED8FE48FADA3"),
+                  AttributeId = new Guid("827CA5B7-0087-4256-BEC0-399199A518D9"),
+                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                  Value = "Leather"
+              },
+              new ProductAttributeValue()
+              {
+                  Id = new Guid("2C2FCF7C-FA5A-4B6F-AC30-48A2A6BDB4B5"),
+                  AttributeId = new Guid("827CA5B7-0087-4256-BEC0-399199A518D9"),
+                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                  Value = "Cotton"
+              },
+              new ProductAttributeValue()
+              {
+                  Id = new Guid("4267FEEE-9A5B-4156-90B0-9E3585A8AF22"),
+                  AttributeId = new Guid("827CA5B7-0087-4256-BEC0-399199A518D9"),
+                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                  Value = "Crocodile skin"
+              });
+
+            modelBuilder.Entity<ProductVariantValue>().HasData(
+            #region  Crocodile leather bag - Red - M - Leather - Quantity: 10 - Price: 5000
+                 new ProductVariantValue()
                  {
                      ProductVariantId = new Guid("AFD19304-3A45-4304-B2BB-1040F000C369"),
                      ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
                      AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),    //color
-                     ProductAttributeTextId = new Guid("1B345D3E-67B2-4AB8-92EF-8790DE816F7E"),     //white
+                     ProductAttributeValueId = new Guid("3D44B2AC-0BD6-433B-9858-ABB84D74EA2E"),     //Red
                  },
-                 new ProductVariantValueText()
+                 new ProductVariantValue()
                  {
                      ProductVariantId = new Guid("AFD19304-3A45-4304-B2BB-1040F000C369"),
                      ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
                      AttributeId = new Guid("F9885DFB-02A8-4065-A4AA-18B29E48EE89"),    //Size 
-                     ProductAttributeTextId = new Guid("0EEAACEE-3129-4C64-BDF6-54D76A84B9F6"),     //L
+                     ProductAttributeValueId = new Guid("DFDBE11D-C978-4CC4-9A9E-CAFC19805AC8"),     //M
                  },
-                 new ProductVariantValueText()
+                 new ProductVariantValue()
                  {
-                     ProductVariantId = new Guid("AFD19304-3A45-4304-B2BB-1040F000C369"),      //5000 - 5
+                     ProductVariantId = new Guid("AFD19304-3A45-4304-B2BB-1040F000C369"),
                      ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
                      AttributeId = new Guid("827CA5B7-0087-4256-BEC0-399199A518D9"),    //Material
-                     ProductAttributeTextId = new Guid("7D62E34F-32BD-4A07-8E9E-DEF1E7840576"),     //Leather
+                     ProductAttributeValueId = new Guid("A2EE0AC5-663D-4D97-B449-ED8FE48FADA3"),     //Leather
                  },
             #endregion
-            #region    Crocodile leather bag - 4500 - Red - size 38
-                 new ProductVariantValueText()
+            #region  Crocodile leather bag - Blue - L - Cotton - Quantity: 15 - Price: 4500
+                 new ProductVariantValue()
                  {
                      ProductVariantId = new Guid("35B39A36-5970-42AA-B996-55170555F85B"),
                      ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
                      AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),    //color
-                     ProductAttributeTextId = new Guid("0F3C7208-6BDF-44F4-B08E-1760CB559BCE"),     //Red
-                 });
-            modelBuilder.Entity<ProductVariantValueInt>().HasData(
-                new ProductVariantValueInt()
-                {
-                    ProductVariantId = new Guid("35B39A36-5970-42AA-B996-55170555F85B"),
-                    ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                    AttributeId = new Guid("F9885DFB-02A8-4065-A4AA-18B29E48EE89"),    //size
-                    ProductAttributeIntId = new Guid("6BB0A02B-D294-496A-B496-994D3DFAA6F2"),     //38
-                });
+                     ProductAttributeValueId = new Guid("3D369A2C-6BCB-468C-B296-64D96A84258A"),     //Blue
+                 },
+                 new ProductVariantValue()
+                 {
+                     ProductVariantId = new Guid("35B39A36-5970-42AA-B996-55170555F85B"),
+                     ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                     AttributeId = new Guid("F9885DFB-02A8-4065-A4AA-18B29E48EE89"),    //Size 
+                     ProductAttributeValueId = new Guid("6BB0A02B-D294-496A-B496-994D3DFAA6F2"),     //L
+                 },
+                 new ProductVariantValue()
+                 {
+                     ProductVariantId = new Guid("35B39A36-5970-42AA-B996-55170555F85B"),
+                     ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                     AttributeId = new Guid("827CA5B7-0087-4256-BEC0-399199A518D9"),    //Material
+                     ProductAttributeValueId = new Guid("2C2FCF7C-FA5A-4B6F-AC30-48A2A6BDB4B5"),     //Cotton
+                 },
             #endregion
+            #region  Crocodile leather bag - Blue - Crocodile skin - Quantity: 5 - Price: 9500
+                 new ProductVariantValue()
+                 {
+                     ProductVariantId = new Guid("F2BA4AB5-46C4-4CE9-BAAF-2C98972D45B0"),
+                     ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                     AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),    //color
+                     ProductAttributeValueId = new Guid("3D369A2C-6BCB-468C-B296-64D96A84258A"),     //Blue
+                 },
+                 new ProductVariantValue()
+                 {
+                     ProductVariantId = new Guid("F2BA4AB5-46C4-4CE9-BAAF-2C98972D45B0"),
+                     ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                     AttributeId = new Guid("827CA5B7-0087-4256-BEC0-399199A518D9"),    //Size 
+                     ProductAttributeValueId = new Guid("4267FEEE-9A5B-4156-90B0-9E3585A8AF22"),     //Crocodile skin
+                 }
+             #endregion
+                 );
         }
     }
 }

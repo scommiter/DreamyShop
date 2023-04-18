@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DreamyShop.Domain
 {
-    [Table("ProductVariantValueTexts")]
-    public class ProductVariantValueText : AuditEntity
+    [Table("ProductVariantValues")]
+    public class ProductVariantValue : AuditEntity
     {
         [Key]
         [Column(Order = 0)]
@@ -17,23 +17,22 @@ namespace DreamyShop.Domain
         public Guid AttributeId { get; set; }
         [Key]
         [Column(Order = 3)]
-        public Guid ProductAttributeTextId { get; set; }
+        public Guid ProductAttributeValueId { get; set; }
 
         [ForeignKey(nameof(ProductVariantId))]
-        [InverseProperty("ProductVariantValueTexts")]
+        [InverseProperty("ProductVariantValues")]
         public virtual ProductVariant ProductVariant { get; set; }
 
         [ForeignKey(nameof(ProductId))]
-        [InverseProperty("ProductVariantValueTexts")]
+        [InverseProperty("ProductVariantValues")]
         public virtual Product Product { get; set; }
 
         [ForeignKey(nameof(AttributeId))]
-        [InverseProperty("ProductVariantValueTexts")]
+        [InverseProperty("ProductVariantValues")]
         public virtual Attribute Attribute { get; set; }
 
-        [ForeignKey(nameof(ProductAttributeTextId))]
-        [InverseProperty("ProductVariantValueTexts")]
-        public virtual ProductAttributeText ProductAttributeText { get; set; }
-
+        [ForeignKey(nameof(ProductAttributeValueId))]
+        [InverseProperty("ProductVariantValues")]
+        public virtual ProductAttributeValue ProductAttributeValues { get; set; }
     }
 }

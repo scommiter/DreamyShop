@@ -1,11 +1,6 @@
 ﻿using DreamyShop.Domain.Shared.Types;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DreamyShop.Domain
 {
@@ -43,20 +38,8 @@ namespace DreamyShop.Domain
         [InverseProperty(nameof(ProductVariant.Product))]
         public virtual ICollection<ProductVariant> ProductVariants { get; set; }
 
-        [InverseProperty(nameof(ProductAttributeDateTime.Product))]
-        public virtual ICollection<ProductAttributeDateTime> ProductAttributeDateTimes { get; set; }
-
-        [InverseProperty(nameof(ProductAttributeDecimal.Product))]
-        public virtual ICollection<ProductAttributeDecimal> ProductAttributeDecimals { get; set; }
-
-        [InverseProperty(nameof(ProductAttributeInt.Product))]
-        public virtual ICollection<ProductAttributeInt> ProductAttributeInts { get; set; }
-
-        [InverseProperty(nameof(ProductAttributeText.Product))]
-        public virtual ICollection<ProductAttributeText> ProductAttributeTexts { get; set; }
-
-        [InverseProperty(nameof(ProductAttributeVarchar.Product))]
-        public virtual ICollection<ProductAttributeVarchar> ProductAttributeVarchars { get; set; }
+        [InverseProperty(nameof(ProductAttributeValue.Product))]
+        public virtual ICollection<ProductAttributeValue> ProductAttributeValues { get; set; }
 
         [InverseProperty(nameof(ProductReview.Product))]
         public virtual ICollection<ProductReview> ProductReviews { get; set; }
@@ -64,20 +47,8 @@ namespace DreamyShop.Domain
         [InverseProperty(nameof(ProductAttribute.Product))]
         public virtual ICollection<ProductAttribute> ProductAttributes { get; set; }
 
-        [InverseProperty(nameof(ProductVariantValueDecimal.Product))]
-        public virtual ICollection<ProductVariantValueDecimal> ProductVariantValueDecimals { get; set; }
-
-        [InverseProperty(nameof(ProductVariantValueText.Product))]
-        public virtual ICollection<ProductVariantValueText> ProductVariantValueTexts { get; set; }
-
-        [InverseProperty(nameof(ProductVariantValueVarchar.Product))]
-        public virtual ICollection<ProductVariantValueVarchar> ProductVariantValueVarchars { get; set; }
-
-        [InverseProperty(nameof(ProductVariantValueInt.Product))]
-        public virtual ICollection<ProductVariantValueInt> ProductVariantValueInts { get; set; }
-
-        [InverseProperty(nameof(ProductVariantValueDateTime.Product))]
-        public virtual ICollection<ProductVariantValueDateTime> ProductVariantValueDateTimes { get; set; }
+        [InverseProperty(nameof(ProductVariantValue.Product))]
+        public virtual ICollection<ProductVariantValue> ProductVariantValues { get; set; }
 
         [InverseProperty(nameof(ProductTag.Product))]
         public virtual ICollection<ProductTag> ProductTags { get; set; }

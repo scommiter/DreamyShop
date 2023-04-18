@@ -14,11 +14,7 @@ namespace DreamyShop.Repository.RepositoryWrapper
         IRoleRepository Role { get; }
         IProductRepository Product { get; }
         IProductAttributeRepository ProductAttribute { get; }
-        IProductAttributeDateTimeRepository ProductAttributeDateTime { get; }
-        IProductAttributeDecimalRepository ProductAttributeDecimal { get; }
-        IProductAttributeIntRepository ProductAttributeInt { get; }
-        IProductAttributeTextRepository ProductAttributeText { get; }
-        IProductAttributeVarcharRepository ProductAttributeVarchar { get; }
+        IProductAttributeValueRepository ProductAttributeValue { get; }
         IManufacturerRepository Manufacturer { get; }
         ICategoryRepository Category { get; }
 

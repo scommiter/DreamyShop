@@ -12,7 +12,6 @@ namespace DreamyShop.Domain.Shared.Dtos
     {
         public string Code { get; set; }
         public string Name { get; set; }
-        public AttributeType DataType { get; set; }
         public int SortOrder { get; set; }
         public bool IsVisibility { get; set; }
         public bool IsActive { get; set; }

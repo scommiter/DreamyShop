@@ -6,26 +6,6 @@ namespace DreamyShop.Domain
     [Table("ProductReviews")]
     public class ProductReview : TrackEntity
     {
-        public ProductReview(
-            Guid id,
-            Guid productId,
-            Guid? parentId,
-            string title,
-            double rating,
-            DateTime? createdAt,
-            string content,
-            Guid orderId)
-        {
-            Id = id;
-            ProductId = productId;
-            ParentId = parentId;
-            Title = title;
-            Rating = rating;
-            CreatedAt = createdAt;
-            Content = content;
-            OrderId = orderId;
-        }
-
         [Key]
         public Guid Id { get; set; }
 

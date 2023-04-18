@@ -2,7 +2,7 @@
 
 namespace DreamyShop.Repository.Repositories.Product
 {
-    public interface IProductAttributeDateTimeRepository : IGenericRepository<Domain.ProductAttributeDateTime>
+    public interface IProductAttributeValueRepository : IGenericRepository<Domain.ProductAttributeValue>
     {
     }
 }

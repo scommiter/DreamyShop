@@ -43,23 +43,23 @@ class Program
                     from piv in pivGroup.DefaultIfEmpty()
                     group new { pv, piv } by pv.ProductVariantId;
 
-        var result = (from pv in productVariantsList
-                      join pvt1 in productVariantValueTextsList on pv.Id equals pvt1.ProductId into pvt1Group
-                      from pvt1 in pvt1Group.DefaultIfEmpty()
-                      join pai1 in productVariantValueIntsList on pv.Id equals pai1.ProductId into pai1Group
-                      from pai1 in pai1Group.DefaultIfEmpty()
-                      join pat1 in productAttributeTextsList on pvt1.ProductAttributeTextId equals pat1.Id into pat1Group
-                      from pat1 in pat1Group.DefaultIfEmpty()
-                      join pai2 in productAttributeIntsList on pai1.ProductAttributeIntId equals pai2.Id into pai2Group
-                      from pai2 in pai2Group.DefaultIfEmpty()
-                      select new
-                      {
-                          Attribute1 = pat1.Value,
-                          Attribute2 = pat2.Value,
-                          Attribute3 = pai2.Value,
-                          Quantity = pv.Quantity,
-                          Price = pv.Price
-                      }).ToList();
+        //var result = (from pv in productVariantsList
+        //              join pvt1 in productVariantValueTextsList on pv.Id equals pvt1.ProductId into pvt1Group
+        //              from pvt1 in pvt1Group.DefaultIfEmpty()
+        //              join pai1 in productVariantValueIntsList on pv.Id equals pai1.ProductId into pai1Group
+        //              from pai1 in pai1Group.DefaultIfEmpty()
+        //              join pat1 in productAttributeTextsList on pvt1.ProductAttributeTextId equals pat1.Id into pat1Group
+        //              from pat1 in pat1Group.DefaultIfEmpty()
+        //              join pai2 in productAttributeIntsList on pai1.ProductAttributeIntId equals pai2.Id into pai2Group
+        //              from pai2 in pai2Group.DefaultIfEmpty()
+        //              select new
+        //              {
+        //                  Attribute1 = pat1.Value,
+        //                  Attribute2 = pat2.Value,
+        //                  Attribute3 = pai2.Value,
+        //                  Quantity = pv.Quantity,
+        //                  Price = pv.Price
+        //              }).ToList();
 
 
         //var results = productVariantsList
