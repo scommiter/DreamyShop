@@ -28,22 +28,22 @@ namespace DreamyShop.Repository.AutoMapper
             //            Price = variant.Price
             //        }).ToList()));
 
-            CreateMap<Product, ProductDto>()
-                .ForMember(pt => pt.CategoryName, opt =>
-                    opt.MapFrom(src => src.ProductCategory.Name))
-                .ForMember(pt => pt.ManufacturerName, opt =>
-                    opt.MapFrom(src => src.Manufacturer.Name))
-                .ForMember(dest => dest.ProductAttributeDisplayDtos, opt => opt.MapFrom(src => src.ProductVariants
-                    .Select(variant => src.ProductVariantValues.GroupBy(p => p.ProductVariantId)
-                        .Select(variantValue => new ProductAttributeDisplayDto
-                        {
-                            AttributeName = string.Join(" ", variantValue.Select(p =>
-                                            src.ProductAttributeValues.FirstOrDefault(pav => pav.Id == p.ProductAttributeValueId)!.Value).ToString()),
-                            Quantity = variant.Quantity,
-                            Price = variant.Price
-                        })
-                    ))
-                );
+            //CreateMap<Product, ProductDto>()
+            //    .ForMember(pt => pt.CategoryName, opt =>
+            //        opt.MapFrom(src => src.ProductCategory.Name))
+            //    .ForMember(pt => pt.ManufacturerName, opt =>
+            //        opt.MapFrom(src => src.Manufacturer.Name))
+            //    .ForMember(dest => dest.ProductAttributeDisplayDtos, opt => opt.MapFrom(src => src.ProductVariants
+            //        .Select(variant => src.ProductVariantValues.GroupBy(p => p.ProductVariantId)
+            //            .Select(variantValue => new ProductAttributeDisplayDto
+            //            {
+            //                AttributeName = string.Join(" ", variantValue.Select(p =>
+            //                                src.ProductAttributeValues.FirstOrDefault(pav => pav.Id == p.ProductAttributeValueId)!.Value).ToString()),
+            //                Quantity = variant.Quantity,
+            //                Price = variant.Price
+            //            })
+            //        ))
+            //    );
 
 
             //CreateMap<Product, ProductDto>()

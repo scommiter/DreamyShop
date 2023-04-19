@@ -20,14 +20,14 @@ namespace DreamyShop.Domain.Shared.Dtos
         public string Description { get; set; }
         public bool IsActive { get; set; }
         public bool IsVisibility { get; set; }
-        public IList<ProductAttributeDisplayDto>? ProductAttributeDisplayDtos { get; set; }
+        public List<ProductAttributeDisplayDto>? ProductAttributeDisplayDtos { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
     }
 
     public class ProductAttributeDisplayDto
     {
-        public string AttributeName { get; set; }   //select from ProductAttributeText, groupby AttributeId => string concatenation 
+        public List<string> AttributeName { get; set; }   //select from ProductAttributeText, groupby AttributeId => string concatenation 
         public int Quantity { get; set; }
         public double Price { get; set; }
     }

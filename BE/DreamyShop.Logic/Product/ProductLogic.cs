@@ -31,30 +31,7 @@ namespace DreamyShop.Logic.Product
         #region Product
         public async Task<ApiResult<PageResult<ProductDto>>> GetAllProduct(PagingRequest pagingRequest)
         {
-            //var result1 = _context.Products
-            //                .Join(_context.Manufacturers, p => p.ManufacturerId, m => m.Id, (p, m) => new { Product = p, Manufacturer = m })
-            //                .Join(_context.ProductCategories, pm => pm.Product.CategoryId, c => c.Id, (pm, c) => new { pm.Product, pm.Manufacturer, Category = c })
-            //                .GroupJoin(_context.ProductVariants, pmc => pmc.Product.Id, pv => pv.ProductId, (pmc, pvN) => new { pmc.Product, pmc.Manufacturer, pmc.Category, ProductVariants = pvN.DefaultIfEmpty() })
-            //                .SelectMany(pmcv => pmcv.ProductVariants.DefaultIfEmpty(), (pmcv, pv) => new { pmcv.Product, pmcv.Manufacturer, pmcv.Category, ProductVariant = pv })
-            //                .GroupJoin(_context.ProductVariantValues, pmcvp => pmcvp.ProductVariant.Id, pvv => pvv.ProductVariantId, (pmcvp, pvvN) => new { pmcvp.Product, pmcvp.Manufacturer, pmcvp.Category, pmcvp.ProductVariant, ProductVariantValues = pvvN.DefaultIfEmpty() })
-            //                .SelectMany(pmcvpv => pmcvpv.ProductVariantValues.DefaultIfEmpty(), (pmcvpv, pvv) => new { pmcvpv.Product, pmcvpv.Manufacturer, pmcvpv.Category, pmcvpv.ProductVariant, ProductVariantValue = pvv })
-            //                .GroupJoin(_context.ProductAttributeValues, pmcvpvv => pmcvpvv.ProductVariantValue.ProductAttributeValueId, pav => pav.Id, (pmcvpvv, pavN) => new { pmcvpvv.Product, pmcvpvv.Manufacturer, pmcvpvv.Category, pmcvpvv.ProductVariant, pmcvpvv.ProductVariantValue, ProductAttributeValue = pavN.DefaultIfEmpty() })
-            //                .SelectMany(pmcvpvav => pmcvpvav.ProductAttributeValue.DefaultIfEmpty(), (pmcvpvav, pav) => new { pmcvpvav.Product, pmcvpvav.Manufacturer, pmcvpvav.Category, pmcvpvav.ProductVariant, pmcvpvav.ProductVariantValue, ProductAttributeValue = pav })
-            //                .Select(x => new
-            //                {
-            //                    x.Product.Id,
-            //                    x.Product.Name,
-            //                    x.Product.Code,
-            //                    x.Product.Slug,
-            //                    ProductVariantId = x.Product.Id,
-            //                    x.ProductVariant.SKU,
-            //                    x.ProductVariant.Quantity,
-            //                    x.ProductVariant.Price,
-            //                    x.ProductVariantValue.ProductAttributeValueId,
-            //                    Value = x.ProductAttributeValue.Value
-            //                }).ToList();
-
-            var query1 = from p in _context.Products
+            var query = await( from p in _context.Products
                          join m in _context.Manufacturers on p.ManufacturerId equals m.Id
                          join c in _context.ProductCategories on p.CategoryId equals c.Id
                          join pv in _context.ProductVariants on p.Id equals pv.ProductId into pvN
@@ -70,46 +47,44 @@ namespace DreamyShop.Logic.Product
                             ManufacturerName = m.Name, 
                             CategoryName = c.Name, 
                             pv, 
-                            pvv,
                             pav
-                        };
-            var result = await query1.ToListAsync();
-            var result2 = result.GroupBy(r => r.Product)
-                        .Select(x => new
+                        }).ToListAsync();
+
+            var productPagings = query.GroupBy(r => new { r.Product })
+                        .Select(x => new ProductDto
                         {
-                            Product = x.Key,
-                            VariantName = x.GroupBy(p => p.ProductVariantId).Select(pv => string.Join(" ", pv?.Select(pvv => pvv.pav.Value ?? ""))).ToList()
-                        });
+                            Id = x.Key.Product.Id,
+                            Name = x.Key.Product.Name,
+                            Code = x.Key.Product.Code,
+                            ThumbnailPicture = x.Key.Product.ThumbnailPicture ?? "",
+                            ProductType = x.Key.Product?.ProductType ?? ProductType.Single,
+                            CategoryName = x.FirstOrDefault()?.CategoryName ?? "",
+                            ManufacturerName = x.FirstOrDefault()?.ManufacturerName ?? "",
+                            Description = x.Key.Product?.Description ?? "",
+                            IsActive = x.Key.Product?.IsActive ?? true,
+                            IsVisibility = x.Key.Product?.IsVisibility ?? true,
+                            DateCreated = x.Key.Product?.DateCreated ?? DateTime.Now,
+                            DateUpdated = x.Key.Product?.DateUpdated ?? DateTime.Now,
+                            ProductAttributeDisplayDtos = x.GroupBy(p => p.ProductVariantId)
+                                                        .Select(pAttr => new ProductAttributeDisplayDto
+                                                        {
+                                                            AttributeName = pAttr.Select(x => x.pav?.Value ?? "").ToList(),
+                                                            Quantity = pAttr.Select(x => x.pv?.Quantity ?? 0).FirstOrDefault(),
+                                                            Price = pAttr.Select(x => x.pv?.Price ?? 0).FirstOrDefault()
+                                                        }).ToList()
+                        }).ToList();
 
-
-            //var products = await query.Select(p => new ProductDto
-            //{
-            //    Id = p.Key.Id,
-            //    Name = p.Key.Name,
-            //    Code = p.Key.Code,
-            //    ThumbnailPicture = p.Key.ThumbnailPicture,
-            //    ProductType = p.Key.ProductType,
-            //    Description = p.Key.Description,
-            //    DateCreated = p.Key.DateCreated,
-            //    DateUpdated = p.Key.DateUpdated,
-            //}).ToListAsync();
-
-            //var result2 = result.Select(p => p.ProductVariants
-            //                        .GroupBy(pv => pv.c.ProductVariantId,
-            //                             (key, g) => new { ProductVariantId = key, VariantName = String.Join(" ", g.Select(gg => gg.d.Value)) }
-            //                        ));
-
-            var productPagings = _context.Products
-                                .Include(opt => opt.Manufacturer)
-                                .Include(opt => opt.ProductCategory)
-                                .Include(opt => opt.ProductVariants)
-                                .Include(opt => opt.ProductVariantValues)
-                                .Include(opt => opt.ProductAttributeValues)
-                                .OrderByDescending(p => p.DateCreated)
-                                .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
-                                .Skip((pagingRequest.Page - 1) * pagingRequest.Limit)
-                                .Take(pagingRequest.Limit)
-                                .ToList();
+            //var productPagings = _context.Products
+            //                    .Include(opt => opt.Manufacturer)
+            //                    .Include(opt => opt.ProductCategory)
+            //                    .Include(opt => opt.ProductVariants)
+            //                    .Include(opt => opt.ProductVariantValues)
+            //                    .Include(opt => opt.ProductAttributeValues)
+            //                    .OrderByDescending(p => p.DateCreated)
+            //                    .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
+            //                    .Skip((pagingRequest.Page - 1) * pagingRequest.Limit)
+            //                    .Take(pagingRequest.Limit)
+            //                    .ToList();
 
             var pageResult = new PageResult<ProductDto>()
             {

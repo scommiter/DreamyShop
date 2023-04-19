@@ -325,6 +325,12 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsVisibility")
+                        .HasColumnType("bit");
+
                     b.Property<Guid>("ManufacturerId")
                         .HasColumnType("uniqueidentifier");
 
@@ -373,6 +379,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring",
+                            IsActive = false,
+                            IsVisibility = false,
                             ManufacturerId = new Guid("57a5f678-43f0-4648-92d8-16bd09d7143e"),
                             Name = "Camera-SKS",
                             ProductType = 1,
@@ -390,6 +398,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "XYZ wireless security camera with high resolution.",
+                            IsActive = false,
+                            IsVisibility = false,
                             ManufacturerId = new Guid("57a5f678-43f0-4648-92d8-16bd09d7143e"),
                             Name = "Camera-UFG",
                             ProductType = 1,
@@ -407,6 +417,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "",
+                            IsActive = false,
+                            IsVisibility = false,
                             ManufacturerId = new Guid("80cad838-29c7-4a02-81c0-9ebe78a0a273"),
                             Name = "Iphone 14 XSMax",
                             ProductType = 2,
@@ -424,6 +436,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Buy genuine Laptop at our store with best quality and affordable price. We supply laptop products from reputable brands. Order now to get a free laptop backpack!",
+                            IsActive = false,
+                            IsVisibility = false,
                             ManufacturerId = new Guid("b9be517b-72aa-46f1-9a98-a0b993cd2cf7"),
                             Name = "Laptop DELL DEMON",
                             ProductType = 2,
@@ -441,6 +455,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "",
+                            IsActive = false,
+                            IsVisibility = false,
                             ManufacturerId = new Guid("41c2c299-ea5f-4c23-992d-e6f043f1b26f"),
                             Name = "Crocodile leather bag",
                             ProductType = 2,

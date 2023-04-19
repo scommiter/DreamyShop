@@ -7,6 +7,20 @@ using System.Xml.Schema;
 
 namespace ConsoleApp1
 {
+    public class Student
+    {
+        public int Stu_ID { get; set; }
+        public string Stu_Name { get; set; }
+        public int Age { get; set; }
+        public string Subject { get; set; }
+    }
+
+    public class Grade
+    {
+        public int Grade_ID { get; set; }
+        public string Grade_Name { get; set; }
+    }
+
     public class ProductDto
     {
         public int ProductId { get; set; }

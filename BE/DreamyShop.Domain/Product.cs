@@ -26,6 +26,8 @@ namespace DreamyShop.Domain
         public string Description { get; set; }
         [StringLength(250)]
         public string ThumbnailPicture { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsVisibility { get; set; }
 
 
         [ForeignKey(nameof(ManufacturerId))]
