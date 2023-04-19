@@ -13,20 +13,38 @@ namespace DreamyShop.Repository.AutoMapper
                            act => act.MapFrom(src => src.Roles.Select(e => e.RoleType)));
             CreateMap<User, UserUpdateDto>();
 
+            //CreateMap<Product, ProductDto>()
+            //    .ForMember(pt => pt.CategoryName, opt =>
+            //        opt.MapFrom(src => src.ProductCategory.Name))
+            //    .ForMember(pt => pt.ManufacturerName, opt =>
+            //        opt.MapFrom(src => src.Manufacturer.Name))
+            //    .ForMember(dest => dest.ProductAttributeDisplayDtos, opt => opt.MapFrom(src => src.ProductVariants
+            //        .Select(variant => new ProductAttributeDisplayDto
+            //        {
+            //            AttributeName = string.Join(" ", src.ProductVariantValues.GroupBy(p => p.ProductVariantId)
+            //                            .Select(g => String.Join(" ", g.Select(p =>
+            //                            src.ProductAttributeValues.FirstOrDefault(pav => pav.Id == p.ProductAttributeValueId)?.Value))).ToList(),
+            //            Quantity = variant.Quantity,
+            //            Price = variant.Price
+            //        }).ToList()));
+
             CreateMap<Product, ProductDto>()
                 .ForMember(pt => pt.CategoryName, opt =>
                     opt.MapFrom(src => src.ProductCategory.Name))
                 .ForMember(pt => pt.ManufacturerName, opt =>
                     opt.MapFrom(src => src.Manufacturer.Name))
                 .ForMember(dest => dest.ProductAttributeDisplayDtos, opt => opt.MapFrom(src => src.ProductVariants
-                    .Select(variant => new ProductAttributeDisplayDto
-                    {
-                        //AttributeName = string.Join(" ", src.ProductAttributeTexts
-                        //                .Where(d => src.ProductVariantValueTexts.Any(pvvt => pvvt.ProductAttributeTextId == d.Id && pvvt.ProductId == d.ProductId))
-                        //                .Select(pai => pai.Value)),
-                        Quantity = variant.Quantity,
-                        Price = variant.Price
-                    }).ToList()));
+                    .Select(variant => src.ProductVariantValues.GroupBy(p => p.ProductVariantId)
+                        .Select(variantValue => new ProductAttributeDisplayDto
+                        {
+                            AttributeName = string.Join(" ", variantValue.Select(p =>
+                                            src.ProductAttributeValues.FirstOrDefault(pav => pav.Id == p.ProductAttributeValueId)!.Value).ToString()),
+                            Quantity = variant.Quantity,
+                            Price = variant.Price
+                        })
+                    ))
+                );
+
 
             //CreateMap<Product, ProductDto>()
             //    .ForMember(pt => pt.CategoryName, opt =>
@@ -40,16 +58,16 @@ namespace DreamyShop.Repository.AutoMapper
             //                {
             //                    variant.Quantity,
             //                    variant.Price,
-            //                    ProductAttributeTexts = src.ProductAttributeTexts
-            //                        .Join(src.ProductVariantValueTexts, pat => pat.Id, pvvt => pvvt.ProductAttributeTextId,
+            //                    ProductAttributeValueStrings = src.ProductAttributeValues
+            //                        .Join(src.ProductVariantValues, pat => pat.Id, pvvt => pvvt.ProductAttributeValueId,
             //                            (pat, pvvt) => new { pat, pvvt })
             //                        .Where(joined => joined.pvvt.ProductId == src.Id)
             //                        .Select(joined => joined.pat)
             //                })
-            //            .GroupBy(p => string.Join(",", p.ProductAttributeTexts.Select(pat => pat.Id)))
+            //            .GroupBy(p => string.Join(",", p.ProductAttributeValueStrings.Select(pat => pat.Id)))
             //            .Select(g => new ProductAttributeDisplayDto
             //            {
-            //                AttributeName = string.Join(", ", g.SelectMany(p => p.ProductAttributeTexts).Select(pat => pat.Value)),
+            //                AttributeName = string.Join(", ", g.SelectMany(p => p.ProductAttributeValueStrings).Select(pat => pat.Value)),
             //                Quantity = g.Sum(p => p.Quantity),
             //                Price = g.Sum(p => p.Price)
             //            })

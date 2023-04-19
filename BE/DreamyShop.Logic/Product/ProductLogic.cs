@@ -31,94 +31,80 @@ namespace DreamyShop.Logic.Product
         #region Product
         public async Task<ApiResult<PageResult<ProductDto>>> GetAllProduct(PagingRequest pagingRequest)
         {
-            //var products = _context.Products
-            //        .Include(p => p.ProductVariants)
-            //        .Include(p => p.ProductVariantValueTexts)
-            //        .Include(p => p.ProductVariantValueInts)
-            //        .Include(p => p.ProductAttributeTexts)
-            //        .Include(p => p.ProductAttributeInts)
-            //        .Select(p => new ProductDto
-            //        {
-            //            Id = p.Id,
-            //            Name = p.Name,
-            //            ProductAttributeDisplayDtos = p.ProductAttributeTexts
-            //                .Select(a => new ProductAttributeDisplayDto
+            //var result1 = _context.Products
+            //                .Join(_context.Manufacturers, p => p.ManufacturerId, m => m.Id, (p, m) => new { Product = p, Manufacturer = m })
+            //                .Join(_context.ProductCategories, pm => pm.Product.CategoryId, c => c.Id, (pm, c) => new { pm.Product, pm.Manufacturer, Category = c })
+            //                .GroupJoin(_context.ProductVariants, pmc => pmc.Product.Id, pv => pv.ProductId, (pmc, pvN) => new { pmc.Product, pmc.Manufacturer, pmc.Category, ProductVariants = pvN.DefaultIfEmpty() })
+            //                .SelectMany(pmcv => pmcv.ProductVariants.DefaultIfEmpty(), (pmcv, pv) => new { pmcv.Product, pmcv.Manufacturer, pmcv.Category, ProductVariant = pv })
+            //                .GroupJoin(_context.ProductVariantValues, pmcvp => pmcvp.ProductVariant.Id, pvv => pvv.ProductVariantId, (pmcvp, pvvN) => new { pmcvp.Product, pmcvp.Manufacturer, pmcvp.Category, pmcvp.ProductVariant, ProductVariantValues = pvvN.DefaultIfEmpty() })
+            //                .SelectMany(pmcvpv => pmcvpv.ProductVariantValues.DefaultIfEmpty(), (pmcvpv, pvv) => new { pmcvpv.Product, pmcvpv.Manufacturer, pmcvpv.Category, pmcvpv.ProductVariant, ProductVariantValue = pvv })
+            //                .GroupJoin(_context.ProductAttributeValues, pmcvpvv => pmcvpvv.ProductVariantValue.ProductAttributeValueId, pav => pav.Id, (pmcvpvv, pavN) => new { pmcvpvv.Product, pmcvpvv.Manufacturer, pmcvpvv.Category, pmcvpvv.ProductVariant, pmcvpvv.ProductVariantValue, ProductAttributeValue = pavN.DefaultIfEmpty() })
+            //                .SelectMany(pmcvpvav => pmcvpvav.ProductAttributeValue.DefaultIfEmpty(), (pmcvpvav, pav) => new { pmcvpvav.Product, pmcvpvav.Manufacturer, pmcvpvav.Category, pmcvpvav.ProductVariant, pmcvpvav.ProductVariantValue, ProductAttributeValue = pav })
+            //                .Select(x => new
             //                {
-            //                    AttributeName = a.Value,
-            //                    Quantity = p.ProductVariants.Where(p => p.ProductId == a.ProductId).,
-            //                    Price = p.ProductVariants.Average(v => v.Price)
-            //                })
-            //                .Concat(p.ProductVariantValueInts
-            //                    .Select(a => new ProductAttributeDisplayDto
-            //                    {
-            //                        AttributeName = a.Value.ToString(),
-            //                        Quantity = p.Variants.Sum(v => v.Quantity),
-            //                        Price = p.Variants.Average(v => v.Price)
-            //                    }))
-            //                .ToList()
-            //        })
-            //        .ToList();
-                    ;
+            //                    x.Product.Id,
+            //                    x.Product.Name,
+            //                    x.Product.Code,
+            //                    x.Product.Slug,
+            //                    ProductVariantId = x.Product.Id,
+            //                    x.ProductVariant.SKU,
+            //                    x.ProductVariant.Quantity,
+            //                    x.ProductVariant.Price,
+            //                    x.ProductVariantValue.ProductAttributeValueId,
+            //                    Value = x.ProductAttributeValue.Value
+            //                }).ToList();
 
-            //var productPagingsas = _context.Products
-            //                    .OrderByDescending(p => p.DateCreated)
-            //                    .Join(_context.Manufacturers, p => p.ManufacturerId, m => m.Id, (p, m) => new { Product = p, Manufacturer = m })
-            //                    .Join(_context.ProductCategories, p => p.Product.CategoryId, pc => pc.Id, (p, pc) => new { p.Product, p.Manufacturer, ProductCategory = pc })
-            //                    .Join(_context.ProductVariants, p => p.Product.Id, pv => pv.ProductId, (p, pv) => new { p.Product, p.Manufacturer, p.ProductCategory, ProductVariant = pv })
-            //                    .Select(p => new ProductDto
-            //                    {
-            //                        Id = p.Product.Id,
-            //                        Name = p.Product.Name,
-            //                        ManufacturerName = p.Manufacturer.Name,
-            //                        CategoryName = p.ProductCategory.Name,
-            //                        ProductAttributeDisplayDtos = p.Product.ProductVariants.Select(padd => new ProductAttributeDisplayDto
-            //                        {
+            var query1 = from p in _context.Products
+                         join m in _context.Manufacturers on p.ManufacturerId equals m.Id
+                         join c in _context.ProductCategories on p.CategoryId equals c.Id
+                         join pv in _context.ProductVariants on p.Id equals pv.ProductId into pvN
+                         from pv in pvN.DefaultIfEmpty()
+                         join pvv in _context.ProductVariantValues on pv.Id equals pvv.ProductVariantId into pvvN
+                         from pvv in pvvN.DefaultIfEmpty()
+                         join pav in _context.ProductAttributeValues on pvv.ProductAttributeValueId equals pav.Id into pavN
+                         from pav in pavN.DefaultIfEmpty()
+                         select new
+                         {
+                            Product = p,
+                            ProductVariantId = pvv.ProductVariantId == null ? Guid.Empty : pvv.ProductVariantId,
+                            ManufacturerName = m.Name, 
+                            CategoryName = c.Name, 
+                            pv, 
+                            pvv,
+                            pav
+                        };
+            var result = await query1.ToListAsync();
+            var result2 = result.GroupBy(r => r.Product)
+                        .Select(x => new
+                        {
+                            Product = x.Key,
+                            VariantName = x.GroupBy(p => p.ProductVariantId).Select(pv => string.Join(" ", pv?.Select(pvv => pvv.pav.Value ?? ""))).ToList()
+                        });
 
-            //                        }).ToList()
-            //                    });
 
-
-            //var productIncludeVariantValue = _context.Products
-            //            .Include(opt => opt.Manufacturer)
-            //            .Include(opt => opt.ProductCategory)
-            //            .Include(opt => opt.ProductVariants)
-            //            .Include(opt => opt.ProductVariantValueDateTimes)
-            //            .Include(opt => opt.ProductVariantValueDecimals)
-            //            .Include(opt => opt.ProductVariantValueTexts)
-            //            .Include(opt => opt.ProductVariantValueInts)
-            //            .Include(opt => opt.ProductVariantValueVarchars)
-            //            .ToList();
-            //var listProductDtos = new List<ProductDto>();
-            //foreach (var p in productIncludeVariantValue)
+            //var products = await query.Select(p => new ProductDto
             //{
-            //    listProductDtos.Add(new ProductDto
-            //    {
-            //        Id = p.Id,
-            //        Name = p.Name,
-            //        Code = p.Code,
-            //        ThumbnailPicture = p.ThumbnailPicture,
-            //        ProductType = p.ProductType,
-            //        ManufacturerName = p.Manufacturer.Name,
-            //        CategoryName = p.ProductCategory.Name,
-            //        Description = p.Description,
-            //        IsActive = true,
-            //        IsVisibility = true,
-            //        DateCreated = p.DateCreated,
-            //        DateUpdated = p.DateUpdated
-            //    });
-            //    var t = p.ProductVariants
-            //            .Where(p => p.ProductVariantValueTexts.Count > 0)
-            //            .Join(p.ProductVariantValueTexts,
-            //                pVariant => pVariant.ProductId,
-            //                pVariantValue => pVariantValue.ProductId,
-            //                (pVariant, pVariantValue) => new { pVariant = pVariant, pVariantValue = pVariantValue });
+            //    Id = p.Key.Id,
+            //    Name = p.Key.Name,
+            //    Code = p.Key.Code,
+            //    ThumbnailPicture = p.Key.ThumbnailPicture,
+            //    ProductType = p.Key.ProductType,
+            //    Description = p.Key.Description,
+            //    DateCreated = p.Key.DateCreated,
+            //    DateUpdated = p.Key.DateUpdated,
+            //}).ToListAsync();
 
-            //};
+            //var result2 = result.Select(p => p.ProductVariants
+            //                        .GroupBy(pv => pv.c.ProductVariantId,
+            //                             (key, g) => new { ProductVariantId = key, VariantName = String.Join(" ", g.Select(gg => gg.d.Value)) }
+            //                        ));
 
             var productPagings = _context.Products
                                 .Include(opt => opt.Manufacturer)
                                 .Include(opt => opt.ProductCategory)
                                 .Include(opt => opt.ProductVariants)
+                                .Include(opt => opt.ProductVariantValues)
+                                .Include(opt => opt.ProductAttributeValues)
                                 .OrderByDescending(p => p.DateCreated)
                                 .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
                                 .Skip((pagingRequest.Page - 1) * pagingRequest.Limit)

@@ -251,7 +251,7 @@ namespace DreamyShop.EntityFrameworkCore
                  {
                      Id = new Guid("fc364f29-fcb9-44b7-8854-dfce09824c35"),
                      ProductId = new Guid("30299235-6937-41B7-A76D-14584F5F856A"),
-                     SKU = "IP14",
+                     SKU = "IP14-A",
                      IsVisibility = true,
                      IsActive = true,
                      Description = "",
@@ -261,21 +261,9 @@ namespace DreamyShop.EntityFrameworkCore
                  },
                  new ProductVariant()
                  {
-                     Id = new Guid("064357A3-F816-44B6-9B06-A58660F26763"),
-                     ProductId = new Guid("85F8B0C3-CB8D-4CCB-9544-19DAAD6EF352"),
-                     SKU = "CAMERA",
-                     IsVisibility = true,
-                     IsActive = true,
-                     Description = "",
-                     ThumbnailPicture = "",
-                     Quantity = 32,
-                     Price = 1500
-                 },
-                 new ProductVariant()
-                 {
                      Id = new Guid("0A134C80-0493-458A-9F02-16361F0DF5C7"),
                      ProductId = new Guid("30299235-6937-41B7-A76D-14584F5F856A"),
-                     SKU = "IP14",
+                     SKU = "IP14-B",
                      IsVisibility = true,
                      IsActive = true,
                      Description = "",
@@ -369,6 +357,20 @@ namespace DreamyShop.EntityFrameworkCore
                   AttributeId = new Guid("827CA5B7-0087-4256-BEC0-399199A518D9"),
                   ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
                   Value = "Crocodile skin"
+              },
+              new ProductAttributeValue()
+              {
+                  Id = new Guid("59327BBA-3A1D-40AD-82C2-99A019E9D3F6"),
+                  AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),
+                  ProductId = new Guid("30299235-6937-41B7-A76D-14584F5F856A"),
+                  Value = "White"
+              },
+              new ProductAttributeValue()
+              {
+                  Id = new Guid("64E5D43E-A34C-4EAB-8672-F7162DD63803"),
+                  AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),
+                  ProductId = new Guid("30299235-6937-41B7-A76D-14584F5F856A"),
+                  Value = "Black"
               });
 
             modelBuilder.Entity<ProductVariantValue>().HasData(
@@ -432,8 +434,26 @@ namespace DreamyShop.EntityFrameworkCore
                      ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
                      AttributeId = new Guid("827CA5B7-0087-4256-BEC0-399199A518D9"),    //Size 
                      ProductAttributeValueId = new Guid("4267FEEE-9A5B-4156-90B0-9E3585A8AF22"),     //Crocodile skin
-                 }
+                 },
              #endregion
+            #region  IP14-A - White - Quantity: 12 - Price: 1200
+                 new ProductVariantValue()
+                 {
+                     ProductVariantId = new Guid("fc364f29-fcb9-44b7-8854-dfce09824c35"),
+                     ProductId = new Guid("30299235-6937-41B7-A76D-14584F5F856A"),
+                     AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),    //color
+                     ProductAttributeValueId = new Guid("59327BBA-3A1D-40AD-82C2-99A019E9D3F6"),     //White
+                 },
+            #endregion
+            #region  IP14-B - Black - Quantity: 20 - Price: 1250
+                 new ProductVariantValue()
+                 {
+                     ProductVariantId = new Guid("0A134C80-0493-458A-9F02-16361F0DF5C7"),
+                     ProductId = new Guid("30299235-6937-41B7-A76D-14584F5F856A"),
+                     AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),    //color
+                     ProductAttributeValueId = new Guid("64E5D43E-A34C-4EAB-8672-F7162DD63803"),     //Black
+                 }
+           #endregion
                  );
         }
     }

@@ -597,6 +597,24 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
                             Value = "Crocodile skin"
+                        },
+                        new
+                        {
+                            Id = new Guid("59327bba-3a1d-40ad-82c2-99a019e9d3f6"),
+                            AttributeId = new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProductId = new Guid("30299235-6937-41b7-a76d-14584f5f856a"),
+                            Value = "White"
+                        },
+                        new
+                        {
+                            Id = new Guid("64e5d43e-a34c-4eab-8672-f7162dd63803"),
+                            AttributeId = new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ProductId = new Guid("30299235-6937-41b7-a76d-14584f5f856a"),
+                            Value = "Black"
                         });
                 });
 
@@ -844,22 +862,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             Price = 1200.0,
                             ProductId = new Guid("30299235-6937-41b7-a76d-14584f5f856a"),
                             Quantity = 12,
-                            SKU = "IP14",
-                            StatusID = (byte)0,
-                            ThumbnailPicture = ""
-                        },
-                        new
-                        {
-                            Id = new Guid("064357a3-f816-44b6-9b06-a58660f26763"),
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "",
-                            IsActive = true,
-                            IsVisibility = true,
-                            Price = 1500.0,
-                            ProductId = new Guid("85f8b0c3-cb8d-4ccb-9544-19daad6ef352"),
-                            Quantity = 32,
-                            SKU = "CAMERA",
+                            SKU = "IP14-A",
                             StatusID = (byte)0,
                             ThumbnailPicture = ""
                         },
@@ -874,7 +877,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             Price = 1250.0,
                             ProductId = new Guid("30299235-6937-41b7-a76d-14584f5f856a"),
                             Quantity = 20,
-                            SKU = "IP14",
+                            SKU = "IP14-B",
                             StatusID = (byte)0,
                             ThumbnailPicture = ""
                         },
@@ -1039,6 +1042,26 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
                             AttributeId = new Guid("827ca5b7-0087-4256-bec0-399199a518d9"),
                             ProductAttributeValueId = new Guid("4267feee-9a5b-4156-90b0-9e3585a8af22"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StatusID = (byte)0
+                        },
+                        new
+                        {
+                            ProductVariantId = new Guid("fc364f29-fcb9-44b7-8854-dfce09824c35"),
+                            ProductId = new Guid("30299235-6937-41b7-a76d-14584f5f856a"),
+                            AttributeId = new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"),
+                            ProductAttributeValueId = new Guid("59327bba-3a1d-40ad-82c2-99a019e9d3f6"),
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            StatusID = (byte)0
+                        },
+                        new
+                        {
+                            ProductVariantId = new Guid("0a134c80-0493-458a-9f02-16361f0df5c7"),
+                            ProductId = new Guid("30299235-6937-41b7-a76d-14584f5f856a"),
+                            AttributeId = new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"),
+                            ProductAttributeValueId = new Guid("64e5d43e-a34c-4eab-8672-f7162dd63803"),
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             StatusID = (byte)0
