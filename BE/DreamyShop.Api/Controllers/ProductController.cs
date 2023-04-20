@@ -32,7 +32,7 @@ namespace DreamyShop.Api.Controllers
         [HttpPost("create")]
         //[Authorize]
         //[Member]
-        public async Task<IActionResult> CreateProduct([FromForm] ProductCreateUpdateDto productCreateUpdateDto)
+        public async Task<IActionResult> CreateProduct([FromBody] ProductCreateUpdateDto productCreateUpdateDto)
         {
             if (!ModelState.IsValid)
             {

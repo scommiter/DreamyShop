@@ -24,10 +24,13 @@ namespace DreamyShop.Repository.AutoMapper
 
             CreateMap<ProductCreateUpdateDto, Product>()
                 .ForMember(u => u.Id, option => option.DoNotUseDestinationValue())
+                .ForMember(u => u.SeoMetaDescription, option => option.DoNotUseDestinationValue())
+                .ForMember(u => u.Slug, option => option.DoNotUseDestinationValue())
+                .ForMember(u => u.SortOrder, option => option.DoNotUseDestinationValue())
                 .ForMember(u => u.ProductReviews, option => option.DoNotUseDestinationValue())
                 .ForMember(u => u.ProductTags, option => option.DoNotUseDestinationValue())
-                .ForPath(u => u.Manufacturer.Name, option => option.MapFrom(p => p.ManufacturerName))
-                .ForPath(u => u.ProductCategory.Name, option => option.MapFrom(p => p.CategoryName));
+                .ForMember(u => u.Manufacturer, option => option.DoNotUseDestinationValue())
+                .ForMember(u => u.ProductCategory, option => option.DoNotUseDestinationValue());
 
             //CreateMap<ProductDto, Product>()
             //    .ForMember(u => u.Manufacturer, option => option.Ignore())

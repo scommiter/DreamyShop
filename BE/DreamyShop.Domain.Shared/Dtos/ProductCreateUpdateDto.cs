@@ -14,12 +14,19 @@ namespace DreamyShop.Domain.Shared.Dtos
         public bool IsActive { get; set; }
         public bool IsVisibility { get; set; }
         public Dictionary<string, List<string>> ProductOptions { get; set; }
-        public List<ProductAttributeDisplayDto> VariantProducts { get; set; }
+        public List<VariantProduct> VariantProducts { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateUpdated { get; set; }
     }
     public class Option
     {
         public List<string> OptionNames { get; set; }
+    }
+    public class VariantProduct
+    {
+        public List<string>? AttributeNames { get; set; }
+        public string SKU { get; set; }
+        public int Quantity { get; set; }
+        public double Price { get; set; }
     }
 }

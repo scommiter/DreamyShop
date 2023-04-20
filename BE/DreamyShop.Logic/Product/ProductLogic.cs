@@ -98,12 +98,69 @@ namespace DreamyShop.Logic.Product
 
         public async Task<ApiResult<ProductDto>> CreateProduct(ProductCreateUpdateDto productCreateUpdateDto)
         {
-            var productAttributeDisplayDtos = productCreateUpdateDto.VariantProducts;
-            //If has many productVariants
-            if (productAttributeDisplayDtos.Any(pAttr => pAttr.AttributeNames != null) && productCreateUpdateDto.VariantProducts.Count > 1)
+            var attributes =  _repository.Attribute.GetAll().ToList();
+            AddAttribute(productCreateUpdateDto, attributes);
+            AddManufacturer(productCreateUpdateDto.ManufacturerName);
+
+            var newProduct = new Domain.Product
+            {
+                ManufacturerId = _repository.Manufacturer.GetByName(productCreateUpdateDto.ManufacturerName).Id,
+                Name = productCreateUpdateDto.Name,
+                Code = productCreateUpdateDto.Code,
+                Slug = null,
+                SortOrder = 1,
+                ProductType = productCreateUpdateDto.ProductType,
+                CategoryId = _repository.Category.GetByName(productCreateUpdateDto.CategoryName).Id,
+                SeoMetaDescription = null,
+                Description = productCreateUpdateDto.Description,
+                ThumbnailPicture = productCreateUpdateDto.ThumbnailPicture,
+                IsActive = productCreateUpdateDto.IsActive,
+                IsVisibility = productCreateUpdateDto.IsVisibility
+            };
+            await _repository.Product.AddAsync(newProduct);
+            _repository.Save();
+
+            AddProductAttributeValue(productCreateUpdateDto, attributes, newProduct);
+
+            return new ApiSuccessResult<ProductDto>(_mapper.Map<ProductDto>(newProduct));
+        }
+
+        /// <summary>
+        /// Add ProductAttributeValue relate to Product
+        /// </summary>
+        /// <param name="productCreateUpdateDto"></param>
+        /// <param name="attributes"></param>
+        /// <param name="newProduct"></param>
+        private async void AddProductAttributeValue(ProductCreateUpdateDto productCreateUpdateDto, List<Domain.Attribute> attributes, Domain.Product newProduct)
+        {
+            var attributeCreates = productCreateUpdateDto.ProductOptions.ToList();
+            var productAttributeNames = productCreateUpdateDto.VariantProducts.SelectMany(pad => pad.AttributeNames.Select(a => a.Standard())).Distinct().ToList();
+            var productAttributeValues = _repository.ProductAttributeValue.GetAll().ToList();
+            var existingProductAttributeValues = productAttributeValues.Where(pa => productAttributeNames.Contains(pa.Value.Standard())).ToList();
+            var newProductAttributeNames = productAttributeNames.Where(an => existingProductAttributeValues.All(a => a.Value.Standard() != an.Standard())).ToList();
+
+            var newProductAttributes = newProductAttributeNames.Select(an => new ProductAttributeValue
+            {
+                AttributeId = attributes.FirstOrDefault(aTrr => aTrr.Name.Standard() == attributeCreates
+                                    .Where(a => a.Value.Select(p => p.Standard()).Contains(an))
+                                    .FirstOrDefault().Key).Id,
+                ProductId = newProduct.Id,
+                Value = an
+            }).ToList();
+            _repository.Save();
+        }
+
+        /// <summary>
+        /// Add if there are many variant products
+        /// </summary>
+        /// <param name="productCreateUpdateDto"></param>
+        /// <param name="attributes"></param>
+        private async void AddAttribute(ProductCreateUpdateDto productCreateUpdateDto, List<Domain.Attribute> attributes)
+        {
+            if (productCreateUpdateDto.VariantProducts.Any(pAttr => pAttr.AttributeNames != null) && productCreateUpdateDto.VariantProducts.Count > 1)
             {
                 var attributeNames = productCreateUpdateDto.ProductOptions.Select(pad => pad.Key.Standard()).Distinct().ToList();
-                var existingAttributes = await _repository.Attribute.GetAll().Where(a => attributeNames.Contains(a.Name.Standard())).ToListAsync();
+                var existingAttributes = attributes.Where(a => attributeNames.Contains(a.Name.Standard())).ToList();
                 var newAttributeNames = attributeNames.Where(an => existingAttributes.All(a => a.Name.Standard() != an.Standard())).ToList();
                 var newAttributes = newAttributeNames.Select(an => new Domain.Attribute
                 {
@@ -115,28 +172,34 @@ namespace DreamyShop.Logic.Product
                     Note = ""
                 }).ToList();
                 await _repository.Attribute.AddRangeAsync(newAttributes);
+                _repository.Save();
             }
-
-            var newProduct = _mapper.Map<Domain.Product>(productCreateUpdateDto);
-            await _repository.Product.AddAsync(newProduct);
-
-
-            var attributeCreates = productCreateUpdateDto.ProductOptions.ToList();
-            var productAttributeNames = productCreateUpdateDto.VariantProducts.SelectMany(pad => pad.AttributeNames.Select(a => a.Standard())).Distinct().ToList();
-            var existingProductAttributeValues = await _repository.ProductAttributeValue.GetAll()
-                                                    .Where(pa => productAttributeNames.Contains(pa.Value.Standard())).ToListAsync();
-            var newProductAttributeNames = productAttributeNames.Where(an => existingProductAttributeValues.All(a => a.Value.Standard() != an.Standard())).ToList();
-
-            var newProductAttributes = newProductAttributeNames.Select(an => new ProductAttributeValue
-            {
-                AttributeId = _repository.Attribute.GetAll().FirstOrDefault(aTrr => aTrr.Name == attributeCreates.Where(a => a.Value.Contains(an)).FirstOrDefault().Key).Id,
-                ProductId = newProduct.Id,
-                Value = an
-            }).ToList();
-
-            _repository.Save();
-            return new ApiSuccessResult<ProductDto>(_mapper.Map<ProductDto>(newProduct));
         }
+
+        /// <summary>
+        /// Add Manufacturer relate to Product
+        /// </summary>
+        /// <param name="manufacturerName"></param>
+        private async void AddManufacturer(string manufacturerName)
+        {
+            var manufacturers = _repository.Manufacturer.GetAll();
+            if (manufacturers.Select(m => m.Name.Standard()).ToList().Any(m => m == manufacturerName.Standard()))
+            {
+                await _repository.Manufacturer.AddAsync(new Domain.Manufacturer
+                {
+                    Name = manufacturerName,
+                    Code = manufacturerName.ToUpper(),
+                    Slug = "",
+                    CoverPicture = "",
+                    IsVisibility = true,
+                    IsActive = true,
+                    Country = ""
+                });
+                _repository.Save();
+            }
+        }
+
+
 
         //public async Task<ApiResult<ProductDto>> UpdateProduct(Guid id, ProductCreateUpdateDto productCreateUpdateDto)
         //{

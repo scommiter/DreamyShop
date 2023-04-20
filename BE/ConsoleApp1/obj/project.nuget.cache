@@ -1,13 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dh6io8XDOyAKlsQ+x7dbtx4DMKEuLUlMKqFlBbjizbrIxKzNgK2OimjHPolmyCpSk7OwuR3cI5SeiGLM82bkNg==",
+  "dgSpecHash": "34uoPKx1rTK9A8Ms7t6JY47vVveDFIBZdwm9tYgGHHxTfDIJqshhz9J3vYcuQOA063tQQc8C4SEWeYDtFY3UvA==",
   "success": true,
-  "projectFilePath": "Z:\\Project\\DreamyShop\\BE\\ConsoleApp1\\ConsoleApp1.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.12\\microsoft.netcore.app.host.win-x64.6.0.12.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.12\\microsoft.aspnetcore.app.ref.6.0.12.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.12\\microsoft.windowsdesktop.app.ref.6.0.12.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.12\\microsoft.netcore.app.ref.6.0.12.nupkg.sha512"
-  ],
+  "projectFilePath": "E:\\MyProject\\DreamyShop\\BE\\ConsoleApp1\\ConsoleApp1.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

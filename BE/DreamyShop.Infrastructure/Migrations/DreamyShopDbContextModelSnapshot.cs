@@ -322,7 +322,6 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
@@ -343,22 +342,19 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SeoMetaDescription")
-                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("Slug")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SortOrder")
+                    b.Property<int?>("SortOrder")
                         .HasColumnType("int");
 
                     b.Property<byte>("StatusID")
                         .HasColumnType("tinyint");
 
                     b.Property<string>("ThumbnailPicture")
-                        .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
