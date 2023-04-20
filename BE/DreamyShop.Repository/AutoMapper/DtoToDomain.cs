@@ -22,12 +22,12 @@ namespace DreamyShop.Repository.AutoMapper
                 .ForMember(u => u.StoredSalt, option => option.DoNotUseDestinationValue())
                 .ForMember(u => u.Roles, option => option.DoNotUseDestinationValue());
 
-            //CreateMap<ProductCreateUpdateDto, Product>()
-            //    .ForMember(u => u.Id, option => option.DoNotUseDestinationValue())
-            //    .ForMember(u => u.ProductCategory, option => option.DoNotUseDestinationValue())
-            //    .ForMember(u => u.ProductReviews, option => option.DoNotUseDestinationValue())
-            //    .ForMember(u => u.ProductTags, option => option.DoNotUseDestinationValue())
-            //    .ForMember(u => u.Manufacturer, option => option.DoNotUseDestinationValue());
+            CreateMap<ProductCreateUpdateDto, Product>()
+                .ForMember(u => u.Id, option => option.DoNotUseDestinationValue())
+                .ForMember(u => u.ProductReviews, option => option.DoNotUseDestinationValue())
+                .ForMember(u => u.ProductTags, option => option.DoNotUseDestinationValue())
+                .ForPath(u => u.Manufacturer.Name, option => option.MapFrom(p => p.ManufacturerName))
+                .ForPath(u => u.ProductCategory.Name, option => option.MapFrom(p => p.CategoryName));
 
             //CreateMap<ProductDto, Product>()
             //    .ForMember(u => u.Manufacturer, option => option.Ignore())

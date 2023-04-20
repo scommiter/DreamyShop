@@ -16,24 +16,28 @@ class Program
         var productVariantValueIntsList = productVariantValueInts.GetProductVariantValueInts();
         var productAttributeTextsList = productAttributeTexts.GetProductAttributeTexts();
         var productAttributeIntsList = productAttributeInts.GetProductAttributeInts();
-        List<Student> student_List = new List<Student>() {
-            new Student() { Stu_ID = 11, Stu_Name = "ABC", Age =18, Subject ="Arts" },
-            new Student() { Stu_ID = 12, Stu_Name = "DEF", Age =19, Subject ="Arts" },
-            new Student() { Stu_ID = 13, Stu_Name = "GHI", Age =18, Subject ="Arts" },
-            new Student() { Stu_ID = 14, Stu_Name = "JKL", Age =19, Subject ="Science" },
-            new Student() { Stu_ID = 15, Stu_Name = "JKL", Age =18, Subject ="Science" },
-            new Student() { Stu_ID = 16, Stu_Name = "JKL", Age =19, Subject ="Arts" },
-        };
-        var result = from s in student_List
-                     group s by new { s.Age, s.Subject };
-        foreach (var ageGroups in result)
+        IDictionary<string, List<string>> p = new Dictionary<string, List<string>>();
+        p.Add("P1", new List<string>{ "Red", "Blue"});
+        p.Add("P2", new List<string>{ "Red1", "Blue2"});
+        p.Add("P3", new List<string>{ "Red2", "Blue3"});
+
+        foreach (KeyValuePair<string, List<string>> kvp in p)
         {
-            Console.WriteLine("Group: {0}", ageGroups.Key);
-
-            foreach (Student s in ageGroups) // Each group has inner collection
-                Console.WriteLine("Student Name: {0}", s.Stu_Name);
+            Console.WriteLine("Key: {0}", kvp.Key);
+            foreach (var item in kvp.Value)
+            {
+                Console.WriteLine(item);
+            }
         }
-
         Console.Read();
+    }
+    
+    public class PV
+    {
+        public List<Option> Options { get; set; }
+    }
+    public class Option
+    {
+        public List<string> Value { get; set; }
     }
 }

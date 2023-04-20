@@ -29,18 +29,18 @@ namespace DreamyShop.Api.Controllers
             return Ok(result.Result.Items);
         }
 
-        //[HttpPost("create")]
+        [HttpPost("create")]
         //[Authorize]
         //[Member]
-        //public async Task<IActionResult> CreateProduct([FromForm] ProductCreateUpdateDto productCreateUpdateDto)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    var result = await _productService.CreateProduct(productCreateUpdateDto);
-        //    return Ok(result);
-        //}
+        public async Task<IActionResult> CreateProduct([FromForm] ProductCreateUpdateDto productCreateUpdateDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _productService.CreateProduct(productCreateUpdateDto);
+            return Ok(result);
+        }
 
         //[HttpPut("updateProduct")]
         //[Authorize]

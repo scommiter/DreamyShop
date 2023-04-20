@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using DreamyShop.Common.Exceptions;
+using DreamyShop.Common.Extensions;
 using DreamyShop.Common.Results;
 using DreamyShop.Domain;
 using DreamyShop.Domain.Shared.Dtos;
@@ -9,6 +10,7 @@ using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Logic.Conditions;
 using DreamyShop.Repository.RepositoryWrapper;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 namespace DreamyShop.Logic.Product
 {
@@ -31,24 +33,24 @@ namespace DreamyShop.Logic.Product
         #region Product
         public async Task<ApiResult<PageResult<ProductDto>>> GetAllProduct(PagingRequest pagingRequest)
         {
-            var query = await( from p in _context.Products
-                         join m in _context.Manufacturers on p.ManufacturerId equals m.Id
-                         join c in _context.ProductCategories on p.CategoryId equals c.Id
-                         join pv in _context.ProductVariants on p.Id equals pv.ProductId into pvN
-                         from pv in pvN.DefaultIfEmpty()
-                         join pvv in _context.ProductVariantValues on pv.Id equals pvv.ProductVariantId into pvvN
-                         from pvv in pvvN.DefaultIfEmpty()
-                         join pav in _context.ProductAttributeValues on pvv.ProductAttributeValueId equals pav.Id into pavN
-                         from pav in pavN.DefaultIfEmpty()
-                         select new
-                         {
-                            Product = p,
-                            ProductVariantId = pvv.ProductVariantId == null ? Guid.Empty : pvv.ProductVariantId,
-                            ManufacturerName = m.Name, 
-                            CategoryName = c.Name, 
-                            pv, 
-                            pav
-                        }).ToListAsync();
+            var query = await (from p in _context.Products
+                               join m in _context.Manufacturers on p.ManufacturerId equals m.Id
+                               join c in _context.ProductCategories on p.CategoryId equals c.Id
+                               join pv in _context.ProductVariants on p.Id equals pv.ProductId into pvN
+                               from pv in pvN.DefaultIfEmpty()
+                               join pvv in _context.ProductVariantValues on pv.Id equals pvv.ProductVariantId into pvvN
+                               from pvv in pvvN.DefaultIfEmpty()
+                               join pav in _context.ProductAttributeValues on pvv.ProductAttributeValueId equals pav.Id into pavN
+                               from pav in pavN.DefaultIfEmpty()
+                               select new
+                               {
+                                   Product = p,
+                                   ProductVariantId = pvv.ProductVariantId == null ? Guid.Empty : pvv.ProductVariantId,
+                                   ManufacturerName = m.Name,
+                                   CategoryName = c.Name,
+                                   pv,
+                                   pav
+                               }).ToListAsync();
 
             var productPagings = query.GroupBy(r => new { r.Product })
                         .Select(x => new ProductDto
@@ -68,7 +70,7 @@ namespace DreamyShop.Logic.Product
                             ProductAttributeDisplayDtos = x.GroupBy(p => p.ProductVariantId)
                                                         .Select(pAttr => new ProductAttributeDisplayDto
                                                         {
-                                                            AttributeName = pAttr.Select(x => x.pav?.Value ?? "").ToList(),
+                                                            AttributeNames = pAttr.Select(x => x.pav?.Value ?? "").ToList(),
                                                             Quantity = pAttr.Select(x => x.pv?.Quantity ?? 0).FirstOrDefault(),
                                                             Price = pAttr.Select(x => x.pv?.Price ?? 0).FirstOrDefault()
                                                         }).ToList()
@@ -94,13 +96,48 @@ namespace DreamyShop.Logic.Product
             return new ApiSuccessResult<PageResult<ProductDto>>(pageResult);
         }
 
-        //public async Task<ApiResult<ProductDto>> CreateProduct(ProductCreateUpdateDto productCreateUpdateDto)
-        //{
-        //    var newProduct = _mapper.Map<Domain.Product>(productCreateUpdateDto);
-        //    await _repository.Product.AddAsync(newProduct);
-        //    _repository.Save();
-        //    return new ApiSuccessResult<ProductDto>(_mapper.Map<ProductDto>(newProduct));
-        //}
+        public async Task<ApiResult<ProductDto>> CreateProduct(ProductCreateUpdateDto productCreateUpdateDto)
+        {
+            var productAttributeDisplayDtos = productCreateUpdateDto.VariantProducts;
+            //If has many productVariants
+            if (productAttributeDisplayDtos.Any(pAttr => pAttr.AttributeNames != null) && productCreateUpdateDto.VariantProducts.Count > 1)
+            {
+                var attributeNames = productCreateUpdateDto.ProductOptions.Select(pad => pad.Key.Standard()).Distinct().ToList();
+                var existingAttributes = await _repository.Attribute.GetAll().Where(a => attributeNames.Contains(a.Name.Standard())).ToListAsync();
+                var newAttributeNames = attributeNames.Where(an => existingAttributes.All(a => a.Name.Standard() != an.Standard())).ToList();
+                var newAttributes = newAttributeNames.Select(an => new Domain.Attribute
+                {
+                    Name = an,
+                    Code = an.ToUpper(),
+                    IsActive = true,
+                    IsVisibility = true,
+                    IsUnique = true,
+                    Note = ""
+                }).ToList();
+                await _repository.Attribute.AddRangeAsync(newAttributes);
+            }
+
+            var newProduct = _mapper.Map<Domain.Product>(productCreateUpdateDto);
+            await _repository.Product.AddAsync(newProduct);
+
+
+            var attributeCreates = productCreateUpdateDto.ProductOptions.ToList();
+            var productAttributeNames = productCreateUpdateDto.VariantProducts.SelectMany(pad => pad.AttributeNames.Select(a => a.Standard())).Distinct().ToList();
+            var existingProductAttributeValues = await _repository.ProductAttributeValue.GetAll()
+                                                    .Where(pa => productAttributeNames.Contains(pa.Value.Standard())).ToListAsync();
+            var newProductAttributeNames = productAttributeNames.Where(an => existingProductAttributeValues.All(a => a.Value.Standard() != an.Standard())).ToList();
+
+            var newProductAttributes = newProductAttributeNames.Select(an => new ProductAttributeValue
+            {
+                AttributeId = _repository.Attribute.GetAll().FirstOrDefault(aTrr => aTrr.Name == attributeCreates.Where(a => a.Value.Contains(an)).FirstOrDefault().Key).Id,
+                ProductId = newProduct.Id,
+                Value = an
+            }).ToList();
+
+            _repository.Save();
+            return new ApiSuccessResult<ProductDto>(_mapper.Map<ProductDto>(newProduct));
+        }
+
         //public async Task<ApiResult<ProductDto>> UpdateProduct(Guid id, ProductCreateUpdateDto productCreateUpdateDto)
         //{
         //    var product = await _repository.Product.GetByIdAsync(id);

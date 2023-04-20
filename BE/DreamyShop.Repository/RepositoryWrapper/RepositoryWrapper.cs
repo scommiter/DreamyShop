@@ -15,6 +15,7 @@ namespace DreamyShop.Repository.RepositoryWrapper
         private IUserRepository _user;
         private IProductRepository _product;
         private IProductAttributeRepository _productAttribute;
+        private IAttributeRepository _attribute;
         private IProductAttributeValueRepository _productAttributeValue;
         private IManufacturerRepository _manufacturer;
         private ICategoryRepository _category;
@@ -28,7 +29,8 @@ namespace DreamyShop.Repository.RepositoryWrapper
             IProductAttributeRepository productAttribute,
             IProductAttributeValueRepository productAttributeValue,
             IManufacturerRepository manufacturer,
-            ICategoryRepository category)
+            ICategoryRepository category,
+            IAttributeRepository attribute)
         {
             _context = context;
             _auth = auth;
@@ -39,6 +41,7 @@ namespace DreamyShop.Repository.RepositoryWrapper
             _manufacturer = manufacturer;
             _category = category;
             _role = role;
+            _attribute = attribute;
         }
 
         public IAuthRepository Auth
@@ -136,6 +139,17 @@ namespace DreamyShop.Repository.RepositoryWrapper
             }
         }
 
+        public IAttributeRepository Attribute
+        {
+            get
+            {
+                if (_attribute == null)
+                {
+                    _attribute = new AttributeRepository(_context);
+                }
+                return _attribute;
+            }
+        }
 
         public void Dispose()
         {

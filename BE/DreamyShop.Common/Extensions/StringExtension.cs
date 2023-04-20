@@ -21,5 +21,19 @@ namespace DreamyShop.Common.Extensions
             }
             return text.Replace(" ", String.Empty);
         }
+
+        /// <summary>
+        /// Trim and ToLower
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public static string Standard(this string text)
+        {
+            if (String.IsNullOrEmpty(text))
+            {
+                return string.Empty;
+            }
+            return text.Trim().ToLower();
+        }
     }
 }
