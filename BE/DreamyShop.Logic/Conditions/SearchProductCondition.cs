@@ -11,7 +11,6 @@ namespace DreamyShop.Logic.Conditions
     {
         public string? ProductName { get; set; }
         public string? Code { get; set; }
-        public double? Price { get; set; }
         public ProductType? ProductType { get; set; }
         public string? CategoryName { get; set; }
         public string? ManufacturerName { get; set; }

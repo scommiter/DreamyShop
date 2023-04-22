@@ -22,7 +22,7 @@ namespace DreamyShop.Repository.AutoMapper
                 .ForMember(u => u.StoredSalt, option => option.DoNotUseDestinationValue())
                 .ForMember(u => u.Roles, option => option.DoNotUseDestinationValue());
 
-            CreateMap<ProductCreateUpdateDto, Product>()
+            CreateMap<ProductCreateDto, Product>()
                 .ForMember(u => u.Id, option => option.DoNotUseDestinationValue())
                 .ForMember(u => u.SeoMetaDescription, option => option.DoNotUseDestinationValue())
                 .ForMember(u => u.Slug, option => option.DoNotUseDestinationValue())

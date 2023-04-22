@@ -14,6 +14,8 @@ namespace DreamyShop.Repository.RepositoryWrapper
         private IAuthRepository _auth;
         private IUserRepository _user;
         private IProductRepository _product;
+        private IProductVariantRepository _productVariant;
+        private IProductVariantValueRepository _productVariantValue;
         private IProductAttributeRepository _productAttribute;
         private IAttributeRepository _attribute;
         private IProductAttributeValueRepository _productAttributeValue;
@@ -30,7 +32,9 @@ namespace DreamyShop.Repository.RepositoryWrapper
             IProductAttributeValueRepository productAttributeValue,
             IManufacturerRepository manufacturer,
             ICategoryRepository category,
-            IAttributeRepository attribute)
+            IAttributeRepository attribute,
+            IProductVariantRepository productVariant,
+            IProductVariantValueRepository productVariantValue)
         {
             _context = context;
             _auth = auth;
@@ -42,6 +46,8 @@ namespace DreamyShop.Repository.RepositoryWrapper
             _category = category;
             _role = role;
             _attribute = attribute;
+            _productVariant = productVariant;
+            _productVariantValue = productVariantValue;
         }
 
         public IAuthRepository Auth
@@ -148,6 +154,30 @@ namespace DreamyShop.Repository.RepositoryWrapper
                     _attribute = new AttributeRepository(_context);
                 }
                 return _attribute;
+            }
+        }
+
+        public IProductVariantRepository ProductVariant
+        {
+            get
+            {
+                if (_productVariant == null)
+                {
+                    _productVariant = new ProductVariantRepository(_context);
+                }
+                return _productVariant;
+            }
+        }
+
+        public IProductVariantValueRepository ProductVariantValue
+        {
+            get
+            {
+                if (_productVariantValue == null)
+                {
+                    _productVariantValue = new ProductVariantValueRepository(_context);
+                }
+                return _productVariantValue;
             }
         }
 

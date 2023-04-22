@@ -1,4 +1,5 @@
-﻿using DreamyShop.Domain;
+﻿using DreamyShop.Common.Extensions;
+using DreamyShop.Domain;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Repository.Repositories.Generic;
 
@@ -18,7 +19,7 @@ namespace DreamyShop.Repository.Repositories.Category
             {
                 return null;
             }
-            return _context.ProductCategories.Where(p => p.Name.Contains(name)).FirstOrDefault();
+            return _context.ProductCategories.Where(p => p.Name == name).FirstOrDefault();
         }
     }
 }

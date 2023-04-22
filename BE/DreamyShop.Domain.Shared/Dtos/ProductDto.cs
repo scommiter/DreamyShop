@@ -28,6 +28,7 @@ namespace DreamyShop.Domain.Shared.Dtos
     public class ProductAttributeDisplayDto
     {
         public List<string>? AttributeNames { get; set; }
+        public string SKU { get; set; }
         public int Quantity { get; set; }
         public double Price { get; set; }
     }
