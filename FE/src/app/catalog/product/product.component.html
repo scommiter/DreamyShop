@@ -9,14 +9,17 @@
         <th>Name</th>
         <th>Picture</th>
         <th>Code</th>
+        <th>Categorization</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>SKU</th>
         <th>
-          <tr>
-            <th>Categorization</th>
-            <th>Price</th>
-            <th>Quantity</th>
-          </tr>
+          <p-button
+            label="Create"
+            icon="pi pi-plus"
+            (click)="showAddModal()"
+          ></p-button>
         </th>
-        <th></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-product>
@@ -28,12 +31,43 @@
         <td>{{ product.thumbnail_picture }}</td>
         <td>{{ product.code }}</td>
         <td>
-          <tr *ngFor="let productVariant of product.product_variants">
-            <td></td>
+          <p *ngFor="let productVariant of product.productAttributeDisplayDtos">
+            {{ productVariant.attributeNames.join(", ") }}
+          </p>
+          <br />
+        </td>
+        <td>
+          <p *ngFor="let productVariant of product.productAttributeDisplayDtos">
+            <span *ngIf="productVariant.price != 0">{{
+              productVariant.price
+            }}</span>
+          </p>
+          <br />
+        </td>
+        <td>
+          <p *ngFor="let productVariant of product.productAttributeDisplayDtos">
+            <span *ngIf="productVariant.quantity != 0">{{
+              productVariant.quantity
+            }}</span>
+          </p>
+          <br />
+        </td>
+        <td>
+          <p *ngFor="let productVariant of product.productAttributeDisplayDtos">
+            {{ productVariant.sku }}
+          </p>
+          <br />
+        </td>
+        <!-- <td>
+          <tr
+            *ngFor="let productVariant of product.productAttributeDisplayDtos"
+          >
+            <td>{{ productVariant.attributeNames }}</td>
             <td>{{ productVariant.price }}</td>
             <td>{{ productVariant.quantity }}</td>
+            <td>{{ productVariant.sku }}</td>
           </tr>
-        </td>
+        </td> -->
         <td>
           <button
             pButton

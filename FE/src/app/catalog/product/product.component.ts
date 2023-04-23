@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { ProductService } from 'src/app/services/product.service';
-import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
-import { ProductVariantDto } from 'src/app/shared/models/product-variant.dto';
 import { ProductDto } from 'src/app/shared/models/product.dto';
+import { DialogService } from 'primeng/dynamicdialog';
+import { CreateProductComponent } from './create-product/create-product.component';
 
 @Component({
   selector: 'app-product',
@@ -15,7 +15,10 @@ export class ProductComponent implements OnInit {
   activeItem!: MenuItem;
   products: ProductDto[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private dialogService: DialogService
+  ) {}
 
   ngOnInit() {
     this.items = [
@@ -28,13 +31,19 @@ export class ProductComponent implements OnInit {
     ];
     this.getAllProducts();
     this.activeItem = this.items[0];
-    console.log('products :>> ', this.products);
   }
 
   getAllProducts() {
     this.productService.getProducts().subscribe((data) => {
       this.products = data;
       console.log('data :>> ', this.products);
+    });
+  }
+
+  showAddModal(): void {
+    const ref = this.dialogService.open(CreateProductComponent, {
+      header: 'Create new product',
+      width: '70%',
     });
   }
 }

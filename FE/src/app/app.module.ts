@@ -5,9 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './catalog/home/home.component';
-import { AdminPageComponent } from './catalog/admin-page/admin-page.component';
 import { AppLayoutModule } from './layout/app.layout.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +16,7 @@ import { AppLayoutModule } from './layout/app.layout.module';
     AppRoutingModule,
     RouterModule,
     AppLayoutModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

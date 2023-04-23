@@ -1,0 +1,98 @@
+<p-panel header="Infomation">
+  <div class="field col-12">
+    <label for="name" class="block">Name <span class="required">*</span></label>
+    <input
+      id="name"
+      pInputText
+      type="text"
+      class="w-full"
+      formControlName="name"
+    />
+  </div>
+  <div class="field col-12">
+    <label for="code" class="block">Code <span class="required">*</span></label>
+    <input
+      id="code"
+      pInputText
+      type="text"
+      class="w-full"
+      formControlName="code"
+    />
+  </div>
+  <div class="field col-12">
+    <label for="thumbnailpicture" class="block">ThumbnailPicture </label>
+    <input
+      type="file"
+      class="file-upload"
+      onchange="console.log(event.target.files)"
+    />
+  </div>
+  <div class="field col-12">
+    <label for="product-type" class="block"
+      >ProductType <span class="required">*</span></label
+    >
+    <p-dropdown
+      [options]="productTypes"
+      [(ngModel)]="selectedProductType"
+      optionLabel="product-type"
+    ></p-dropdown>
+  </div>
+  <div class="field col-12">
+    <label for="category-name" class="block"
+      >CategoryName <span class="required">*</span></label
+    >
+    <input
+      id="category-name"
+      pInputText
+      type="text"
+      class="w-full"
+      formControlName="category-name"
+    />
+  </div>
+  <div class="field col-12">
+    <label for="manufacturer-name" class="block"
+      >ManufacturerName <span class="required">*</span></label
+    >
+    <input
+      id="manufacturer-name"
+      pInputText
+      type="text"
+      class="w-full"
+      formControlName="manufacturer-name"
+    />
+  </div>
+  <div class="field col-12">
+    <label for="description" class="block">Description</label>
+    <input
+      id="description"
+      pInputText
+      type="text"
+      class="w-full"
+      formControlName="description"
+    />
+  </div>
+  <div class="field col-12">
+    <label for="is-active" class="block"
+      >IsActive <span class="required">*</span></label
+    >
+    <input
+      id="is-active"
+      pInputText
+      type="text"
+      class="w-full"
+      formControlName="is-active"
+    />
+  </div>
+  <div class="field col-12">
+    <label for="is-visibility" class="block"
+      >IsVisibility <span class="required">*</span></label
+    >
+    <input
+      id="is-visibility"
+      pInputText
+      type="text"
+      class="w-full"
+      formControlName="is-visibility"
+    />
+  </div>
+</p-panel>
