@@ -14,8 +14,6 @@ namespace DreamyShop.Domain
         public bool IsVisibility { get; set; }
         public bool IsActive { get; set; }
         public string Description { get; set; }
-        [StringLength(250)]
-        public string ThumbnailPicture { get; set; }
         public int Quantity { get; set; }
         public double Price { get; set; }
 
@@ -24,5 +22,8 @@ namespace DreamyShop.Domain
 
         [InverseProperty(nameof(ProductVariantValue.ProductVariant))]
         public virtual ICollection<ProductVariantValue> ProductVariantValues { get; set; }
+
+        [InverseProperty(nameof(ProductVariantValue.ProductVariant))]
+        public virtual ICollection<ImageProductVariant> ImageProductVariants { get; set; }
     }
 }

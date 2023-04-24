@@ -33,6 +33,7 @@ namespace DreamyShop.Api.Configurations
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProductVariantRepository, ProductVariantRepository>();
+            services.AddScoped<IProductVariantImageRepository, ProductVariantImageRepository>();
             services.AddScoped<IProductVariantValueRepository, ProductVariantValueRepository>();
             services.AddScoped<IAttributeRepository, AttributeRepository>();
             services.AddScoped<IProductAttributeRepository, ProductAttributeRepository>();

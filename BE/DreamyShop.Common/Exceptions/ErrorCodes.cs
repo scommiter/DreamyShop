@@ -48,5 +48,8 @@ namespace DreamyShop.Common.Exceptions
 
         [Display(Description = "Cannot Delete!")]
         DeleteFailed,
+
+        [Display(Description = "Upload Failed")]
+        UploadFailed,
     }
 }

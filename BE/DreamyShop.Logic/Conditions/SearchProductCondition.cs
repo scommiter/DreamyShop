@@ -14,9 +14,16 @@ namespace DreamyShop.Logic.Conditions
         public ProductType? ProductType { get; set; }
         public string? CategoryName { get; set; }
         public string? ManufacturerName { get; set; }
+        public Price? PriceRange { get; set; }
         public bool? IsActive { get; set; }
         public bool? IsVisibility { get; set; }
         public DateTime? DateCreated { get; set; }
         public DateTime? DateUpdated { get; set; }
+    }
+
+    public class Price
+    {
+        public double Min { get; set; }
+        public double Max { get; set; }
     }
 }

@@ -112,6 +112,32 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         });
                 });
 
+            modelBuilder.Entity("DreamyShop.Domain.ImageProductVariant", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ProductVariantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductVariantId");
+
+                    b.ToTable("ImageProductVariants");
+                });
+
             modelBuilder.Entity("DreamyShop.Domain.Inventory", b =>
                 {
                     b.Property<Guid>("Id")
@@ -851,11 +877,6 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.Property<byte>("StatusID")
                         .HasColumnType("tinyint");
 
-                    b.Property<string>("ThumbnailPicture")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
@@ -875,8 +896,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             ProductId = new Guid("30299235-6937-41b7-a76d-14584f5f856a"),
                             Quantity = 12,
                             SKU = "IP14-A",
-                            StatusID = (byte)0,
-                            ThumbnailPicture = ""
+                            StatusID = (byte)0
                         },
                         new
                         {
@@ -890,8 +910,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             ProductId = new Guid("30299235-6937-41b7-a76d-14584f5f856a"),
                             Quantity = 20,
                             SKU = "IP14-B",
-                            StatusID = (byte)0,
-                            ThumbnailPicture = ""
+                            StatusID = (byte)0
                         },
                         new
                         {
@@ -905,8 +924,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
                             Quantity = 10,
                             SKU = "BAGGUCCI-A",
-                            StatusID = (byte)0,
-                            ThumbnailPicture = ""
+                            StatusID = (byte)0
                         },
                         new
                         {
@@ -920,8 +938,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
                             Quantity = 15,
                             SKU = "BAGGUCCI-B",
-                            StatusID = (byte)0,
-                            ThumbnailPicture = ""
+                            StatusID = (byte)0
                         },
                         new
                         {
@@ -935,8 +952,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             ProductId = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
                             Quantity = 5,
                             SKU = "BAGGUCCI-VIP",
-                            StatusID = (byte)0,
-                            ThumbnailPicture = ""
+                            StatusID = (byte)0
                         });
                 });
 
@@ -1338,6 +1354,17 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("DreamyShop.Domain.ImageProductVariant", b =>
+                {
+                    b.HasOne("DreamyShop.Domain.ProductVariant", "ProductVariant")
+                        .WithMany("ImageProductVariants")
+                        .HasForeignKey("ProductVariantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductVariant");
+                });
+
             modelBuilder.Entity("DreamyShop.Domain.InventoryTicket", b =>
                 {
                     b.HasOne("DreamyShop.Domain.Inventory", "Inventory")
@@ -1588,6 +1615,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("DreamyShop.Domain.ProductVariant", b =>
                 {
+                    b.Navigation("ImageProductVariants");
+
                     b.Navigation("ProductVariantValues");
                 });
 

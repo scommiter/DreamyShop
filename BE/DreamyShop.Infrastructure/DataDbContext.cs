@@ -255,7 +255,6 @@ namespace DreamyShop.EntityFrameworkCore
                      IsVisibility = true,
                      IsActive = true,
                      Description = "",
-                     ThumbnailPicture = "",
                      Quantity = 12,
                      Price = 1200
                  },
@@ -267,7 +266,6 @@ namespace DreamyShop.EntityFrameworkCore
                      IsVisibility = true,
                      IsActive = true,
                      Description = "",
-                     ThumbnailPicture = "",
                      Quantity = 20,
                      Price = 1250
                  },
@@ -279,7 +277,6 @@ namespace DreamyShop.EntityFrameworkCore
                      IsVisibility = true,
                      IsActive = true,
                      Description = "",
-                     ThumbnailPicture = "",
                      Quantity = 10,
                      Price = 5000
                  },
@@ -291,7 +288,6 @@ namespace DreamyShop.EntityFrameworkCore
                      IsVisibility = true,
                      IsActive = true,
                      Description = "",
-                     ThumbnailPicture = "",
                      Quantity = 15,
                      Price = 4500
                  },
@@ -303,7 +299,6 @@ namespace DreamyShop.EntityFrameworkCore
                      IsVisibility = true,
                      IsActive = true,
                      Description = "",
-                     ThumbnailPicture = "",
                      Quantity = 5,
                      Price = 9500
                  });

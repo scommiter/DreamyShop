@@ -9,8 +9,10 @@ using DreamyShop.Domain.Shared.Types;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Logic.Conditions;
 using DreamyShop.Repository.RepositoryWrapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 
 namespace DreamyShop.Logic.Product
 {
@@ -51,6 +53,8 @@ namespace DreamyShop.Logic.Product
                               join c in _context.ProductCategories on p.CategoryId equals c.Id
                               join pv in _context.ProductVariants on p.Id equals pv.ProductId into pvN
                               from pv in pvN.DefaultIfEmpty()
+                              join ipv in _context.ImageProductVariants on pv.Id equals ipv.ProductVariantId into ipvN
+                              from ipv in ipvN.DefaultIfEmpty()
                               join pvv in _context.ProductVariantValues on pv.Id equals pvv.ProductVariantId into pvvN
                               from pvv in pvvN.DefaultIfEmpty()
                               join pav in _context.ProductAttributeValues on pvv.ProductAttributeValueId equals pav.Id into pavN
@@ -62,7 +66,8 @@ namespace DreamyShop.Logic.Product
                                   ManufacturerName = m.Name,
                                   CategoryName = c.Name,
                                   pv,
-                                  pav
+                                  pav,
+                                  ipv
                               }).ToListAsync();
 
             return query.GroupBy(r => new { r.Product })
@@ -86,7 +91,8 @@ namespace DreamyShop.Logic.Product
                                                                     AttributeNames = pAttr.Select(x => x.pav?.Value ?? "").ToList(),
                                                                     SKU = pAttr.Select(x => x.pv?.SKU ?? "").FirstOrDefault(),
                                                                     Quantity = pAttr.Select(x => x.pv?.Quantity ?? 0).FirstOrDefault(),
-                                                                    Price = pAttr.Select(x => x.pv?.Price ?? 0).FirstOrDefault()
+                                                                    Price = pAttr.Select(x => x.pv?.Price ?? 0).FirstOrDefault(),
+                                                                    Images = pAttr.Select(x => x.ipv?.Path ?? "").ToList()
                                                                 }).ToList()
                                 }).ToList();
         }
@@ -175,7 +181,6 @@ namespace DreamyShop.Logic.Product
                     IsVisibility = true,
                     IsActive = true,
                     Description = "",
-                    ThumbnailPicture = v.ThumbnailPicture,
                     Quantity = v.Quantity,
                     Price = v.Price,
                     DateCreated = DateTime.Now
@@ -450,10 +455,96 @@ namespace DreamyShop.Logic.Product
             {
                 productDtos = productDtos.Where(p => p.DateUpdated == condition.DateUpdated).ToList();
             }
+            //if(condition.PriceRange != null)
+            //{
+            //    var prices = productDtos.Select(p => p.ProductAttributeDisplayDtos?.Select(pad => pad.Price));
+            //    foreach (var price in prices.Where(p => p != null))
+            //    {
+            //        var minPrice = price.Count() == 1 ? 0 : price.Min();
+            //        var maxPrice = price.Max();
+            //        if(condition.PriceRange.Min == 0)
+            //        {
+
+            //        }
+            //    }
+            //}
             var productDtoPagingsResult = productDtos.Skip((pagingRequest.Page - 1) * pagingRequest.Limit)
                                     .Take(pagingRequest.Limit)
                                     .ToList(); ;
             return new ApiSuccessResult<IList<ProductDto>>(productDtoPagingsResult);
         }
+
+        public async Task<ApiResult<bool>> UploadImage(IFormFile file, Guid productId)
+        {
+            var product = await _repository.Product.GetByIdAsync(productId);
+            if (product == null)
+            {
+                return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
+            }
+            var folderName = Path.Combine("Resources", "Images");
+            var pathToSave = Path.Combine(Directory.GetCurrentDirectory().Replace("DreamyShop.Api", "DreamyShop.Domain.Shared"), folderName);
+            if (file.Length > 0)
+            {
+                var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                var fullPath = Path.Combine(pathToSave, fileName);
+                var dbPath = Path.Combine("DreamyShop.Domain.Shared", folderName, fileName);
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+                product.ThumbnailPicture = dbPath;
+                _repository.Product.Update(product);
+                _repository.Save();
+                return new ApiSuccessResult<bool>(true);
+            }
+            else
+            {
+                return new ApiErrorResult<bool>((int)ErrorCodes.UploadFailed);
+            }
+        }
+
+        public async Task<ApiResult<bool>> UploadMultipleImage(List<IFormFile> files, Guid productVariantId)
+        {
+            try
+            {
+                //var productVariant = await _repository.ProductVariant.GetByIdAsync(productVariantId);
+                //if (productVariant == null)
+                //{
+                //    return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
+                //}
+                var folderName = Path.Combine("Resources", "Images");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory().Replace("DreamyShop.Api", "DreamyShop.Domain.Shared"), folderName);
+                foreach (var file in files)
+                {
+                    if (file.Length > 0)
+                    {
+                        var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                        var fullPath = Path.Combine(pathToSave, fileName);
+                        var dbPath = Path.Combine("DreamyShop.Domain.Shared", folderName, fileName);
+                        using (var stream = new FileStream(fullPath, FileMode.Create))
+                        {
+                            file.CopyTo(stream);
+                        }
+                        await _repository.ProductVariantImage.AddAsync(new ImageProductVariant
+                        {
+                            ProductVariantId = productVariantId,
+                            Path = dbPath,
+                            DateCreated = DateTime.Now,
+                            DateUpdated = DateTime.Now
+                        });
+                        _repository.Save();
+                    }
+                    else
+                    {
+                        return new ApiErrorResult<bool>((int)ErrorCodes.UploadFailed);
+                    }
+                }
+                return new ApiSuccessResult<bool>(true);
+            }
+            catch (Exception ex)
+            {
+                return new ApiErrorResult<bool>((int)ErrorCodes.UploadFailed);
+            }
+        }
     }
-}
+}   

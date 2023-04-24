@@ -80,5 +80,27 @@ namespace DreamyShop.Api.Controllers
             }
             return Ok(result);
         }
+
+        [HttpPost("uploadImage"), DisableRequestSizeLimit]
+        public IActionResult Upload(Guid productId, IFormFile file)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = _productService.UploadImage(file, productId);
+            return Ok(result);
+        }
+
+        [HttpPost("uploadMultipleImage"), DisableRequestSizeLimit]
+        public IActionResult UploadMultipleFile(Guid productId, List<IFormFile> files)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = _productService.UploadMultipleImage(files, productId);
+            return Ok(result);
+        }
     }
 }

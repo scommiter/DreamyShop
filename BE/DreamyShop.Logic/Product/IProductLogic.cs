@@ -1,11 +1,7 @@
 ﻿using DreamyShop.Common.Results;
 using DreamyShop.Domain.Shared.Dtos;
 using DreamyShop.Logic.Conditions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace DreamyShop.Logic.Product
 {
@@ -16,5 +12,7 @@ namespace DreamyShop.Logic.Product
         Task<ApiResult<bool>> UpdateProduct(Guid id, ProductUpdateDto productCreateUpdateDto);
         Task<ApiResult<bool>> RemoveProduct(Guid id);
         Task<ApiResult<IList<ProductDto>>> SearchProduct(SearchProductCondition condition, PagingRequest pagingRequest);
+        Task<ApiResult<bool>> UploadImage(IFormFile file, Guid productId);
+        Task<ApiResult<bool>> UploadMultipleImage(List<IFormFile> files, Guid productId);
     }
 }

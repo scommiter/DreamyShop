@@ -22,6 +22,7 @@ namespace DreamyShop.EntityFrameworkCore
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductAttribute> ProductAttributes { get; set; }
         public virtual DbSet<ProductVariant> ProductVariants { get; set; }
+        public virtual DbSet<ImageProductVariant> ImageProductVariants { get; set; }
         public virtual DbSet<ProductVariantValue> ProductVariantValues { get; set; }
         public virtual DbSet<Domain.Attribute> Attributes { get; set; }
         public virtual DbSet<ProductAttributeValue> ProductAttributeValues { get; set; }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DreamyShop.EntityFrameworkCore.Migrations
 {
-    public partial class InitDB : Migration
+    public partial class InitDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -441,7 +441,6 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     IsVisibility = table.Column<bool>(type: "bit", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ThumbnailPicture = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     StatusID = table.Column<byte>(type: "tinyint", nullable: false),
@@ -455,6 +454,27 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         name: "FK_ProductVariants_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ImageProductVariants",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductVariantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Path = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ImageProductVariants", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ImageProductVariants_ProductVariants_ProductVariantId",
+                        column: x => x.ProductVariantId,
+                        principalTable: "ProductVariants",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -571,14 +591,14 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "ProductVariants",
-                columns: new[] { "Id", "DateCreated", "DateUpdated", "Description", "IsActive", "IsVisibility", "Price", "ProductId", "Quantity", "SKU", "StatusID", "ThumbnailPicture" },
+                columns: new[] { "Id", "DateCreated", "DateUpdated", "Description", "IsActive", "IsVisibility", "Price", "ProductId", "Quantity", "SKU", "StatusID" },
                 values: new object[,]
                 {
-                    { new Guid("0a134c80-0493-458a-9f02-16361f0df5c7"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 1250.0, new Guid("30299235-6937-41b7-a76d-14584f5f856a"), 20, "IP14-B", (byte)0, "" },
-                    { new Guid("35b39a36-5970-42aa-b996-55170555f85b"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 4500.0, new Guid("e914fd7b-9af8-403e-9f32-803346659264"), 15, "BAGGUCCI-B", (byte)0, "" },
-                    { new Guid("afd19304-3a45-4304-b2bb-1040f000c369"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 5000.0, new Guid("e914fd7b-9af8-403e-9f32-803346659264"), 10, "BAGGUCCI-A", (byte)0, "" },
-                    { new Guid("f2ba4ab5-46c4-4ce9-baaf-2c98972d45b0"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 9500.0, new Guid("e914fd7b-9af8-403e-9f32-803346659264"), 5, "BAGGUCCI-VIP", (byte)0, "" },
-                    { new Guid("fc364f29-fcb9-44b7-8854-dfce09824c35"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 1200.0, new Guid("30299235-6937-41b7-a76d-14584f5f856a"), 12, "IP14-A", (byte)0, "" }
+                    { new Guid("0a134c80-0493-458a-9f02-16361f0df5c7"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 1250.0, new Guid("30299235-6937-41b7-a76d-14584f5f856a"), 20, "IP14-B", (byte)0 },
+                    { new Guid("35b39a36-5970-42aa-b996-55170555f85b"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 4500.0, new Guid("e914fd7b-9af8-403e-9f32-803346659264"), 15, "BAGGUCCI-B", (byte)0 },
+                    { new Guid("afd19304-3a45-4304-b2bb-1040f000c369"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 5000.0, new Guid("e914fd7b-9af8-403e-9f32-803346659264"), 10, "BAGGUCCI-A", (byte)0 },
+                    { new Guid("f2ba4ab5-46c4-4ce9-baaf-2c98972d45b0"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 9500.0, new Guid("e914fd7b-9af8-403e-9f32-803346659264"), 5, "BAGGUCCI-VIP", (byte)0 },
+                    { new Guid("fc364f29-fcb9-44b7-8854-dfce09824c35"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 1200.0, new Guid("30299235-6937-41b7-a76d-14584f5f856a"), 12, "IP14-A", (byte)0 }
                 });
 
             migrationBuilder.InsertData(
@@ -597,6 +617,11 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     { new Guid("827ca5b7-0087-4256-bec0-399199a518d9"), new Guid("4267feee-9a5b-4156-90b0-9e3585a8af22"), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new Guid("f2ba4ab5-46c4-4ce9-baaf-2c98972d45b0"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
                     { new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"), new Guid("59327bba-3a1d-40ad-82c2-99a019e9d3f6"), new Guid("30299235-6937-41b7-a76d-14584f5f856a"), new Guid("fc364f29-fcb9-44b7-8854-dfce09824c35"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ImageProductVariants_ProductVariantId",
+                table: "ImageProductVariants",
+                column: "ProductVariantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_InventoryTicketItems_InventionTicketId",
@@ -686,6 +711,9 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ImageProductVariants");
+
             migrationBuilder.DropTable(
                 name: "InventoryTicketItems");
 
