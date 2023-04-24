@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-create-product',
@@ -8,17 +8,28 @@ import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
   encapsulation: ViewEncapsulation.None,
 })
 export class CreateProductComponent implements OnInit {
-  productTypes: string[] = [
-    'Single',
-    'Grouped',
-    'Configurable',
-    'Bundle',
-    'Virtual',
-    'Downloadable',
-  ];
-  selectedProductType: string = '';
+  productTypes: string[] = [];
+  stateOptions: string[] = [];
+  defaultOptionActive: string = 'True';
+  defaultOptionVisibily: string = 'True';
+  text: string = 'aaaaaaaa';
+
+  items: MenuItem[] = [];
+
+  home: MenuItem = {};
 
   ngOnInit(): void {
-    this.selectedProductType = this.productTypes[0];
+    this.productTypes = [
+      'Single',
+      'Grouped',
+      'Configurable',
+      'Bundle',
+      'Virtual',
+      'Downloadable',
+    ];
+    this.stateOptions = ['True', 'False'];
+    this.items = [{ label: 'Product' }, { label: 'Create' }];
+
+    this.home = { icon: 'pi pi-home', routerLink: '/' };
   }
 }

@@ -9,11 +9,15 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { PanelModule } from 'primeng/panel';
 import { FileUploadModule } from 'primeng/fileupload';
 import { DropdownModule } from 'primeng/dropdown';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { FormsModule } from '@angular/forms';
+import { EditorModule } from 'primeng/editor';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { SplitterModule } from 'primeng/splitter';
 
 @NgModule({
   declarations: [CreateProductComponent],
   imports: [
-    CommonModule,
     CreateProductRoutingModule,
     InputTextModule,
     CheckboxModule,
@@ -21,6 +25,11 @@ import { DropdownModule } from 'primeng/dropdown';
     PanelModule,
     FileUploadModule,
     DropdownModule,
+    SelectButtonModule,
+    FormsModule,
+    EditorModule,
+    BreadcrumbModule,
+    SplitterModule,
   ],
 })
 export class CreateProductModule {}

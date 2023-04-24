@@ -11,6 +11,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { FormsModule } from '@angular/forms';
 import { DialogService } from 'primeng/dynamicdialog';
 import { FileUploadModule } from 'primeng/fileupload';
+import { EditorModule } from 'primeng/editor';
 
 @NgModule({
   declarations: [ProductComponent],
@@ -24,6 +25,7 @@ import { FileUploadModule } from 'primeng/fileupload';
     ButtonModule,
     FormsModule,
     FileUploadModule,
+    EditorModule,
   ],
   providers: [ProductService, DialogService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

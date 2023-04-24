@@ -1,3 +1,8 @@
+.container{
+    max-width: 1000px;
+    margin-left: auto;   margin-right: auto;
+}
+
 .required{
     color: red;
 }
@@ -5,3 +10,19 @@
 .field.col-12 {
     margin: 0;
 }
+
+#true-false{
+    display: flex;
+    gap: 100px;
+}
+
+.label-active-visibility {
+    margin-bottom: 10px;
+}
+
+.p-breadcrumb {
+    border: none;
+    background: none;
+    font-size: 20px;
+    font-weight: bold;
+  }

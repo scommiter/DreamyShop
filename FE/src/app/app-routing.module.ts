@@ -38,13 +38,11 @@ const routes: Routes = [
       import('./catalog/product/create-product/create-product.module').then(
         (m) => m.CreateProductModule
       ),
-    component: AppLayoutComponent,
   },
   {
     path: 'test',
     pathMatch: 'full',
     loadChildren: () => import('./test/test.module').then((m) => m.TestModule),
-    component: AppLayoutComponent,
   },
 ];
 
