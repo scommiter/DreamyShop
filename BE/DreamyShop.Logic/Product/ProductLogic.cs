@@ -92,7 +92,7 @@ namespace DreamyShop.Logic.Product
                                                                     SKU = pAttr.Select(x => x.pv?.SKU ?? "").FirstOrDefault(),
                                                                     Quantity = pAttr.Select(x => x.pv?.Quantity ?? 0).FirstOrDefault(),
                                                                     Price = pAttr.Select(x => x.pv?.Price ?? 0).FirstOrDefault(),
-                                                                    Images = pAttr.Select(x => x.ipv?.Path ?? "").ToList()
+                                                                    Images = pAttr.Where(x => x.ipv?.Path != null).Select(x => x.ipv.Path).ToList()
                                                                 }).ToList()
                                 }).ToList();
         }
@@ -400,6 +400,11 @@ namespace DreamyShop.Logic.Product
             try
             {
                 await _repository.Product.BeginTransactionAsync();
+                var productVariantvalueDelete = _repository.ProductVariantValue.GetAll().Where(pv => pv.ProductVariant.ProductId == id).ToList();
+                _repository.ProductVariantValue.RemoveMultiple(productVariantvalueDelete);
+                _repository.ProductAttributeValue.RemoveMultiple(_context.ProductAttributeValues.Where(p => p.ProductId == id).ToList());
+                _repository.ProductVariant.RemoveMultiple(_context.ProductVariants.Where(p => p.ProductId == id).ToList());
+                _repository.ProductAttribute.RemoveMultiple(_context.ProductAttributes.Where(p => p.ProductId == id).ToList());
                 _repository.Product.Remove(id);
                 _repository.Save();
                 await _repository.Product.EndTransactionAsync();
@@ -476,28 +481,35 @@ namespace DreamyShop.Logic.Product
 
         public async Task<ApiResult<bool>> UploadImage(IFormFile file, Guid productId)
         {
-            var product = await _repository.Product.GetByIdAsync(productId);
-            if (product == null)
+            try
             {
-                return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
-            }
-            var folderName = Path.Combine("Resources", "Images");
-            var pathToSave = Path.Combine(Directory.GetCurrentDirectory().Replace("DreamyShop.Api", "DreamyShop.Domain.Shared"), folderName);
-            if (file.Length > 0)
-            {
-                var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                var fullPath = Path.Combine(pathToSave, fileName);
-                var dbPath = Path.Combine("DreamyShop.Domain.Shared", folderName, fileName);
-                using (var stream = new FileStream(fullPath, FileMode.Create))
+                var product = _context.Products.Where(p => p.Id == productId).FirstOrDefault();
+                if (product == null)
                 {
-                    file.CopyTo(stream);
+                    return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
                 }
-                product.ThumbnailPicture = dbPath;
-                _repository.Product.Update(product);
-                _repository.Save();
-                return new ApiSuccessResult<bool>(true);
+                var folderName = Path.Combine("Resources", "Images");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory().Replace("DreamyShop.Api", "DreamyShop.Domain.Shared"), folderName);
+                if (file.Length > 0)
+                {
+                    var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                    var fullPath = Path.Combine(pathToSave, fileName);
+                    var dbPath = Path.Combine("DreamyShop.Domain.Shared", folderName, fileName);
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+                    product.ThumbnailPicture = dbPath;
+                    _repository.Product.Update(product);
+                    _repository.Save();
+                    return new ApiSuccessResult<bool>(true);
+                }
+                else
+                {
+                    return new ApiErrorResult<bool>((int)ErrorCodes.UploadFailed);
+                }
             }
-            else
+            catch (Exception ex)
             {
                 return new ApiErrorResult<bool>((int)ErrorCodes.UploadFailed);
             }
@@ -507,11 +519,11 @@ namespace DreamyShop.Logic.Product
         {
             try
             {
-                //var productVariant = await _repository.ProductVariant.GetByIdAsync(productVariantId);
-                //if (productVariant == null)
-                //{
-                //    return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
-                //}
+                var product = _context.Products.Where(p => p.Id == productVariantId).FirstOrDefault();
+                if (product == null)
+                {
+                    return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
+                }
                 var folderName = Path.Combine("Resources", "Images");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory().Replace("DreamyShop.Api", "DreamyShop.Domain.Shared"), folderName);
                 foreach (var file in files)
