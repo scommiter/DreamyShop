@@ -483,18 +483,18 @@ namespace DreamyShop.Logic.Product
         {
             try
             {
-                var product = _context.Products.Where(p => p.Id == productId).FirstOrDefault();
+                var product = await _repository.Product.GetByIdAsync(productId);
                 if (product == null)
                 {
                     return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
                 }
                 var folderName = Path.Combine("Resources", "Images");
-                var pathToSave = Path.Combine(Directory.GetCurrentDirectory().Replace("DreamyShop.Api", "DreamyShop.Domain.Shared"), folderName);
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory().Replace("DreamyShop.Api", "DreamyShop.Infrastructure"), folderName);
                 if (file.Length > 0)
                 {
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                     var fullPath = Path.Combine(pathToSave, fileName);
-                    var dbPath = Path.Combine("DreamyShop.Domain.Shared", folderName, fileName);
+                    var dbPath = Path.Combine("DreamyShop.Infrastructure", folderName, fileName);
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         file.CopyTo(stream);
@@ -519,20 +519,20 @@ namespace DreamyShop.Logic.Product
         {
             try
             {
-                var product = _context.Products.Where(p => p.Id == productVariantId).FirstOrDefault();
-                if (product == null)
+                var productVariant = await _repository.ProductVariant.GetByIdAsync(productVariantId);
+                if (productVariant == null)
                 {
                     return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
                 }
                 var folderName = Path.Combine("Resources", "Images");
-                var pathToSave = Path.Combine(Directory.GetCurrentDirectory().Replace("DreamyShop.Api", "DreamyShop.Domain.Shared"), folderName);
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory().Replace("DreamyShop.Api", "DreamyShop.Infrastructure"), folderName);
                 foreach (var file in files)
                 {
                     if (file.Length > 0)
                     {
                         var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                         var fullPath = Path.Combine(pathToSave, fileName);
-                        var dbPath = Path.Combine("DreamyShop.Domain.Shared", folderName, fileName);
+                        var dbPath = Path.Combine("DreamyShop.Infrastructure", folderName, fileName);
                         using (var stream = new FileStream(fullPath, FileMode.Create))
                         {
                             file.CopyTo(stream);

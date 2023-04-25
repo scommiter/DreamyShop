@@ -19,4 +19,8 @@
     <ProjectReference Include="..\DreamyShop.Domain\DreamyShop.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resources\Images\" />
+  </ItemGroup>
+
 </Project>

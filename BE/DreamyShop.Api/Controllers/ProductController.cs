@@ -82,24 +82,32 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpPost("uploadImage"), DisableRequestSizeLimit]
-        public IActionResult Upload(Guid productId, IFormFile file)
+        public async Task<IActionResult> Upload(Guid productId, IFormFile file)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var result = _productService.UploadImage(file, productId);
+            var result = await _productService.UploadImage(file, productId);
+            if (result.Result == null)
+            {
+                return BadRequest(result);
+            }
             return Ok(result);
         }
 
         [HttpPost("uploadMultipleImage"), DisableRequestSizeLimit]
-        public IActionResult UploadMultipleFile(Guid productId, List<IFormFile> files)
+        public async Task<IActionResult> UploadMultipleFile(Guid productId, List<IFormFile> files)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var result = _productService.UploadMultipleImage(files, productId);
+            var result = await _productService.UploadMultipleImage(files, productId);
+            if (result.Result == null)
+            {
+                return BadRequest(result);
+            }
             return Ok(result);
         }
     }

@@ -128,7 +128,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions()
 {
-    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory().Replace("DreamyShop.Api", "DreamyShop.Domain.Shared"), @"Resources")),
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory().Replace("DreamyShop.Api", "DreamyShop.Infrastructure"), @"Resources")),
     RequestPath = new PathString("/Resources")
 });
 
