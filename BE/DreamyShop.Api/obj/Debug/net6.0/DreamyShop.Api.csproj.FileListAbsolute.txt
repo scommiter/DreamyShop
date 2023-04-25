@@ -244,9 +244,6 @@ Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\win-arm\native
 Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
-Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
-Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
@@ -312,3 +309,12 @@ E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.Extensions.
 Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Google.dll
 E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Google.dll
 E:\MyProject\DreamyShop\BE\DreamyShop.Api\obj\Debug\net6.0\DreamyShop.Api.MvcApplicationPartsAssemblyInfo.cs
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\EPPlus.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\EPPlus.Interfaces.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\EPPlus.System.Drawing.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.IO.RecyclableMemoryStream.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll

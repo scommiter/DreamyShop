@@ -32,7 +32,7 @@ namespace DreamyShop.Logic.Product
             _mapper = mapper;
         }
 
-        public async Task<ApiResult<PageResult<ProductDto>>> GetAllProduct(PagingRequest pagingRequest)
+        public async Task<ApiResult<PageResult<ProductDto>>> GetAllProductPaging(PagingRequest pagingRequest)
         {
             var productDtos = GetAllProductDto().Result;
 
@@ -41,6 +41,18 @@ namespace DreamyShop.Logic.Product
                 Items = productDtos.Skip((pagingRequest.Page - 1) * pagingRequest.Limit)
                                 .Take(pagingRequest.Limit)
                                 .ToList(),
+                Totals = productDtos.Count()
+            };
+            return new ApiSuccessResult<PageResult<ProductDto>>(pageResult);
+        }
+
+        public async Task<ApiResult<PageResult<ProductDto>>> GetAllProduct()
+        {
+            var productDtos = GetAllProductDto().Result;
+
+            var pageResult = new PageResult<ProductDto>()
+            {
+                Items = productDtos,
                 Totals = productDtos.Count()
             };
             return new ApiSuccessResult<PageResult<ProductDto>>(pageResult);

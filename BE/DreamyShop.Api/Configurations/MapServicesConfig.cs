@@ -14,6 +14,7 @@ using DreamyShop.Repository.Repositories.Role;
 using DreamyShop.Repository.Repositories.Category;
 using DreamyShop.Logic.Role;
 using DreamyShop.Logic.Category;
+using DreamyShop.Logic.Report;
 
 namespace DreamyShop.Api.Configurations
 {
@@ -49,6 +50,7 @@ namespace DreamyShop.Api.Configurations
             services.AddScoped<IProductLogic, ProductLogic>();
             services.AddScoped<IManufacturerLogic, ManufacturerLogic>();
             services.AddScoped<ICategoryLogic, CategoryLogic>();
+            services.AddScoped<IReportLogic, ReportLogic>();
             #endregion
         }
     }

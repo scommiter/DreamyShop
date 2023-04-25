@@ -63,6 +63,10 @@
               "target": "Package",
               "version": "[12.0.0, )"
             },
+            "EPPlus": {
+              "target": "Package",
+              "version": "[6.2.2, )"
+            },
             "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
               "version": "[6.0.15, )"
@@ -543,6 +547,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[6.2.2, )"
+            },
             "Microsoft.AspNetCore.Cryptography.KeyDerivation": {
               "target": "Package",
               "version": "[6.0.15, )"

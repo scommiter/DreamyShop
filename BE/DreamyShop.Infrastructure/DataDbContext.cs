@@ -1,6 +1,7 @@
 ﻿using DreamyShop.Domain;
 using DreamyShop.Domain.Shared.Types;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 namespace DreamyShop.EntityFrameworkCore
 {
@@ -21,7 +22,11 @@ namespace DreamyShop.EntityFrameworkCore
                    CategoryId = new Guid("96BFF1B2-3715-4F10-90D3-AAABB332E0E9"),
                    SeoMetaDescription = "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring",
                    Description = "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring",
-                   ThumbnailPicture = ""
+                   ThumbnailPicture = "",
+                   IsActive = true,
+                   IsVisibility = true,
+                   DateCreated = DateTime.Now,
+                   DateUpdated = DateTime.Now
                },
                new Product()
                {
@@ -35,7 +40,11 @@ namespace DreamyShop.EntityFrameworkCore
                    CategoryId = new Guid("96BFF1B2-3715-4F10-90D3-AAABB332E0E9"),
                    SeoMetaDescription = "XYZ wireless security camera with high resolution, built-in motion sensor, supports wifi connection, helps you observe your family, home, shop, office whenever and wherever.",
                    Description = "XYZ wireless security camera with high resolution.",
-                   ThumbnailPicture = ""
+                   ThumbnailPicture = "",
+                   IsActive = true,
+                   IsVisibility = true,
+                   DateCreated = DateTime.Now,
+                   DateUpdated = DateTime.Now
                },
                new Product()
                {
@@ -49,7 +58,11 @@ namespace DreamyShop.EntityFrameworkCore
                    CategoryId = new Guid("EFD560A8-C65B-439C-AF43-765DA733F3C1"),
                    SeoMetaDescription = "Find out about Apple's latest line of iPhones at Apple Store Vietnam. Order online and get instant deals.",
                    Description = "",
-                   ThumbnailPicture = ""
+                   ThumbnailPicture = "",
+                   IsActive = true,
+                   IsVisibility = true,
+                   DateCreated = DateTime.Now,
+                   DateUpdated = DateTime.Now
                },
                new Product()
                {
@@ -63,7 +76,11 @@ namespace DreamyShop.EntityFrameworkCore
                    CategoryId = new Guid("2ED8E62D-2F2E-4957-AE81-8A07B0BCD443"),
                    SeoMetaDescription = "",
                    Description = "Buy genuine Laptop at our store with best quality and affordable price. We supply laptop products from reputable brands. Order now to get a free laptop backpack!",
-                   ThumbnailPicture = ""
+                   ThumbnailPicture = "",
+                   IsActive = true,
+                   IsVisibility = true,
+                   DateCreated = DateTime.Now,
+                   DateUpdated = DateTime.Now
                },
                new Product()
                {
@@ -77,7 +94,11 @@ namespace DreamyShop.EntityFrameworkCore
                    CategoryId = new Guid("7375FAB5-4FF3-43D0-A707-A56062E161BE"),
                    SeoMetaDescription = "",
                    Description = "",
-                   ThumbnailPicture = ""
+                   ThumbnailPicture = "",
+                   IsActive = true,
+                   IsVisibility = true,
+                   DateCreated = DateTime.Now,
+                   DateUpdated = DateTime.Now
                });
 
             modelBuilder.Entity<Manufacturer>().HasData(

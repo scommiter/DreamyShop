@@ -25,7 +25,7 @@ namespace DreamyShop.Api.Controllers
         [HttpGet("getAll")]
         public async Task<IActionResult> GetAllProduct([FromQuery] PagingRequest pagingRequest)
         {
-            var result = await _productService.GetAllProduct(pagingRequest);
+            var result = await _productService.GetAllProductPaging(pagingRequest);
             return Ok(result.Result.Items);
         }
 
