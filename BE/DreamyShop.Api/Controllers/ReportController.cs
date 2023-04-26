@@ -25,7 +25,7 @@ namespace DreamyShop.Api.Controllers
         [HttpPost("exportFileExcell")]
         public async Task<IActionResult> DownloadReport()
         {
-            string reportname = $"Product.xlsx";
+            string reportname = $"ProductReport-{DateTime.Now.ToString("MM/dd/yyyy")}.xlsx";
             var products = await _productService.GetAllProduct();
             if (products.Result.Items.Count == 0)
             {
