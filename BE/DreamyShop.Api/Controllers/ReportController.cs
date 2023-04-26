@@ -34,5 +34,20 @@ namespace DreamyShop.Api.Controllers
             var exportfile = _reportService.ExporttoExcel<ProductDto>(products.Result.Items, reportname);
             return File(exportfile, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", reportname);
         }
+
+        [HttpPost("readExcel")]
+        public async Task<IActionResult> ReadExcel(IFormFile reportFile)
+        {
+            var exportfile = await _reportService.ReadFromExcel(reportFile);
+            if (exportfile.Result == null)
+            {
+                return BadRequest(exportfile);
+            }
+            foreach (var productCreateDto in exportfile.Result)
+            {
+                await _productService.CreateProduct(productCreateDto);
+            }
+            return Ok();
+        }
     }
 }

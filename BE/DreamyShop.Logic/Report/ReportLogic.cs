@@ -1,10 +1,16 @@
-﻿using DreamyShop.Domain;
+﻿using DreamyShop.Common.Exceptions;
+using DreamyShop.Common.Results;
+using DreamyShop.Domain;
 using DreamyShop.Domain.Shared.Dtos;
+using DreamyShop.Domain.Shared.Types;
+using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using OfficeOpenXml.Table;
 using System;
 using System.Drawing;
+using System.Net.Http.Headers;
+using System.Reflection.PortableExecutable;
 using System.Text;
 
 namespace DreamyShop.Logic.Report
@@ -39,9 +45,6 @@ namespace DreamyShop.Logic.Report
             worksheet.Cells[1, 13].Value = "SKU";
             worksheet.Cells[1, 14].Value = "Quantity";
             worksheet.Cells[1, 15].Value = "Price";
-
-            worksheet.Cells[12, 2, 15, 2].Style.Fill.PatternType = ExcelFillStyle.Solid;
-            worksheet.Cells[12, 2, 15, 2].Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml("#ffedb3"));
 
             worksheet.Cells["A1:O1"].Style.Fill.PatternType = ExcelFillStyle.Solid;
             worksheet.Cells["A1:O1"].Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml("#ffedb3"));
@@ -102,6 +105,97 @@ namespace DreamyShop.Logic.Report
             }
 
             return excel.GetAsByteArray();
+        }
+
+        public async Task<ApiResult<List<ProductCreateDto>>> ReadFromExcel(IFormFile reportFile)
+        {
+            var productCreateDtos = new List<ProductCreateDto>();
+            var pathFile = UploadFile(reportFile);
+            if (pathFile == "")
+            {
+                return new ApiErrorResult<List<ProductCreateDto>>((int)ErrorCodes.UploadFailed);
+            }
+            FileInfo existingFile = new FileInfo(pathFile);
+            using (ExcelPackage package = new ExcelPackage(existingFile))
+            {
+                foreach (var sheet in package.Workbook.Worksheets)
+                {
+                   productCreateDtos.Add(GetProductCreateDto(sheet));
+                }
+            }
+            return new ApiSuccessResult<List<ProductCreateDto>>(productCreateDtos);
+        }
+
+        private ProductCreateDto GetProductCreateDto(ExcelWorksheet sheet)
+        {
+            var productDto = new ProductCreateDto();
+            int rowCount = sheet.Dimension.End.Row;
+            for (int row = 2; row <= rowCount; row++)
+            {
+                productDto.Name = sheet.Cells[row, 1].Value.ToString().Trim();
+                productDto.Code = sheet.Cells[row, 2].Value.ToString().Trim();
+                productDto.ThumbnailPicture = "";
+                productDto.ProductType = (ProductType)Enum.Parse(typeof(ProductType), sheet.Cells[row, 3].Value.ToString().Trim());
+                productDto.CategoryName = sheet.Cells[row, 4].Value.ToString().Trim();
+                productDto.ManufacturerName = sheet.Cells[row, 5].Value.ToString().Trim();
+                productDto.Description = sheet.Cells[row, 6].Value.ToString().Trim();
+                productDto.IsActive = (sheet.Cells[row, 7].Value == "true") ? true : false;
+                productDto.IsVisibility = (sheet.Cells[row, 8].Value == "true") ? true : false;
+                var productOptions = new Dictionary<string, List<string>>();
+                var variants = new List<VariantProduct>();
+                int subRow;
+                for (subRow = row; subRow <= rowCount; subRow++)
+                {
+                    if (sheet.Cells[subRow, 9].Value != null)
+                    {
+                        var listOptionValues = sheet.Cells[subRow, 10].Value.ToString().Split(",");
+                        productOptions.Add(sheet.Cells[subRow, 9].Value.ToString().Trim(), listOptionValues.ToList());
+                    }
+                    var listAttributeNames = sheet.Cells[subRow, 11].Value.ToString().Split(",");
+                    variants.Add(new VariantProduct
+                    {
+                        AttributeNames = listAttributeNames.ToList(),
+                        SKU = sheet.Cells[subRow, 12].Value.ToString().Trim(),
+                        Quantity = int.Parse(sheet.Cells[subRow, 13].Value.ToString()),
+                        Price = float.Parse(sheet.Cells[subRow, 14].Value.ToString())
+                    });
+                    if (sheet.Cells[subRow + 1, 1].Value != null)
+                    {
+                        break;
+                    }
+                }
+                productDto.ProductOptions = productOptions;
+                productDto.VariantProducts = variants;
+
+                row = subRow;
+            }
+            return productDto;
+        }
+
+        private string UploadFile(IFormFile reportFile)
+        {
+            var folderName = Path.Combine("Resources", "Reports");
+            var pathToSave = Path.Combine(Directory.GetCurrentDirectory().Replace("DreamyShop.Api", "DreamyShop.Infrastructure"), folderName);
+            // Create the Directory if it is not exist
+            if (!Directory.Exists(pathToSave))
+            {
+                Directory.CreateDirectory(pathToSave);
+            }
+            // MAke sure that only Excel file is used 
+            string dataFileName = Path.GetFileName(reportFile.FileName);
+            string extension = Path.GetExtension(dataFileName);
+            string[] allowedExtsnions = new string[] { ".xls", ".xlsx" };
+            if (!allowedExtsnions.Contains(extension))
+            {
+                return "";
+            }
+            var fileName = ContentDispositionHeaderValue.Parse(reportFile.ContentDisposition).FileName.Trim('"');
+            var fullPath = Path.Combine(pathToSave, fileName);
+            //using (var stream = new FileStream(fullPath, FileMode.Create))
+            //{
+            //    reportFile.CopyTo(stream);
+            //}
+            return fullPath;
         }
 
         private void SetBorderColDetail(ExcelWorksheet worksheet, int row, int col, int range)
