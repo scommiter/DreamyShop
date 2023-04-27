@@ -9,7 +9,7 @@
         public string CoverPicture { get; set; }
         public bool IsVisibility { get; set; }
         public bool IsActive { get; set; }
-        public Guid? ParentId { get; set; }
+        public int? ParentId { get; set; }
         public string? SeoMetaDescription { get; set; }
     }
 }

@@ -7,14 +7,14 @@ namespace DreamyShop.Domain
     public class InventoryTicket : AuditEntity
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(50)]
         public string Code { get; set; }
-        public Guid InventoryId { get; set; }
+        public int InventoryId { get; set; }
         public bool IsApproved { get; set; }
-        public Guid? ApproverId { get; set; }
+        public int? ApproverId { get; set; }
         public DateTime? ApprovedDate { get; set; }
 
         [ForeignKey(nameof(InventoryId))]

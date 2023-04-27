@@ -44,7 +44,7 @@ namespace DreamyShop.Repository.Repositories.Generic
             return _dbSet.AsNoTracking().AsQueryable();
         }
 
-        public async Task<T> GetByIdAsync(Guid id)
+        public async Task<T> GetByIdAsync(int id)
         {
             if (id == null)
             {
@@ -53,7 +53,7 @@ namespace DreamyShop.Repository.Repositories.Generic
             return await _dbSet.FindAsync(id);
         }
 
-        public void Remove(Guid id)
+        public void Remove(int id)
         {
             var result = _dbSet.Find(id);
             try

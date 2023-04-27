@@ -7,9 +7,9 @@ namespace DreamyShop.Domain
     public class PromotionManufacturer : AuditEntity
     {
         [Key]
-        public Guid Id { get; set; }
-        public Guid ManufactureId { get; set; }
-        public Guid PromotionId { get; set; }
+        public int Id { get; set; }
+        public int ManufactureId { get; set; }
+        public int PromotionId { get; set; }
 
         [ForeignKey(nameof(PromotionId))]
         [InverseProperty("PromotionManufacturers")]

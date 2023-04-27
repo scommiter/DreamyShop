@@ -12,7 +12,7 @@ namespace DreamyShop.Domain.Shared.Dtos
     public class UserDto
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(150)]

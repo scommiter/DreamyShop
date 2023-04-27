@@ -7,9 +7,9 @@ namespace DreamyShop.Domain
     public class InventoryTicketItem : TrackEntity
     {
         [Key]
-        public Guid Id { get; set; }
-        public Guid InventionTicketId { get; set; }
-        public Guid ProductId { get; set; }
+        public int Id { get; set; }
+        public int InventionTicketId { get; set; }
+        public int ProductId { get; set; }
         public int Quantity { get; set; }
         public DateTime? ExpiredDate { get; set; }
 

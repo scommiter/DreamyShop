@@ -7,9 +7,9 @@ namespace DreamyShop.Domain
     public class BillDetail
     {
         [Key]
-        public Guid Id { get; set; }
-        public Guid BillId { get; set; }
-        public Guid VariantProductId { get; set; }
+        public int Id { get; set; }
+        public int BillId { get; set; }
+        public int VariantProductId { get; set; }
         public int Quantity { get; set; }
         public double TotalPrice { get; set; }
         public double Tax { get; set; }

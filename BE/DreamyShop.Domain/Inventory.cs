@@ -7,9 +7,9 @@ namespace DreamyShop.Domain
     public class Inventory : TrackEntity
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
-        public Guid ProductId { get; set; }
+        public int ProductId { get; set; }
 
         [Required]
         public int Quantity { get; set; }

@@ -12,7 +12,7 @@ namespace DreamyShop.Logic.Manufacturer
     {
         Task<ApiResult<PageResult<ManufacturerDto>>> GetAllManufacturer(PagingRequest pagingRequest);
         Task<ApiResult<ManufacturerDto>> CreateManufacturer(ManufacturerCreateUpdateDto manufacturerCreateUpdateDto);
-        Task<ApiResult<ManufacturerDto>> UpdateManufacturer(Guid id, ManufacturerCreateUpdateDto manufacturerCreateUpdateDto);
-        Task<ApiResult<bool>> RemoveManufacturer(Guid id);
+        Task<ApiResult<ManufacturerDto>> UpdateManufacturer(int id, ManufacturerCreateUpdateDto manufacturerCreateUpdateDto);
+        Task<ApiResult<bool>> RemoveManufacturer(int id);
     }
 }

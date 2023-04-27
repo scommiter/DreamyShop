@@ -9,8 +9,8 @@ namespace DreamyShop.Domain
     {
         public Product() { }
         [Key]
-        public Guid Id { get; set; }
-        public Guid ManufacturerId { get; set; }
+        public int Id { get; set; }
+        public int ManufacturerId { get; set; }
         [Required]
         [StringLength(250)]
         public string Name { get; set; }
@@ -20,7 +20,7 @@ namespace DreamyShop.Domain
         public string? Slug { get; set; }
         public int? SortOrder { get; set; }
         public ProductType ProductType { get; set; }
-        public Guid CategoryId { get; set; }
+        public int CategoryId { get; set; }
         [StringLength(250)]
         public string? SeoMetaDescription { get; set; }
         public string? Description { get; set; }

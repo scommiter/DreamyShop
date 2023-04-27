@@ -45,7 +45,7 @@ namespace DreamyShop.Api.Controllers
         [HttpPut("updateManufacturer")]
         [Authorize]
         [Member]
-        public async Task<IActionResult> UpdateManufacturer(Guid id, [FromForm] ManufacturerCreateUpdateDto manufacturerCreateUpdateDto)
+        public async Task<IActionResult> UpdateManufacturer(int id, [FromForm] ManufacturerCreateUpdateDto manufacturerCreateUpdateDto)
         {
             if (!ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace DreamyShop.Api.Controllers
         [HttpDelete("removeManufacturer")]
         [Authorize]
         [Member]
-        public async Task<IActionResult> RemoveManufacturer(Guid id)
+        public async Task<IActionResult> RemoveManufacturer(int id)
         {
             if (!ModelState.IsValid)
             {

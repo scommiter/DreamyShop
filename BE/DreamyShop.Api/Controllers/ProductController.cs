@@ -45,7 +45,7 @@ namespace DreamyShop.Api.Controllers
         [HttpPut("updateProduct")]
         //[Authorize]
         //[Member]
-        public async Task<IActionResult> UpdateProduct(Guid id, [FromBody] ProductUpdateDto productCreateUpdateDto)
+        public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductUpdateDto productCreateUpdateDto)
         {
             if (!ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace DreamyShop.Api.Controllers
         [HttpDelete("removeProduct")]
         //[Authorize]
         //[Member]
-        public async Task<IActionResult> RemoveProduct(Guid id)
+        public async Task<IActionResult> RemoveProduct(int id)
         {
             if (!ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpPost("uploadImage"), DisableRequestSizeLimit]
-        public async Task<IActionResult> Upload(Guid productId, IFormFile file)
+        public async Task<IActionResult> Upload(int productId, IFormFile file)
         {
             if (!ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpPost("uploadMultipleImage"), DisableRequestSizeLimit]
-        public async Task<IActionResult> UploadMultipleFile(Guid productId, List<IFormFile> files)
+        public async Task<IActionResult> UploadMultipleFile(int productId, List<IFormFile> files)
         {
             if (!ModelState.IsValid)
             {

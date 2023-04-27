@@ -13,7 +13,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "Attributes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
@@ -34,8 +35,9 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "Inventories",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -49,7 +51,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "Manufacturers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Slug = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -67,7 +70,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "ProductCategories",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Slug = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -75,7 +79,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     CoverPicture = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsVisibility = table.Column<bool>(type: "bit", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    ParentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ParentId = table.Column<int>(type: "int", nullable: true),
                     SeoMetaDescription = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     StatusID = table.Column<byte>(type: "tinyint", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -90,7 +94,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "Promotions",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     CouponCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RequireUseCouponCode = table.Column<bool>(type: "bit", nullable: false),
@@ -127,7 +132,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     FullName = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     GenderType = table.Column<bool>(type: "bit", nullable: true),
                     Dob = table.Column<DateTime>(type: "date", nullable: true),
@@ -153,11 +159,12 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "InventoryTickets",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    InventoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    InventoryId = table.Column<int>(type: "int", nullable: false),
                     IsApproved = table.Column<bool>(type: "bit", nullable: false),
-                    ApproverId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ApproverId = table.Column<int>(type: "int", nullable: true),
                     ApprovedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     StatusID = table.Column<byte>(type: "tinyint", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -178,14 +185,15 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ManufacturerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ManufacturerId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Slug = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: true),
                     ProductType = table.Column<int>(type: "int", nullable: false),
-                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     SeoMetaDescription = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ThumbnailPicture = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
@@ -216,9 +224,10 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "PromotionCategories",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PromotionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    PromotionId = table.Column<int>(type: "int", nullable: false),
                     StatusID = table.Column<byte>(type: "tinyint", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -238,9 +247,10 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "PromotionManufacturers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ManufactureId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PromotionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ManufactureId = table.Column<int>(type: "int", nullable: false),
+                    PromotionId = table.Column<int>(type: "int", nullable: false),
                     StatusID = table.Column<byte>(type: "tinyint", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -260,9 +270,10 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "PromotionProducts",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PromotionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    PromotionId = table.Column<int>(type: "int", nullable: false),
                     StatusID = table.Column<byte>(type: "tinyint", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -282,8 +293,9 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "Bills",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     TotalMoney = table.Column<double>(type: "float", nullable: false),
                     ShippingFee = table.Column<double>(type: "float", nullable: false),
                     Discount = table.Column<int>(type: "int", nullable: false),
@@ -315,8 +327,9 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "Carts",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -334,8 +347,9 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "Roles",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserID = table.Column<int>(type: "int", nullable: false),
                     RoleType = table.Column<byte>(type: "tinyint", nullable: false),
                     ProfileUrl = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
                     StatusID = table.Column<byte>(type: "tinyint", nullable: false),
@@ -357,9 +371,10 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "InventoryTicketItems",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    InventionTicketId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    InventionTicketId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     ExpiredDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -380,8 +395,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "ProductAttributes",
                 columns: table => new
                 {
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AttributeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    AttributeId = table.Column<int>(type: "int", nullable: false),
                     StatusID = table.Column<byte>(type: "tinyint", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -407,9 +422,10 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "ProductAttributeValues",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AttributeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AttributeId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -435,14 +451,15 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "ProductReviews",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ParentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    ParentId = table.Column<int>(type: "int", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Rating = table.Column<double>(type: "float", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Content = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -461,7 +478,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "ProductTags",
                 columns: table => new
                 {
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     TagId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -487,8 +504,9 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "ProductVariants",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     SKU = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsVisibility = table.Column<bool>(type: "bit", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
@@ -514,9 +532,10 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "BillDetails",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BillId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    VariantProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BillId = table.Column<int>(type: "int", nullable: false),
+                    VariantProductId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     TotalPrice = table.Column<double>(type: "float", nullable: false),
                     Tax = table.Column<double>(type: "float", nullable: false),
@@ -543,9 +562,10 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "CartDetails",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CartId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    VariantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CartId = table.Column<int>(type: "int", nullable: false),
+                    VariantId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -570,8 +590,9 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "ImageProductVariants",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductVariantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductVariantId = table.Column<int>(type: "int", nullable: false),
                     Path = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -591,10 +612,10 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 name: "ProductVariantValues",
                 columns: table => new
                 {
-                    ProductVariantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AttributeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductAttributeValueId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductVariantId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    AttributeId = table.Column<int>(type: "int", nullable: false),
+                    ProductAttributeValueId = table.Column<int>(type: "int", nullable: false),
                     StatusID = table.Column<byte>(type: "tinyint", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -631,9 +652,9 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "DateCreated", "DateUpdated", "IsActive", "IsUnique", "IsVisibility", "Name", "Note", "SortOrder", "StatusID" },
                 values: new object[,]
                 {
-                    { new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"), "COLOR", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, true, "COLOR", "Product color", 1, (byte)0 },
-                    { new Guid("827ca5b7-0087-4256-bec0-399199a518d9"), "MATERIAL", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, true, "MATERIAL", "", 3, (byte)0 },
-                    { new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"), "SIZE", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, true, "SIZE", "", 2, (byte)0 }
+                    { 1, "COLOR", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, true, "COLOR", "Product color", 1, (byte)0 },
+                    { 2, "SIZE", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, true, "SIZE", "", 2, (byte)0 },
+                    { 3, "MATERIAL", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, true, "MATERIAL", "", 3, (byte)0 }
                 });
 
             migrationBuilder.InsertData(
@@ -641,11 +662,11 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "Country", "CoverPicture", "IsActive", "IsVisibility", "Name", "Slug" },
                 values: new object[,]
                 {
-                    { new Guid("41c2c299-ea5f-4c23-992d-e6f043f1b26f"), "GCCI", "Italy", "", true, true, "Gucci", "gucci" },
-                    { new Guid("57a5f678-43f0-4648-92d8-16bd09d7143e"), "SN", "Japan", "", true, true, "Sony", "sony" },
-                    { new Guid("69d0372b-dbf5-4b70-9beb-0e4ea77f243a"), "asus", "Taiwan", "", true, true, "ASUS", "asus" },
-                    { new Guid("80cad838-29c7-4a02-81c0-9ebe78a0a273"), "IPAPL", "US", "", true, true, "Apple", "apple" },
-                    { new Guid("b9be517b-72aa-46f1-9a98-a0b993cd2cf7"), "dell", "Texas-USA", "", true, true, "DELL", "dell" }
+                    { 1, "SN", "Japan", "", true, true, "Sony", "sony" },
+                    { 2, "GCCI", "Italy", "", true, true, "Gucci", "gucci" },
+                    { 3, "IPAPL", "US", "", true, true, "Apple", "apple" },
+                    { 4, "dell", "Texas-USA", "", true, true, "DELL", "dell" },
+                    { 5, "asus", "Taiwan", "", true, true, "ASUS", "asus" }
                 });
 
             migrationBuilder.InsertData(
@@ -653,10 +674,10 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CoverPicture", "DateCreated", "DateUpdated", "IsActive", "IsVisibility", "Name", "ParentId", "SeoMetaDescription", "Slug", "SortOrder", "StatusID" },
                 values: new object[,]
                 {
-                    { new Guid("2ed8e62d-2f2e-4957-ae81-8a07b0bcd443"), "LP", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, "Laptop", null, "", "laptop", 3, (byte)0 },
-                    { new Guid("7375fab5-4ff3-43d0-a707-a56062e161be"), "JLY", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, "Jewelry", null, "", "jly", 4, (byte)0 },
-                    { new Guid("96bff1b2-3715-4f10-90d3-aaabb332e0e9"), "CMR", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, "Camera", null, "", "camera", 1, (byte)0 },
-                    { new Guid("efd560a8-c65b-439c-af43-765da733f3c1"), "IP", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, "Iphone", null, "", "iphone", 2, (byte)0 }
+                    { 1, "CMR", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, "Camera", null, "", "camera", 1, (byte)0 },
+                    { 2, "IP", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, "Iphone", null, "", "iphone", 2, (byte)0 },
+                    { 3, "LP", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, "Laptop", null, "", "laptop", 3, (byte)0 },
+                    { 4, "JLY", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, "Jewelry", null, "", "jly", 4, (byte)0 }
                 });
 
             migrationBuilder.InsertData(
@@ -664,11 +685,11 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "CategoryId", "Code", "DateCreated", "DateUpdated", "Description", "IsActive", "IsVisibility", "ManufacturerId", "Name", "ProductType", "SeoMetaDescription", "Slug", "SortOrder", "StatusID", "ThumbnailPicture" },
                 values: new object[,]
                 {
-                    { new Guid("1747cdf9-3acb-4001-8f52-ee7f387f8efb"), new Guid("96bff1b2-3715-4f10-90d3-aaabb332e0e9"), "CMRSKS", new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3344), new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3355), "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring", true, true, new Guid("57a5f678-43f0-4648-92d8-16bd09d7143e"), "Camera-SKS", 1, "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring", "camera-sks", 1, (byte)0, "" },
-                    { new Guid("215e9dee-1d6c-40f4-9233-bb810509adaa"), new Guid("2ed8e62d-2f2e-4957-ae81-8a07b0bcd443"), "DELLDEMON", new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3375), new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3376), "Buy genuine Laptop at our store with best quality and affordable price. We supply laptop products from reputable brands. Order now to get a free laptop backpack!", true, true, new Guid("b9be517b-72aa-46f1-9a98-a0b993cd2cf7"), "Laptop DELL DEMON", 2, "", "dell-demon", 4, (byte)0, "" },
-                    { new Guid("30299235-6937-41b7-a76d-14584f5f856a"), new Guid("efd560a8-c65b-439c-af43-765da733f3c1"), "IP14XSM", new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3371), new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3372), "", true, true, new Guid("80cad838-29c7-4a02-81c0-9ebe78a0a273"), "Iphone 14 XSMax", 2, "Find out about Apple's latest line of iPhones at Apple Store Vietnam. Order online and get instant deals.", "ip14-xsmax", 3, (byte)0, "" },
-                    { new Guid("85f8b0c3-cb8d-4ccb-9544-19daad6ef352"), new Guid("96bff1b2-3715-4f10-90d3-aaabb332e0e9"), "CMRUFG", new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3366), new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3367), "XYZ wireless security camera with high resolution.", true, true, new Guid("57a5f678-43f0-4648-92d8-16bd09d7143e"), "Camera-UFG", 1, "XYZ wireless security camera with high resolution, built-in motion sensor, supports wifi connection, helps you observe your family, home, shop, office whenever and wherever.", "camera-ufg", 2, (byte)0, "" },
-                    { new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new Guid("7375fab5-4ff3-43d0-a707-a56062e161be"), "CLBGCCI", new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3379), new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3379), "", true, true, new Guid("41c2c299-ea5f-4c23-992d-e6f043f1b26f"), "Crocodile leather bag", 2, "", "clbcci", 4, (byte)0, "" }
+                    { 1, 1, "CMRSKS", new DateTime(2023, 4, 27, 13, 55, 48, 841, DateTimeKind.Local).AddTicks(5746), new DateTime(2023, 4, 27, 13, 55, 48, 841, DateTimeKind.Local).AddTicks(5758), "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring", true, true, 1, "Camera-SKS", 1, "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring", "camera-sks", 1, (byte)0, "" },
+                    { 2, 1, "CMRUFG", new DateTime(2023, 4, 27, 13, 55, 48, 841, DateTimeKind.Local).AddTicks(5760), new DateTime(2023, 4, 27, 13, 55, 48, 841, DateTimeKind.Local).AddTicks(5760), "XYZ wireless security camera with high resolution.", true, true, 4, "Camera-UFG", 1, "XYZ wireless security camera with high resolution, built-in motion sensor, supports wifi connection, helps you observe your family, home, shop, office whenever and wherever.", "camera-ufg", 2, (byte)0, "" },
+                    { 3, 2, "IP14XSM", new DateTime(2023, 4, 27, 13, 55, 48, 841, DateTimeKind.Local).AddTicks(5762), new DateTime(2023, 4, 27, 13, 55, 48, 841, DateTimeKind.Local).AddTicks(5762), "", true, true, 3, "Iphone 14 XSMax", 2, "Find out about Apple's latest line of iPhones at Apple Store Vietnam. Order online and get instant deals.", "ip14-xsmax", 3, (byte)0, "" },
+                    { 4, 3, "DELLDEMON", new DateTime(2023, 4, 27, 13, 55, 48, 841, DateTimeKind.Local).AddTicks(5763), new DateTime(2023, 4, 27, 13, 55, 48, 841, DateTimeKind.Local).AddTicks(5764), "Buy genuine Laptop at our store with best quality and affordable price. We supply laptop products from reputable brands. Order now to get a free laptop backpack!", true, true, 4, "Laptop DELL DEMON", 2, "", "dell-demon", 4, (byte)0, "" },
+                    { 5, 4, "CLBGCCI", new DateTime(2023, 4, 27, 13, 55, 48, 841, DateTimeKind.Local).AddTicks(5765), new DateTime(2023, 4, 27, 13, 55, 48, 841, DateTimeKind.Local).AddTicks(5765), "", true, true, 2, "Crocodile leather bag", 2, "", "clbcci", 4, (byte)0, "" }
                 });
 
             migrationBuilder.InsertData(
@@ -676,15 +697,15 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "AttributeId", "DateCreated", "DateUpdated", "ProductId", "Value" },
                 values: new object[,]
                 {
-                    { new Guid("2c2fcf7c-fa5a-4b6f-ac30-48a2a6bdb4b5"), new Guid("827ca5b7-0087-4256-bec0-399199a518d9"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), "Cotton" },
-                    { new Guid("3d369a2c-6bcb-468c-b296-64d96a84258a"), new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), "Blue" },
-                    { new Guid("3d44b2ac-0bd6-433b-9858-abb84d74ea2e"), new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), "Red" },
-                    { new Guid("4267feee-9a5b-4156-90b0-9e3585a8af22"), new Guid("827ca5b7-0087-4256-bec0-399199a518d9"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), "Crocodile skin" },
-                    { new Guid("59327bba-3a1d-40ad-82c2-99a019e9d3f6"), new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("30299235-6937-41b7-a76d-14584f5f856a"), "White" },
-                    { new Guid("64e5d43e-a34c-4eab-8672-f7162dd63803"), new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("30299235-6937-41b7-a76d-14584f5f856a"), "Black" },
-                    { new Guid("6bb0a02b-d294-496a-b496-994d3dfaa6f2"), new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), "L" },
-                    { new Guid("a2ee0ac5-663d-4d97-b449-ed8fe48fada3"), new Guid("827ca5b7-0087-4256-bec0-399199a518d9"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), "Leather" },
-                    { new Guid("dfdbe11d-c978-4cc4-9a9e-cafc19805ac8"), new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), "M" }
+                    { 1, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Red" },
+                    { 2, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Blue" },
+                    { 3, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "M" },
+                    { 4, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "L" },
+                    { 5, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Leather" },
+                    { 6, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Cotton" },
+                    { 7, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Crocodile skin" },
+                    { 8, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "White" },
+                    { 9, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Black" }
                 });
 
             migrationBuilder.InsertData(
@@ -692,9 +713,9 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 columns: new[] { "AttributeId", "ProductId", "DateCreated", "DateUpdated", "StatusID" },
                 values: new object[,]
                 {
-                    { new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { new Guid("827ca5b7-0087-4256-bec0-399199a518d9"), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 }
+                    { 1, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
+                    { 2, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
+                    { 3, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 }
                 });
 
             migrationBuilder.InsertData(
@@ -702,11 +723,11 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "DateCreated", "DateUpdated", "Description", "IsActive", "IsVisibility", "Price", "ProductId", "Quantity", "SKU", "StatusID" },
                 values: new object[,]
                 {
-                    { new Guid("0a134c80-0493-458a-9f02-16361f0df5c7"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 1250.0, new Guid("30299235-6937-41b7-a76d-14584f5f856a"), 20, "IP14-B", (byte)0 },
-                    { new Guid("35b39a36-5970-42aa-b996-55170555f85b"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 4500.0, new Guid("e914fd7b-9af8-403e-9f32-803346659264"), 15, "BAGGUCCI-B", (byte)0 },
-                    { new Guid("afd19304-3a45-4304-b2bb-1040f000c369"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 5000.0, new Guid("e914fd7b-9af8-403e-9f32-803346659264"), 10, "BAGGUCCI-A", (byte)0 },
-                    { new Guid("f2ba4ab5-46c4-4ce9-baaf-2c98972d45b0"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 9500.0, new Guid("e914fd7b-9af8-403e-9f32-803346659264"), 5, "BAGGUCCI-VIP", (byte)0 },
-                    { new Guid("fc364f29-fcb9-44b7-8854-dfce09824c35"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 1200.0, new Guid("30299235-6937-41b7-a76d-14584f5f856a"), 12, "IP14-A", (byte)0 }
+                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 1200.0, 3, 12, "IP14-A", (byte)0 },
+                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 1250.0, 3, 20, "IP14-B", (byte)0 },
+                    { 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 5000.0, 5, 10, "BAGGUCCI-A", (byte)0 },
+                    { 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 4500.0, 5, 15, "BAGGUCCI-B", (byte)0 },
+                    { 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 9500.0, 5, 5, "BAGGUCCI-VIP", (byte)0 }
                 });
 
             migrationBuilder.InsertData(
@@ -714,16 +735,16 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 columns: new[] { "AttributeId", "ProductAttributeValueId", "ProductId", "ProductVariantId", "DateCreated", "DateUpdated", "StatusID" },
                 values: new object[,]
                 {
-                    { new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"), new Guid("64e5d43e-a34c-4eab-8672-f7162dd63803"), new Guid("30299235-6937-41b7-a76d-14584f5f856a"), new Guid("0a134c80-0493-458a-9f02-16361f0df5c7"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"), new Guid("3d369a2c-6bcb-468c-b296-64d96a84258a"), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new Guid("35b39a36-5970-42aa-b996-55170555f85b"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { new Guid("827ca5b7-0087-4256-bec0-399199a518d9"), new Guid("2c2fcf7c-fa5a-4b6f-ac30-48a2a6bdb4b5"), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new Guid("35b39a36-5970-42aa-b996-55170555f85b"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"), new Guid("6bb0a02b-d294-496a-b496-994d3dfaa6f2"), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new Guid("35b39a36-5970-42aa-b996-55170555f85b"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"), new Guid("3d44b2ac-0bd6-433b-9858-abb84d74ea2e"), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new Guid("afd19304-3a45-4304-b2bb-1040f000c369"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { new Guid("827ca5b7-0087-4256-bec0-399199a518d9"), new Guid("a2ee0ac5-663d-4d97-b449-ed8fe48fada3"), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new Guid("afd19304-3a45-4304-b2bb-1040f000c369"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { new Guid("f9885dfb-02a8-4065-a4aa-18b29e48ee89"), new Guid("dfdbe11d-c978-4cc4-9a9e-cafc19805ac8"), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new Guid("afd19304-3a45-4304-b2bb-1040f000c369"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"), new Guid("3d369a2c-6bcb-468c-b296-64d96a84258a"), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new Guid("f2ba4ab5-46c4-4ce9-baaf-2c98972d45b0"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { new Guid("827ca5b7-0087-4256-bec0-399199a518d9"), new Guid("4267feee-9a5b-4156-90b0-9e3585a8af22"), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new Guid("f2ba4ab5-46c4-4ce9-baaf-2c98972d45b0"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"), new Guid("59327bba-3a1d-40ad-82c2-99a019e9d3f6"), new Guid("30299235-6937-41b7-a76d-14584f5f856a"), new Guid("fc364f29-fcb9-44b7-8854-dfce09824c35"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 }
+                    { 1, 8, 3, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
+                    { 1, 9, 3, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
+                    { 1, 1, 5, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
+                    { 2, 3, 5, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
+                    { 3, 5, 5, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
+                    { 1, 2, 5, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
+                    { 2, 4, 5, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
+                    { 3, 6, 5, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
+                    { 1, 2, 5, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
+                    { 2, 7, 5, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 }
                 });
 
             migrationBuilder.CreateIndex(

@@ -23,7 +23,7 @@ namespace DreamyShop.Api.Controllers
         [HttpPost("assignRole")]
         [Authorize]
         [Admin]
-        public async Task<IActionResult> AssignRole(Guid userId, [FromForm] List<byte> roleIds)
+        public async Task<IActionResult> AssignRole(int userId, [FromForm] List<byte> roleIds)
         {
             if (!ModelState.IsValid)
             {
@@ -36,7 +36,7 @@ namespace DreamyShop.Api.Controllers
         [HttpPost("updateRole")]
         [Authorize]
         [Admin]
-        public async Task<IActionResult> UpdateRole(Guid userId, [FromForm] List<byte> roleIds)
+        public async Task<IActionResult> UpdateRole(int userId, [FromForm] List<byte> roleIds)
         {
             if (!ModelState.IsValid)
             {

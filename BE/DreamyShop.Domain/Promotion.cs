@@ -7,7 +7,7 @@ namespace DreamyShop.Domain
     public class Promotion : AuditEntity
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         [Required]
         [StringLength(250)]
         public string Name { get; set; }

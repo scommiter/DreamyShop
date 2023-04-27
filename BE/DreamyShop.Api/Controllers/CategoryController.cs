@@ -42,7 +42,7 @@ namespace DreamyShop.Api.Controllers
         [HttpPut("updateCategory")]
         [Authorize]
         [Member]
-        public async Task<IActionResult> UpdateCategory(Guid id, [FromForm] CategoryCreateUpdateDto categoryCreateUpdateDto)
+        public async Task<IActionResult> UpdateCategory(int id, [FromForm] CategoryCreateUpdateDto categoryCreateUpdateDto)
         {
             if (!ModelState.IsValid)
             {
@@ -55,7 +55,7 @@ namespace DreamyShop.Api.Controllers
         [HttpDelete("removeCategory")]
         [Authorize]
         [Member]
-        public async Task<IActionResult> RemoveCategory(Guid id)
+        public async Task<IActionResult> RemoveCategory(int id)
         {
             if (!ModelState.IsValid)
             {

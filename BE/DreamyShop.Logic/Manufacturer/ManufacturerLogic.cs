@@ -47,7 +47,7 @@ namespace DreamyShop.Logic.Manufacturer
             return new ApiSuccessResult<PageResult<ManufacturerDto>>(pageResult);
         }
 
-        public async Task<ApiResult<bool>> RemoveManufacturer(Guid id)
+        public async Task<ApiResult<bool>> RemoveManufacturer(int id)
         {
             var manufacturer = await _repository.Manufacturer.GetByIdAsync(id);
             if (manufacturer == null)
@@ -57,7 +57,7 @@ namespace DreamyShop.Logic.Manufacturer
             return new ApiSuccessResult<bool>(true);
         }
 
-        public async Task<ApiResult<ManufacturerDto>> UpdateManufacturer(Guid id, ManufacturerCreateUpdateDto manufacturerCreateUpdateDto)
+        public async Task<ApiResult<ManufacturerDto>> UpdateManufacturer(int id, ManufacturerCreateUpdateDto manufacturerCreateUpdateDto)
         {
             var manufacturer = await _repository.Manufacturer.GetByIdAsync(id);
             if (manufacturer == null)

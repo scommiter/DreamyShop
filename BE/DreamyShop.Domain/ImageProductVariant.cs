@@ -12,8 +12,8 @@ namespace DreamyShop.Domain
     public class ImageProductVariant : TrackEntity
     {
         [Key]
-        public Guid Id { get; set; }
-        public Guid ProductVariantId { get; set; }
+        public int Id { get; set; }
+        public int ProductVariantId { get; set; }
         public string Path { get; set; }
 
         [ForeignKey(nameof(ProductVariantId))]

@@ -7,9 +7,9 @@ namespace DreamyShop.Domain
     public class Role : AuditEntity
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
-        public Guid UserID { get; set; }
+        public int UserID { get; set; }
         public byte RoleType { get; set; }
 
         [StringLength(2000)]

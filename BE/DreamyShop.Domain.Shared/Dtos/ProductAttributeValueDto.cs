@@ -4,9 +4,9 @@ namespace DreamyShop.Domain.Shared.Dtos
 {
     public class ProductAttributeValueDto
     {
-        public Guid Id { get; set; }
-        public Guid ProductId { get; set; }
-        public Guid AttributeId { get; set; }
+        public int Id { get; set; }
+        public int ProductId { get; set; }
+        public int AttributeId { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
 
@@ -16,10 +16,10 @@ namespace DreamyShop.Domain.Shared.Dtos
         public string? TextValue { get; set; }
         public string? VarcharValue { get; set; }
 
-        public Guid? DateTimeId { get; set; }
-        public Guid? DecimalId { get; set; }
-        public Guid? IntId { get; set; }
-        public Guid? TextId { get; set; }
-        public Guid? VarcharId { get; set; }
+        public int? DateTimeId { get; set; }
+        public int? DecimalId { get; set; }
+        public int? IntId { get; set; }
+        public int? TextId { get; set; }
+        public int? VarcharId { get; set; }
     }
 }

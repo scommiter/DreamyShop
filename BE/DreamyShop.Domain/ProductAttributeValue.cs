@@ -9,10 +9,10 @@ namespace DreamyShop.Domain
         public ProductAttributeValue() { }
 
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
-        public Guid AttributeId { get; set; }
-        public Guid ProductId { get; set; }
+        public int AttributeId { get; set; }
+        public int ProductId { get; set; }
         public string Value { get; set; }
 
         [ForeignKey(nameof(AttributeId))]

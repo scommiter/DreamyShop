@@ -7,7 +7,7 @@ namespace DreamyShop.Domain
     public class User : AuditEntity
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(150)]

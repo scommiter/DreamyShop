@@ -48,7 +48,7 @@ namespace DreamyShop.Logic.Category
             return new ApiSuccessResult<CategoryDto>(_mapper.Map<CategoryDto>(newCategory));
         }
 
-        public async Task<ApiResult<CategoryDto>> UpdateCategory(Guid id, CategoryCreateUpdateDto categoryCreateUpdateDto)
+        public async Task<ApiResult<CategoryDto>> UpdateCategory(int id, CategoryCreateUpdateDto categoryCreateUpdateDto)
         {
             var category = await _repository.Product.GetByIdAsync(id);
             if (category == null)
@@ -60,7 +60,7 @@ namespace DreamyShop.Logic.Category
             return new ApiSuccessResult<CategoryDto>(_mapper.Map<CategoryDto>(category));
         }
 
-        public async Task<ApiResult<bool>> RemoveCategory(Guid id)
+        public async Task<ApiResult<bool>> RemoveCategory(int id)
         {
             var category = await _repository.Category.GetByIdAsync(id);
             if (category == null)

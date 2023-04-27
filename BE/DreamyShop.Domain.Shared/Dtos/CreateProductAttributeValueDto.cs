@@ -8,8 +8,8 @@ namespace DreamyShop.Domain.Shared.Dtos
 {
     public class CreateProductAttributeValueDto
     {
-        public Guid ProductId { get; set; }
-        public Guid AttributeId { get; set; }
+        public int ProductId { get; set; }
+        public int AttributeId { get; set; }
 
         public DateTime? DateTimeValue { get; set; }
         public decimal? DecimalValue { get; set; }

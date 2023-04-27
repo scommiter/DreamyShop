@@ -8,8 +8,8 @@ namespace DreamyShop.Domain.Shared.Dtos
 {
     public class ProductVariantDto
     {
-        public Guid Id { get; set; }
-        public Guid ProductId { get; set; }
+        public int Id { get; set; }
+        public int ProductId { get; set; }
         public string SKU { get; set; }
         public bool IsVisibility { get; set; }
         public bool IsActive { get; set; }

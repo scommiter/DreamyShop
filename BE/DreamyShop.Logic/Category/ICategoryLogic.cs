@@ -12,7 +12,7 @@ namespace DreamyShop.Logic.Category
     {
         Task<ApiResult<PageResult<CategoryDto>>> GetAllCategory(PagingRequest pagingRequest);
         Task<ApiResult<CategoryDto>> CreateCategory(CategoryCreateUpdateDto categoryCreateUpdateDto);
-        Task<ApiResult<CategoryDto>> UpdateCategory(Guid id, CategoryCreateUpdateDto categoryCreateUpdateDto);
-        Task<ApiResult<bool>> RemoveCategory(Guid id);
+        Task<ApiResult<CategoryDto>> UpdateCategory(int id, CategoryCreateUpdateDto categoryCreateUpdateDto);
+        Task<ApiResult<bool>> RemoveCategory(int id);
     }
 }

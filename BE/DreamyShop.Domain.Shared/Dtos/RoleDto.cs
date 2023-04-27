@@ -9,7 +9,7 @@ namespace DreamyShop.Domain.Shared.Dtos
 {
     public class RoleDto
     {
-        public Guid UserID { get; set; }
+        public int UserID { get; set; }
         public byte RoleType { get; set; }
         public string? ProfileUrl { get; set; }
     }

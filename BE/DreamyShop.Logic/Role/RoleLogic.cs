@@ -27,7 +27,7 @@ namespace DreamyShop.Logic.Role
             _repository = repository;
         }
 
-        public async Task<ApiResult<bool>> AssignRole(Guid userId, List<byte> roleIds)
+        public async Task<ApiResult<bool>> AssignRole(int userId, List<byte> roleIds)
         {
             var user = await _repository.User.GetByIdAsync(userId);
             if (user == null)
@@ -36,7 +36,6 @@ namespace DreamyShop.Logic.Role
             }
             var rolesToAdd = roleIds.Select(r => new Domain.Role
             {
-                Id = Guid.NewGuid(),
                 UserID = userId,
                 RoleType = r,
                 ProfileUrl = "",
@@ -48,7 +47,7 @@ namespace DreamyShop.Logic.Role
             return new ApiSuccessResult<bool>(true);
         }
 
-        public async Task<ApiResult<bool>> UpdateRole(Guid userId, List<byte> roleIds)
+        public async Task<ApiResult<bool>> UpdateRole(int userId, List<byte> roleIds)
         {
             var user = await _repository.User.GetByIdAsync(userId);
             if (user == null)
@@ -63,7 +62,6 @@ namespace DreamyShop.Logic.Role
 
             var rolesToAdd = roleIds.Select(r => new Domain.Role
             {
-                Id = Guid.NewGuid(),
                 UserID = userId,
                 RoleType = r,
                 ProfileUrl = "",

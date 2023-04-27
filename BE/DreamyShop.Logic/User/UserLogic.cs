@@ -92,7 +92,7 @@ namespace DreamyShop.Logic.User
 
         public async Task<ApiResult<bool>> UpdateUser(string userId, UserUpdateDto userUpdateDto)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Id == Guid.Parse(userId));
+            var user = _context.Users.FirstOrDefault(u => u.Id == int.Parse(userId));
             if (user == null)
             {
                 return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
@@ -113,7 +113,7 @@ namespace DreamyShop.Logic.User
             {
                 return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
             }
-            var user = _context.Users.FirstOrDefault(u => u.Id == Guid.Parse(userId));
+            var user = _context.Users.FirstOrDefault(u => u.Id == int.Parse(userId));
             if (user == null)
             {
                 return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
@@ -123,7 +123,7 @@ namespace DreamyShop.Logic.User
             {
                 return new ApiErrorResult<bool>((int)ErrorCodes.UserIsUnauthorized);
             }
-            _repository.User.Remove(Guid.Parse(userId));
+            _repository.User.Remove(int.Parse(userId));
             _repository.Save();
             return new ApiSuccessResult<bool>(true);
         }

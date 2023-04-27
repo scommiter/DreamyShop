@@ -9,8 +9,8 @@ namespace DreamyShop.Domain
     public class Bill : AuditEntity
     {
         [Key]
-        public Guid Id { get; set; }
-        public Guid UserId { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
         [Required]
         public double TotalMoney { get; set; }
         [Required]

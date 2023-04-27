@@ -9,7 +9,7 @@ namespace DreamyShop.Domain
     {
         public Attribute() { }
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         [Required]
         [StringLength(50)]
         public string Code { get; set; }

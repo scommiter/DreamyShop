@@ -8,7 +8,7 @@ namespace DreamyShop.Domain
     {
         public ProductCategory() { }
         public ProductCategory(
-            Guid id,
+            int id,
             string name,
             string code,
             string slug,
@@ -16,7 +16,7 @@ namespace DreamyShop.Domain
             string coverPicture,
             bool isVisibility,
             bool isActive,
-            Guid? parentId,
+            int? parentId,
             string seoMetaDescription)
         {
             Id = id;
@@ -31,7 +31,7 @@ namespace DreamyShop.Domain
             SeoMetaDescription = seoMetaDescription;
         }
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         [Required]
         [StringLength(250)]
         public string Name { get; set; }
@@ -43,7 +43,7 @@ namespace DreamyShop.Domain
         public string CoverPicture { get; set; }
         public bool IsVisibility { get; set; }
         public bool IsActive { get; set; }
-        public Guid? ParentId { get; set; }
+        public int? ParentId { get; set; }
         [StringLength(250)]
         public string SeoMetaDescription { get; set; }
 

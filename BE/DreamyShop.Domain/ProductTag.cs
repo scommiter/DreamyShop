@@ -8,7 +8,7 @@ namespace DreamyShop.Domain
     {
         [Key]
         [Column(Order = 1)]
-        public Guid ProductId { get; set; }
+        public int ProductId { get; set; }
 
         [Key]
         [Column(Order = 2)]

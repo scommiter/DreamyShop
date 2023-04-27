@@ -8,11 +8,11 @@ namespace DreamyShop.Domain
     {
         [Key]
         [Column(Order = 1)]
-        public Guid ProductId { get; set; }
+        public int ProductId { get; set; }
 
         [Key]
         [Column(Order = 2)]
-        public Guid AttributeId { get; set; }
+        public int AttributeId { get; set; }
 
         [ForeignKey(nameof(ProductId))]
         [InverseProperty("ProductAttributes")]

@@ -7,8 +7,8 @@ namespace DreamyShop.Domain
     public class Cart
     {
         [Key]
-        public Guid Id { get; set; }
-        public Guid UserId { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
         public bool Status { get; set; }
 
         [ForeignKey(nameof(UserId))]

@@ -74,7 +74,7 @@ namespace DreamyShop.Logic.Product
                               select new
                               {
                                   Product = p,
-                                  ProductVariantId = pvv.ProductVariantId == null ? Guid.Empty : pvv.ProductVariantId,
+                                  ProductVariantId = pvv.ProductVariantId == null ? new int() : pvv.ProductVariantId,
                                   ManufacturerName = m.Name,
                                   CategoryName = c.Name,
                                   pv,
@@ -150,7 +150,7 @@ namespace DreamyShop.Logic.Product
         /// <param name="attributes"></param>
         /// <param name="isUpdate"></param>
         private async void AddOrUpdateProductVariantValue(
-            Guid productId, 
+            int productId, 
             List<VariantProduct> productVariantValues, 
             Dictionary<string, List<string>> productOptions,
             List<Domain.Attribute> attributes)
@@ -177,7 +177,7 @@ namespace DreamyShop.Logic.Product
         /// </summary>
         /// <param name="variantProducts"></param>
         /// <param name="newProductId"></param>
-        private async void AddOrUpdateProductVariant(List<VariantProduct> variantProducts, Guid productId, bool isUpdate)
+        private async void AddOrUpdateProductVariant(List<VariantProduct> variantProducts, int productId, bool isUpdate)
         {
             if(isUpdate == true)
             {
@@ -211,7 +211,7 @@ namespace DreamyShop.Logic.Product
         private async void AddOrUpdateProductAttributeValue(
             Dictionary<string, List<string>> productOptions,
             List<Domain.Attribute> attributes, 
-            Guid productId,
+            int productId,
             bool isUpdate)
         {   
             if(isUpdate == true)
@@ -316,7 +316,7 @@ namespace DreamyShop.Logic.Product
 
 
 
-        public async Task<ApiResult<bool>> UpdateProduct(Guid id, ProductUpdateDto productUpdateDto)
+        public async Task<ApiResult<bool>> UpdateProduct(int id, ProductUpdateDto productUpdateDto)
         {
             var product = await _repository.Product.GetByIdAsync(id);
 
@@ -404,7 +404,7 @@ namespace DreamyShop.Logic.Product
             return new ApiSuccessResult<bool>(true);
         }
 
-        public async Task<ApiResult<bool>> RemoveProduct(Guid id)
+        public async Task<ApiResult<bool>> RemoveProduct(int id)
         {
             var product = await _repository.Product.GetByIdAsync(id);
             if (product == null)
@@ -491,7 +491,7 @@ namespace DreamyShop.Logic.Product
             return new ApiSuccessResult<IList<ProductDto>>(productDtoPagingsResult);
         }
 
-        public async Task<ApiResult<bool>> UploadImage(IFormFile file, Guid productId)
+        public async Task<ApiResult<bool>> UploadImage(IFormFile file, int productId)
         {
             try
             {
@@ -531,7 +531,7 @@ namespace DreamyShop.Logic.Product
             }
         }
 
-        public async Task<ApiResult<bool>> UploadMultipleImage(List<IFormFile> files, Guid productVariantId)
+        public async Task<ApiResult<bool>> UploadMultipleImage(List<IFormFile> files, int productVariantId)
         {
             try
             {

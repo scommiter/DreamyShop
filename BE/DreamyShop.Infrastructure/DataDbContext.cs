@@ -12,14 +12,14 @@ namespace DreamyShop.EntityFrameworkCore
             modelBuilder.Entity<Product>().HasData(
                new Product()
                {
-                   Id = new Guid("1747CDF9-3ACB-4001-8F52-EE7F387F8EFB"),
-                   ManufacturerId = new Guid("57A5F678-43F0-4648-92D8-16BD09D7143E"),
+                   Id = 1,
+                   ManufacturerId = 1,
                    Name = "Camera-SKS",
                    Code = "CMRSKS",
                    Slug = "camera-sks",
                    SortOrder = 1,
                    ProductType = ProductType.Single,
-                   CategoryId = new Guid("96BFF1B2-3715-4F10-90D3-AAABB332E0E9"),
+                   CategoryId = 1,
                    SeoMetaDescription = "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring",
                    Description = "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring",
                    ThumbnailPicture = "",
@@ -30,14 +30,14 @@ namespace DreamyShop.EntityFrameworkCore
                },
                new Product()
                {
-                   Id = new Guid("85F8B0C3-CB8D-4CCB-9544-19DAAD6EF352"),
-                   ManufacturerId = new Guid("57A5F678-43F0-4648-92D8-16BD09D7143E"),
+                   Id = 2,
+                   ManufacturerId = 4,
                    Name = "Camera-UFG",
                    Code = "CMRUFG",
                    Slug = "camera-ufg",
                    SortOrder = 2,
                    ProductType = ProductType.Single,
-                   CategoryId = new Guid("96BFF1B2-3715-4F10-90D3-AAABB332E0E9"),
+                   CategoryId = 1,
                    SeoMetaDescription = "XYZ wireless security camera with high resolution, built-in motion sensor, supports wifi connection, helps you observe your family, home, shop, office whenever and wherever.",
                    Description = "XYZ wireless security camera with high resolution.",
                    ThumbnailPicture = "",
@@ -48,14 +48,14 @@ namespace DreamyShop.EntityFrameworkCore
                },
                new Product()
                {
-                   Id = new Guid("30299235-6937-41B7-A76D-14584F5F856A"),
-                   ManufacturerId = new Guid("80CAD838-29C7-4A02-81C0-9EBE78A0A273"),
+                   Id = 3,
+                   ManufacturerId = 3,
                    Name = "Iphone 14 XSMax",
                    Code = "IP14XSM",
                    Slug = "ip14-xsmax",
                    SortOrder = 3,
                    ProductType = ProductType.Grouped,
-                   CategoryId = new Guid("EFD560A8-C65B-439C-AF43-765DA733F3C1"),
+                   CategoryId = 2,
                    SeoMetaDescription = "Find out about Apple's latest line of iPhones at Apple Store Vietnam. Order online and get instant deals.",
                    Description = "",
                    ThumbnailPicture = "",
@@ -66,14 +66,14 @@ namespace DreamyShop.EntityFrameworkCore
                },
                new Product()
                {
-                   Id = new Guid("215E9DEE-1D6C-40F4-9233-BB810509ADAA"),
-                   ManufacturerId = new Guid("B9BE517B-72AA-46F1-9A98-A0B993CD2CF7"),
+                   Id = 4,
+                   ManufacturerId = 4,
                    Name = "Laptop DELL DEMON",
                    Code = "DELLDEMON",
                    Slug = "dell-demon",
                    SortOrder = 4,
                    ProductType = ProductType.Grouped,
-                   CategoryId = new Guid("2ED8E62D-2F2E-4957-AE81-8A07B0BCD443"),
+                   CategoryId = 3,
                    SeoMetaDescription = "",
                    Description = "Buy genuine Laptop at our store with best quality and affordable price. We supply laptop products from reputable brands. Order now to get a free laptop backpack!",
                    ThumbnailPicture = "",
@@ -84,14 +84,14 @@ namespace DreamyShop.EntityFrameworkCore
                },
                new Product()
                {
-                   Id = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                   ManufacturerId = new Guid("41C2C299-EA5F-4C23-992D-E6F043F1B26F"),
+                   Id = 5,
+                   ManufacturerId = 2,
                    Name = "Crocodile leather bag",
                    Code = "CLBGCCI",
                    Slug = "clbcci",
                    SortOrder = 4,
                    ProductType = ProductType.Grouped,
-                   CategoryId = new Guid("7375FAB5-4FF3-43D0-A707-A56062E161BE"),
+                   CategoryId = 4,
                    SeoMetaDescription = "",
                    Description = "",
                    ThumbnailPicture = "",
@@ -104,7 +104,7 @@ namespace DreamyShop.EntityFrameworkCore
             modelBuilder.Entity<Manufacturer>().HasData(
                new Manufacturer()
                {
-                   Id = new Guid("57A5F678-43F0-4648-92D8-16BD09D7143E"),
+                   Id = 1,
                    Name = "Sony",
                    Code = "SN",
                    Slug = "sony",
@@ -115,7 +115,7 @@ namespace DreamyShop.EntityFrameworkCore
                },
                new Manufacturer()
                {
-                   Id = new Guid("41C2C299-EA5F-4C23-992D-E6F043F1B26F"),
+                   Id = 2,
                    Name = "Gucci",
                    Code = "GCCI",
                    Slug = "gucci",
@@ -126,7 +126,7 @@ namespace DreamyShop.EntityFrameworkCore
                },
                new Manufacturer()
                {
-                   Id = new Guid("80CAD838-29C7-4A02-81C0-9EBE78A0A273"),
+                   Id = 3,
                    Name = "Apple",
                    Code = "IPAPL",
                    Slug = "apple",
@@ -137,7 +137,7 @@ namespace DreamyShop.EntityFrameworkCore
                },
                new Manufacturer()
                {
-                   Id = new Guid("B9BE517B-72AA-46F1-9A98-A0B993CD2CF7"),
+                   Id = 4,
                    Name = "DELL",
                    Code = "dell",
                    Slug = "dell",
@@ -148,7 +148,7 @@ namespace DreamyShop.EntityFrameworkCore
                },
                new Manufacturer()
                {
-                   Id = new Guid("69D0372B-DBF5-4B70-9BEB-0E4EA77F243A"),
+                   Id = 5,
                    Name = "ASUS",
                    Code = "asus",
                    Slug = "asus",
@@ -161,7 +161,7 @@ namespace DreamyShop.EntityFrameworkCore
             modelBuilder.Entity<ProductCategory>().HasData(
               new ProductCategory()
               {
-                  Id = new Guid("96BFF1B2-3715-4F10-90D3-AAABB332E0E9"),
+                  Id = 1,
                   Name = "Camera",
                   Code = "CMR",
                   Slug = "camera",
@@ -174,7 +174,7 @@ namespace DreamyShop.EntityFrameworkCore
               },
               new ProductCategory()
               {
-                  Id = new Guid("EFD560A8-C65B-439C-AF43-765DA733F3C1"),
+                  Id = 2,
                   Name = "Iphone",
                   Code = "IP",
                   Slug = "iphone",
@@ -187,7 +187,7 @@ namespace DreamyShop.EntityFrameworkCore
               },
               new ProductCategory()
               {
-                  Id = new Guid("2ED8E62D-2F2E-4957-AE81-8A07B0BCD443"),
+                  Id = 3,
                   Name = "Laptop",
                   Code = "LP",
                   Slug = "laptop",
@@ -200,7 +200,7 @@ namespace DreamyShop.EntityFrameworkCore
               },
               new ProductCategory()
               {
-                  Id = new Guid("7375FAB5-4FF3-43D0-A707-A56062E161BE"),
+                  Id = 4,
                   Name = "Jewelry",
                   Code = "JLY",
                   Slug = "jly",
@@ -215,7 +215,7 @@ namespace DreamyShop.EntityFrameworkCore
             modelBuilder.Entity<Domain.Attribute>().HasData(
                 new Domain.Attribute()
                 {
-                    Id = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),
+                    Id = 1,
                     Code = "COLOR",
                     Name = "COLOR",
                     SortOrder = 1,
@@ -226,7 +226,7 @@ namespace DreamyShop.EntityFrameworkCore
                 },
                 new Domain.Attribute()
                 {
-                    Id = new Guid("F9885DFB-02A8-4065-A4AA-18B29E48EE89"),
+                    Id = 2,
                     Code = "SIZE",
                     Name = "SIZE",
                     SortOrder = 2,
@@ -237,7 +237,7 @@ namespace DreamyShop.EntityFrameworkCore
                 },
                 new Domain.Attribute()
                 {
-                    Id = new Guid("827CA5B7-0087-4256-BEC0-399199A518D9"),
+                    Id = 3,
                     Code = "MATERIAL",
                     Name = "MATERIAL",
                     SortOrder = 3,
@@ -251,27 +251,27 @@ namespace DreamyShop.EntityFrameworkCore
                 //Bag -  Color
                 new ProductAttribute()
                 {
-                    ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                    AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A")
+                    ProductId = 5,
+                    AttributeId = 1
                 },
                 //Bag - SIZE
                 new ProductAttribute()
                 {
-                    ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"), 
-                    AttributeId = new Guid("F9885DFB-02A8-4065-A4AA-18B29E48EE89")
+                    ProductId = 5, 
+                    AttributeId = 2
                 },
                 //Bag - Material
                 new ProductAttribute()
                 {
-                    ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                    AttributeId = new Guid("827CA5B7-0087-4256-BEC0-399199A518D9")
+                    ProductId = 5,
+                    AttributeId = 3
                 });
 
             modelBuilder.Entity<ProductVariant>().HasData(
                  new ProductVariant()
                  {
-                     Id = new Guid("fc364f29-fcb9-44b7-8854-dfce09824c35"),
-                     ProductId = new Guid("30299235-6937-41B7-A76D-14584F5F856A"),
+                     Id = 1,
+                     ProductId = 3,
                      SKU = "IP14-A",
                      IsVisibility = true,
                      IsActive = true,
@@ -281,8 +281,8 @@ namespace DreamyShop.EntityFrameworkCore
                  },
                  new ProductVariant()
                  {
-                     Id = new Guid("0A134C80-0493-458A-9F02-16361F0DF5C7"),
-                     ProductId = new Guid("30299235-6937-41B7-A76D-14584F5F856A"),
+                     Id = 2,
+                     ProductId = 3,
                      SKU = "IP14-B",
                      IsVisibility = true,
                      IsActive = true,
@@ -292,8 +292,8 @@ namespace DreamyShop.EntityFrameworkCore
                  },
                  new ProductVariant()
                  {
-                     Id = new Guid("AFD19304-3A45-4304-B2BB-1040F000C369"),
-                     ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                     Id = 3,
+                     ProductId = 5,
                      SKU = "BAGGUCCI-A",
                      IsVisibility = true,
                      IsActive = true,
@@ -303,8 +303,8 @@ namespace DreamyShop.EntityFrameworkCore
                  },
                  new ProductVariant()
                  {
-                     Id = new Guid("35B39A36-5970-42AA-B996-55170555F85B"),
-                     ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                     Id =4,
+                     ProductId = 5,
                      SKU = "BAGGUCCI-B",
                      IsVisibility = true,
                      IsActive = true,
@@ -314,8 +314,8 @@ namespace DreamyShop.EntityFrameworkCore
                  },
                  new ProductVariant()
                  {
-                     Id = new Guid("F2BA4AB5-46C4-4CE9-BAAF-2C98972D45B0"),
-                     ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                     Id = 5,
+                     ProductId = 5,
                      SKU = "BAGGUCCI-VIP",
                      IsVisibility = true,
                      IsActive = true,
@@ -327,65 +327,65 @@ namespace DreamyShop.EntityFrameworkCore
             modelBuilder.Entity<ProductAttributeValue>().HasData(
               new ProductAttributeValue()
               {
-                  Id = new Guid("3D44B2AC-0BD6-433B-9858-ABB84D74EA2E"),
-                  AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),
-                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                  Id = 1,
+                  AttributeId = 1,
+                  ProductId = 5,
                   Value = "Red"
               },
               new ProductAttributeValue()
               {
-                  Id = new Guid("3D369A2C-6BCB-468C-B296-64D96A84258A"),
-                  AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),
-                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                  Id = 2,
+                  AttributeId = 1,
+                  ProductId = 5,
                   Value = "Blue"
               },
               new ProductAttributeValue()
               {
-                  Id = new Guid("DFDBE11D-C978-4CC4-9A9E-CAFC19805AC8"),
-                  AttributeId = new Guid("F9885DFB-02A8-4065-A4AA-18B29E48EE89"),
-                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                  Id = 3,
+                  AttributeId = 2,
+                  ProductId = 5,
                   Value = "M"
               },
               new ProductAttributeValue()
               {
-                  Id = new Guid("6BB0A02B-D294-496A-B496-994D3DFAA6F2"),
-                  AttributeId = new Guid("F9885DFB-02A8-4065-A4AA-18B29E48EE89"),
-                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                  Id = 4,
+                  AttributeId = 2,
+                  ProductId = 5,
                   Value = "L"
               },
               new ProductAttributeValue()
               {
-                  Id = new Guid("A2EE0AC5-663D-4D97-B449-ED8FE48FADA3"),
-                  AttributeId = new Guid("827CA5B7-0087-4256-BEC0-399199A518D9"),
-                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                  Id = 5,
+                  AttributeId = 3,
+                  ProductId = 5,
                   Value = "Leather"
               },
               new ProductAttributeValue()
               {
-                  Id = new Guid("2C2FCF7C-FA5A-4B6F-AC30-48A2A6BDB4B5"),
-                  AttributeId = new Guid("827CA5B7-0087-4256-BEC0-399199A518D9"),
-                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                  Id = 6,
+                  AttributeId = 3,
+                  ProductId = 5,
                   Value = "Cotton"
               },
               new ProductAttributeValue()
               {
-                  Id = new Guid("4267FEEE-9A5B-4156-90B0-9E3585A8AF22"),
-                  AttributeId = new Guid("827CA5B7-0087-4256-BEC0-399199A518D9"),
-                  ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
+                  Id = 7,
+                  AttributeId = 3,
+                  ProductId = 5,
                   Value = "Crocodile skin"
               },
               new ProductAttributeValue()
               {
-                  Id = new Guid("59327BBA-3A1D-40AD-82C2-99A019E9D3F6"),
-                  AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),
-                  ProductId = new Guid("30299235-6937-41B7-A76D-14584F5F856A"),
+                  Id = 8,
+                  AttributeId = 1,
+                  ProductId = 3,
                   Value = "White"
               },
               new ProductAttributeValue()
               {
-                  Id = new Guid("64E5D43E-A34C-4EAB-8672-F7162DD63803"),
-                  AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),
-                  ProductId = new Guid("30299235-6937-41B7-A76D-14584F5F856A"),
+                  Id = 9,
+                  AttributeId = 1,
+                  ProductId = 3,
                   Value = "Black"
               });
 
@@ -393,81 +393,81 @@ namespace DreamyShop.EntityFrameworkCore
             #region  Crocodile leather bag - Red - M - Leather - Quantity: 10 - Price: 5000
                  new ProductVariantValue()
                  {
-                     ProductVariantId = new Guid("AFD19304-3A45-4304-B2BB-1040F000C369"),
-                     ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                     AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),    //color
-                     ProductAttributeValueId = new Guid("3D44B2AC-0BD6-433B-9858-ABB84D74EA2E"),     //Red
+                     ProductVariantId = 3,
+                     ProductId = 5,
+                     AttributeId = 1,    //color
+                     ProductAttributeValueId = 1,     //Red
                  },
                  new ProductVariantValue()
                  {
-                     ProductVariantId = new Guid("AFD19304-3A45-4304-B2BB-1040F000C369"),
-                     ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                     AttributeId = new Guid("F9885DFB-02A8-4065-A4AA-18B29E48EE89"),    //Size 
-                     ProductAttributeValueId = new Guid("DFDBE11D-C978-4CC4-9A9E-CAFC19805AC8"),     //M
+                     ProductVariantId = 3,
+                     ProductId = 5,
+                     AttributeId = 2,    //Size 
+                     ProductAttributeValueId = 3,     //M
                  },
                  new ProductVariantValue()
                  {
-                     ProductVariantId = new Guid("AFD19304-3A45-4304-B2BB-1040F000C369"),
-                     ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                     AttributeId = new Guid("827CA5B7-0087-4256-BEC0-399199A518D9"),    //Material
-                     ProductAttributeValueId = new Guid("A2EE0AC5-663D-4D97-B449-ED8FE48FADA3"),     //Leather
+                     ProductVariantId = 3,
+                     ProductId = 5,
+                     AttributeId = 3,    //Material
+                     ProductAttributeValueId = 5,     //Leather
                  },
             #endregion
             #region  Crocodile leather bag - Blue - L - Cotton - Quantity: 15 - Price: 4500
                  new ProductVariantValue()
                  {
-                     ProductVariantId = new Guid("35B39A36-5970-42AA-B996-55170555F85B"),
-                     ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                     AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),    //color
-                     ProductAttributeValueId = new Guid("3D369A2C-6BCB-468C-B296-64D96A84258A"),     //Blue
+                     ProductVariantId = 4,
+                     ProductId = 5,
+                     AttributeId = 1,    //color
+                     ProductAttributeValueId = 2,     //Blue
                  },
                  new ProductVariantValue()
                  {
-                     ProductVariantId = new Guid("35B39A36-5970-42AA-B996-55170555F85B"),
-                     ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                     AttributeId = new Guid("F9885DFB-02A8-4065-A4AA-18B29E48EE89"),    //Size 
-                     ProductAttributeValueId = new Guid("6BB0A02B-D294-496A-B496-994D3DFAA6F2"),     //L
+                     ProductVariantId = 4,
+                     ProductId = 5,
+                     AttributeId = 2,    //Size 
+                     ProductAttributeValueId = 4,     //L
                  },
                  new ProductVariantValue()
                  {
-                     ProductVariantId = new Guid("35B39A36-5970-42AA-B996-55170555F85B"),
-                     ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                     AttributeId = new Guid("827CA5B7-0087-4256-BEC0-399199A518D9"),    //Material
-                     ProductAttributeValueId = new Guid("2C2FCF7C-FA5A-4B6F-AC30-48A2A6BDB4B5"),     //Cotton
+                     ProductVariantId = 4,
+                     ProductId = 5,
+                     AttributeId = 3,     //Material
+                     ProductAttributeValueId = 6,     //Cotton
                  },
             #endregion
             #region  Crocodile leather bag - Blue - Crocodile skin - Quantity: 5 - Price: 9500
                  new ProductVariantValue()
                  {
-                     ProductVariantId = new Guid("F2BA4AB5-46C4-4CE9-BAAF-2C98972D45B0"),
-                     ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                     AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),    //color
-                     ProductAttributeValueId = new Guid("3D369A2C-6BCB-468C-B296-64D96A84258A"),     //Blue
+                     ProductVariantId = 5,
+                     ProductId = 5,
+                     AttributeId = 1,    //color
+                     ProductAttributeValueId = 2,     //Blue
                  },
                  new ProductVariantValue()
                  {
-                     ProductVariantId = new Guid("F2BA4AB5-46C4-4CE9-BAAF-2C98972D45B0"),
-                     ProductId = new Guid("E914FD7B-9AF8-403E-9F32-803346659264"),
-                     AttributeId = new Guid("827CA5B7-0087-4256-BEC0-399199A518D9"),    //Size 
-                     ProductAttributeValueId = new Guid("4267FEEE-9A5B-4156-90B0-9E3585A8AF22"),     //Crocodile skin
+                     ProductVariantId = 5,
+                     ProductId = 5,
+                     AttributeId = 2,    //Size 
+                     ProductAttributeValueId = 7,     //Crocodile skin
                  },
              #endregion
             #region  IP14-A - White - Quantity: 12 - Price: 1200
                  new ProductVariantValue()
                  {
-                     ProductVariantId = new Guid("fc364f29-fcb9-44b7-8854-dfce09824c35"),
-                     ProductId = new Guid("30299235-6937-41B7-A76D-14584F5F856A"),
-                     AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),    //color
-                     ProductAttributeValueId = new Guid("59327BBA-3A1D-40AD-82C2-99A019E9D3F6"),     //White
+                     ProductVariantId = 1,
+                     ProductId = 3,
+                     AttributeId = 1,    //color
+                     ProductAttributeValueId = 8,     //White
                  },
             #endregion
             #region  IP14-B - Black - Quantity: 20 - Price: 1250
                  new ProductVariantValue()
                  {
-                     ProductVariantId = new Guid("0A134C80-0493-458A-9F02-16361F0DF5C7"),
-                     ProductId = new Guid("30299235-6937-41B7-A76D-14584F5F856A"),
-                     AttributeId = new Guid("03B9545D-09BD-4B83-808D-DE2208E9D26A"),    //color
-                     ProductAttributeValueId = new Guid("64E5D43E-A34C-4EAB-8672-F7162DD63803"),     //Black
+                     ProductVariantId = 2,
+                     ProductId = 3,
+                     AttributeId = 1,    //color
+                     ProductAttributeValueId = 9,     //Black
                  }
            #endregion
                  );
