@@ -22,7 +22,7 @@ namespace DreamyShop.Api.Controllers
             _reportService = reportService;
         }
 
-        [HttpPost("exportFileExcell")]
+        [HttpPost("export/Excell")]
         public async Task<IActionResult> DownloadReport()
         {
             string reportname = $"ProductReport-{DateTime.Now.ToString("MM/dd/yyyy")}.xlsx";
@@ -35,7 +35,7 @@ namespace DreamyShop.Api.Controllers
             return File(exportfile, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", reportname);
         }
 
-        [HttpPost("readExcel")]
+        [HttpPost("import/Excell")]
         public async Task<IActionResult> ReadExcel(IFormFile reportFile)
         {
             var exportfile = await _reportService.ReadFromExcel(reportFile);

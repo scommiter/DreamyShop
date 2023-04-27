@@ -121,7 +121,7 @@ namespace DreamyShop.Logic.Product
                 ManufacturerId = _repository.Manufacturer.GetByName(productCreateDto.ManufacturerName).Id,
                 Name = productCreateDto.Name,
                 Code = productCreateDto.Code,
-                Slug = null,
+                Slug = productCreateDto.Name.ToLower(),
                 SortOrder = 1,
                 ProductType = productCreateDto.ProductType,
                 CategoryId = _repository.Category.GetByName(productCreateDto.CategoryName).Id,

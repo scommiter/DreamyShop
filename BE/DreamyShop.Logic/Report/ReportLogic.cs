@@ -1,4 +1,5 @@
 ﻿using DreamyShop.Common.Exceptions;
+using DreamyShop.Common.Extensions;
 using DreamyShop.Common.Results;
 using DreamyShop.Domain;
 using DreamyShop.Domain.Shared.Dtos;
@@ -109,67 +110,61 @@ namespace DreamyShop.Logic.Report
 
         public async Task<ApiResult<List<ProductCreateDto>>> ReadFromExcel(IFormFile reportFile)
         {
-            var productCreateDtos = new List<ProductCreateDto>();
             var pathFile = UploadFile(reportFile);
             if (pathFile == "")
             {
                 return new ApiErrorResult<List<ProductCreateDto>>((int)ErrorCodes.UploadFailed);
             }
+            var productCreateDtos = new List<ProductCreateDto>();
             FileInfo existingFile = new FileInfo(pathFile);
             using (ExcelPackage package = new ExcelPackage(existingFile))
             {
                 foreach (var sheet in package.Workbook.Worksheets)
                 {
-                   productCreateDtos.Add(GetProductCreateDto(sheet));
+                    int rowCount = sheet.Dimension.End.Row;
+                    for (int row = 2; row <= rowCount; row++)
+                    {
+                        var productDto = new ProductCreateDto();
+                        productDto.Name = sheet.Cells[row, 1].Value.ToString().Trim();
+                        productDto.Code = sheet.Cells[row, 2].Value.ToString().Trim();
+                        productDto.ThumbnailPicture = "";
+                        productDto.ProductType = (ProductType)Enum.Parse(typeof(ProductType), sheet.Cells[row, 3].Value.ToString().Trim());
+                        productDto.CategoryName = sheet.Cells[row, 4].Value.ToString().Trim();
+                        productDto.ManufacturerName = sheet.Cells[row, 5].Value.ToString().Trim();
+                        productDto.Description = sheet.Cells[row, 6].Value.ToString().Trim();
+                        productDto.IsActive = (sheet.Cells[row, 7].Value.ToString().Standard() == "true") ? true : false;
+                        productDto.IsVisibility = (sheet.Cells[row, 8].Value.ToString().Standard() == "true") ? true : false;
+                        var productOptions = new Dictionary<string, List<string>>();
+                        var variants = new List<VariantProduct>();
+                        int subRow;
+                        for (subRow = row; subRow <= rowCount; subRow++)
+                        {
+                            if (sheet.Cells[subRow, 9].Value != null)
+                            {
+                                var listOptionValues = sheet.Cells[subRow, 10].Value.ToString().Split(",");
+                                productOptions.Add(sheet.Cells[subRow, 9].Value.ToString().Trim(), listOptionValues.ToList());
+                            }
+                            var listAttributeNames = sheet.Cells[subRow, 11].Value.ToString().Split(",");
+                            variants.Add(new VariantProduct
+                            {
+                                AttributeNames = listAttributeNames.ToList(),
+                                SKU = sheet.Cells[subRow, 12].Value.ToString().Trim(),
+                                Quantity = int.Parse(sheet.Cells[subRow, 13].Value.ToString()),
+                                Price = float.Parse(sheet.Cells[subRow, 14].Value.ToString())
+                            });
+                            if (sheet.Cells[subRow + 1, 1].Value != null)
+                            {
+                                break;
+                            }
+                        }
+                        productDto.ProductOptions = productOptions;
+                        productDto.VariantProducts = variants;
+                        row = subRow;
+                        productCreateDtos.Add(productDto);
+                    }
                 }
             }
             return new ApiSuccessResult<List<ProductCreateDto>>(productCreateDtos);
-        }
-
-        private ProductCreateDto GetProductCreateDto(ExcelWorksheet sheet)
-        {
-            var productDto = new ProductCreateDto();
-            int rowCount = sheet.Dimension.End.Row;
-            for (int row = 2; row <= rowCount; row++)
-            {
-                productDto.Name = sheet.Cells[row, 1].Value.ToString().Trim();
-                productDto.Code = sheet.Cells[row, 2].Value.ToString().Trim();
-                productDto.ThumbnailPicture = "";
-                productDto.ProductType = (ProductType)Enum.Parse(typeof(ProductType), sheet.Cells[row, 3].Value.ToString().Trim());
-                productDto.CategoryName = sheet.Cells[row, 4].Value.ToString().Trim();
-                productDto.ManufacturerName = sheet.Cells[row, 5].Value.ToString().Trim();
-                productDto.Description = sheet.Cells[row, 6].Value.ToString().Trim();
-                productDto.IsActive = (sheet.Cells[row, 7].Value == "true") ? true : false;
-                productDto.IsVisibility = (sheet.Cells[row, 8].Value == "true") ? true : false;
-                var productOptions = new Dictionary<string, List<string>>();
-                var variants = new List<VariantProduct>();
-                int subRow;
-                for (subRow = row; subRow <= rowCount; subRow++)
-                {
-                    if (sheet.Cells[subRow, 9].Value != null)
-                    {
-                        var listOptionValues = sheet.Cells[subRow, 10].Value.ToString().Split(",");
-                        productOptions.Add(sheet.Cells[subRow, 9].Value.ToString().Trim(), listOptionValues.ToList());
-                    }
-                    var listAttributeNames = sheet.Cells[subRow, 11].Value.ToString().Split(",");
-                    variants.Add(new VariantProduct
-                    {
-                        AttributeNames = listAttributeNames.ToList(),
-                        SKU = sheet.Cells[subRow, 12].Value.ToString().Trim(),
-                        Quantity = int.Parse(sheet.Cells[subRow, 13].Value.ToString()),
-                        Price = float.Parse(sheet.Cells[subRow, 14].Value.ToString())
-                    });
-                    if (sheet.Cells[subRow + 1, 1].Value != null)
-                    {
-                        break;
-                    }
-                }
-                productDto.ProductOptions = productOptions;
-                productDto.VariantProducts = variants;
-
-                row = subRow;
-            }
-            return productDto;
         }
 
         private string UploadFile(IFormFile reportFile)
@@ -191,10 +186,10 @@ namespace DreamyShop.Logic.Report
             }
             var fileName = ContentDispositionHeaderValue.Parse(reportFile.ContentDisposition).FileName.Trim('"');
             var fullPath = Path.Combine(pathToSave, fileName);
-            //using (var stream = new FileStream(fullPath, FileMode.Create))
-            //{
-            //    reportFile.CopyTo(stream);
-            //}
+            using (var stream = new FileStream(fullPath, FileMode.Create))
+            {
+                reportFile.CopyTo(stream);
+            }
             return fullPath;
         }
 
