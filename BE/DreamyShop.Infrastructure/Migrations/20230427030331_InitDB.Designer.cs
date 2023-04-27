@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DreamyShop.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(DreamyShopDbContext))]
-    [Migration("20230425073713_InitDB")]
+    [Migration("20230427030331_InitDB")]
     partial class InitDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,6 +112,151 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             SortOrder = 3,
                             StatusID = (byte)0
                         });
+                });
+
+            modelBuilder.Entity("DreamyShop.Domain.Bill", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("BillStatus")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CancelDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Discount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PaymentStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PaymentType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<double>("ShippingFee")
+                        .HasColumnType("float");
+
+                    b.Property<byte>("StatusID")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime?>("SuccessDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("TotalMoney")
+                        .HasColumnType("float");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Bills");
+                });
+
+            modelBuilder.Entity("DreamyShop.Domain.BillDetail", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BillId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Tax")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("float");
+
+                    b.Property<Guid>("VariantProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BillId");
+
+                    b.HasIndex("VariantProductId");
+
+                    b.ToTable("BillDetails");
+                });
+
+            modelBuilder.Entity("DreamyShop.Domain.Cart", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("DreamyShop.Domain.CartDetail", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CartId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("VariantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("VariantId");
+
+                    b.ToTable("CartDetails");
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.ImageProductVariant", b =>
@@ -400,8 +545,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             Id = new Guid("1747cdf9-3acb-4001-8f52-ee7f387f8efb"),
                             CategoryId = new Guid("96bff1b2-3715-4f10-90d3-aaabb332e0e9"),
                             Code = "CMRSKS",
-                            DateCreated = new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2851),
-                            DateUpdated = new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2863),
+                            DateCreated = new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3344),
+                            DateUpdated = new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3355),
                             Description = "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring",
                             IsActive = true,
                             IsVisibility = true,
@@ -419,8 +564,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             Id = new Guid("85f8b0c3-cb8d-4ccb-9544-19daad6ef352"),
                             CategoryId = new Guid("96bff1b2-3715-4f10-90d3-aaabb332e0e9"),
                             Code = "CMRUFG",
-                            DateCreated = new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2867),
-                            DateUpdated = new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2868),
+                            DateCreated = new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3366),
+                            DateUpdated = new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3367),
                             Description = "XYZ wireless security camera with high resolution.",
                             IsActive = true,
                             IsVisibility = true,
@@ -438,8 +583,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             Id = new Guid("30299235-6937-41b7-a76d-14584f5f856a"),
                             CategoryId = new Guid("efd560a8-c65b-439c-af43-765da733f3c1"),
                             Code = "IP14XSM",
-                            DateCreated = new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2872),
-                            DateUpdated = new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2873),
+                            DateCreated = new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3371),
+                            DateUpdated = new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3372),
                             Description = "",
                             IsActive = true,
                             IsVisibility = true,
@@ -457,8 +602,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             Id = new Guid("215e9dee-1d6c-40f4-9233-bb810509adaa"),
                             CategoryId = new Guid("2ed8e62d-2f2e-4957-ae81-8a07b0bcd443"),
                             Code = "DELLDEMON",
-                            DateCreated = new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2877),
-                            DateUpdated = new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2877),
+                            DateCreated = new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3375),
+                            DateUpdated = new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3376),
                             Description = "Buy genuine Laptop at our store with best quality and affordable price. We supply laptop products from reputable brands. Order now to get a free laptop backpack!",
                             IsActive = true,
                             IsVisibility = true,
@@ -476,8 +621,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             Id = new Guid("e914fd7b-9af8-403e-9f32-803346659264"),
                             CategoryId = new Guid("7375fab5-4ff3-43d0-a707-a56062e161be"),
                             Code = "CLBGCCI",
-                            DateCreated = new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2924),
-                            DateUpdated = new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2925),
+                            DateCreated = new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3379),
+                            DateUpdated = new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3379),
                             Description = "",
                             IsActive = true,
                             IsVisibility = true,
@@ -1356,6 +1501,66 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("DreamyShop.Domain.Bill", b =>
+                {
+                    b.HasOne("DreamyShop.Domain.User", "User")
+                        .WithMany("Bills")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DreamyShop.Domain.BillDetail", b =>
+                {
+                    b.HasOne("DreamyShop.Domain.Bill", "Bill")
+                        .WithMany("BillDetails")
+                        .HasForeignKey("BillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DreamyShop.Domain.ProductVariant", "ProductVariant")
+                        .WithMany("BillDetails")
+                        .HasForeignKey("VariantProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Bill");
+
+                    b.Navigation("ProductVariant");
+                });
+
+            modelBuilder.Entity("DreamyShop.Domain.Cart", b =>
+                {
+                    b.HasOne("DreamyShop.Domain.User", "User")
+                        .WithMany("Carts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DreamyShop.Domain.CartDetail", b =>
+                {
+                    b.HasOne("DreamyShop.Domain.Cart", "Cart")
+                        .WithMany("CartDetails")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DreamyShop.Domain.ProductVariant", "ProductVariant")
+                        .WithMany("CartDetails")
+                        .HasForeignKey("VariantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cart");
+
+                    b.Navigation("ProductVariant");
+                });
+
             modelBuilder.Entity("DreamyShop.Domain.ImageProductVariant", b =>
                 {
                     b.HasOne("DreamyShop.Domain.ProductVariant", "ProductVariant")
@@ -1575,6 +1780,16 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.Navigation("ProductVariantValues");
                 });
 
+            modelBuilder.Entity("DreamyShop.Domain.Bill", b =>
+                {
+                    b.Navigation("BillDetails");
+                });
+
+            modelBuilder.Entity("DreamyShop.Domain.Cart", b =>
+                {
+                    b.Navigation("CartDetails");
+                });
+
             modelBuilder.Entity("DreamyShop.Domain.Inventory", b =>
                 {
                     b.Navigation("InventoryTickets");
@@ -1617,6 +1832,10 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("DreamyShop.Domain.ProductVariant", b =>
                 {
+                    b.Navigation("BillDetails");
+
+                    b.Navigation("CartDetails");
+
                     b.Navigation("ImageProductVariants");
 
                     b.Navigation("ProductVariantValues");
@@ -1638,6 +1857,10 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("DreamyShop.Domain.User", b =>
                 {
+                    b.Navigation("Bills");
+
+                    b.Navigation("Carts");
+
                     b.Navigation("Roles");
                 });
 #pragma warning restore 612, 618

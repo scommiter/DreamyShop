@@ -15,6 +15,10 @@ namespace DreamyShop.EntityFrameworkCore
         {
         }
 
+        public virtual DbSet<Bill> Bills { get; set; }
+        public virtual DbSet<BillDetail> BillDetails { get; set; }
+        public virtual DbSet<Cart> Carts { get; set; }
+        public virtual DbSet<CartDetail> CartDetails { get; set; }
         public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<InventoryTicket> InventoryTickets { get; set; }
         public virtual DbSet<InventoryTicketItem> InventoryTicketItems { get; set; }

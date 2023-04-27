@@ -25,5 +25,11 @@ namespace DreamyShop.Domain
 
         [InverseProperty(nameof(ProductVariantValue.ProductVariant))]
         public virtual ICollection<ImageProductVariant> ImageProductVariants { get; set; }
+
+
+        [InverseProperty(nameof(BillDetail.ProductVariant))]
+        public virtual ICollection<BillDetail> BillDetails { get; set; }
+        [InverseProperty(nameof(CartDetail.ProductVariant))]
+        public virtual ICollection<CartDetail> CartDetails { get; set; }
     }
 }

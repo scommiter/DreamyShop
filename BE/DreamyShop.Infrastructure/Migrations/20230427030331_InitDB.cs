@@ -279,6 +279,58 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Bills",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TotalMoney = table.Column<double>(type: "float", nullable: false),
+                    ShippingFee = table.Column<double>(type: "float", nullable: false),
+                    Discount = table.Column<int>(type: "int", nullable: false),
+                    PaymentType = table.Column<int>(type: "int", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentStatus = table.Column<int>(type: "int", nullable: false),
+                    BillStatus = table.Column<int>(type: "int", nullable: false),
+                    SuccessDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CancelDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    StatusID = table.Column<byte>(type: "tinyint", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bills", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Bills_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Carts",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Carts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Carts_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -459,6 +511,62 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BillDetails",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BillId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    VariantProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    TotalPrice = table.Column<double>(type: "float", nullable: false),
+                    Tax = table.Column<double>(type: "float", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BillDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BillDetails_Bills_BillId",
+                        column: x => x.BillId,
+                        principalTable: "Bills",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BillDetails_ProductVariants_VariantProductId",
+                        column: x => x.VariantProductId,
+                        principalTable: "ProductVariants",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CartDetails",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CartId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    VariantId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CartDetails_Carts_CartId",
+                        column: x => x.CartId,
+                        principalTable: "Carts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CartDetails_ProductVariants_VariantId",
+                        column: x => x.VariantId,
+                        principalTable: "ProductVariants",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ImageProductVariants",
                 columns: table => new
                 {
@@ -556,11 +664,11 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "CategoryId", "Code", "DateCreated", "DateUpdated", "Description", "IsActive", "IsVisibility", "ManufacturerId", "Name", "ProductType", "SeoMetaDescription", "Slug", "SortOrder", "StatusID", "ThumbnailPicture" },
                 values: new object[,]
                 {
-                    { new Guid("1747cdf9-3acb-4001-8f52-ee7f387f8efb"), new Guid("96bff1b2-3715-4f10-90d3-aaabb332e0e9"), "CMRSKS", new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2851), new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2863), "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring", true, true, new Guid("57a5f678-43f0-4648-92d8-16bd09d7143e"), "Camera-SKS", 1, "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring", "camera-sks", 1, (byte)0, "" },
-                    { new Guid("215e9dee-1d6c-40f4-9233-bb810509adaa"), new Guid("2ed8e62d-2f2e-4957-ae81-8a07b0bcd443"), "DELLDEMON", new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2877), new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2877), "Buy genuine Laptop at our store with best quality and affordable price. We supply laptop products from reputable brands. Order now to get a free laptop backpack!", true, true, new Guid("b9be517b-72aa-46f1-9a98-a0b993cd2cf7"), "Laptop DELL DEMON", 2, "", "dell-demon", 4, (byte)0, "" },
-                    { new Guid("30299235-6937-41b7-a76d-14584f5f856a"), new Guid("efd560a8-c65b-439c-af43-765da733f3c1"), "IP14XSM", new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2872), new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2873), "", true, true, new Guid("80cad838-29c7-4a02-81c0-9ebe78a0a273"), "Iphone 14 XSMax", 2, "Find out about Apple's latest line of iPhones at Apple Store Vietnam. Order online and get instant deals.", "ip14-xsmax", 3, (byte)0, "" },
-                    { new Guid("85f8b0c3-cb8d-4ccb-9544-19daad6ef352"), new Guid("96bff1b2-3715-4f10-90d3-aaabb332e0e9"), "CMRUFG", new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2867), new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2868), "XYZ wireless security camera with high resolution.", true, true, new Guid("57a5f678-43f0-4648-92d8-16bd09d7143e"), "Camera-UFG", 1, "XYZ wireless security camera with high resolution, built-in motion sensor, supports wifi connection, helps you observe your family, home, shop, office whenever and wherever.", "camera-ufg", 2, (byte)0, "" },
-                    { new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new Guid("7375fab5-4ff3-43d0-a707-a56062e161be"), "CLBGCCI", new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2924), new DateTime(2023, 4, 25, 14, 37, 13, 319, DateTimeKind.Local).AddTicks(2925), "", true, true, new Guid("41c2c299-ea5f-4c23-992d-e6f043f1b26f"), "Crocodile leather bag", 2, "", "clbcci", 4, (byte)0, "" }
+                    { new Guid("1747cdf9-3acb-4001-8f52-ee7f387f8efb"), new Guid("96bff1b2-3715-4f10-90d3-aaabb332e0e9"), "CMRSKS", new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3344), new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3355), "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring", true, true, new Guid("57a5f678-43f0-4648-92d8-16bd09d7143e"), "Camera-SKS", 1, "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring", "camera-sks", 1, (byte)0, "" },
+                    { new Guid("215e9dee-1d6c-40f4-9233-bb810509adaa"), new Guid("2ed8e62d-2f2e-4957-ae81-8a07b0bcd443"), "DELLDEMON", new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3375), new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3376), "Buy genuine Laptop at our store with best quality and affordable price. We supply laptop products from reputable brands. Order now to get a free laptop backpack!", true, true, new Guid("b9be517b-72aa-46f1-9a98-a0b993cd2cf7"), "Laptop DELL DEMON", 2, "", "dell-demon", 4, (byte)0, "" },
+                    { new Guid("30299235-6937-41b7-a76d-14584f5f856a"), new Guid("efd560a8-c65b-439c-af43-765da733f3c1"), "IP14XSM", new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3371), new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3372), "", true, true, new Guid("80cad838-29c7-4a02-81c0-9ebe78a0a273"), "Iphone 14 XSMax", 2, "Find out about Apple's latest line of iPhones at Apple Store Vietnam. Order online and get instant deals.", "ip14-xsmax", 3, (byte)0, "" },
+                    { new Guid("85f8b0c3-cb8d-4ccb-9544-19daad6ef352"), new Guid("96bff1b2-3715-4f10-90d3-aaabb332e0e9"), "CMRUFG", new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3366), new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3367), "XYZ wireless security camera with high resolution.", true, true, new Guid("57a5f678-43f0-4648-92d8-16bd09d7143e"), "Camera-UFG", 1, "XYZ wireless security camera with high resolution, built-in motion sensor, supports wifi connection, helps you observe your family, home, shop, office whenever and wherever.", "camera-ufg", 2, (byte)0, "" },
+                    { new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new Guid("7375fab5-4ff3-43d0-a707-a56062e161be"), "CLBGCCI", new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3379), new DateTime(2023, 4, 27, 10, 3, 31, 586, DateTimeKind.Local).AddTicks(3379), "", true, true, new Guid("41c2c299-ea5f-4c23-992d-e6f043f1b26f"), "Crocodile leather bag", 2, "", "clbcci", 4, (byte)0, "" }
                 });
 
             migrationBuilder.InsertData(
@@ -617,6 +725,36 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     { new Guid("827ca5b7-0087-4256-bec0-399199a518d9"), new Guid("4267feee-9a5b-4156-90b0-9e3585a8af22"), new Guid("e914fd7b-9af8-403e-9f32-803346659264"), new Guid("f2ba4ab5-46c4-4ce9-baaf-2c98972d45b0"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
                     { new Guid("03b9545d-09bd-4b83-808d-de2208e9d26a"), new Guid("59327bba-3a1d-40ad-82c2-99a019e9d3f6"), new Guid("30299235-6937-41b7-a76d-14584f5f856a"), new Guid("fc364f29-fcb9-44b7-8854-dfce09824c35"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BillDetails_BillId",
+                table: "BillDetails",
+                column: "BillId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BillDetails_VariantProductId",
+                table: "BillDetails",
+                column: "VariantProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bills_UserId",
+                table: "Bills",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartDetails_CartId",
+                table: "CartDetails",
+                column: "CartId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartDetails_VariantId",
+                table: "CartDetails",
+                column: "VariantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Carts_UserId",
+                table: "Carts",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ImageProductVariants_ProductVariantId",
@@ -712,6 +850,12 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "BillDetails");
+
+            migrationBuilder.DropTable(
+                name: "CartDetails");
+
+            migrationBuilder.DropTable(
                 name: "ImageProductVariants");
 
             migrationBuilder.DropTable(
@@ -740,6 +884,12 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "Roles");
+
+            migrationBuilder.DropTable(
+                name: "Bills");
+
+            migrationBuilder.DropTable(
+                name: "Carts");
 
             migrationBuilder.DropTable(
                 name: "InventoryTickets");
