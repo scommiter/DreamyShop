@@ -22,8 +22,7 @@ namespace DreamyShop.Api.Controllers
         [HttpGet("getAll")]
         public async Task<IActionResult> GetAllCategory([FromQuery] PagingRequest pagingRequest)
         {
-            var result = await _categoryService.GetAllCategory(pagingRequest);
-            return Ok(result);
+            return Ok();
         }
 
         [HttpPost("create")]
@@ -35,8 +34,7 @@ namespace DreamyShop.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var result = await _categoryService.CreateCategory(categoryCreateUpdateDto);
-            return Ok(result);
+            return Ok();
         }
 
         [HttpPut("updateCategory")]
@@ -48,8 +46,7 @@ namespace DreamyShop.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var result = await _categoryService.UpdateCategory(id, categoryCreateUpdateDto);
-            return Ok(result);
+            return Ok();
         }
 
         [HttpDelete("removeCategory")]
@@ -57,12 +54,7 @@ namespace DreamyShop.Api.Controllers
         [Member]
         public async Task<IActionResult> RemoveCategory(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var result = await _categoryService.RemoveCategory(id);
-            return Ok(result);
+            return Ok();
         }
     }
 }

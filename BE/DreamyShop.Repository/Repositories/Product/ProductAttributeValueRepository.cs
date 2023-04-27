@@ -1,11 +1,12 @@
 ﻿using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Repository.Repositories.Generic;
+using System.Data;
 
 namespace DreamyShop.Repository.Repositories.Product
 {
     public class ProductAttributeValueRepository : GenericRepository<Domain.ProductAttributeValue>, IProductAttributeValueRepository
     {
-        public ProductAttributeValueRepository(DreamyShopDbContext context) : base(context)
+        public ProductAttributeValueRepository(IDbConnection _db) : base(_db)
         {
         }
     }

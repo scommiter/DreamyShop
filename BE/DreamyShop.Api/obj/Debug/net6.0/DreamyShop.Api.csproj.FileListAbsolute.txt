@@ -318,3 +318,10 @@ Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\win\lib\net6.0
 Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
 Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Dapper.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\System.Data.SqlClient.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll

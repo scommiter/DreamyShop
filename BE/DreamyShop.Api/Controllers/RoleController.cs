@@ -25,12 +25,7 @@ namespace DreamyShop.Api.Controllers
         [Admin]
         public async Task<IActionResult> AssignRole(int userId, [FromForm] List<byte> roleIds)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var result = await _roleLogic.AssignRole(userId, roleIds);
-            return Ok(result);
+            return Ok();
         }
 
         [HttpPost("updateRole")]
@@ -38,12 +33,7 @@ namespace DreamyShop.Api.Controllers
         [Admin]
         public async Task<IActionResult> UpdateRole(int userId, [FromForm] List<byte> roleIds)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var result = await _roleLogic.UpdateRole(userId, roleIds);
-            return Ok(result);
+            return Ok();
         }
     }
 }

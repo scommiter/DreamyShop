@@ -15,9 +15,6 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<DreamyShopDbContext>(options => options.UseSqlServer(
-    builder.Configuration.GetConnectionString("DreamyShopDBContext")
-    ));
 builder.Services.MapServices();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
@@ -109,6 +106,7 @@ builder.Services.AddSwaggerGen(c =>
                           }
                         });
 });
+
 
 var app = builder.Build();
 

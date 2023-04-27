@@ -23,7 +23,7 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpGet("getAll")]
-        public async Task<IActionResult> GetAllManufacturer(PagingRequest pagingRequest)
+        public async Task<IActionResult> GetAllManufacturer([FromQuery] PagingRequest pagingRequest)
         {
             var result = await _manufacturerService.GetAllManufacturer(pagingRequest);
             return Ok(result);
@@ -38,8 +38,7 @@ namespace DreamyShop.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var result = await _manufacturerService.CreateManufacturer(manufacturerCreateUpdateDto);
-            return Ok(result);
+            return Ok();
         }
 
         [HttpPut("updateManufacturer")]
@@ -51,8 +50,7 @@ namespace DreamyShop.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var result = await _manufacturerService.UpdateManufacturer(id, manufacturerCreateUpdateDto);
-            return Ok(result);
+            return Ok();
         }
 
         [HttpDelete("removeManufacturer")]
@@ -64,8 +62,7 @@ namespace DreamyShop.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var result = await _manufacturerService.RemoveManufacturer(id);
-            return Ok(result);
+            return Ok();
         }
     }
 }

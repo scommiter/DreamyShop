@@ -1,11 +1,11 @@
-﻿using DreamyShop.EntityFrameworkCore;
-using DreamyShop.Repository.Repositories.Generic;
+﻿using DreamyShop.Repository.Repositories.Generic;
+using System.Data;
 
 namespace DreamyShop.Repository.Repositories.Auth
 {
-    public class AuthRepository : GenericRepository<DreamyShop.Domain.User>, IAuthRepository
+    public class AuthRepository : GenericRepository<Domain.User>, IAuthRepository
     {
-        public AuthRepository(DreamyShopDbContext context) : base(context)
+        public AuthRepository(IDbConnection _db) : base(_db)
         {
         }
     }

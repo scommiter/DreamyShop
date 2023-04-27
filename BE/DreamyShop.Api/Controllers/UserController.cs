@@ -26,19 +26,7 @@ namespace DreamyShop.Api.Controllers
         [Admin]
         public async Task<IActionResult> UpdateUser([FromForm] UserUpdateDto userUpdateDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            var user = (AuthEntity)HttpContext.Items["Auth"];
-            if (user == null)
-            {
-                return NotFound(user);
-            }
-            var result = await _userService.UpdateUser(user.UserID, userUpdateDto);
-            if (result.Result == null)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result);
+            return Ok();
         }
 
         [HttpPut("searchCondition")]
@@ -46,14 +34,7 @@ namespace DreamyShop.Api.Controllers
         [Member]
         public async Task<IActionResult> SearchUser([FromForm] SearchUserCondition searchUserCondition)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            var result = await _userService.Search(searchUserCondition);
-            if (result.Result == null)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result);
+            return Ok();
         }
 
         [HttpGet("getAll")]
@@ -61,8 +42,7 @@ namespace DreamyShop.Api.Controllers
         [Admin]
         public async Task<IActionResult> GetAllUser(PagingRequest pagingRequest)
         {
-            var result = await _userService.GetAllUser(pagingRequest);
-            return Ok(result);
+            return Ok();
         }
 
         [HttpDelete("delete")]
@@ -70,8 +50,7 @@ namespace DreamyShop.Api.Controllers
         [Admin]
         public async Task<IActionResult> DeleteUser(string userId)
         {
-            var result = await _userService.DeleteUser(userId);
-            return Ok(result);
+            return Ok();
         }
     }
 }

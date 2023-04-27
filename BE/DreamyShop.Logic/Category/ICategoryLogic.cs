@@ -10,9 +10,5 @@ namespace DreamyShop.Logic.Category
 {
     public interface ICategoryLogic
     {
-        Task<ApiResult<PageResult<CategoryDto>>> GetAllCategory(PagingRequest pagingRequest);
-        Task<ApiResult<CategoryDto>> CreateCategory(CategoryCreateUpdateDto categoryCreateUpdateDto);
-        Task<ApiResult<CategoryDto>> UpdateCategory(int id, CategoryCreateUpdateDto categoryCreateUpdateDto);
-        Task<ApiResult<bool>> RemoveCategory(int id);
     }
 }

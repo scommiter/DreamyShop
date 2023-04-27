@@ -24,27 +24,13 @@ namespace DreamyShop.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto userRegisterDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            var result = await _authService.Register(userRegisterDto);
-            if (result.Result == null)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result);
+            return Ok();
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto userLoginDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            var result = await _authService.Login(userLoginDto);
-            if (result.Result == null)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result.Result);
+            return Ok();
         }
 
         [HttpPut("ChangePassword")]
@@ -52,19 +38,7 @@ namespace DreamyShop.Api.Controllers
         [Member]
         public async Task<IActionResult> ChangePassword([FromBody] UserChangePassword userLoginDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            var user = (AuthEntity)HttpContext.Items["Auth"];
-            if(user == null)
-            {
-                return NotFound(user);
-            }
-            var result = await _authService.ChangePassword(user.Email, userLoginDto);
-            if (result.Result == null)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result);
+            return Ok();
         }
     }
 }

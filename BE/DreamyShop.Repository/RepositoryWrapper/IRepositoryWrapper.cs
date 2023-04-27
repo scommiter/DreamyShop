@@ -9,19 +9,19 @@ namespace DreamyShop.Repository.RepositoryWrapper
 {
     public interface IRepositoryWrapper : IDisposable
     {
-        IAuthRepository Auth { get; }
-        IUserRepository User { get; }
-        IRoleRepository Role { get; }
-        IProductRepository Product { get; }
-        IProductAttributeRepository ProductAttribute { get; }
-        IProductVariantRepository ProductVariant { get; }
-        IProductVariantImageRepository ProductVariantImage { get; }
-        IProductVariantValueRepository ProductVariantValue { get; }
-        IAttributeRepository Attribute { get; }
-        IProductAttributeValueRepository ProductAttributeValue { get; }
+        //IAuthRepository Auth { get; }
+        //IUserRepository User { get; }
+        //IRoleRepository Role { get; }
+        //IProductRepository Product { get; }
+        //IProductAttributeRepository ProductAttribute { get; }
+        //IProductVariantRepository ProductVariant { get; }
+        //IProductVariantImageRepository ProductVariantImage { get; }
+        //IProductVariantValueRepository ProductVariantValue { get; }
+        //IAttributeRepository Attribute { get; }
+        //IProductAttributeValueRepository ProductAttributeValue { get; }
         IManufacturerRepository Manufacturer { get; }
-        ICategoryRepository Category { get; }
+        //ICategoryRepository Category { get; }
 
-        void Save();
+        //void Save();
     }
 }

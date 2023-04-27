@@ -25,8 +25,7 @@ namespace DreamyShop.Api.Controllers
         [HttpGet("getAll")]
         public async Task<IActionResult> GetAllProduct([FromQuery] PagingRequest pagingRequest)
         {
-            var result = await _productService.GetAllProductPaging(pagingRequest);
-            return Ok(result.Result.Items);
+            return Ok();
         }
 
         [HttpPost("create")]
@@ -38,8 +37,7 @@ namespace DreamyShop.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var result = await _productService.CreateProduct(productCreateUpdateDto);
-            return Ok(result);
+            return Ok();
         }
 
         [HttpPut("updateProduct")]
@@ -51,8 +49,7 @@ namespace DreamyShop.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var result = await _productService.UpdateProduct(id, productCreateUpdateDto);
-            return Ok(result);
+            return Ok();
         }
 
         [HttpDelete("removeProduct")]
@@ -64,8 +61,7 @@ namespace DreamyShop.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var result = await _productService.RemoveProduct(id);
-            return Ok(result);
+            return Ok();
         }
 
         [HttpPut("searchCondition")]
@@ -73,12 +69,7 @@ namespace DreamyShop.Api.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var result = await _productService.SearchProduct(searchProductCondition, pagingRequest);
-            if (result.Result == null)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result);
+            return Ok();
         }
 
         [HttpPost("uploadImage"), DisableRequestSizeLimit]
@@ -88,12 +79,7 @@ namespace DreamyShop.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var result = await _productService.UploadImage(file, productId);
-            if (result.Result == null)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result);
+            return Ok();
         }
 
         [HttpPost("uploadMultipleImage"), DisableRequestSizeLimit]
@@ -103,12 +89,7 @@ namespace DreamyShop.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var result = await _productService.UploadMultipleImage(files, productId);
-            if (result.Result == null)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result);
+            return Ok();
         }
     }
 }

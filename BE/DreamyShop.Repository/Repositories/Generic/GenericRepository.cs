@@ -1,91 +1,32 @@
-﻿using DreamyShop.EntityFrameworkCore;
+﻿using Dapper;
+using DreamyShop.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 using System.Linq.Expressions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace DreamyShop.Repository.Repositories.Generic
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly DreamyShopDbContext _context;
-
-        private readonly DbSet<T> _dbSet;
-
-        public GenericRepository(DreamyShopDbContext context)
+        private readonly IDbConnection _db;
+        private string tableName; 
+        public GenericRepository(IDbConnection db)
         {
-            _context = context;
-            _dbSet = _context.Set<T>();
-        }
-
-        public async Task<IDbContextTransaction> BeginTransactionAsync() => await _context.Database.BeginTransactionAsync();
-
-        public Task RollbackTransactionAsync() => _context.Database.RollbackTransactionAsync();
-
-        public async Task EndTransactionAsync() => await _context.Database.CommitTransactionAsync();
-
-        public async Task AddAsync(T entity)
-        {
-            await _dbSet.AddAsync(entity);
-        }
-
-        public async Task AddRangeAsync(IEnumerable<T> entities)
-        {
-            await _dbSet.AddRangeAsync(entities);
-        }
-
-        public async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
-        {
-            return await _dbSet.AnyAsync(expression);
-        }
-
-        public IQueryable<T> GetAll()
-        {
-            return _dbSet.AsNoTracking().AsQueryable();
-        }
-
-        public async Task<T> GetByIdAsync(int id)
-        {
-            if (id == null)
+            _db = db;
+            var tableAttribute = typeof(T).GetCustomAttributes(typeof(TableAttribute), true).FirstOrDefault() as TableAttribute;
+            if (tableAttribute != null)
             {
-                return null;
-            }
-            return await _dbSet.FindAsync(id);
-        }
-
-        public void Remove(int id)
-        {
-            var result = _dbSet.Find(id);
-            try
-            {
-                _dbSet.Remove(result);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                tableName = tableAttribute.Name;
             }
         }
 
-        public void RemoveMultiple(List<T> entities)
+        public IEnumerable<T> GetAll()
         {
-            _context.Set<T>().RemoveRange(entities);
-        }
-
-        public void Update(T entity)
-        {
-            try
-            {
-                _dbSet.Attach(entity);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public IQueryable<T> Where(Expression<Func<T, bool>> expression)
-        {
-            return _dbSet.Where(expression);
+            return _db.Query<T>($"SELECT * FROM {tableName}");
         }
     }
 }
