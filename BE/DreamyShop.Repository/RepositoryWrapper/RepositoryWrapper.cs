@@ -202,10 +202,5 @@ namespace DreamyShop.Repository.RepositoryWrapper
         {
             _db.Dispose();
         }
-
-        //public void Save()
-        //{
-        //    _context.SaveChanges();
-        //}
     }
 }

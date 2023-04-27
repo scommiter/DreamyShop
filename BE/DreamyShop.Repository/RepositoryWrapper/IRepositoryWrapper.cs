@@ -21,7 +21,5 @@ namespace DreamyShop.Repository.RepositoryWrapper
         //IProductAttributeValueRepository ProductAttributeValue { get; }
         IManufacturerRepository Manufacturer { get; }
         //ICategoryRepository Category { get; }
-
-        //void Save();
     }
 }

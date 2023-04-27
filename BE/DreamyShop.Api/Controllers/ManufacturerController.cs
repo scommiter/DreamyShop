@@ -42,15 +42,16 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpPut("updateManufacturer")]
-        [Authorize]
-        [Member]
+        //[Authorize]
+        //[Member]
         public async Task<IActionResult> UpdateManufacturer(int id, [FromForm] ManufacturerCreateUpdateDto manufacturerCreateUpdateDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            return Ok();
+            var result = await _manufacturerService.UpdateManufacturer(id, manufacturerCreateUpdateDto);
+            return Ok(result);
         }
 
         [HttpDelete("removeManufacturer")]
