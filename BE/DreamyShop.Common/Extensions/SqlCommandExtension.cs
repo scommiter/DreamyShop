@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace DreamyShop.Common.Extensions
 {
-    public static class DbCommandExtension
+    public static class SqlCommandExtension
     {
         /// <summary>
         /// Create select all column in specific table
@@ -12,8 +12,12 @@ namespace DreamyShop.Common.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="columnNames"></param>
         /// <returns></returns>
-        public static string CreateSelectColumnSqlCmd<T>(this List<string> columnNames) where T : class
+        public static string CreateSelectColumnSqlCmd<T>() where T : class
         {
+            var columnNames = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                            .Where(property => !property.PropertyType.IsGenericType)
+                            .Select(property => property.Name)
+                            .ToList();
             string tableName = GetTableName<T>();
             return string.Join(", ", columnNames.Select(e => $"{(tableName + ".")}{e} {CreateColumnSelectName(e, tableName)}"));
         }

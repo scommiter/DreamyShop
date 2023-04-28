@@ -71,6 +71,7 @@ namespace DreamyShop.Repository.Repositories.Generic
         public async Task UpdateAsync(T entity, int id)
         {
             var props = entity.GetType().GetProperties();
+            var test = props.ToString();
             string phay;
             string query = $"UPDATE {tableName} SET ";
             foreach (var prop in props)
