@@ -30,15 +30,16 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpPost("create")]
-        [Authorize]
-        [Member]
+        //[Authorize]
+        //[Member]
         public async Task<IActionResult> CreateManufacturer([FromForm] ManufacturerCreateUpdateDto manufacturerCreateUpdateDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            return Ok();
+            var result = await _manufacturerService.CreateManufacturer(manufacturerCreateUpdateDto);
+            return Ok(result);
         }
 
         [HttpPut("updateManufacturer")]
@@ -55,15 +56,16 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpDelete("removeManufacturer")]
-        [Authorize]
-        [Member]
+        //[Authorize]
+        //[Member]
         public async Task<IActionResult> RemoveManufacturer(int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            return Ok();
+            var result = await _manufacturerService.RemoveManufacturer(id);
+            return Ok(result);
         }
     }
 }

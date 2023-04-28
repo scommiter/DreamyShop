@@ -18,5 +18,15 @@ namespace DreamyShop.Logic.Product
 {
     public class ProductLogic : IProductLogic
     {
+        private readonly IRepositoryWrapper _repository;
+        private readonly IMapper _mapper;
+
+        public ProductLogic(
+            IRepositoryWrapper repository,
+            IMapper mapper)
+        {
+            _repository = repository;
+            _mapper = mapper;
+        }
     }
 }   

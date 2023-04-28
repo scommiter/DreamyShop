@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using DreamyShop.Common.Exceptions;
 using DreamyShop.Common.Results;
+using DreamyShop.Domain;
 using DreamyShop.Domain.Shared.Dtos;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Repository.RepositoryWrapper;
@@ -21,25 +22,31 @@ namespace DreamyShop.Logic.Manufacturer
             _mapper = mapper;
         }
 
-        public Task<ApiResult<ManufacturerDto>> CreateManufacturer(ManufacturerCreateUpdateDto manufacturerCreateUpdateDto)
+        public async Task<ApiResult<ManufacturerDto>> CreateManufacturer(ManufacturerCreateUpdateDto manufacturerCreateUpdateDto)
         {
-            throw new NotImplementedException();
+            var newManufacturer = _mapper.Map<Domain.Manufacturer>(manufacturerCreateUpdateDto);
+            await _repository.Manufacturer.AddAsync(newManufacturer);
+            return new ApiSuccessResult<ManufacturerDto>(_mapper.Map<ManufacturerDto>(newManufacturer));
         }
 
         public async Task<ApiResult<PageResult<ManufacturerDto>>> GetAllManufacturer(PagingRequest pagingRequest)
         {
-            var manufacturerPagings = _repository.Manufacturer.GetAll().ToList();
+            var manufacturerPagings = await _repository.Manufacturer.GetAll();
             var pageResult = new PageResult<ManufacturerDto>()
             {
-                Items = _mapper.Map<List<ManufacturerDto>>(manufacturerPagings),
+                Items = _mapper.Map<List<ManufacturerDto>>(manufacturerPagings.ToList()),
                 Totals = manufacturerPagings.Count()
             };
             return new ApiSuccessResult<PageResult<ManufacturerDto>>(pageResult);
         }
 
-        public Task<ApiResult<bool>> RemoveManufacturer(int id)
+        public async Task<ApiResult<bool>> RemoveManufacturer(int id)
         {
-            throw new NotImplementedException();
+            var manufacturer = await _repository.Manufacturer.GetByIdAsync(id);
+            if (manufacturer == null)
+                return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
+            await _repository.Manufacturer.Remove(id);
+            return new ApiSuccessResult<bool>(true);
         }
 
         public async Task<ApiResult<ManufacturerDto>> UpdateManufacturer(int id, ManufacturerCreateUpdateDto manufacturerCreateUpdateDto)

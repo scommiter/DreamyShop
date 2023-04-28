@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DreamyShop.Repository", "Dr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DreamyShop.Common", "DreamyShop.Common\DreamyShop.Common.csproj", "{D4AA5A62-16AA-40D9-8A76-8111B8A032C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{76BE0645-3B4E-4DD2-BFDC-234C34D62206}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{D4AA5A62-16AA-40D9-8A76-8111B8A032C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4AA5A62-16AA-40D9-8A76-8111B8A032C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4AA5A62-16AA-40D9-8A76-8111B8A032C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76BE0645-3B4E-4DD2-BFDC-234C34D62206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76BE0645-3B4E-4DD2-BFDC-234C34D62206}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76BE0645-3B4E-4DD2-BFDC-234C34D62206}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76BE0645-3B4E-4DD2-BFDC-234C34D62206}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

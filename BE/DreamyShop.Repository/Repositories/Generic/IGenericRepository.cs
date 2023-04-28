@@ -11,20 +11,16 @@ namespace DreamyShop.Repository.Repositories.Generic
 
         Task<T> GetByIdAsync(int id);
 
-        IEnumerable<T> GetAll();
+        Task<IEnumerable<T>> GetAll();
 
-        //IQueryable<T> Where(Expression<Func<T, bool>> expression);
+        Task AddAsync(T entity);
 
-        //Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
-
-        //Task AddAsync(T entity);
-
-        //Task AddRangeAsync(IEnumerable<T> entities);
+        Task AddRangeAsync(IEnumerable<T> entities);
 
         Task UpdateAsync(T entity, int id);
 
-        //void Remove(int id);
+        Task Remove(int id);
 
-        //void RemoveMultiple(List<T> entities);
+        Task RemoveMultiple(List<T> entities);
     }
 }

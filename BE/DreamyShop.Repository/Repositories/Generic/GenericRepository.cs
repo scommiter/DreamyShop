@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
+using System.Text;
 using System.Xml.Linq;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DreamyShop.Repository.Repositories.Generic
 {
@@ -20,14 +22,50 @@ namespace DreamyShop.Repository.Repositories.Generic
             }
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task AddAsync(T entity)
         {
-            return _db.Query<T>($"SELECT * FROM {tableName}");
+            var sqlColumnName = new StringBuilder();
+            var sqlColumnValue = new StringBuilder();
+            var props = entity.GetType().GetProperties();
+            string phay = "";
+            foreach (var prop in props)
+            {
+                if (prop.Name == "Id") continue;
+                if (prop.PropertyType.IsGenericType)
+                {
+                    continue;
+                }
+                sqlColumnName.Append($"{phay}{prop.Name}");
+                sqlColumnValue.Append($"{phay}'{prop.GetValue(entity)}'");
+                phay = ",";
+            }
+            var sqlCmmd = $"INSERT INTO {tableName} ({sqlColumnName}) VALUES ({sqlColumnValue})";
+            await _db.ExecuteAsync(sqlCmmd);
+        }
+
+        public Task AddRangeAsync(IEnumerable<T> entities)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<T>> GetAll()
+        {
+            return await _db.QueryAsync<T>($"SELECT * FROM {tableName}");
         }
 
         public async Task<T> GetByIdAsync(int id)
         {
             return await _db.QuerySingleOrDefaultAsync<T>($"SELECT * FROM {tableName} WHERE Id = {id}");
+        }
+
+        public async Task Remove(int id)
+        {
+            await _db.ExecuteAsync($"DELETE FROM {tableName} WHERE Id = {id}");
+        }
+
+        public Task RemoveMultiple(List<T> entities)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task UpdateAsync(T entity, int id)
