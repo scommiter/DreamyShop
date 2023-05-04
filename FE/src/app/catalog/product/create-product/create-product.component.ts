@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
+import { AddProductVariantComponent } from '../add-product-variant/add-product-variant.component';
 
 @Component({
   selector: 'app-create-product',
@@ -17,6 +19,9 @@ export class CreateProductComponent implements OnInit {
   items: MenuItem[] = [];
 
   home: MenuItem = {};
+  visible: boolean = false;
+
+  constructor(private dialogService: DialogService) {}
 
   ngOnInit(): void {
     this.productTypes = [
@@ -31,5 +36,12 @@ export class CreateProductComponent implements OnInit {
     this.items = [{ label: 'Product' }, { label: 'Create' }];
 
     this.home = { icon: 'pi pi-home', routerLink: '/' };
+  }
+
+  showAddModal(): void {
+    const ref = this.dialogService.open(AddProductVariantComponent, {
+      header: 'Add Product Variant',
+      width: '70%',
+    });
   }
 }

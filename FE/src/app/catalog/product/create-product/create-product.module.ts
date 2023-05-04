@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { CreateProductRoutingModule } from './create-product-routing.module';
 import { CreateProductComponent } from './create-product.component';
@@ -14,6 +13,9 @@ import { FormsModule } from '@angular/forms';
 import { EditorModule } from 'primeng/editor';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { SplitterModule } from 'primeng/splitter';
+import { DialogModule } from 'primeng/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogService } from 'primeng/dynamicdialog';
 
 @NgModule({
   declarations: [CreateProductComponent],
@@ -30,6 +32,9 @@ import { SplitterModule } from 'primeng/splitter';
     EditorModule,
     BreadcrumbModule,
     SplitterModule,
+    DialogModule,
+    ConfirmDialogModule,
   ],
+  providers: [DialogService],
 })
 export class CreateProductModule {}
