@@ -14,7 +14,7 @@ namespace DreamyShop.Repository.RepositoryWrapper
         private readonly IDbConnection _db;
         //private IAuthRepository _auth;
         //private IUserRepository _user;
-        //private IProductRepository _product;
+        private IProductRepository _product;
         //private IProductVariantRepository _productVariant;
         //private IProductVariantImageRepository _productVariantImage;
         //private IProductVariantValueRepository _productVariantValue;
@@ -29,7 +29,7 @@ namespace DreamyShop.Repository.RepositoryWrapper
             //IAuthRepository auth,
             //IUserRepository user,
             //IRoleRepository role,
-            //IProductRepository product,
+            IProductRepository product,
             //IProductAttributeRepository productAttribute,
             //IProductAttributeValueRepository productAttributeValue,
             IManufacturerRepository manufacturer
@@ -43,7 +43,7 @@ namespace DreamyShop.Repository.RepositoryWrapper
             _db = db;
             //_auth = auth;
             //_user = user;
-            //_product = product;
+            _product = product;
             //_productAttribute = productAttribute;
             //_productAttributeValue = productAttributeValue;
             _manufacturer = manufacturer;
@@ -91,17 +91,17 @@ namespace DreamyShop.Repository.RepositoryWrapper
         //    }
         //}
 
-        //public IProductRepository Product
-        //{
-        //    get
-        //    {
-        //        if (_product == null)
-        //        {
-        //            _product = new ProductRepository(_context);
-        //        }
-        //        return _product;
-        //    }
-        //}
+        public IProductRepository Product
+        {
+            get
+            {
+                if (_product == null)
+                {
+                    _product = new ProductRepository(_db);
+                }
+                return _product;
+            }
+        }
 
         //public IProductAttributeRepository ProductAttribute
         //{

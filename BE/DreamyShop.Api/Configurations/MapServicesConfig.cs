@@ -38,7 +38,7 @@ namespace DreamyShop.Api.Configurations
             //services.AddScoped<IAuthRepository, AuthRepository>();
             //services.AddScoped<IUserRepository, UserRepository>();
             //services.AddScoped<IRoleRepository, RoleRepository>();
-            //services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             //services.AddScoped<IProductVariantRepository, ProductVariantRepository>();
             //services.AddScoped<IProductVariantImageRepository, ProductVariantImageRepository>();
             //services.AddScoped<IProductVariantValueRepository, ProductVariantValueRepository>();
@@ -53,7 +53,7 @@ namespace DreamyShop.Api.Configurations
             //services.AddScoped<IAuthLogic, AuthLogic>();
             //services.AddScoped<IUserLogic, UserLogic>();
             //services.AddScoped<IRoleLogic, RoleLogic>();
-            //services.AddScoped<IProductLogic, ProductLogic>();
+            services.AddScoped<IProductLogic, ProductLogic>();
             services.AddScoped<IManufacturerLogic, ManufacturerLogic>();
             //services.AddScoped<ICategoryLogic, CategoryLogic>();
             //services.AddScoped<IReportLogic, ReportLogic>();

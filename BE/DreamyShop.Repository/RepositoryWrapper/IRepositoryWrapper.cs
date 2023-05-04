@@ -12,7 +12,7 @@ namespace DreamyShop.Repository.RepositoryWrapper
         //IAuthRepository Auth { get; }
         //IUserRepository User { get; }
         //IRoleRepository Role { get; }
-        //IProductRepository Product { get; }
+        IProductRepository Product { get; }
         //IProductAttributeRepository ProductAttribute { get; }
         //IProductVariantRepository ProductVariant { get; }
         //IProductVariantImageRepository ProductVariantImage { get; }

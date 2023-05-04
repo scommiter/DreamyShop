@@ -15,11 +15,12 @@ namespace DreamyShop.Common.Extensions
         public static string CreateSelectColumnSqlCmd<T>() where T : class
         {
             var columnNames = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                            .Where(property => !property.PropertyType.IsGenericType)
+                            .Where(property => !property.PropertyType.IsGenericType && !property.GetGetMethod().IsVirtual)
                             .Select(property => property.Name)
                             .ToList();
             string tableName = GetTableName<T>();
-            return string.Join(", ", columnNames.Select(e => $"{(tableName + ".")}{e} {CreateColumnSelectName(e, tableName)}"));
+            string tableShortName = GetTableShortName(tableName);
+            return string.Join(", ", columnNames.Select(e => $"{(tableShortName + ".")}{e} {CreateColumnSelectName(e, tableName)}"));
         }
 
         private static string CreateColumnSelectName(string columnName, string tableName)
@@ -57,7 +58,7 @@ namespace DreamyShop.Common.Extensions
             var shortNameTableFrom = GetTableShortName(fromTable);
             var toTable = GetTableName<To>();
             var shortNameTableTo = GetTableShortName(toTable);
-            return $"dbo.{fromTable} {shortNameTableTo} ON {shortNameTableFrom}.{fromColumn} = {shortNameTableTo}.{toColumn}";
+            return $"dbo.{toTable} {shortNameTableTo} ON {shortNameTableFrom}.{fromColumn} = {shortNameTableTo}.{toColumn}";
         }
 
         private static string GetTableName<T>() where T : class
