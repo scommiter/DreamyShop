@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using DreamyShop.Common.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
@@ -24,22 +25,7 @@ namespace DreamyShop.Repository.Repositories.Generic
 
         public async Task AddAsync(T entity)
         {
-            var sqlColumnName = new StringBuilder();
-            var sqlColumnValue = new StringBuilder();
-            var props = entity.GetType().GetProperties();
-            string phay = "";
-            foreach (var prop in props)
-            {
-                if (prop.Name == "Id") continue;
-                if (prop.PropertyType.IsGenericType)
-                {
-                    continue;
-                }
-                sqlColumnName.Append($"{phay}{prop.Name}");
-                sqlColumnValue.Append($"{phay}'{prop.GetValue(entity)}'");
-                phay = ",";
-            }
-            var sqlCmmd = $"INSERT INTO {tableName} ({sqlColumnName}) VALUES ({sqlColumnValue})";
+            var sqlCmmd = SqlCommandExtension.InsertSqlCmd<T>(entity);
             await _db.ExecuteAsync(sqlCmmd);
         }
 

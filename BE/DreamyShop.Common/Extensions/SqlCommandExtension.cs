@@ -1,11 +1,30 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace DreamyShop.Common.Extensions
 {
     public static class SqlCommandExtension
     {
+        public static string InsertSqlCmd<T>(T entity) where T : class
+        {
+            var sqlColumnName = new StringBuilder();
+            var sqlColumnValue = new StringBuilder();
+            var tableName = GetTableName<T>();
+            var props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            string quotes = "";
+            foreach (var prop in props)
+            {
+                if (prop.Name == "Id") continue;
+                if (prop.GetGetMethod().IsVirtual) continue;
+                sqlColumnName.Append($"{quotes}{prop.Name}");
+                sqlColumnValue.Append($"{quotes}'{prop.GetValue(entity)}'");
+                quotes = ",";
+            }
+            return $"INSERT INTO {tableName} ({sqlColumnName}) VALUES ({sqlColumnValue})";
+        }
+
         /// <summary>
         /// Create select all column in specific table
         /// </summary>
@@ -15,7 +34,7 @@ namespace DreamyShop.Common.Extensions
         public static string CreateSelectColumnSqlCmd<T>() where T : class
         {
             var columnNames = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                            .Where(property => !property.PropertyType.IsGenericType && !property.GetGetMethod().IsVirtual)
+                            .Where(property => !property.GetGetMethod().IsVirtual)
                             .Select(property => property.Name)
                             .ToList();
             string tableName = GetTableName<T>();
