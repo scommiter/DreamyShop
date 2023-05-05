@@ -7,5 +7,6 @@ namespace DreamyShop.Repository.Repositories.Product
     public interface IProductRepository : IGenericRepository<Domain.Product>
     {
         Task<IEnumerable<dynamic>> GetAllProduct();
+        Task CreateProduct(ProductCreateDto productCreateDto);
     }
 }

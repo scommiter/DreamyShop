@@ -12,15 +12,9 @@ namespace DreamyShop.Repository.Repositories.Generic
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly IDbConnection _db;
-        private string tableName;
         public GenericRepository(IDbConnection db)
         {
             _db = db;
-            var tableAttribute = typeof(T).GetCustomAttributes(typeof(TableAttribute), true).FirstOrDefault() as TableAttribute;
-            if (tableAttribute != null)
-            {
-                tableName = tableAttribute.Name;
-            }
         }
 
         public async Task AddAsync(T entity)
@@ -36,17 +30,17 @@ namespace DreamyShop.Repository.Repositories.Generic
 
         public async Task<IEnumerable<T>> GetAll()
         {
-            return await _db.QueryAsync<T>($"SELECT * FROM {tableName}");
+            return await _db.QueryAsync<T>(SqlCommandExtension.GetAllSqlCmd<T>());
         }
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await _db.QuerySingleOrDefaultAsync<T>($"SELECT * FROM {tableName} WHERE Id = {id}");
+            return await _db.QuerySingleOrDefaultAsync<T>(SqlCommandExtension.GetByIdSqlCmd<T>(id));
         }
 
         public async Task Remove(int id)
         {
-            await _db.ExecuteAsync($"DELETE FROM {tableName} WHERE Id = {id}");
+            await _db.ExecuteAsync(SqlCommandExtension.DeleteSqlCmd<T>(id));
         }
 
         public Task RemoveMultiple(List<T> entities)
@@ -56,26 +50,7 @@ namespace DreamyShop.Repository.Repositories.Generic
 
         public async Task UpdateAsync(T entity, int id)
         {
-            var props = entity.GetType().GetProperties();
-            var test = props.ToString();
-            string phay;
-            string query = $"UPDATE {tableName} SET ";
-            foreach (var prop in props)
-            {
-                if (prop.Name == "Id") continue;
-                if (prop.PropertyType.IsGenericType)
-                {
-                    query = query.Substring(0, query.Length - 1);
-                    continue;
-                }
-                phay = "";
-                query += $"{phay}{prop.Name}={phay}'{prop.GetValue(entity)}'";
-                if (prop != props.Last())
-                {
-                    query += ",";
-                }
-            }
-            await _db.ExecuteAsync(query + $" WHERE Id = {id}");
+            await _db.ExecuteAsync(SqlCommandExtension.UpdateSqlCmd<T>(entity, id));
         }
     }
 }

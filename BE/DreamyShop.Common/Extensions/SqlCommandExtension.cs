@@ -7,6 +7,77 @@ namespace DreamyShop.Common.Extensions
 {
     public static class SqlCommandExtension
     {
+        /// <summary>
+        /// Create sql cmd get all record of table
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static string GetAllSqlCmd<T>() where T : class
+        {
+            var tableName = GetTableName<T>();
+            return $"SELECT * FROM {tableName}";
+        }
+
+        /// <summary>
+        /// Create sql cmd get record by id from table
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static string GetByIdSqlCmd<T>(int id) where T : class
+        {
+            var tableName = GetTableName<T>();
+            return $"SELECT * FROM {tableName} WHERE Id = {id}";
+        }
+
+        /// <summary>
+        /// Create sql cmd for delete record from table
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static string DeleteSqlCmd<T>(int id) where T : class
+        {
+            var tableName = GetTableName<T>();
+            return $"DELETE FROM {tableName} WHERE Id = {id}";
+        }
+
+        /// <summary>
+        /// Create sql cmd for update record to table
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static string UpdateSqlCmd<T>(T entity, int id) where T : class
+        {
+            var props = entity.GetType().GetProperties();
+            var tableName = GetTableName<T>();
+            string phay;
+            string query = $"UPDATE {tableName} SET ";
+            foreach (var prop in props)
+            {
+                if (prop.Name == "Id") continue;
+                if (prop.GetGetMethod().IsVirtual)
+                {
+                    query = query.Substring(0, query.Length - 1);
+                    continue;
+                }
+                phay = "";
+                query += $"{phay}{prop.Name}={phay}'{prop.GetValue(entity)}'";
+                if (prop != props.Last())
+                {
+                    query += ",";
+                }
+            }
+            return query + $" WHERE Id = {id}";
+        }
+
+        /// <summary>
+        /// Create sql cmd for insert record to table
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public static string InsertSqlCmd<T>(T entity) where T : class
         {
             var sqlColumnName = new StringBuilder();

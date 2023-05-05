@@ -16,6 +16,11 @@ namespace DreamyShop.Repository.Repositories.Product
             _db = db;
         }
 
+        public async Task CreateProduct(ProductCreateDto productCreateDto)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<dynamic>> GetAllProduct()
         {
             var sqlSelectColumn = new StringBuilder();
