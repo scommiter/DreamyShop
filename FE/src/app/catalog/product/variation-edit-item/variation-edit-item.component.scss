@@ -1,0 +1,54 @@
+.container-variant{
+    padding: 20px;
+    font-size: 14px;
+    background: #f6f6f6;
+}
+
+.classify{
+    display: flex;
+}
+
+.title-variant{
+    width: 141px;
+    min-height: 30px;
+    font-size: 14px;
+}
+
+.option-list {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 30px;
+    max-width: 659px;
+    gap: 25px;
+}
+
+.option-item{
+    display: flex;
+}
+
+.input-content{
+    width: 259px;
+    height: 32px;
+    border-radius: 3px;
+    padding: 0 12px;
+    border: 1px solid #e5e5e5;
+}
+
+.icon-trash{
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.classify.taxonomy-group {
+    margin-bottom: 25px;
+}
+
+.button-add-classify-product{
+    padding: 5px 15px;
+    border-style: dashed;
+    background-color: #fff;
+    border-color: #b7b7b7;
+    color: red;
+    border-radius: 5px;
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
-import { AddProductVariantComponent } from '../add-product-variant/add-product-variant.component';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-product',
@@ -14,16 +14,16 @@ export class CreateProductComponent implements OnInit {
   stateOptions: string[] = [];
   defaultOptionActive: string = 'True';
   defaultOptionVisibily: string = 'True';
-  text: string = 'aaaaaaaa';
-
   items: MenuItem[] = [];
-
   home: MenuItem = {};
-  visible: boolean = false;
+  productOptions = new Map<string, string[]>();
+  isAddVisibility: boolean = false;
 
   constructor(private dialogService: DialogService) {}
 
   ngOnInit(): void {
+    this.home = { icon: 'pi pi-home', routerLink: '/' };
+    this.items = [{ label: 'Product' }, { label: 'Create' }];
     this.productTypes = [
       'Single',
       'Grouped',
@@ -33,15 +33,9 @@ export class CreateProductComponent implements OnInit {
       'Downloadable',
     ];
     this.stateOptions = ['True', 'False'];
-    this.items = [{ label: 'Product' }, { label: 'Create' }];
-
-    this.home = { icon: 'pi pi-home', routerLink: '/' };
   }
 
-  showAddModal(): void {
-    const ref = this.dialogService.open(AddProductVariantComponent, {
-      header: 'Add Product Variant',
-      width: '70%',
-    });
+  addProductOptions() {
+    this.isAddVisibility = false;
   }
 }

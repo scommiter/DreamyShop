@@ -16,10 +16,14 @@ import { SplitterModule } from 'primeng/splitter';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogService } from 'primeng/dynamicdialog';
+import { DividerModule } from 'primeng/divider';
+import { CommonModule } from '@angular/common';
+import { VariationEditItemComponent } from '../variation-edit-item/variation-edit-item.component';
 
 @NgModule({
-  declarations: [CreateProductComponent],
+  declarations: [CreateProductComponent, VariationEditItemComponent],
   imports: [
+    CommonModule,
     CreateProductRoutingModule,
     InputTextModule,
     CheckboxModule,
@@ -34,6 +38,7 @@ import { DialogService } from 'primeng/dynamicdialog';
     SplitterModule,
     DialogModule,
     ConfirmDialogModule,
+    DividerModule,
   ],
   providers: [DialogService],
 })

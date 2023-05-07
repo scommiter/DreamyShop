@@ -12,10 +12,9 @@ import { FormsModule } from '@angular/forms';
 import { DialogService } from 'primeng/dynamicdialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { EditorModule } from 'primeng/editor';
-import { AddProductVariantComponent } from './add-product-variant/add-product-variant.component';
 
 @NgModule({
-  declarations: [ProductComponent, AddProductVariantComponent],
+  declarations: [ProductComponent],
   imports: [
     CommonModule,
     ProductRoutingModule,
