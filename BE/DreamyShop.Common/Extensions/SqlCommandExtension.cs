@@ -97,6 +97,19 @@ namespace DreamyShop.Common.Extensions
         }
 
         /// <summary>
+        /// Create select specific column in specific table
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="columnNames"></param>
+        /// <returns></returns>
+        public static string CreateSelectSpecificColumnSqlCmd<T>(List<string> columnNames) where T : class
+        {
+            string tableName = GetTableName<T>();
+            string tableShortName = GetTableShortName(tableName);
+            return string.Join(", ", columnNames.Select(e => $"{(tableShortName + ".")}{e} {CreateColumnSelectName(e, tableName)}"));
+        }
+
+        /// <summary>
         /// Create select all column in specific table
         /// </summary>
         /// <typeparam name="T"></typeparam>

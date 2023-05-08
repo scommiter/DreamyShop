@@ -27,12 +27,12 @@ namespace DreamyShop.Repository.Repositories.Product
             var sqlFrom = new StringBuilder();
 
             sqlSelectColumn.AppendLine($"{SqlCommandExtension.CreateSelectColumnSqlCmd<Domain.Product>()}");
-            sqlSelectColumn.AppendLine($", {SqlCommandExtension.CreateSelectColumnSqlCmd<Domain.Manufacturer>()}");
-            sqlSelectColumn.AppendLine($", {SqlCommandExtension.CreateSelectColumnSqlCmd<Domain.ProductCategory>()}");
-            sqlSelectColumn.AppendLine($", {SqlCommandExtension.CreateSelectColumnSqlCmd<Domain.ProductVariant>()}");
-            sqlSelectColumn.AppendLine($", {SqlCommandExtension.CreateSelectColumnSqlCmd<Domain.ProductVariantValue>()}");
-            sqlSelectColumn.AppendLine($", {SqlCommandExtension.CreateSelectColumnSqlCmd<Domain.ProductAttributeValue>()}");
-            sqlSelectColumn.AppendLine($", {SqlCommandExtension.CreateSelectColumnSqlCmd<Domain.ImageProductVariant>()}");
+            sqlSelectColumn.AppendLine($", {SqlCommandExtension.CreateSelectSpecificColumnSqlCmd<Domain.Manufacturer>(new List<string>() { "Name"}) }");
+            sqlSelectColumn.AppendLine($", {SqlCommandExtension.CreateSelectSpecificColumnSqlCmd<Domain.ProductCategory>(new List<string>() { "Name" }) }");
+            sqlSelectColumn.AppendLine($", {SqlCommandExtension.CreateSelectSpecificColumnSqlCmd<Domain.ProductVariant>(new List<string>() { "SKU", "Quantity", "Price" })}");
+            sqlSelectColumn.AppendLine($", {SqlCommandExtension.CreateSelectSpecificColumnSqlCmd<Domain.ProductVariantValue>(new List<string>() { "ProductVariantId" })}");
+            sqlSelectColumn.AppendLine($", {SqlCommandExtension.CreateSelectSpecificColumnSqlCmd<Domain.ProductAttributeValue>(new List<string>() { "Value" })}");
+            sqlSelectColumn.AppendLine($", {SqlCommandExtension.CreateSelectSpecificColumnSqlCmd<Domain.ImageProductVariant>(new List<string>() { "Path" })}");
 
             sqlFrom.AppendLine($"FROM {SqlCommandExtension.CreateFromTableSqlCmd<Domain.Product>()}");
             sqlFrom.AppendLine($"JOIN {SqlCommandExtension.CreateJoinTableSqlCmd<Domain.Product, Domain.Manufacturer>("ManufacturerId", "Id")}");
