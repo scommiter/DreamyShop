@@ -26,6 +26,7 @@ import { EditorModule } from 'primeng/editor';
     FormsModule,
     FileUploadModule,
     EditorModule,
+    FormsModule,
   ],
   providers: [ProductService, DialogService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
