@@ -10,9 +10,9 @@ export class VariationEditItemComponent implements OnInit {
   @Input() productOptionValue: string[] = [];
   @Input() indexProductOption: number = 1;
 
-  containerVariants: string[] = [''];
+  productOptions: string[] = [''];
   indexProductVariant: number = 1;
-  inputs: { value: string }[][] = [[{ value: '' }]];
+  options: { value: string }[][] = [[{ value: '' }]];
   containerVariantCount: number = 0;
 
   constructor() {}
@@ -22,22 +22,25 @@ export class VariationEditItemComponent implements OnInit {
   onInputFocus() {
     let index = this.indexProductVariant - 1;
     if (
-      this.inputs[index].length === 0 ||
-      this.inputs[index][this.inputs[index].length - 1].value !== ''
+      this.options[index].length === 0 ||
+      this.options[index][this.options[index].length - 1].value !== ''
     ) {
-      this.inputs[index].push({ value: '' });
-      console.log('this.inputs22222222222 :>> ', this.inputs[index]);
+      this.options[index].push({ value: '' });
     }
+    console.log('this.productOptions :>> ', this.options);
   }
 
   addProductVariant() {
-    this.containerVariants.push('');
-    this.inputs.push([{ value: '' }]);
+    this.productOptions.push('');
+    this.options.push([{ value: '' }]);
     this.indexProductVariant++;
     this.containerVariantCount++;
   }
 
   onDeleteClassify() {
-    this.inputs[this.indexProductVariant - 1].splice(-1);
+    this.options[this.indexProductVariant - 1].splice(
+      this.options[this.indexProductVariant - 1].length - 2,
+      1
+    );
   }
 }

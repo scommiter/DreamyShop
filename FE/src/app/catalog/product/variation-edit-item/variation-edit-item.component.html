@@ -1,6 +1,6 @@
 <div
   class="container-variant"
-  *ngFor="let containerVariant of containerVariants; let i = index"
+  *ngFor="let productOption of productOptions; let i = index"
 >
   <div class="classify taxonomy-group">
     <div class="title-variant">Nhóm phân loại {{ i + 1 }}</div>
@@ -17,13 +17,13 @@
   <div class="classify product-classification">
     <div class="title-variant">Phân loại hàng</div>
     <div class="option-list">
-      <div class="option-item" *ngFor="let input of inputs[i]; let i = index">
+      <div class="option-item" *ngFor="let option of options[i]; let i = index">
         <div class="input-container">
           <input
             type="text"
             class="input-content"
             placeholder="Ví dụ: Trắng, Đỏ ..."
-            [(ngModel)]="input.value"
+            [(ngModel)]="option.value"
             (input)="onInputFocus()"
           />
         </div>
