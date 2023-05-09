@@ -1,6 +1,9 @@
-<div class="container-variant">
+<div
+  class="container-variant"
+  *ngFor="let containerVariant of containerVariants; let i = index"
+>
   <div class="classify taxonomy-group">
-    <div class="title-variant">Nhóm phân loại {{ indexProductOption }}</div>
+    <div class="title-variant">Nhóm phân loại {{ i + 1 }}</div>
     <div class="option-list">
       <div class="input-container">
         <input
@@ -14,31 +17,33 @@
   <div class="classify product-classification">
     <div class="title-variant">Phân loại hàng</div>
     <div class="option-list">
-      <div class="option-item" *ngFor="let input of inputs; let i = index">
+      <div class="option-item" *ngFor="let input of inputs[i]; let i = index">
         <div class="input-container">
           <input
             type="text"
             class="input-content"
             placeholder="Ví dụ: Trắng, Đỏ ..."
             [(ngModel)]="input.value"
-            (keyup.enter)="onInputFocus()"
+            (input)="onInputFocus()"
           />
         </div>
-        <div class="icon-trash">
+        <div class="icon-trash" (click)="onDeleteClassify()">
           <i class="pi pi-trash" style="font-size: 1rem; color: #708090"></i>
         </div>
       </div>
     </div>
   </div>
 </div>
-<br />
+
 <div class="container-variant">
   <div class="classify taxonomy-group">
-    <div class="title-variant">Nhóm phân loại {{ indexProductOption }}</div>
+    <div class="title-variant">
+      Nhóm phân loại {{ indexProductVariant + 1 }}
+    </div>
     <div class="add-classify-product">
-      <button class="button-add-classify-product">
+      <button class="button-add-classify-product" (click)="addProductVariant()">
         <i class="pi pi-plus" style="font-size: 1rem; color: red"></i> Thêm nhóm
-        phân loại {{ indexProductOption }}
+        phân loại {{ indexProductVariant + 1 }}
       </button>
     </div>
   </div>
