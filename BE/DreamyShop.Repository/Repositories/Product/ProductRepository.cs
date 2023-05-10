@@ -16,6 +16,27 @@ namespace DreamyShop.Repository.Repositories.Product
             _db = db;
         }
 
+        public async Task AddAttributeProducts(List<VariantProduct> variantProducts, Dictionary<string, List<string>> productOptions, List<Domain.Attribute> attributes)
+        {
+            if (variantProducts.Any(pAttr => pAttr.AttributeNames != null) && variantProducts.Count > 1)
+            {
+                var attributeNames = productOptions.Select(pad => pad.Key.Standard()).Distinct().ToList();
+                var newAttributeNames = attributeNames.Where(a => !attributes.Select(attr => attr.Name.Standard()).Contains(a.Standard())).ToList();
+                var newAttributes = newAttributeNames.Select(an => new Domain.Attribute
+                {
+                    Name = an,
+                    Code = an.ToUpper(),
+                    IsActive = true,
+                    IsVisibility = true,
+                    IsUnique = true,
+                    Note = "",
+                    DateCreated = DateTime.Now
+                }).ToList();
+                var sql = SqlCommandExtension.InsertMultipleSqlCmd<Domain.Attribute>(newAttributes);
+                await _db.ExecuteAsync(sql);
+            }
+        }
+
         public async Task CreateProduct(ProductCreateDto productCreateDto)
         {
             throw new NotImplementedException();
@@ -44,6 +65,31 @@ namespace DreamyShop.Repository.Repositories.Product
 
             var sql = $@"SELECT {sqlSelectColumn} {sqlFrom}";
             return await _db.QueryAsync(sql);
+        }
+
+        /// <summary>
+        /// Add if there are many variant products
+        /// </summary>
+        /// <param name="productCreateUpdateDto"></param>
+        /// <param name="attributes"></param>
+        private async void AddAttribute(List<VariantProduct> variantProducts, Dictionary<string, List<string>> productOptions, List<Domain.Attribute> attributes)
+        {
+            if (variantProducts.Any(pAttr => pAttr.AttributeNames != null) && variantProducts.Count > 1)
+            {
+                var attributeNames = productOptions.Select(pad => pad.Key.Standard()).Distinct().ToList();
+                var newAttributeNames = attributeNames.Where(a => !attributes.Select(attr => attr.Name.Standard()).Contains(a.Standard())).ToList();
+                var newAttributes = newAttributeNames.Select(an => new Domain.Attribute
+                {
+                    Name = an,
+                    Code = an.ToUpper(),
+                    IsActive = true,
+                    IsVisibility = true,
+                    IsUnique = true,
+                    Note = "",
+                    DateCreated = DateTime.Now
+                }).ToList();
+
+            }
         }
     }
 }

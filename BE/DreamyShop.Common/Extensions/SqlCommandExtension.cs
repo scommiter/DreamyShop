@@ -73,6 +73,38 @@ namespace DreamyShop.Common.Extensions
         }
 
         /// <summary>
+        /// Create sql cmd for insert multiple record to table
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static string InsertMultipleSqlCmd<T>(List<T> entites) where T : class
+        {
+            var tableName = GetTableName<T>();
+            var sqlColumnValue = new StringBuilder();
+            var sqlColumnName = new StringBuilder();
+            foreach (var entity in entites)
+            {
+                var sqlColumnValueItem = new StringBuilder();    
+                var props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                string quotes = "";
+                foreach (var prop in props)
+                {
+                    if (prop.Name == "Id") continue;
+                    if (prop.GetGetMethod().IsVirtual) continue;
+                    if(sqlColumnName == null)
+                    {
+                        sqlColumnName.Append($"{quotes}{prop.Name}");
+                    }
+                    sqlColumnValueItem.Append($"{quotes}'{prop.GetValue(entity)}'");
+                    sqlColumnValue.Append($"{quotes}'{sqlColumnValueItem}'");
+                    quotes = ",";
+                }
+            }
+            return $"INSERT INTO {tableName} ({sqlColumnName}) VALUES ({sqlColumnValue})";
+        }
+
+        /// <summary>
         /// Create sql cmd for insert record to table
         /// </summary>
         /// <typeparam name="T"></typeparam>

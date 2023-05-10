@@ -8,5 +8,6 @@ namespace DreamyShop.Repository.Repositories.Product
     {
         Task<IEnumerable<dynamic>> GetAllProduct();
         Task CreateProduct(ProductCreateDto productCreateDto);
+        Task AddAttributeProducts(List<VariantProduct> variantProducts, Dictionary<string, List<string>> productOptions, List<Domain.Attribute> attributes);
     }
 }
