@@ -10,6 +10,8 @@
           type="text"
           class="input-content"
           placeholder="Ví dụ: Màu sắc, Size, ..."
+          [(ngModel)]="optionTitles[i]"
+          (blur)="onInputOptionTile()"
         />
       </div>
     </div>
@@ -17,17 +19,17 @@
   <div class="classify product-classification">
     <div class="title-variant">Phân loại hàng</div>
     <div class="option-list">
-      <div class="option-item" *ngFor="let option of options[i]; let i = index">
+      <div class="option-item" *ngFor="let option of options[i]">
         <div class="input-container">
           <input
             type="text"
             class="input-content"
             placeholder="Ví dụ: Trắng, Đỏ ..."
             [(ngModel)]="option.value"
-            (input)="onInputFocus()"
+            (input)="onInputFocus(i)"
           />
         </div>
-        <div class="icon-trash" (click)="onDeleteClassify()">
+        <div class="icon-trash" (click)="onDeleteClassify(i)">
           <i class="pi pi-trash" style="font-size: 1rem; color: #708090"></i>
         </div>
       </div>
@@ -48,3 +50,5 @@
     </div>
   </div>
 </div>
+
+<div class="container-variant">alo</div>

@@ -11,20 +11,19 @@ export class VariationEditItemComponent implements OnInit {
   @Input() indexProductOption: number = 1;
 
   productOptions: string[] = [''];
-  indexProductVariant: number = 1;
   options: { value: string }[][] = [[{ value: '' }]];
   containerVariantCount: number = 0;
+  indexProductVariant: number = 1;
+  optionTitles: string[] = [];
+  optionTitle: string = '';
+  indexOptionTitle: number = 0;
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  onInputFocus() {
-    let index = this.indexProductVariant - 1;
-    if (
-      this.options[index].length === 0 ||
-      this.options[index][this.options[index].length - 1].value !== ''
-    ) {
+  onInputFocus(index: number) {
+    if (this.options[index][this.options[index].length - 1].value !== '') {
       this.options[index].push({ value: '' });
     }
     console.log('this.productOptions :>> ', this.options);
@@ -32,15 +31,19 @@ export class VariationEditItemComponent implements OnInit {
 
   addProductVariant() {
     this.productOptions.push('');
+    this.optionTitles.push('');
     this.options.push([{ value: '' }]);
-    this.indexProductVariant++;
     this.containerVariantCount++;
+    this.indexProductVariant++;
+    this.indexOptionTitle++;
   }
 
-  onDeleteClassify() {
-    this.options[this.indexProductVariant - 1].splice(
-      this.options[this.indexProductVariant - 1].length - 2,
-      1
-    );
+  onInputOptionTile() {
+    console.log('this.optionTitles :>> ', this.optionTitles);
+    console.log('this.indexOptionTitle :>> ', this.indexOptionTitle);
+  }
+
+  onDeleteClassify(index: number) {
+    this.options[index].splice(this.options[index].length - 3, 1);
   }
 }
