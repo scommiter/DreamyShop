@@ -16,7 +16,7 @@ export class CreateProductComponent implements OnInit {
   defaultOptionVisibily: string = 'True';
   items: MenuItem[] = [];
   home: MenuItem = {};
-  productOptions = new Map<string, string[]>();
+
   isAddVisibility: boolean = false;
 
   constructor(private dialogService: DialogService) {}

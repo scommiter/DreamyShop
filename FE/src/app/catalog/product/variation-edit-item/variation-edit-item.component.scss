@@ -34,6 +34,14 @@
     padding: 0 12px;
     border: 1px solid #e5e5e5;
 }
+.input-content-variant{
+    width: 150px;
+    height: 32px;
+    border-radius: 3px;
+    padding: 0 12px;
+    margin: 5px;
+    border: 1px solid #e5e5e5;
+}
 
 .icon-trash{
     padding-left: 10px;
@@ -61,3 +69,121 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
+// PRODUCT VARIANT
+// table, th, td, tr-variant {
+//     border: 1px solid black;    
+//     border-collapse: collapse;
+//     text-align: center;
+// }
+
+// table{
+//     width: 100%;
+//     border-radius: 5px;
+// }
+
+// th, td {
+//     padding: 10px;    
+// }
+
+// td {
+//     word-wrap: break-word;
+//     white-space: normal;
+// }
+
+.table-wrapper  
+{  
+    display: flex;
+    width: 100%;
+}  
+.table-option-one{
+    width: 12.5%;
+}
+.table-option-diff{
+    width: 87.5%;
+}
+
+.heading{
+    display: flex;
+}
+.cell-heading{
+    padding-top: 5px;
+    justify-content: center;
+    text-align: center;
+    min-height: 35px;
+    background: #f6f6f6;
+    font-weight: bold;
+}
+
+.cell-heading-diff {
+    width: 100%;
+    padding-top: 5px;
+    justify-content: center;
+    text-align: center;
+    height: 35px;
+    font-weight: bold;
+    background: #f6f5f6f5;
+}
+
+.row-option-one{
+    justify-content: center;
+    text-align: center; 
+}
+
+.body-option-diff{
+    display: flex;
+    width: 100%;
+}
+
+.row{
+    justify-content: center;
+    text-align: center; 
+}
+
+.row-option,
+.diff-option{
+    width: 14.2%;
+}
+.row-value,
+.diff-value{
+    width: 29%;
+}
+
+p.option-value{
+    width: 102px;
+    height: 32px;
+    margin: 10px;
+}
+p.content-space-title {
+    width: 102px;
+    height: 27px;
+    margin: 5px;
+}
+// .Title  
+// {  
+//     display: table-caption;  
+//     text-align: center;  
+//     font-weight: bold;  
+//     font-size: larger;  
+// }  
+
+// .Heading  
+// {  
+//     display: table-row;  
+//     font-weight: bold;  
+//     text-align: center;  
+// }  
+
+// .Row  
+// {  
+//     display: table-row;  
+// }  
+
+// .Cell  
+// {  
+//     display: table-cell;  
+//     border: solid;  
+//     border-width: thin;  
+//     padding-left: 5px;  
+//     padding-right: 5px;  
+// }  

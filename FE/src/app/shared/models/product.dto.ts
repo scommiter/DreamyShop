@@ -1,4 +1,3 @@
-import { ProductVariantDto } from './product-variant.dto';
 import { ProductTypes } from '../enums/product-types.enum';
 
 export interface ProductDto {

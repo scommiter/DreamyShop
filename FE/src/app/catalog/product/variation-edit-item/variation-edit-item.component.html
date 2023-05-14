@@ -26,7 +26,8 @@
             class="input-content"
             placeholder="Ví dụ: Trắng, Đỏ ..."
             [(ngModel)]="option.value"
-            (input)="onInputFocus(i)"
+            (input)="onInputFocus(i, option.value)"
+            (blur)="onInputOptionValue(option.value)"
           />
         </div>
         <div class="icon-trash" (click)="onDeleteClassify(i)">
@@ -37,7 +38,7 @@
   </div>
 </div>
 
-<div class="container-variant">
+<div class="container-variant" *ngIf="indexProductVariant + 1 < 3">
   <div class="classify taxonomy-group">
     <div class="title-variant">
       Nhóm phân loại {{ indexProductVariant + 1 }}
@@ -51,4 +52,101 @@
   </div>
 </div>
 
-<div class="container-variant">alo</div>
+<div class="table-wrapper">
+  <div class="table-option-one" *ngIf="optionTitles[0] != null">
+    <div class="heading cell-heading">{{ optionTitles[0] }}</div>
+    <div class="body-table">
+      <div class="row-option-one" *ngFor="let option of optionTitleSeconds">
+        <p *ngIf="option !== ''" class="option-value">{{ option }}</p>
+        <p *ngIf="option === ''" class="content-space-title"><br /></p>
+      </div>
+    </div>
+  </div>
+  <div class="table-option-diff">
+    <div class="heading heading-diff">
+      <div
+        class="diff-option cell-heading-diff"
+        *ngIf="optionTitles[1] != null"
+      >
+        <p>{{ optionTitles[1] }}</p>
+      </div>
+      <div class="diff-value cell-heading-diff" *ngIf="optionTitles[0] != null">
+        <p>Giá</p>
+      </div>
+      <div class="diff-value cell-heading-diff" *ngIf="optionTitles[0] != null">
+        <p>Số lượng</p>
+      </div>
+      <div class="diff-value cell-heading-diff" *ngIf="optionTitles[0] != null">
+        <p>SKU phân loại</p>
+      </div>
+    </div>
+    <div *ngIf="indexProductVariant - 1 === 0">
+      <div
+        class="body-option-diff"
+        *ngFor="let option of options[indexProductVariant - 1]"
+      >
+        <div class="row row-value">
+          <p *ngIf="option.value !== ''">
+            <input type="text" class="input-content-variant" />
+          </p>
+          <div *ngIf="option.value === ''" class="content-space">
+            <br />
+          </div>
+        </div>
+        <div class="row row-value">
+          <p *ngIf="option.value !== ''">
+            <input type="text" class="input-content-variant" />
+          </p>
+          <div *ngIf="option.value === ''" class="content-space">
+            <br />
+          </div>
+        </div>
+        <div class="row row-value">
+          <p *ngIf="option.value !== ''">
+            <input type="text" class="input-content-variant" />
+          </p>
+          <div *ngIf="option.value === ''" class="content-space">
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="indexProductVariant - 1 === 1">
+      <div *ngFor="let optionOne of options[0]">
+        <div class="body-option-diff" *ngFor="let option of options[1]">
+          <div
+            class="row row-option option-value"
+            *ngIf="optionTitles[1] != null"
+          >
+            <p>{{ option.value }}</p>
+          </div>
+          <div class="row row-value" *ngIf="options[0].length > 1">
+            <p *ngIf="option.value !== ''">
+              <input type="text" class="input-content-variant" />
+            </p>
+            <div *ngIf="option.value === ''" class="content-space">
+              <br />
+            </div>
+          </div>
+          <div class="row row-value" *ngIf="options[0].length > 1">
+            <p *ngIf="option.value !== ''">
+              <input type="text" class="input-content-variant" />
+            </p>
+            <div *ngIf="option.value === ''" class="content-space">
+              <br />
+            </div>
+          </div>
+          <div class="row row-value" *ngIf="options[0].length > 1">
+            <p *ngIf="option.value !== ''">
+              <input type="text" class="input-content-variant" />
+            </p>
+            <div *ngIf="option.value === ''" class="content-space">
+              <br />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
