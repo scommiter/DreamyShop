@@ -70,65 +70,83 @@
     cursor: pointer;
 }
 
-// PRODUCT VARIANT
-// table, th, td, tr-variant {
-//     border: 1px solid black;    
-//     border-collapse: collapse;
-//     text-align: center;
-// }
+.button-add-picture-variant{
+    border-style: dashed;
+    background-color: #fff;
+    border-color: #b7b7b7;
+    color: red;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-// table{
+//PRODUCT VARIANT
+table, th, td, tr-variant {
+    border: 1px solid #000000;    
+    border-collapse: collapse;
+    text-align: center;
+}
+
+td, th {
+    padding: 10px;  
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+
+table{
+    width: 100%;
+}
+
+th{
+    padding: 10px;   
+    background: #b7b7b7; 
+}
+
+th:nth-child(1),
+th:nth-child(2),
+td:nth-child(1),
+td:nth-child(2) {
+  width: 100px;
+}
+
+// .table-wrapper  
+// {  
+//     display: flex;
 //     width: 100%;
-//     border-radius: 5px;
+// }  
+// .table-option-one{
+//     width: 12.5%;
+// }
+// .table-option-diff{
+//     width: 87.5%;
 // }
 
-// th, td {
-//     padding: 10px;    
+// .heading{
+//     display: flex;
+// }
+// .cell-heading{
+//     padding-top: 5px;
+//     justify-content: center;
+//     text-align: center;
+//     min-height: 35px;
+//     background: #f6f6f6;
+//     font-weight: bold;
 // }
 
-// td {
-//     word-wrap: break-word;
-//     white-space: normal;
+// .cell-heading-diff {
+//     width: 100%;
+//     padding-top: 5px;
+//     justify-content: center;
+//     text-align: center;
+//     height: 35px;
+//     font-weight: bold;
+//     background: #f6f5f6f5;
 // }
 
-.table-wrapper  
-{  
-    display: flex;
-    width: 100%;
-}  
-.table-option-one{
-    width: 12.5%;
-}
-.table-option-diff{
-    width: 87.5%;
-}
-
-.heading{
-    display: flex;
-}
-.cell-heading{
-    padding-top: 5px;
-    justify-content: center;
-    text-align: center;
-    min-height: 35px;
-    background: #f6f6f6;
-    font-weight: bold;
-}
-
-.cell-heading-diff {
-    width: 100%;
-    padding-top: 5px;
-    justify-content: center;
-    text-align: center;
-    height: 35px;
-    font-weight: bold;
-    background: #f6f5f6f5;
-}
-
-.row-option-one{
-    justify-content: center;
-    text-align: center; 
-}
+// .row-option-one{
+//     justify-content: center;
+//     text-align: center; 
+// }
 
 .body-option-diff{
     display: flex;

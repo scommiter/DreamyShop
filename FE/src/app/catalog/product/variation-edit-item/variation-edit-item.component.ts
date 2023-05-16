@@ -6,100 +6,42 @@ import { ProductVariantDto } from 'src/app/shared/models/product-variant.dto';
   templateUrl: './variation-edit-item.component.html',
   styleUrls: ['./variation-edit-item.component.scss'],
 })
-export class VariationEditItemComponent implements OnInit {
+export class VariationEditItemComponent {
   @Input() productOptionKey: string = '';
   @Input() productOptionValue: string[] = [];
   @Input() indexProductOption: number = 1;
 
-  productVariants = new Array<ProductVariantDto>();
+  addClassifyProduct: boolean = false;
+  productOptions: { key: string; value: string[] }[] = [
+    { key: '', value: [''] },
+  ];
 
-  productOptions: string[] = [''];
-  options: { value: string }[][] = [[{ value: '' }]];
-  containerVariantCount: number = 0;
-  indexProductVariant: number = 1;
-  optionTitles: string[] = [];
-  indexOptionTitle: number = 0;
-  optionTitleSeconds: string[] = [];
-  indexSecond: number = 0;
+  addClassifyProductVariant() {
+    this.addClassifyProduct = true;
+    this.productOptions.push({ key: '', value: [''] });
+  }
 
-  cache2: number = 1;
-  cahe3: number = 1;
-
-  constructor() {}
-
-  ngOnInit(): void {}
-
-  onInputFocus(index: number, value: string) {
+  onInputOptionValue(index: number, value: string, indexChild: number) {
+    console.log('this.productOptions :>> ', this.productOptions);
+    console.log('indexChild :>> ', indexChild);
     if (
-      this.options[index][this.options[index].length - 1].value !== '' &&
-      value !== ''
+      value !== '' &&
+      indexChild === this.productOptions[index].value.length - 1
     ) {
-      this.options[index].push({ value: '' });
+      this.productOptions[index].value.push('');
+      console.log('this.productOptions :>> ', this.productOptions);
     }
   }
 
-  addProductVariant() {
-    this.productOptions.push('');
-    this.optionTitles.push('');
-    this.options.push([{ value: '' }]);
-    this.containerVariantCount++;
-    this.indexProductVariant++;
-    this.indexOptionTitle++;
-    this.options[0] = this.options[0].filter((item) => item.value !== '');
-    // console.log('this.indexProductVariant :>> ', this.indexProductVariant);
+  onDeleteVariant(index: number, indexChild: number) {
+    this.productOptions[index].value.splice(indexChild, 1);
   }
 
-  // checkInput(value: string) {
-  //   console.log('value :>> ', value);
-  //   if (value) {
-
-  //   }
-  // }
-
-  onInputOptionValue(value: string) {
-    console.log('value :>> ', value);
-    if (value !== '') {
-      if (this.indexProductVariant - 1 === 0) {
-        this.optionTitleSeconds.push(this.options[0][this.indexSecond++].value);
-        // console.log('this.optionTitleSeconds :>> ', this.optionTitleSeconds);
-      }
-      // console.log('Optionsssssssssssss :>> ', this.options[0].length);
-      if (this.indexProductVariant - 1 === 1) {
-        console.log(
-          'this.indexProductVariantssssssss :>> ',
-          this.indexProductVariant
-        );
-        let test = 0;
-        for (let i = 0; i < this.options[0].length - 1; i++) {
-          if (i == 0) {
-            this.optionTitleSeconds.splice(this.cahe3, 0, '');
-            // console.log('indexif :>> ', this.cahe3);
-          } else {
-            this.optionTitleSeconds.splice(test + this.cache2, 0, '');
-            // console.log('test :>> ', test + this.cache2);
-            // console.log('indexelse :>> ', test + this.cache2);
-          }
-
-          // console.log('iiiiiiiiiiiiiiiiiiiiiii :>> ', this.cache3 + this.cache2);
-          // console.log('this.optionTitleSeconds :>> ', this.optionTitleSeconds);
-          test += 2;
-        }
-        this.cache2 += 2;
-        this.cahe3++;
-      }
-
-      console.log('this.options :>> ', this.options);
-      console.log('this.optionTitles :>> ', this.optionTitles);
-    }
+  //trackby return index of of the element inside the loop to determine the change
+  trackByFn(index: number, item: { key: string; value: string[] }) {
+    return index;
   }
-
-  onInputOptionTile() {
-    // console.log('this.optionTitles :>> ', this.optionTitles);
-    // console.log('this.indexOptionTitle :>> ', this.indexOptionTitle);
-    // console.log('this.optionTitleSeconds :>> ', this.optionTitleSeconds);
-  }
-
-  onDeleteClassify(index: number) {
-    this.options[index].splice(this.options[index].length - 3, 1);
+  trackByFnNested(index: number, item: any) {
+    return index;
   }
 }

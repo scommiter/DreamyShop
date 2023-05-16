@@ -17,7 +17,7 @@ export class CreateProductComponent implements OnInit {
   items: MenuItem[] = [];
   home: MenuItem = {};
 
-  isAddVisibility: boolean = false;
+  isAddVisibility: boolean = true;
 
   constructor(private dialogService: DialogService) {}
 
