@@ -55,7 +55,7 @@
     </div>
   </div>
 </div>
-<div class="container-variant" *ngIf="productOptions[0]?.key">
+<div class="container-variant-table" *ngIf="productOptions[0]?.key">
   <table>
     <ng-container>
       <tr>
@@ -68,7 +68,9 @@
         <th class="col-rest-picture">Ảnh</th>
       </tr>
 
-      <ng-container *ngFor="let optionOne of productOptions[0].value">
+      <ng-container
+        *ngFor="let optionOne of productOptions[0].value; let indexO = index"
+      >
         <ng-container *ngIf="!productOptions[1]?.value">
           <tr *ngIf="!!optionOne">
             <td>{{ optionOne }}</td>
@@ -76,9 +78,39 @@
             <td><input type="text" class="input-content-variant" /></td>
             <td><input type="text" class="input-content-variant" /></td>
             <td class="picture">
-              <button class="button-add-picture-variant">
+              <div class="image-container" *ngIf="!isVisibility[indexO]">
+                <img
+                  [src]="productVariants[0].thumbnail_picture[indexO + 1]"
+                  height="50"
+                  width="50"
+                />
+                <br />
+                <input
+                  type="file"
+                  [id]="'upload-' + indexO"
+                  (change)="onSelectFile($event, 0, indexO)"
+                  hidden
+                />
+                <label
+                  class="button-add-picture-variant image-button opacity-label"
+                  [for]="'upload-' + indexO"
+                >
+                  <i class="pi pi-plus" style="font-size: 1rem; color: red"></i>
+                </label>
+              </div>
+              <input
+                type="file"
+                [id]="'upload-' + indexO"
+                (change)="onSelectFile($event, 0, indexO)"
+                hidden
+              />
+              <label
+                class="button-add-picture-variant"
+                [for]="'upload-' + indexO"
+                *ngIf="isVisibility[indexO]"
+              >
                 <i class="pi pi-plus" style="font-size: 1rem; color: red"></i>
-              </button>
+              </label>
             </td>
           </tr>
         </ng-container>

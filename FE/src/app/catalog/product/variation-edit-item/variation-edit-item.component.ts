@@ -15,6 +15,15 @@ export class VariationEditItemComponent {
   productOptions: { key: string; value: string[] }[] = [
     { key: '', value: [''] },
   ];
+  productVariants: ProductVariantDto[] = [
+    {
+      attribute_names: [''],
+      sku: '',
+      quantity: '',
+      price: 0,
+      thumbnail_picture: [''],
+    },
+  ];
 
   addClassifyProductVariant() {
     this.addClassifyProduct = true;
@@ -22,13 +31,13 @@ export class VariationEditItemComponent {
   }
 
   onInputOptionValue(index: number, value: string, indexChild: number) {
-    console.log('this.productOptions :>> ', this.productOptions);
-    console.log('indexChild :>> ', indexChild);
     if (
       value !== '' &&
       indexChild === this.productOptions[index].value.length - 1
     ) {
       this.productOptions[index].value.push('');
+      this.productVariants[index].thumbnail_picture.push('');
+      this.isVisibility.push(true);
       console.log('this.productOptions :>> ', this.productOptions);
     }
   }
@@ -43,5 +52,24 @@ export class VariationEditItemComponent {
   }
   trackByFnNested(index: number, item: any) {
     return index;
+  }
+
+  //upload thumnail Image
+  isVisibility: boolean[] = [];
+  url: string[] = [''];
+  onSelectFile(event: any, index: number, indexOption: number) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => {
+        // called once readAsDataURL is completed
+        this.productVariants[index].thumbnail_picture[indexOption + 1] = event
+          .target?.result as string;
+        this.url.push(event.target?.result as string);
+      };
+      this.isVisibility[indexOption] = false;
+    }
   }
 }
