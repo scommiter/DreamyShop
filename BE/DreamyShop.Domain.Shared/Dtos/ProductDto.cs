@@ -13,7 +13,7 @@ namespace DreamyShop.Domain.Shared.Dtos
         public int Id { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
-        public string ThumbnailPicture { get; set; }
+        public List<string> ThumbnailPicture { get; set; }
         public ProductType ProductType { get; set; }
         public string CategoryName { get; set; }
         public string ManufacturerName { get; set; }
@@ -31,6 +31,6 @@ namespace DreamyShop.Domain.Shared.Dtos
         public string SKU { get; set; }
         public int Quantity { get; set; }
         public double Price { get; set; }
-        public List<string> Images { get; set; }
+        public string Image { get; set; }
     }
 }

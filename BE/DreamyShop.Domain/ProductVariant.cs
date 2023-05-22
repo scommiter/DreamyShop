@@ -16,16 +16,13 @@ namespace DreamyShop.Domain
         public string Description { get; set; }
         public int Quantity { get; set; }
         public double Price { get; set; }
+        public string ThumbnailPicture { get; set; }
 
         [ForeignKey(nameof(ProductId))]
         public virtual Product Product { get; set; }
 
         [InverseProperty(nameof(ProductVariantValue.ProductVariant))]
         public virtual ICollection<ProductVariantValue> ProductVariantValues { get; set; }
-
-        [InverseProperty(nameof(ProductVariantValue.ProductVariant))]
-        public virtual ICollection<ImageProductVariant> ImageProductVariants { get; set; }
-
 
         [InverseProperty(nameof(BillDetail.ProductVariant))]
         public virtual ICollection<BillDetail> BillDetails { get; set; }

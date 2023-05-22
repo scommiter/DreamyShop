@@ -65,8 +65,8 @@ namespace DreamyShop.Logic.Product
                               join c in _context.ProductCategories on p.CategoryId equals c.Id
                               join pv in _context.ProductVariants on p.Id equals pv.ProductId into pvN
                               from pv in pvN.DefaultIfEmpty()
-                              join ipv in _context.ImageProductVariants on pv.Id equals ipv.ProductVariantId into ipvN
-                              from ipv in ipvN.DefaultIfEmpty()
+                              join ip in _context.ImageProducts on p.Id equals ip.ProductId into ipvN
+                              from ip in ipvN.DefaultIfEmpty()
                               join pvv in _context.ProductVariantValues on pv.Id equals pvv.ProductVariantId into pvvN
                               from pvv in pvvN.DefaultIfEmpty()
                               join pav in _context.ProductAttributeValues on pvv.ProductAttributeValueId equals pav.Id into pavN
@@ -79,7 +79,7 @@ namespace DreamyShop.Logic.Product
                                   CategoryName = c.Name,
                                   pv,
                                   pav,
-                                  ipv
+                                  ip
                               }).ToListAsync();
 
             return query.GroupBy(r => new { r.Product })
@@ -88,7 +88,7 @@ namespace DreamyShop.Logic.Product
                                     Id = x.Key.Product.Id,
                                     Name = x.Key.Product.Name,
                                     Code = x.Key.Product.Code,
-                                    ThumbnailPicture = x.Key.Product.ThumbnailPicture ?? "",
+                                    ThumbnailPicture = x.GroupBy(p => p.ip).Select(pt => pt.Select(ptt => ptt.ip?.Path ?? "").FirstOrDefault()).ToList(),
                                     ProductType = x.Key.Product?.ProductType ?? ProductType.Single,
                                     CategoryName = x.FirstOrDefault()?.CategoryName ?? "",
                                     ManufacturerName = x.FirstOrDefault()?.ManufacturerName ?? "",
@@ -100,11 +100,11 @@ namespace DreamyShop.Logic.Product
                                     ProductAttributeDisplayDtos = x.GroupBy(p => p.ProductVariantId)
                                                                 .Select(pAttr => new ProductAttributeDisplayDto
                                                                 {
-                                                                    AttributeNames = pAttr.Select(x => x.pav?.Value ?? "").ToList(),
+                                                                    AttributeNames = pAttr.GroupBy(p => p.pav).Select(x => x.Select(px => px.pav?.Value ?? "").FirstOrDefault()).ToList(),
                                                                     SKU = pAttr.Select(x => x.pv?.SKU ?? "").FirstOrDefault(),
                                                                     Quantity = pAttr.Select(x => x.pv?.Quantity ?? 0).FirstOrDefault(),
                                                                     Price = pAttr.Select(x => x.pv?.Price ?? 0).FirstOrDefault(),
-                                                                    Images = pAttr.Where(x => x.ipv?.Path != null).Select(x => x.ipv.Path).ToList()
+                                                                    Image = pAttr.Select(p => p.ip?.Path ?? "").FirstOrDefault()
                                                                 }).ToList()
                                 }).ToList();
         }
@@ -127,7 +127,6 @@ namespace DreamyShop.Logic.Product
                 CategoryId = _repository.Category.GetByName(productCreateDto.CategoryName).Id,
                 SeoMetaDescription = null,
                 Description = productCreateDto.Description,
-                ThumbnailPicture = productCreateDto.ThumbnailPicture,
                 IsActive = productCreateDto.IsActive,
                 IsVisibility = productCreateDto.IsVisibility,
                 DateCreated = DateTime.Now
@@ -375,10 +374,10 @@ namespace DreamyShop.Logic.Product
                 product.SortOrder = productUpdateDto.SortOrder;
             }
 
-            if (productUpdateDto.ThumbnailPicture != null)
-            {
-                product.ThumbnailPicture = productUpdateDto.ThumbnailPicture;
-            }
+            //if (productUpdateDto.ThumbnailPicture != null)
+            //{
+            //    product.ThumbnailPicture = productUpdateDto.ThumbnailPicture;
+            //}
 
             if (productUpdateDto.IsActive != null)
             {
@@ -515,7 +514,7 @@ namespace DreamyShop.Logic.Product
                     {
                         file.CopyTo(stream);
                     }
-                    product.ThumbnailPicture = dbPath;
+                    //product.ThumbnailPicture = dbPath;
                     _repository.Product.Update(product);
                     _repository.Save();
                     return new ApiSuccessResult<bool>(true);
@@ -557,9 +556,9 @@ namespace DreamyShop.Logic.Product
                         {
                             file.CopyTo(stream);
                         }
-                        await _repository.ProductVariantImage.AddAsync(new ImageProductVariant
+                        await _repository.ProductVariantImage.AddAsync(new ImageProduct
                         {
-                            ProductVariantId = productVariantId,
+                            //ProductVariantId = productVariantId,
                             Path = dbPath,
                             DateCreated = DateTime.Now,
                             DateUpdated = DateTime.Now

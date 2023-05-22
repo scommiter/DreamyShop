@@ -22,7 +22,6 @@ namespace DreamyShop.EntityFrameworkCore
                    CategoryId = 1,
                    SeoMetaDescription = "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring",
                    Description = "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring",
-                   ThumbnailPicture = "",
                    IsActive = true,
                    IsVisibility = true,
                    DateCreated = DateTime.Now,
@@ -40,7 +39,6 @@ namespace DreamyShop.EntityFrameworkCore
                    CategoryId = 1,
                    SeoMetaDescription = "XYZ wireless security camera with high resolution, built-in motion sensor, supports wifi connection, helps you observe your family, home, shop, office whenever and wherever.",
                    Description = "XYZ wireless security camera with high resolution.",
-                   ThumbnailPicture = "",
                    IsActive = true,
                    IsVisibility = true,
                    DateCreated = DateTime.Now,
@@ -58,7 +56,6 @@ namespace DreamyShop.EntityFrameworkCore
                    CategoryId = 2,
                    SeoMetaDescription = "Find out about Apple's latest line of iPhones at Apple Store Vietnam. Order online and get instant deals.",
                    Description = "",
-                   ThumbnailPicture = "",
                    IsActive = true,
                    IsVisibility = true,
                    DateCreated = DateTime.Now,
@@ -76,7 +73,6 @@ namespace DreamyShop.EntityFrameworkCore
                    CategoryId = 3,
                    SeoMetaDescription = "",
                    Description = "Buy genuine Laptop at our store with best quality and affordable price. We supply laptop products from reputable brands. Order now to get a free laptop backpack!",
-                   ThumbnailPicture = "",
                    IsActive = true,
                    IsVisibility = true,
                    DateCreated = DateTime.Now,
@@ -94,7 +90,6 @@ namespace DreamyShop.EntityFrameworkCore
                    CategoryId = 4,
                    SeoMetaDescription = "",
                    Description = "",
-                   ThumbnailPicture = "",
                    IsActive = true,
                    IsVisibility = true,
                    DateCreated = DateTime.Now,
@@ -277,7 +272,8 @@ namespace DreamyShop.EntityFrameworkCore
                      IsActive = true,
                      Description = "",
                      Quantity = 12,
-                     Price = 1200
+                     Price = 1200,
+                     ThumbnailPicture = ""
                  },
                  new ProductVariant()
                  {
@@ -288,7 +284,8 @@ namespace DreamyShop.EntityFrameworkCore
                      IsActive = true,
                      Description = "",
                      Quantity = 20,
-                     Price = 1250
+                     Price = 1250,
+                     ThumbnailPicture = ""
                  },
                  new ProductVariant()
                  {
@@ -299,7 +296,8 @@ namespace DreamyShop.EntityFrameworkCore
                      IsActive = true,
                      Description = "",
                      Quantity = 10,
-                     Price = 5000
+                     Price = 5000,
+                     ThumbnailPicture = ""
                  },
                  new ProductVariant()
                  {
@@ -310,7 +308,8 @@ namespace DreamyShop.EntityFrameworkCore
                      IsActive = true,
                      Description = "",
                      Quantity = 15,
-                     Price = 4500
+                     Price = 4500,
+                     ThumbnailPicture = ""
                  },
                  new ProductVariant()
                  {
@@ -321,7 +320,8 @@ namespace DreamyShop.EntityFrameworkCore
                      IsActive = true,
                      Description = "",
                      Quantity = 5,
-                     Price = 9500
+                     Price = 9500,
+                     ThumbnailPicture = ""
                  });
 
             modelBuilder.Entity<ProductAttributeValue>().HasData(

@@ -24,8 +24,6 @@ namespace DreamyShop.Domain
         [StringLength(250)]
         public string? SeoMetaDescription { get; set; }
         public string? Description { get; set; }
-        [StringLength(250)]
-        public string? ThumbnailPicture { get; set; }
         public bool IsActive { get; set; }
         public bool IsVisibility { get; set; }
 
@@ -54,5 +52,8 @@ namespace DreamyShop.Domain
 
         [InverseProperty(nameof(ProductTag.Product))]
         public virtual ICollection<ProductTag> ProductTags { get; set; }
+
+        [InverseProperty(nameof(ImageProduct.Product))]
+        public virtual ICollection<ImageProduct> ImageProducts { get; set; }
     }
 }

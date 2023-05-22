@@ -61,8 +61,6 @@ namespace DreamyShop.Repository.AutoMapper
             //            .ToList()));
 
 
-            CreateMap<ProductVariant, ProductVariantDto>();
-
             CreateMap<Domain.Attribute, ProductAttributeDto>();
 
             CreateMap<Manufacturer, ManufacturerDto>();

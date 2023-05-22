@@ -267,7 +267,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.ToTable("CartDetails");
                 });
 
-            modelBuilder.Entity("DreamyShop.Domain.ImageProductVariant", b =>
+            modelBuilder.Entity("DreamyShop.Domain.ImageProduct", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -285,14 +285,14 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProductVariantId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductVariantId");
+                    b.HasIndex("ProductId");
 
-                    b.ToTable("ImageProductVariants");
+                    b.ToTable("ImageProducts");
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.Inventory", b =>
@@ -547,10 +547,6 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.Property<byte>("StatusID")
                         .HasColumnType("tinyint");
 
-                    b.Property<string>("ThumbnailPicture")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
@@ -565,8 +561,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             Id = 1,
                             CategoryId = 1,
                             Code = "CMRSKS",
-                            DateCreated = new DateTime(2023, 5, 16, 0, 15, 31, 518, DateTimeKind.Local).AddTicks(1847),
-                            DateUpdated = new DateTime(2023, 5, 16, 0, 15, 31, 518, DateTimeKind.Local).AddTicks(1858),
+                            DateCreated = new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2114),
+                            DateUpdated = new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2128),
                             Description = "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring",
                             IsActive = true,
                             IsVisibility = true,
@@ -576,16 +572,15 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             SeoMetaDescription = "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring",
                             Slug = "camera-sks",
                             SortOrder = 1,
-                            StatusID = (byte)0,
-                            ThumbnailPicture = ""
+                            StatusID = (byte)0
                         },
                         new
                         {
                             Id = 2,
                             CategoryId = 1,
                             Code = "CMRUFG",
-                            DateCreated = new DateTime(2023, 5, 16, 0, 15, 31, 518, DateTimeKind.Local).AddTicks(1860),
-                            DateUpdated = new DateTime(2023, 5, 16, 0, 15, 31, 518, DateTimeKind.Local).AddTicks(1861),
+                            DateCreated = new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2131),
+                            DateUpdated = new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2132),
                             Description = "XYZ wireless security camera with high resolution.",
                             IsActive = true,
                             IsVisibility = true,
@@ -595,16 +590,15 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             SeoMetaDescription = "XYZ wireless security camera with high resolution, built-in motion sensor, supports wifi connection, helps you observe your family, home, shop, office whenever and wherever.",
                             Slug = "camera-ufg",
                             SortOrder = 2,
-                            StatusID = (byte)0,
-                            ThumbnailPicture = ""
+                            StatusID = (byte)0
                         },
                         new
                         {
                             Id = 3,
                             CategoryId = 2,
                             Code = "IP14XSM",
-                            DateCreated = new DateTime(2023, 5, 16, 0, 15, 31, 518, DateTimeKind.Local).AddTicks(1862),
-                            DateUpdated = new DateTime(2023, 5, 16, 0, 15, 31, 518, DateTimeKind.Local).AddTicks(1863),
+                            DateCreated = new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2133),
+                            DateUpdated = new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2134),
                             Description = "",
                             IsActive = true,
                             IsVisibility = true,
@@ -614,16 +608,15 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             SeoMetaDescription = "Find out about Apple's latest line of iPhones at Apple Store Vietnam. Order online and get instant deals.",
                             Slug = "ip14-xsmax",
                             SortOrder = 3,
-                            StatusID = (byte)0,
-                            ThumbnailPicture = ""
+                            StatusID = (byte)0
                         },
                         new
                         {
                             Id = 4,
                             CategoryId = 3,
                             Code = "DELLDEMON",
-                            DateCreated = new DateTime(2023, 5, 16, 0, 15, 31, 518, DateTimeKind.Local).AddTicks(1864),
-                            DateUpdated = new DateTime(2023, 5, 16, 0, 15, 31, 518, DateTimeKind.Local).AddTicks(1864),
+                            DateCreated = new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2135),
+                            DateUpdated = new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2139),
                             Description = "Buy genuine Laptop at our store with best quality and affordable price. We supply laptop products from reputable brands. Order now to get a free laptop backpack!",
                             IsActive = true,
                             IsVisibility = true,
@@ -633,16 +626,15 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             SeoMetaDescription = "",
                             Slug = "dell-demon",
                             SortOrder = 4,
-                            StatusID = (byte)0,
-                            ThumbnailPicture = ""
+                            StatusID = (byte)0
                         },
                         new
                         {
                             Id = 5,
                             CategoryId = 4,
                             Code = "CLBGCCI",
-                            DateCreated = new DateTime(2023, 5, 16, 0, 15, 31, 518, DateTimeKind.Local).AddTicks(1866),
-                            DateUpdated = new DateTime(2023, 5, 16, 0, 15, 31, 518, DateTimeKind.Local).AddTicks(1866),
+                            DateCreated = new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2154),
+                            DateUpdated = new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2155),
                             Description = "",
                             IsActive = true,
                             IsVisibility = true,
@@ -652,8 +644,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             SeoMetaDescription = "",
                             Slug = "clbcci",
                             SortOrder = 4,
-                            StatusID = (byte)0,
-                            ThumbnailPicture = ""
+                            StatusID = (byte)0
                         });
                 });
 
@@ -1052,6 +1043,10 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.Property<byte>("StatusID")
                         .HasColumnType("tinyint");
 
+                    b.Property<string>("ThumbnailPicture")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
@@ -1071,7 +1066,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             ProductId = 3,
                             Quantity = 12,
                             SKU = "IP14-A",
-                            StatusID = (byte)0
+                            StatusID = (byte)0,
+                            ThumbnailPicture = ""
                         },
                         new
                         {
@@ -1085,7 +1081,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             ProductId = 3,
                             Quantity = 20,
                             SKU = "IP14-B",
-                            StatusID = (byte)0
+                            StatusID = (byte)0,
+                            ThumbnailPicture = ""
                         },
                         new
                         {
@@ -1099,7 +1096,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             ProductId = 5,
                             Quantity = 10,
                             SKU = "BAGGUCCI-A",
-                            StatusID = (byte)0
+                            StatusID = (byte)0,
+                            ThumbnailPicture = ""
                         },
                         new
                         {
@@ -1113,7 +1111,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             ProductId = 5,
                             Quantity = 15,
                             SKU = "BAGGUCCI-B",
-                            StatusID = (byte)0
+                            StatusID = (byte)0,
+                            ThumbnailPicture = ""
                         },
                         new
                         {
@@ -1127,7 +1126,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                             ProductId = 5,
                             Quantity = 5,
                             SKU = "BAGGUCCI-VIP",
-                            StatusID = (byte)0
+                            StatusID = (byte)0,
+                            ThumbnailPicture = ""
                         });
                 });
 
@@ -1601,15 +1601,15 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.Navigation("ProductVariant");
                 });
 
-            modelBuilder.Entity("DreamyShop.Domain.ImageProductVariant", b =>
+            modelBuilder.Entity("DreamyShop.Domain.ImageProduct", b =>
                 {
-                    b.HasOne("DreamyShop.Domain.ProductVariant", "ProductVariant")
-                        .WithMany("ImageProductVariants")
-                        .HasForeignKey("ProductVariantId")
+                    b.HasOne("DreamyShop.Domain.Product", "Product")
+                        .WithMany("ImageProducts")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ProductVariant");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.InventoryTicket", b =>
@@ -1847,6 +1847,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("DreamyShop.Domain.Product", b =>
                 {
+                    b.Navigation("ImageProducts");
+
                     b.Navigation("ProductAttributeValues");
 
                     b.Navigation("ProductAttributes");
@@ -1875,8 +1877,6 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.Navigation("BillDetails");
 
                     b.Navigation("CartDetails");
-
-                    b.Navigation("ImageProductVariants");
 
                     b.Navigation("ProductVariantValues");
                 });
