@@ -15,7 +15,7 @@ namespace DreamyShop.Repository.RepositoryWrapper
         private IUserRepository _user;
         private IProductRepository _product;
         private IProductVariantRepository _productVariant;
-        private IProductVariantImageRepository _productVariantImage;
+        private IProductImageRepository _productImage;
         private IProductVariantValueRepository _productVariantValue;
         private IProductAttributeRepository _productAttribute;
         private IAttributeRepository _attribute;
@@ -36,7 +36,7 @@ namespace DreamyShop.Repository.RepositoryWrapper
             IAttributeRepository attribute,
             IProductVariantRepository productVariant,
             IProductVariantValueRepository productVariantValue,
-            IProductVariantImageRepository productVariantImage)
+            IProductImageRepository productImage)
         {
             _context = context;
             _auth = auth;
@@ -50,7 +50,7 @@ namespace DreamyShop.Repository.RepositoryWrapper
             _attribute = attribute;
             _productVariant = productVariant;
             _productVariantValue = productVariantValue;
-            _productVariantImage = productVariantImage;
+            _productImage = productImage;
         }
 
         public IAuthRepository Auth
@@ -184,15 +184,15 @@ namespace DreamyShop.Repository.RepositoryWrapper
             }
         }
 
-        public IProductVariantImageRepository ProductVariantImage
+        public IProductImageRepository ProductImage
         {
             get
             {
-                if (_productVariantImage == null)
+                if (_productImage == null)
                 {
-                    _productVariantImage = new ProductVariantImageRepository(_context);
+                    _productImage = new ProductImageRepository(_context);
                 }
-                return _productVariantImage;
+                return _productImage;
             }
         }
 
