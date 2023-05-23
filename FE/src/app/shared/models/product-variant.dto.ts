@@ -3,5 +3,5 @@ export interface ProductVariantDto {
   sku: string;
   quantity: string;
   price: number;
-  thumbnail_picture: string[];
+  thumbnail_picture: string;
 }

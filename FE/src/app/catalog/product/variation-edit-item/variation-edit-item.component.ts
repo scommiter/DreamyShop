@@ -21,27 +21,15 @@ export class VariationEditItemComponent {
       sku: '',
       quantity: '',
       price: 0,
-      thumbnail_picture: [''],
+      thumbnail_picture: '',
     },
   ];
-  productVariantTwos: ProductVariantDto[][] = [
-    [
-      {
-        attribute_names: [''],
-        sku: '',
-        quantity: '',
-        price: 0,
-        thumbnail_picture: [''],
-      },
-    ],
-  ];
-  isVisibilityTwo: boolean[][] = [];
   checkCountOptionsOne: number = 0;
 
   addClassifyProductVariant() {
     this.addClassifyProduct = true;
     this.productOptions.push({ key: '', value: [''] });
-    this.productVariants[0].thumbnail_picture = [''];
+    this.productVariants[0].thumbnail_picture = '';
     this.isVisibility = [];
     console.log('this.productVariants :>> ', this.productVariants);
     console.log('this.isVisibility :>> ', this.isVisibility);
@@ -53,26 +41,6 @@ export class VariationEditItemComponent {
       this.productOptions[0].value.length !== this.checkCountOptionsOne
     ) {
       //gan lai productVariantTwos moi khi nhap them option moi
-      this.productVariantTwos = [
-        [
-          {
-            attribute_names: [''],
-            sku: '',
-            quantity: '',
-            price: 0,
-            thumbnail_picture: [''],
-          },
-        ],
-      ];
-      for (let i = 0; i < this.productOptions[0].value.length - 1; i++) {
-        for (let j = 0; j < this.productOptions[1].value.length - 1; j++) {
-          this.productVariantTwos[i][j].thumbnail_picture.push('');
-        }
-      }
-      console.log(
-        'productVariantTwossssssssssss :>> ',
-        this.productVariantTwos
-      );
     }
     if (
       value !== '' &&
@@ -81,7 +49,7 @@ export class VariationEditItemComponent {
       this.productOptions[index].value.push('');
       if (index === 0) {
         this.checkCountOptionsOne = this.productOptions[0].value.length;
-        this.productVariants[index].thumbnail_picture.push('');
+        this.productVariants[index].thumbnail_picture = '';
         this.isVisibility.push(true);
       }
       console.log('this.productOptions :>> ', this.productOptions);
@@ -115,8 +83,8 @@ export class VariationEditItemComponent {
 
       reader.onload = (event) => {
         // called once readAsDataURL is completed
-        this.productVariants[index].thumbnail_picture[indexOption + 1] = event
-          .target?.result as string;
+        this.productVariants[index].thumbnail_picture = event.target
+          ?.result as string;
         this.url.push(event.target?.result as string);
       };
       this.isVisibility[indexOption] = false;
