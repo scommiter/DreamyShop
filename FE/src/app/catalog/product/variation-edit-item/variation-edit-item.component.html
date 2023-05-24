@@ -69,7 +69,7 @@
       </tr>
 
       <ng-container
-        *ngFor="let optionOne of productOptions[0].value; let indexO = index"
+        *ngFor="let optionOne of productOptions[0].value; let index0 = index"
       >
         <ng-container *ngIf="!productOptions[1]?.value">
           <tr *ngIf="!!optionOne">
@@ -78,36 +78,36 @@
             <td><input type="text" class="input-content-variant" /></td>
             <td><input type="text" class="input-content-variant" /></td>
             <td class="picture">
-              <div class="image-container" *ngIf="!isVisibility[indexO]">
+              <div class="image-container" *ngIf="!isVisibility[index0]">
                 <img
-                  [src]="productVariants[0].thumbnail_picture[indexO + 1]"
+                  [src]="productVariants[index0].thumbnail_picture"
                   height="50"
                   width="50"
                 />
                 <br />
                 <input
                   type="file"
-                  [id]="'upload-' + indexO"
-                  (change)="onSelectFile($event, 0, indexO)"
+                  [id]="'upload-' + index0"
+                  (change)="onSelectFile($event, index0)"
                   hidden
                 />
                 <label
                   class="button-add-picture-variant image-button opacity-label"
-                  [for]="'upload-' + indexO"
+                  [for]="'upload-' + index0"
                 >
                   <i class="pi pi-plus" style="font-size: 1rem; color: red"></i>
                 </label>
               </div>
               <input
                 type="file"
-                [id]="'upload-' + indexO"
-                (change)="onSelectFile($event, 0, indexO)"
+                [id]="'upload-' + index0"
+                (change)="onSelectFile($event, index0)"
                 hidden
               />
               <label
                 class="button-add-picture-variant"
-                [for]="'upload-' + indexO"
-                *ngIf="isVisibility[indexO]"
+                [for]="'upload-' + index0"
+                *ngIf="isVisibility[index0]"
               >
                 <i class="pi pi-plus" style="font-size: 1rem; color: red"></i>
               </label>
@@ -116,11 +116,14 @@
         </ng-container>
         <ng-container *ngIf="productOptions[1]?.value">
           <ng-container
-            *ngFor="let optionTwo of productOptions[1].value; let j = index"
+            *ngFor="
+              let optionTwo of productOptions[1].value;
+              let index1 = index
+            "
           >
             <tr *ngIf="!!optionTwo && !!optionOne">
               <td
-                *ngIf="j === 0"
+                *ngIf="index1 === 0"
                 [attr.rowspan]="productOptions[1].value.length - 1"
               >
                 {{ optionOne }}
@@ -130,22 +133,25 @@
               <td><input type="text" class="input-content-variant" /></td>
               <td><input type="text" class="input-content-variant" /></td>
               <td class="picture">
-                <!-- <div class="image-container" *ngIf="!isVisibility[indexO]">
+                <div
+                  class="image-container"
+                  *ngIf="!isVisibilityTwo[index0][index1]"
+                >
                   <img
-                    [src]="productVariants[0].thumbnail_picture[indexO + 1]"
+                    [src]="productVariantTwos[index0][index1].thumbnail_picture"
                     height="50"
                     width="50"
                   />
                   <br />
                   <input
                     type="file"
-                    [id]="'upload-' + indexO"
-                    (change)="onSelectFile($event, 0, indexO)"
+                    [id]="'upload-' + index0 + index1"
+                    (change)="onSelectFileVariantTwo($event, index0, index1)"
                     hidden
                   />
                   <label
                     class="button-add-picture-variant image-button opacity-label"
-                    [for]="'upload-' + indexO"
+                    [for]="'upload-' + index0 + index1"
                   >
                     <i
                       class="pi pi-plus"
@@ -155,17 +161,17 @@
                 </div>
                 <input
                   type="file"
-                  [id]="'upload-' + indexO"
-                  (change)="onSelectFile($event, 0, indexO)"
+                  [id]="'upload-' + index0 + index1"
+                  (change)="onSelectFileVariantTwo($event, index0, index1)"
                   hidden
                 />
                 <label
                   class="button-add-picture-variant"
-                  [for]="'upload-' + indexO"
-                  *ngIf="isVisibility[indexO]"
+                  [for]="'upload-' + index0 + index1"
+                  *ngIf="isVisibilityTwo[index0][index1]"
                 >
                   <i class="pi pi-plus" style="font-size: 1rem; color: red"></i>
-                </label> -->
+                </label>
               </td>
             </tr>
           </ng-container>

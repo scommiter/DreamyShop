@@ -16,6 +16,9 @@ export class CreateProductComponent implements OnInit {
   defaultOptionVisibily: string = 'True';
   items: MenuItem[] = [];
   home: MenuItem = {};
+  imageProducts: string[] = [];
+  url: string[] = [''];
+  imageCount: number = 0;
 
   isAddVisibility: boolean = true;
 
@@ -37,5 +40,30 @@ export class CreateProductComponent implements OnInit {
 
   addProductOptions() {
     this.isAddVisibility = false;
+  }
+
+  onSelectFile(event: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      for (let i = 0; i < event.target.files.length; i++) {
+        if (i < 5) {
+          this.imageCount++;
+          const file = event.target.files[i];
+          const reader = new FileReader();
+          reader.readAsDataURL(file); // read file as data url
+
+          reader.onload = () => {
+            // called once readAsDataURL is completed
+            const imageDataUrl = reader.result as string;
+            this.imageProducts.push(imageDataUrl);
+            this.url.push(imageDataUrl);
+          };
+        }
+      }
+    }
+  }
+
+  closeImage(index: number) {
+    this.imageProducts.splice(index, 1);
+    this.imageCount--;
   }
 }

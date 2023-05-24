@@ -24,36 +24,74 @@ export class VariationEditItemComponent {
       thumbnail_picture: '',
     },
   ];
+  productVariantTwos: ProductVariantDto[][] = [
+    [
+      {
+        attribute_names: [''],
+        sku: '',
+        quantity: '',
+        price: 0,
+        thumbnail_picture: '',
+      },
+    ],
+  ];
+  isVisibilityTwo: boolean[][] = [];
   checkCountOptionsOne: number = 0;
+  checkIsAddVariant: boolean = false;
 
   addClassifyProductVariant() {
     this.addClassifyProduct = true;
     this.productOptions.push({ key: '', value: [''] });
-    this.productVariants[0].thumbnail_picture = '';
-    this.isVisibility = [];
-    console.log('this.productVariants :>> ', this.productVariants);
-    console.log('this.isVisibility :>> ', this.isVisibility);
+    this.checkIsAddVariant = true;
   }
 
   onInputOptionValue(index: number, value: string, indexChild: number) {
+    console.log(
+      'this.productOptions[0].value.length :>> ',
+      this.productOptions[0].value.length
+    );
+    console.log('this.checkCountOptionsOne :>> ', this.checkCountOptionsOne);
     if (
-      index === 1 ||
-      this.productOptions[0].value.length !== this.checkCountOptionsOne
+      (index === 1 && this.checkIsAddVariant == true) ||
+      (this.productOptions[0].value.length !== this.checkCountOptionsOne &&
+        this.checkIsAddVariant == true)
     ) {
-      //gan lai productVariantTwos moi khi nhap them option moi
+      console.log('heloooooooooooooo :>> ', index, indexChild);
+      this.productVariantTwos = [];
+      this.isVisibilityTwo = [];
+      for (let i = 0; i < this.productOptions[0].value.length; i++) {
+        this.productVariantTwos[i] = [];
+        this.isVisibilityTwo[i] = [];
+        for (let j = 0; j < this.productOptions[1].value.length; j++) {
+          this.productVariantTwos[i].push({
+            attribute_names: [''],
+            sku: '',
+            quantity: '',
+            price: 0,
+            thumbnail_picture: '',
+          });
+          this.isVisibilityTwo[i].push(true);
+        }
+      }
+      console.log('this.productVariantTwos :>> ', this.productVariantTwos);
+      console.log('this.isVisibilityTwo :>> ', this.isVisibilityTwo);
     }
     if (
       value !== '' &&
       indexChild === this.productOptions[index].value.length - 1
     ) {
       this.productOptions[index].value.push('');
-      if (index === 0) {
+      if (index === 0 && this.checkIsAddVariant == false) {
         this.checkCountOptionsOne = this.productOptions[0].value.length;
-        this.productVariants[index].thumbnail_picture = '';
+        this.productVariants.push({
+          attribute_names: [''],
+          sku: '',
+          quantity: '',
+          price: 0,
+          thumbnail_picture: '',
+        });
         this.isVisibility.push(true);
       }
-      console.log('this.productOptions :>> ', this.productOptions);
-      console.log('this.checkCountOptionsOne :>> ', this.checkCountOptionsOne);
     }
   }
 
@@ -75,19 +113,39 @@ export class VariationEditItemComponent {
   //upload thumnail Image
   isVisibility: boolean[] = [];
   url: string[] = [''];
-  onSelectFile(event: any, index: number, indexOption: number) {
+  onSelectFile(event: any, indexOption: number) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
-
       reader.readAsDataURL(event.target.files[0]); // read file as data url
 
       reader.onload = (event) => {
         // called once readAsDataURL is completed
-        this.productVariants[index].thumbnail_picture = event.target
+        this.productVariants[indexOption].thumbnail_picture = event.target
           ?.result as string;
         this.url.push(event.target?.result as string);
       };
+      console.log('this.productVariants :>> ', this.productVariants);
       this.isVisibility[indexOption] = false;
+    }
+  }
+
+  onSelectFileVariantTwo(
+    event: any,
+    indexOption1: number,
+    indexOption2: number
+  ) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => {
+        // called once readAsDataURL is completed
+        this.productVariantTwos[indexOption1][indexOption2].thumbnail_picture =
+          event.target?.result as string;
+        this.url.push(event.target?.result as string);
+      };
+      console.log('this.productVariants :>> ', this.productVariants);
+      this.isVisibilityTwo[indexOption1][indexOption2] = false;
     }
   }
 }

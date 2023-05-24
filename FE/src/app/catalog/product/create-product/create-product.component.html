@@ -20,14 +20,37 @@
     </div>
     <div class="field col-12">
       <label for="thumbnailpicture" class="block">Thêm ảnh </label>
-      <p-fileUpload
+      <!-- <p-fileUpload
         mode="basic"
         accept="image/*"
         [maxFileSize]="1000000"
         [auto]="true"
         chooseLabel="Upload"
         chooseIcon="pi pi-upload"
-      ></p-fileUpload>
+      ></p-fileUpload> -->
+      <div class="list-image-product">
+        <ng-container *ngFor="let img of imageProducts; let i = index">
+          <div class="image-container">
+            <img [src]="img" height="100" width="100" />
+            <div class="close-image" (click)="closeImage(i)">x</div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="imageCount < 5">
+          <input
+            type="file"
+            [id]="'upload'"
+            (change)="onSelectFile($event)"
+            multiple
+            hidden
+          />
+          <label
+            class="button-add-picture-variant image-button opacity-label"
+            [for]="'upload'"
+          >
+            <i class="pi pi-plus" style="font-size: 1rem; color: red"></i>
+          </label>
+        </ng-container>
+      </div>
     </div>
 
     <div class="field col-12">
