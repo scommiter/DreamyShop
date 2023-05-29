@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ProductVariantDto } from 'src/app/shared/models/product-variant.dto';
 
 @Component({
@@ -12,14 +12,24 @@ export class VariationEditItemComponent {
   @Input() indexProductOption: number = 1;
 
   addClassifyProduct: boolean = false;
+  @Output() productOptionOuputs = new EventEmitter<
+    { key: string; value: string[] }[]
+  >();
+  @Output() productVariantOutputs = new EventEmitter<ProductVariantDto[]>();
+  @Output() productVariantTwoOutputs = new EventEmitter<
+    ProductVariantDto[][]
+  >();
+  @Output() checkAddProductClassify = new EventEmitter<boolean>();
   productOptions: { key: string; value: string[] }[] = [
     { key: '', value: [''] },
   ];
+  @Output() imageVariantOutputs = new EventEmitter<File[]>();
+  @Output() atrributeNameOutputs = new EventEmitter<string[][]>();
   productVariants: ProductVariantDto[] = [
     {
       attribute_names: [''],
       sku: '',
-      quantity: '',
+      quantity: 0,
       price: 0,
       thumbnail_picture: '',
     },
@@ -29,7 +39,7 @@ export class VariationEditItemComponent {
       {
         attribute_names: [''],
         sku: '',
-        quantity: '',
+        quantity: 0,
         price: 0,
         thumbnail_picture: '',
       },
@@ -38,25 +48,21 @@ export class VariationEditItemComponent {
   isVisibilityTwo: boolean[][] = [];
   checkCountOptionsOne: number = 0;
   checkIsAddVariant: boolean = false;
+  imageVariants: File[] = [];
 
   addClassifyProductVariant() {
     this.addClassifyProduct = true;
     this.productOptions.push({ key: '', value: [''] });
     this.checkIsAddVariant = true;
+    this.checkAddProductClassify.emit(this.addClassifyProduct);
   }
 
   onInputOptionValue(index: number, value: string, indexChild: number) {
-    console.log(
-      'this.productOptions[0].value.length :>> ',
-      this.productOptions[0].value.length
-    );
-    console.log('this.checkCountOptionsOne :>> ', this.checkCountOptionsOne);
     if (
       (index === 1 && this.checkIsAddVariant == true) ||
       (this.productOptions[0].value.length !== this.checkCountOptionsOne &&
         this.checkIsAddVariant == true)
     ) {
-      console.log('heloooooooooooooo :>> ', index, indexChild);
       this.productVariantTwos = [];
       this.isVisibilityTwo = [];
       for (let i = 0; i < this.productOptions[0].value.length; i++) {
@@ -66,15 +72,13 @@ export class VariationEditItemComponent {
           this.productVariantTwos[i].push({
             attribute_names: [''],
             sku: '',
-            quantity: '',
+            quantity: 0,
             price: 0,
             thumbnail_picture: '',
           });
           this.isVisibilityTwo[i].push(true);
         }
       }
-      console.log('this.productVariantTwos :>> ', this.productVariantTwos);
-      console.log('this.isVisibilityTwo :>> ', this.isVisibilityTwo);
     }
     if (
       value !== '' &&
@@ -86,13 +90,23 @@ export class VariationEditItemComponent {
         this.productVariants.push({
           attribute_names: [''],
           sku: '',
-          quantity: '',
+          quantity: 0,
           price: 0,
           thumbnail_picture: '',
         });
         this.isVisibility.push(true);
       }
     }
+    this.productOptionOuputs.emit(this.productOptions);
+  }
+
+  onInputValue() {
+    this.productVariantOutputs.emit(this.productVariants);
+    this.productVariantTwoOutputs.emit(this.productVariantTwos);
+    let productOptions = this.convertProductOptionsToAttributeName(
+      this.productOptions
+    );
+    this.atrributeNameOutputs.emit(productOptions);
   }
 
   onDeleteVariant(index: number, indexChild: number) {
@@ -115,6 +129,9 @@ export class VariationEditItemComponent {
   url: string[] = [''];
   onSelectFile(event: any, indexOption: number) {
     if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0] as File;
+      this.imageVariants.push(file);
+      console.log('filesssssssssssssssssssssss :>> ', this.imageVariants);
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]); // read file as data url
 
@@ -124,7 +141,6 @@ export class VariationEditItemComponent {
           ?.result as string;
         this.url.push(event.target?.result as string);
       };
-      console.log('this.productVariants :>> ', this.productVariants);
       this.isVisibility[indexOption] = false;
     }
   }
@@ -144,8 +160,32 @@ export class VariationEditItemComponent {
           event.target?.result as string;
         this.url.push(event.target?.result as string);
       };
-      console.log('this.productVariants :>> ', this.productVariants);
       this.isVisibilityTwo[indexOption1][indexOption2] = false;
     }
+  }
+
+  convertProductOptionsToAttributeName(
+    productOptions: { key: string; value: string[] }[]
+  ) {
+    const attributeNames: string[][] = [];
+    if (productOptions.length > 1) {
+      let index = 0;
+      for (let i = 0; i < productOptions[0].value.length - 1; i++) {
+        for (let j = 0; j < productOptions[1].value.length - 1; j++) {
+          attributeNames.push([]);
+          attributeNames[index].push(productOptions[0].value[i]);
+          attributeNames[index].push(productOptions[1].value[j]);
+          index++;
+        }
+      }
+    } else {
+      this.productOptions[0].value.pop();
+      for (let i = 0; i < productOptions[0].value.length; i++) {
+        attributeNames.push([]);
+        attributeNames[i].push(productOptions[0].value[i]);
+      }
+    }
+
+    return attributeNames;
   }
 }

@@ -74,9 +74,30 @@
         <ng-container *ngIf="!productOptions[1]?.value">
           <tr *ngIf="!!optionOne">
             <td>{{ optionOne }}</td>
-            <td><input type="text" class="input-content-variant" /></td>
-            <td><input type="text" class="input-content-variant" /></td>
-            <td><input type="text" class="input-content-variant" /></td>
+            <td>
+              <input
+                [(ngModel)]="productVariants[index0].price"
+                type="number"
+                class="input-content-variant"
+                (blur)="onInputValue()"
+              />
+            </td>
+            <td>
+              <input
+                [(ngModel)]="productVariants[index0].quantity"
+                type="number"
+                class="input-content-variant"
+                (blur)="onInputValue()"
+              />
+            </td>
+            <td>
+              <input
+                [(ngModel)]="productVariants[index0].sku"
+                type="text"
+                class="input-content-variant"
+                (blur)="onInputValue()"
+              />
+            </td>
             <td class="picture">
               <div class="image-container" *ngIf="!isVisibility[index0]">
                 <img
@@ -129,9 +150,30 @@
                 {{ optionOne }}
               </td>
               <td>{{ optionTwo }}</td>
-              <td><input type="text" class="input-content-variant" /></td>
-              <td><input type="text" class="input-content-variant" /></td>
-              <td><input type="text" class="input-content-variant" /></td>
+              <td>
+                <input
+                  [(ngModel)]="productVariantTwos[index0][index1].price"
+                  type="text"
+                  class="input-content-variant"
+                  (blur)="onInputValue()"
+                />
+              </td>
+              <td>
+                <input
+                  [(ngModel)]="productVariantTwos[index0][index1].quantity"
+                  type="text"
+                  class="input-content-variant"
+                  (blur)="onInputValue()"
+                />
+              </td>
+              <td>
+                <input
+                  [(ngModel)]="productVariantTwos[index0][index1].sku"
+                  type="text"
+                  class="input-content-variant"
+                  (blur)="onInputValue()"
+                />
+              </td>
               <td class="picture">
                 <div
                   class="image-container"

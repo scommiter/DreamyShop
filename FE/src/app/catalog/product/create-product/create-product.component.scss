@@ -54,7 +54,7 @@
     display: flex;
 }
 
-.button-add-picture-variant{
+.button-add-picture {
     border-style: dashed;
     padding: 5px;
     background-color: #fff;
@@ -92,5 +92,10 @@ img{
 }
 .close-image:hover{
     color: blue;
+}
+
+p-button.p-element.button-submit {
+    padding-bottom: 20px;
+    float: right;
 }
 

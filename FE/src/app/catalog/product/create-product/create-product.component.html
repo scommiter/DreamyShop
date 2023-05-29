@@ -10,24 +10,28 @@
       <label for="name" class="block"
         >Tên sản phẩm <span class="required">*</span></label
       >
-      <input id="name" pInputText type="text" class="w-full" />
+      <input
+        [(ngModel)]="productCreateRequest.name"
+        id="name"
+        pInputText
+        type="text"
+        class="w-full"
+      />
     </div>
     <div class="field col-12">
       <label for="code" class="block"
         >Mã sản phẩm <span class="required">*</span></label
       >
-      <input id="code" pInputText type="text" class="w-full" />
+      <input
+        [(ngModel)]="productCreateRequest.code"
+        id="code"
+        pInputText
+        type="text"
+        class="w-full"
+      />
     </div>
     <div class="field col-12">
       <label for="thumbnailpicture" class="block">Thêm ảnh </label>
-      <!-- <p-fileUpload
-        mode="basic"
-        accept="image/*"
-        [maxFileSize]="1000000"
-        [auto]="true"
-        chooseLabel="Upload"
-        chooseIcon="pi pi-upload"
-      ></p-fileUpload> -->
       <div class="list-image-product">
         <ng-container *ngFor="let img of imageProducts; let i = index">
           <div class="image-container">
@@ -44,7 +48,7 @@
             hidden
           />
           <label
-            class="button-add-picture-variant image-button opacity-label"
+            class="button-add-picture image-button opacity-label"
             [for]="'upload'"
           >
             <i class="pi pi-plus" style="font-size: 1rem; color: red"></i>
@@ -55,7 +59,12 @@
 
     <div class="field col-12">
       <label for="description" class="block">Mô tả sản phẩm</label>
-      <textarea rows="10" cols="100" pInputTextarea></textarea>
+      <textarea
+        [(ngModel)]="productCreateRequest.description"
+        rows="10"
+        cols="100"
+        pInputTextarea
+      ></textarea>
     </div>
   </p-panel>
   <br />
@@ -68,19 +77,32 @@
       <p-dropdown
         [options]="productTypes"
         placeholder="Select a Product Type"
+        [(ngModel)]="productCreateRequest.product_type"
       ></p-dropdown>
     </div>
     <div class="field col-12">
       <label for="category-name" class="block"
         >Phân loại ngành <span class="required">*</span></label
       >
-      <input id="category-name" pInputText type="text" class="w-full" />
+      <input
+        [(ngModel)]="productCreateRequest.category_name"
+        id="category-name"
+        pInputText
+        type="text"
+        class="w-full"
+      />
     </div>
     <div class="field col-12">
       <label for="manufacturer-name" class="block"
         >Nhà sản xuất <span class="required">*</span></label
       >
-      <input id="manufacturer-name" pInputText type="text" class="w-full" />
+      <input
+        [(ngModel)]="productCreateRequest.manufacturer_name"
+        id="manufacturer-name"
+        pInputText
+        type="text"
+        class="w-full"
+      />
     </div>
     <div class="field col-12" id="true-false">
       <div class="active-button">
@@ -121,33 +143,49 @@
       <div class="option-variant-wrapper">
         <div class="title-variant-wrapper">Phân loại hàng</div>
         <div class="product-variant option-list">
-          <!-- <app-variation-edit-item
-            *ngFor="let productOption of productOptions.entries()"
-            [productOptionKey]="productOption[0]"
-            [productOptionValue]="productOption[1]"
-          >
-          </app-variation-edit-item> -->
-          <app-variation-edit-item></app-variation-edit-item>
+          <app-variation-edit-item
+            (productOptionOuputs)="receiveData($event)"
+            (productVariantOutputs)="receiveVariantData($event)"
+            (productVariantTwoOutputs)="receiveVariantTwoData($event)"
+            (checkAddProductClassify)="receiveCheckAddData($event)"
+            (imageVariantOutputs)="receiveImageVariantData($event)"
+            (atrributeNameOutputs)="receiveAtrributeNameData($event)"
+          ></app-variation-edit-item>
         </div>
       </div>
-      <!-- <div class="list-product-variant-wrapper">
-        <div class="title-variant">Phân loại hàng</div>
-        <div class="product-variant variant-list"></div>
-      </div> -->
     </div>
 
     <div class="field col-12" *ngIf="isAddVisibility">
       <label for="price" class="block"
         >Giá bán <span class="required">*</span></label
       >
-      <input id="price" pInputText type="text" class="w-full" />
+      <input
+        [(ngModel)]="priceProduct"
+        id="price"
+        pInputText
+        type="text"
+        class="w-full"
+      />
     </div>
     <div class="field col-12" *ngIf="isAddVisibility">
       <label for="quantity" class="block"
         >Số lượng <span class="required">*</span></label
       >
-      <input id="quantity" pInputText type="text" class="w-full" />
+      <input
+        [(ngModel)]="quantityProduct"
+        id="quantity"
+        pInputText
+        type="text"
+        class="w-full"
+      />
     </div>
   </p-panel>
   <br />
+
+  <p-button
+    label="Submit"
+    icon="pi pi-check"
+    class="button-submit"
+    (onClick)="createProduct()"
+  ></p-button>
 </div>

@@ -9,7 +9,7 @@ import { PanelModule } from 'primeng/panel';
 import { FileUploadModule } from 'primeng/fileupload';
 import { DropdownModule } from 'primeng/dropdown';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditorModule } from 'primeng/editor';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { SplitterModule } from 'primeng/splitter';
@@ -39,6 +39,7 @@ import { VariationEditItemComponent } from '../variation-edit-item/variation-edi
     DialogModule,
     ConfirmDialogModule,
     DividerModule,
+    ReactiveFormsModule,
   ],
   providers: [DialogService],
 })
