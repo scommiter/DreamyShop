@@ -4,12 +4,25 @@ import { ProductVariantRequestDto } from './product-variant.dto';
 export interface ProductCreateDto {
   name: string;
   code: string;
-  product_type: ProductTypes;
-  category_name: string;
-  manufacturer_name: string;
+  productType: ProductTypes;
+  categoryName: string;
+  manufacturerName: string;
   description: string;
-  is_active: boolean;
-  is_visibility: boolean;
-  product_options: { key: string; value: string[] }[];
-  variant_product: Array<ProductVariantRequestDto>;
+  isActive: boolean;
+  isVisibility: boolean;
+  productOptions: { [key: string]: string[] };
+  variantProducts: ProductVariantRequestDto[];
+}
+
+export interface ProductCreateTestDto {
+  name: string;
+  code: string;
+  productType: ProductTypes;
+  categoryName: string;
+  manufacturerName?: string | null;
+  description?: string | null;
+  isActive: boolean;
+  isVisibility: boolean;
+  productOptions: { [key: string]: string[] };
+  variantProducts: ProductVariantRequestDto[];
 }

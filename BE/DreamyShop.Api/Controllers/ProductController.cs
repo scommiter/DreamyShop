@@ -29,7 +29,7 @@ namespace DreamyShop.Api.Controllers
             return Ok(result.Result.Items);
         }
 
-        [HttpPost("create")]
+        [HttpPost("create"), DisableRequestSizeLimit]
         //[Authorize]
         //[Member]
         public async Task<IActionResult> CreateProduct([FromBody] ProductCreateDto productCreateUpdateDto)

@@ -77,7 +77,7 @@
       <p-dropdown
         [options]="productTypes"
         placeholder="Select a Product Type"
-        [(ngModel)]="productCreateRequest.product_type"
+        [(ngModel)]="productCreateRequest.productType"
       ></p-dropdown>
     </div>
     <div class="field col-12">
@@ -85,7 +85,7 @@
         >Phân loại ngành <span class="required">*</span></label
       >
       <input
-        [(ngModel)]="productCreateRequest.category_name"
+        [(ngModel)]="productCreateRequest.categoryName"
         id="category-name"
         pInputText
         type="text"
@@ -97,7 +97,7 @@
         >Nhà sản xuất <span class="required">*</span></label
       >
       <input
-        [(ngModel)]="productCreateRequest.manufacturer_name"
+        [(ngModel)]="productCreateRequest.manufacturerName"
         id="manufacturer-name"
         pInputText
         type="text"

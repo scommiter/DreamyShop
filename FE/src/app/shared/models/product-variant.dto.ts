@@ -7,9 +7,9 @@ export interface ProductVariantDto {
 }
 
 export interface ProductVariantRequestDto {
-  attribute_names: Array<string>;
-  sku: string;
+  attributeNames: Array<string>;
+  sKU: string;
   quantity: number;
   price: number;
-  thumbnail_picture: File | null;
+  thumbnailPicture: string;
 }

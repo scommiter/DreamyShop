@@ -127,7 +127,8 @@ namespace DreamyShop.Logic.Report
                         var productDto = new ProductCreateDto();
                         productDto.Name = sheet.Cells[row, 1].Value.ToString().Trim();
                         productDto.Code = sheet.Cells[row, 2].Value.ToString().Trim();
-                        productDto.ProductType = (ProductType)Enum.Parse(typeof(ProductType), sheet.Cells[row, 3].Value.ToString().Trim());
+                        //productDto.ProductType = (ProductType)Enum.Parse(typeof(ProductType), sheet.Cells[row, 3].Value.ToString().Trim());
+                        productDto.ProductType = sheet.Cells[row, 3].Value.ToString().Trim();
                         productDto.CategoryName = sheet.Cells[row, 4].Value.ToString().Trim();
                         productDto.ManufacturerName = sheet.Cells[row, 5].Value.ToString().Trim();
                         productDto.Description = sheet.Cells[row, 6].Value.ToString().Trim();

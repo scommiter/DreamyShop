@@ -11,6 +11,7 @@ using DreamyShop.Logic.Conditions;
 using DreamyShop.Repository.RepositoryWrapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http.Internal;
 
 namespace DreamyShop.Logic.Product
 {
@@ -121,7 +122,7 @@ namespace DreamyShop.Logic.Product
                 Code = productCreateDto.Code,
                 Slug = productCreateDto.Name.ToLower(),
                 SortOrder = 1,
-                ProductType = productCreateDto.ProductType,
+                ProductType = (ProductType)Enum.Parse(typeof(ProductType), productCreateDto.ProductType),
                 CategoryId = _repository.Category.GetByName(productCreateDto.CategoryName).Id,
                 SeoMetaDescription = null,
                 Description = productCreateDto.Description,
@@ -250,6 +251,7 @@ namespace DreamyShop.Logic.Product
         {
             if (variantProducts.Any(pAttr => pAttr.AttributeNames != null) && variantProducts.Count > 1)
             {
+                productOptions.Values.ToList().ForEach(list => list.RemoveAt(list.Count - 1));
                 var attributeNames = productOptions.Select(pad => pad.Key.Standard()).Distinct().ToList();
                 var newAttributeNames = attributeNames.Where(a => !attributes.Select(attr => attr.Name.Standard()).Contains(a.Standard())).ToList();
                 var newAttributes = newAttributeNames.Select(an => new Domain.Attribute
@@ -510,38 +512,52 @@ namespace DreamyShop.Logic.Product
             return new ApiSuccessResult<IList<ProductDto>>(productDtoPagingsResult);
         }
 
-        private async Task<ApiResult<bool>> UploadVariantImage(IFormFile file, int productVariantId)
+        private async Task<ApiResult<bool>> UploadVariantImage(string fileContext, int productVariantId)
         {
             try
             {
-                var productVariant = await _repository.ProductVariant.GetByIdAsync(productVariantId);
-                if (productVariant == null)
+                // Tách phần dữ liệu cơ bản (base64 data) từ chuỗi base64
+                string base64Data = fileContext.Split(',')[1];
+                // Chuyển đổi chuỗi base64 thành mảng byte
+                byte[] imageBytes = Convert.FromBase64String(base64Data);
+
+                // Tạo MemoryStream từ mảng byte
+                using (MemoryStream memoryStream = new MemoryStream(imageBytes))
                 {
-                    return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
-                }
-                var folderName = Path.Combine("Resources", "Images");
-                var pathToSave = Path.Combine(Directory.GetCurrentDirectory().Replace("DreamyShop.Api", "DreamyShop.Infrastructure"), folderName);
-                if (!Directory.Exists(pathToSave))
-                {
-                    Directory.CreateDirectory(pathToSave);
-                }
-                if (file.Length > 0)
-                {
-                    var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                    var fullPath = Path.Combine(pathToSave, fileName);
-                    var dbPath = Path.Combine("DreamyShop.Infrastructure", folderName, fileName);
-                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    // Tạo đối tượng IFormFile từ MemoryStream
+                    IFormFile file = new FormFile(memoryStream, 0, memoryStream.Length, "fileName", "fileName.png");
+
+                    var productVariant = await _repository.ProductVariant.GetByIdAsync(productVariantId);
+                    if (productVariant == null)
                     {
-                        file.CopyTo(stream);
+                        return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
                     }
-                    productVariant.ThumbnailPicture = dbPath;
-                    _repository.Save();
-                    return new ApiSuccessResult<bool>(true);
+                    var folderName = Path.Combine("Resources", "Images");
+                    var pathToSave = Path.Combine(Directory.GetCurrentDirectory().Replace("DreamyShop.Api", "DreamyShop.Infrastructure"), folderName);
+                    if (!Directory.Exists(pathToSave))
+                    {
+                        Directory.CreateDirectory(pathToSave);
+                    }
+                    if (file.Length > 0)
+                    {
+                        var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                        var fullPath = Path.Combine(pathToSave, fileName);
+                        var dbPath = Path.Combine("DreamyShop.Infrastructure", folderName, fileName);
+                        using (var stream = new FileStream(fullPath, FileMode.Create))
+                        {
+                            file.CopyTo(stream);
+                        }
+                        productVariant.ThumbnailPicture = dbPath;
+                        _repository.Save();
+                        return new ApiSuccessResult<bool>(true);
+                    }
+                    else
+                    {
+                        return new ApiErrorResult<bool>((int)ErrorCodes.UploadFailed);
+                    }
                 }
-                else
-                {
-                    return new ApiErrorResult<bool>((int)ErrorCodes.UploadFailed);
-                }
+
+                
             }
             catch (Exception ex)
             {

@@ -97,12 +97,14 @@ export class VariationEditItemComponent {
         this.isVisibility.push(true);
       }
     }
-    this.productOptionOuputs.emit(this.productOptions);
   }
 
   onInputValue() {
+    this.productOptionOuputs.emit(this.productOptions);
     this.productVariantOutputs.emit(this.productVariants);
-    this.productVariantTwoOutputs.emit(this.productVariantTwos);
+    if (this.productOptions.length > 1) {
+      this.productVariantTwoOutputs.emit(this.productVariantTwos);
+    }
     let productOptions = this.convertProductOptionsToAttributeName(
       this.productOptions
     );
@@ -131,7 +133,6 @@ export class VariationEditItemComponent {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0] as File;
       this.imageVariants.push(file);
-      console.log('filesssssssssssssssssssssss :>> ', this.imageVariants);
       var reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]); // read file as data url
 
@@ -164,6 +165,13 @@ export class VariationEditItemComponent {
     }
   }
 
+  removeNullObject(productOptions: { key: string; value: string[] }[]) {
+    for (let i = 0; i < productOptions.length; i++) {
+      productOptions[i].value.pop();
+    }
+    return productOptions;
+  }
+
   convertProductOptionsToAttributeName(
     productOptions: { key: string; value: string[] }[]
   ) {
@@ -179,8 +187,7 @@ export class VariationEditItemComponent {
         }
       }
     } else {
-      this.productOptions[0].value.pop();
-      for (let i = 0; i < productOptions[0].value.length; i++) {
+      for (let i = 0; i < productOptions[0].value.length - 1; i++) {
         attributeNames.push([]);
         attributeNames[i].push(productOptions[0].value[i]);
       }

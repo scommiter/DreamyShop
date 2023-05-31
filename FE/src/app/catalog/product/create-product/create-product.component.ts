@@ -6,7 +6,10 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/app/environments/environment';
 import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
-import { ProductCreateDto } from 'src/app/shared/models/product-create-update.dto';
+import {
+  ProductCreateDto,
+  ProductCreateTestDto,
+} from 'src/app/shared/models/product-create-update.dto';
 import {
   ProductVariantDto,
   ProductVariantRequestDto,
@@ -22,14 +25,14 @@ export class CreateProductComponent implements OnInit {
   productCreateRequest: ProductCreateDto = {
     name: '',
     code: '',
-    product_type: ProductTypes.Single,
-    category_name: '',
-    manufacturer_name: '',
+    productType: ProductTypes.Single,
+    categoryName: '',
+    manufacturerName: '',
     description: '',
-    is_active: true,
-    is_visibility: true,
-    product_options: [],
-    variant_product: [],
+    isActive: true,
+    isVisibility: true,
+    productOptions: {},
+    variantProducts: [],
   };
   productTypes: string[] = [];
   stateOptions: string[] = [];
@@ -74,10 +77,8 @@ export class CreateProductComponent implements OnInit {
         5 - this.images.length
       ) as File[];
       files.forEach((file) => this.images.push(file));
-      console.log('images :>> ', this.images);
       for (let i = 0; i < event.target.files.length; i++) {
         if (i < 5 - cacheNumberImage) {
-          console.log('LinhDXZZZ');
           this.imageCount++;
           const file = event.target.files[i];
           const reader = new FileReader();
@@ -114,16 +115,16 @@ export class CreateProductComponent implements OnInit {
   closeImage(index: number) {
     this.imageProducts.splice(index, 1);
     this.images.splice(index, 1);
-    console.log('this.images :>> ', this.images);
     this.imageCount--;
   }
+  productOptions: { key: string; value: string[] }[] = [];
   productVariants: ProductVariantDto[] = [];
   productVariantRequests: ProductVariantRequestDto[] = [];
   productVariantTwos: ProductVariantDto[][] = [];
   productVariantTwoRequests: ProductVariantRequestDto[][] = [];
   checkAddProductClassify: boolean = false;
   receiveData(data: any) {
-    this.productCreateRequest.product_options = data;
+    this.productOptions = data;
   }
 
   receiveVariantData(data: any) {
@@ -147,10 +148,18 @@ export class CreateProductComponent implements OnInit {
   }
 
   createProduct() {
-    this.productCreateRequest.is_active =
+    this.productCreateRequest.isActive =
       this.defaultOptionActive === 'True' ? true : false;
-    this.productCreateRequest.is_visibility =
+    this.productCreateRequest.isVisibility =
       this.defaultOptionVisibily === 'True' ? true : false;
+
+    const convertedProductOptions: { [key: string]: string[] } =
+      this.productOptions.reduce((acc: { [key: string]: string[] }, obj) => {
+        acc[obj.key] = obj.value;
+        return acc;
+      }, {});
+    console.log('convertedProductOptions :>> ', convertedProductOptions);
+    this.productCreateRequest.productOptions = convertedProductOptions;
 
     if (this.isAddVisibility) {
       let productVariant: ProductVariantDto = {
@@ -160,7 +169,7 @@ export class CreateProductComponent implements OnInit {
         price: this.priceProduct,
         thumbnail_picture: '',
       };
-      this.productCreateRequest.variant_product.push(
+      this.productCreateRequest.variantProducts.push(
         this.convertToProductVariantRequestDto(productVariant)
       );
     } else {
@@ -169,28 +178,60 @@ export class CreateProductComponent implements OnInit {
           this.productVariants[i].attribute_names = this.attributeNames[i];
         }
         this.productVariants.pop();
-        this.productCreateRequest.variant_product =
+        this.productCreateRequest.variantProducts =
           this.convertToProductVariantRequestArray(this.productVariants);
       } else {
         this.productVariantTwos.pop();
-        this.productCreateRequest.variant_product =
+        this.productCreateRequest.variantProducts =
           this.convertToProductVariantRequestArray(
             this.productVariantTwos.flat()
           );
         for (
           let i = 0;
-          i < this.productCreateRequest.variant_product.length;
+          i < this.productCreateRequest.variantProducts.length;
           i++
         ) {
-          this.productCreateRequest.variant_product[i].attribute_names =
+          this.productCreateRequest.variantProducts[i].attributeNames =
             this.attributeNames[i];
         }
       }
     }
     console.log('this.productCreateRequest :>> ', this.productCreateRequest);
-    // console.log('this.images :>> ', this.images);
+
+    // const product: ProductCreateTestDto = {
+    //   name: 'Product Name',
+    //   code: 'ABC123',
+    //   productType: ProductTypes.Single,
+    //   categoryName: 'Category',
+    //   manufacturerName: null,
+    //   description: null,
+    //   isActive: true,
+    //   isVisibility: true,
+    //   productOptions: {
+    //     option1: ['value1', 'value2'],
+    //     option2: ['value3', 'value4'],
+    //   },
+    //   variantProducts: [],
+    // };
+
+    this.callAPICreateProduct(this.productCreateRequest);
 
     // this.addImage(this.images);
+  }
+
+  callAPICreateProduct(productCreateDto: ProductCreateDto): void {
+    this.http
+      .post(`${environment.apiUrl}/api/Product/create`, productCreateDto)
+      .subscribe(
+        (response) => {
+          console.log('Product created successfully');
+          // Handle the response as needed
+        },
+        (error) => {
+          console.error('Error creating product:', error);
+          // Handle the error as needed
+        }
+      );
   }
 
   convertToFile(fileContext: string, fileName: string) {
@@ -221,14 +262,15 @@ export class CreateProductComponent implements OnInit {
   ): ProductVariantRequestDto[] {
     return dtos.map((dto: ProductVariantDto) => {
       const requestDto: ProductVariantRequestDto = {
-        attribute_names: dto.attribute_names,
-        sku: dto.sku,
+        attributeNames: dto.attribute_names,
+        sKU: dto.sku,
         quantity: dto.quantity,
         price: dto.price,
-        thumbnail_picture: this.convertToFile(
-          dto.thumbnail_picture,
-          dto.attribute_names.join('')
-        ),
+        // thumbnailPicture: this.convertToFile(
+        //   dto.thumbnail_picture,
+        //   dto.attribute_names.join('')
+        // ),
+        thumbnailPicture: dto.thumbnail_picture,
       };
       return requestDto;
     });
@@ -238,14 +280,15 @@ export class CreateProductComponent implements OnInit {
     dto: ProductVariantDto
   ): ProductVariantRequestDto {
     const requestDto: ProductVariantRequestDto = {
-      attribute_names: dto.attribute_names,
-      sku: dto.sku,
+      attributeNames: dto.attribute_names,
+      sKU: dto.sku,
       quantity: dto.quantity,
       price: dto.price,
-      thumbnail_picture: this.convertToFile(
-        dto.thumbnail_picture,
-        dto.attribute_names.join('')
-      ),
+      // thumbnailPicture: this.convertToFile(
+      //   dto.thumbnail_picture,
+      //   dto.attribute_names.join('')
+      // ),
+      thumbnailPicture: dto.thumbnail_picture,
     };
 
     return requestDto;
