@@ -133,7 +133,6 @@ namespace DreamyShop.Logic.Product
             await _repository.Product.AddAsync(newProduct);
             _repository.Save();
 
-            //AddProductImage(productCreateDto.Images, newProduct.Id);
             AddOrUpdateProductVariant(productCreateDto.VariantProducts, newProduct.Id, false);
             AddOrUpdateProductAttributeValue(productCreateDto.ProductOptions, attributes, newProduct.Id, false);
             AddOrUpdateProductVariantValue(newProduct.Id, productCreateDto.VariantProducts, productCreateDto.ProductOptions, attributes);
