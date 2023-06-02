@@ -4,6 +4,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { ProductDto } from 'src/app/shared/models/product.dto';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CreateProductComponent } from './create-product/create-product.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -17,7 +18,8 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -45,5 +47,9 @@ export class ProductComponent implements OnInit {
       header: 'Create new product',
       width: '70%',
     });
+  }
+
+  redirectToProduct() {
+    this.router.navigateByUrl('/product/create');
   }
 }

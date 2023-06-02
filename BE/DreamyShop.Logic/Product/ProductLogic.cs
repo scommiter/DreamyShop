@@ -11,7 +11,6 @@ using DreamyShop.Logic.Conditions;
 using DreamyShop.Repository.RepositoryWrapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http.Internal;
 
 namespace DreamyShop.Logic.Product
 {
@@ -37,7 +36,8 @@ namespace DreamyShop.Logic.Product
 
             var pageResult = new PageResult<ProductDto>()
             {
-                Items = productDtos.Skip((pagingRequest.Page - 1) * pagingRequest.Limit)
+                Items = productDtos.OrderByDescending(p => p.DateCreated)
+                    .Skip((pagingRequest.Page - 1) * pagingRequest.Limit)
                                 .Take(pagingRequest.Limit)
                                 .ToList(),
                 Totals = productDtos.Count()
@@ -111,7 +111,10 @@ namespace DreamyShop.Logic.Product
         public async Task<ApiResult<bool>> CreateProduct(ProductCreateDto productCreateDto)
         {
             var attributes =  _repository.Attribute.GetAll().ToList();
-            AddAttribute(productCreateDto.VariantProducts, productCreateDto.ProductOptions, attributes);
+            if(productCreateDto.ProductOptions.Count > 0 && productCreateDto.VariantProducts.Count > 1)
+            {
+                AddAttribute(productCreateDto.VariantProducts, productCreateDto.ProductOptions, attributes);
+            }
             AddManufacturer(productCreateDto.ManufacturerName);
             AddCategory(productCreateDto.CategoryName);
 
@@ -134,8 +137,11 @@ namespace DreamyShop.Logic.Product
             _repository.Save();
 
             AddOrUpdateProductVariant(productCreateDto.VariantProducts, newProduct.Id, false);
-            AddOrUpdateProductAttributeValue(productCreateDto.ProductOptions, attributes, newProduct.Id, false);
-            AddOrUpdateProductVariantValue(newProduct.Id, productCreateDto.VariantProducts, productCreateDto.ProductOptions, attributes);
+            if (productCreateDto.ProductOptions.Count > 0 && productCreateDto.VariantProducts.Count > 1)
+            {
+                AddOrUpdateProductAttributeValue(productCreateDto.ProductOptions, attributes, newProduct.Id, false);
+                AddOrUpdateProductVariantValue(newProduct.Id, productCreateDto.VariantProducts, productCreateDto.ProductOptions, attributes);
+            }
             return new ApiSuccessResult<bool>(true);
         }
 
@@ -153,6 +159,8 @@ namespace DreamyShop.Logic.Product
             Dictionary<string, List<string>> productOptions,
             List<Domain.Attribute> attributes)
         {
+            productVariantValues.RemoveAll(product => product.SKU == "");
+
             var productVariants = _repository.ProductVariant.GetAll().ToList();
             var productAttributeValues = _repository.ProductAttributeValue.GetAll().ToList();
             foreach (var productVariantValue in productVariantValues)
@@ -177,7 +185,8 @@ namespace DreamyShop.Logic.Product
         /// <param name="newProductId"></param>
         private async void AddOrUpdateProductVariant(List<VariantProduct> variantProducts, int productId, bool isUpdate)
         {
-            if(isUpdate == true)
+            variantProducts.RemoveAll(product => product.SKU == "");
+            if (isUpdate == true)
             {
                 var variantProductByProductIds = _context.ProductVariants.Where(pv => pv.ProductId == productId);
                 variantProducts = variantProducts.Where(v => !variantProductByProductIds.Any(vp => vp.SKU == v.SKU && vp.ProductId == productId)).ToList();
@@ -195,11 +204,47 @@ namespace DreamyShop.Logic.Product
                         Description = "",
                         Quantity = variant.Quantity,
                         Price = variant.Price,
+                        ThumbnailPicture = "",
                         DateCreated = DateTime.Now
                     };
                     await _repository.ProductVariant.AddAsync(newVariantProduct);
                     _repository.Save();
-                    UploadVariantImage(variant.ThumbnailPicture, newVariantProduct.Id);
+
+                    if(variant.ThumbnailPicture != "")
+                    {
+                        AddImageVariantProduct(variant.ThumbnailPicture, newVariantProduct.Id, $"{variant.SKU}Product.png");
+                    }
+                }
+            }
+        }
+
+        private async void AddImageVariantProduct(string fileContext, int variantId, string fileName)
+        {
+            string base64Data = fileContext.Split(',')[1];
+            byte[] imageBytes = Convert.FromBase64String(base64Data);
+            //Tạo MemoryStream từ mảng byte
+            using (MemoryStream memoryStream = new MemoryStream(imageBytes))
+            {
+                IFormFile file = new FormFile(memoryStream, 0, memoryStream.Length, Path.GetFileNameWithoutExtension(fileName), $"{fileName}.png");
+
+                var productVariant = await _repository.ProductVariant.GetByIdAsync(variantId);
+                var folderName = Path.Combine("Resources", "Images");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory().Replace("DreamyShop.Api", "DreamyShop.Infrastructure"), folderName);
+                if (!Directory.Exists(pathToSave))
+                {
+                    Directory.CreateDirectory(pathToSave);
+                }
+                if (file.Length > 0)
+                {
+                    //var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                    var fullPath = Path.Combine(pathToSave, fileName);
+                    var dbPath = Path.Combine("DreamyShop.Infrastructure", folderName, fileName);
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+                    productVariant.ThumbnailPicture = dbPath;
+                    _repository.Save();
                 }
             }
         }
@@ -509,59 +554,6 @@ namespace DreamyShop.Logic.Product
                                     .Take(pagingRequest.Limit)
                                     .ToList(); ;
             return new ApiSuccessResult<IList<ProductDto>>(productDtoPagingsResult);
-        }
-
-        private async Task<ApiResult<bool>> UploadVariantImage(string fileContext, int productVariantId)
-        {
-            try
-            {
-                // Tách phần dữ liệu cơ bản (base64 data) từ chuỗi base64
-                string base64Data = fileContext.Split(',')[1];
-                // Chuyển đổi chuỗi base64 thành mảng byte
-                byte[] imageBytes = Convert.FromBase64String(base64Data);
-
-                // Tạo MemoryStream từ mảng byte
-                using (MemoryStream memoryStream = new MemoryStream(imageBytes))
-                {
-                    // Tạo đối tượng IFormFile từ MemoryStream
-                    IFormFile file = new FormFile(memoryStream, 0, memoryStream.Length, "fileName", "fileName.png");
-
-                    var productVariant = await _repository.ProductVariant.GetByIdAsync(productVariantId);
-                    if (productVariant == null)
-                    {
-                        return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
-                    }
-                    var folderName = Path.Combine("Resources", "Images");
-                    var pathToSave = Path.Combine(Directory.GetCurrentDirectory().Replace("DreamyShop.Api", "DreamyShop.Infrastructure"), folderName);
-                    if (!Directory.Exists(pathToSave))
-                    {
-                        Directory.CreateDirectory(pathToSave);
-                    }
-                    if (file.Length > 0)
-                    {
-                        var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                        var fullPath = Path.Combine(pathToSave, fileName);
-                        var dbPath = Path.Combine("DreamyShop.Infrastructure", folderName, fileName);
-                        using (var stream = new FileStream(fullPath, FileMode.Create))
-                        {
-                            file.CopyTo(stream);
-                        }
-                        productVariant.ThumbnailPicture = dbPath;
-                        _repository.Save();
-                        return new ApiSuccessResult<bool>(true);
-                    }
-                    else
-                    {
-                        return new ApiErrorResult<bool>((int)ErrorCodes.UploadFailed);
-                    }
-                }
-
-                
-            }
-            catch (Exception ex)
-            {
-                return new ApiErrorResult<bool>((int)ErrorCodes.UploadFailed);
-            }
         }
 
         public async Task<ApiResult<bool>> UploadImage(IFormFile file, int productId)

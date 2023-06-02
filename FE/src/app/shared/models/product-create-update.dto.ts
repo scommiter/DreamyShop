@@ -13,16 +13,3 @@ export interface ProductCreateDto {
   productOptions: { [key: string]: string[] };
   variantProducts: ProductVariantRequestDto[];
 }
-
-export interface ProductCreateTestDto {
-  name: string;
-  code: string;
-  productType: ProductTypes;
-  categoryName: string;
-  manufacturerName?: string | null;
-  description?: string | null;
-  isActive: boolean;
-  isVisibility: boolean;
-  productOptions: { [key: string]: string[] };
-  variantProducts: ProductVariantRequestDto[];
-}

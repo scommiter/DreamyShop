@@ -1,15 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
-import { DialogService } from 'primeng/dynamicdialog';
-import { map } from 'rxjs/operators';
-import { environment } from 'src/app/environments/environment';
+import { ProductService } from 'src/app/services/product.service';
 import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
-import {
-  ProductCreateDto,
-  ProductCreateTestDto,
-} from 'src/app/shared/models/product-create-update.dto';
+import { ProductCreateDto } from 'src/app/shared/models/product-create-update.dto';
 import {
   ProductVariantDto,
   ProductVariantRequestDto,
@@ -40,6 +34,7 @@ export class CreateProductComponent implements OnInit {
   defaultOptionVisibily: string = 'True';
   items: MenuItem[] = [];
   home: MenuItem = {};
+  skuProduct: string = '';
   imageProducts: string[] = [];
   url: string[] = [''];
   imageCount: number = 0;
@@ -49,7 +44,11 @@ export class CreateProductComponent implements OnInit {
   isAddVisibility: boolean = true;
   images: File[] = [];
   imageVariants: File[] = [];
-  constructor(private http: HttpClient) {}
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.home = { icon: 'pi pi-home', routerLink: '/' };
@@ -95,22 +94,23 @@ export class CreateProductComponent implements OnInit {
     }
   }
 
-  addImage(imageFiles: File[]) {
-    const formData = new FormData();
-    imageFiles.forEach((image) => formData.append('image', image));
-    this.http
-      .post(`${environment.apiUrl}/api/Product/uploadMultipleImage`, formData)
-      .subscribe(
-        (response) => {
-          // Xử lý phản hồi từ API (nếu cần)
-          console.log('Image added successfully');
-        },
-        (error) => {
-          // Xử lý lỗi (nếu có)
-          console.error('Failed to add image', error);
-        }
-      );
-  }
+  // addImage(imageFiles: File[]) {
+  //   const formData = new FormData();
+  //   imageFiles.forEach((image) => formData.append('image', image));
+  //   this.productService.createImageProduct(formData);
+  //   // this.http
+  //   //   .post(`${environment.apiUrl}/api/Product/uploadMultipleImage`, formData)
+  //   //   .subscribe(
+  //   //     (response) => {
+  //   //       // Xử lý phản hồi từ API (nếu cần)
+  //   //       console.log('Image added successfully');
+  //   //     },
+  //   //     (error) => {
+  //   //       // Xử lý lỗi (nếu có)
+  //   //       console.error('Failed to add image', error);
+  //   //     }
+  //   //   );
+  // }
 
   closeImage(index: number) {
     this.imageProducts.splice(index, 1);
@@ -164,7 +164,7 @@ export class CreateProductComponent implements OnInit {
     if (this.isAddVisibility) {
       let productVariant: ProductVariantDto = {
         attribute_names: [''],
-        sku: '',
+        sku: this.skuProduct,
         quantity: this.quantityProduct,
         price: this.priceProduct,
         thumbnail_picture: '',
@@ -197,42 +197,37 @@ export class CreateProductComponent implements OnInit {
       }
     }
     console.log('this.productCreateRequest :>> ', this.productCreateRequest);
-
-    // const product: ProductCreateTestDto = {
-    //   name: 'Product Name',
-    //   code: 'ABC123',
-    //   productType: ProductTypes.Single,
-    //   categoryName: 'Category',
-    //   manufacturerName: null,
-    //   description: null,
-    //   isActive: true,
-    //   isVisibility: true,
-    //   productOptions: {
-    //     option1: ['value1', 'value2'],
-    //     option2: ['value3', 'value4'],
-    //   },
-    //   variantProducts: [],
-    // };
-
-    this.callAPICreateProduct(this.productCreateRequest);
-
-    // this.addImage(this.images);
+    this.callApis(this.productCreateRequest, this.images);
   }
 
-  callAPICreateProduct(productCreateDto: ProductCreateDto): void {
-    this.http
-      .post(`${environment.apiUrl}/api/Product/create`, productCreateDto)
-      .subscribe(
-        (response) => {
-          console.log('Product created successfully');
-          // Handle the response as needed
-        },
-        (error) => {
-          console.error('Error creating product:', error);
-          // Handle the error as needed
-        }
-      );
+  async callApis(productCreateDto: ProductCreateDto, imageFiles: File[]) {
+    try {
+      const response1 = await this.productService
+        .createProduct(productCreateDto)
+        .toPromise();
+      const formData = new FormData();
+      imageFiles.forEach((image) => formData.append('image', image));
+      const response2 = await this.productService
+        .createImageProduct(formData)
+        .toPromise();
+      this.router.navigateByUrl('/product');
+    } catch (error) {
+      // Xử lý lỗi
+    }
   }
+
+  // callAPICreateProduct(productCreateDto: ProductCreateDto): void {
+  //   this.productService.createProduct(productCreateDto).subscribe(
+  //     (response) => {
+  //       console.log('Product created successfully');
+  //       // Handle the response as needed
+  //     },
+  //     (error) => {
+  //       console.error('Error creating product:', error);
+  //       // Handle the error as needed
+  //     }
+  //   );
+  // }
 
   convertToFile(fileContext: string, fileName: string) {
     if (fileContext === '') {

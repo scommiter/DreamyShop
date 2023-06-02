@@ -1,5 +1,4 @@
 ﻿using DreamyShop.Domain.Shared.Types;
-using Microsoft.AspNetCore.Http;
 
 namespace DreamyShop.Domain.Shared.Dtos
 {

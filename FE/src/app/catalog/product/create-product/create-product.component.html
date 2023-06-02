@@ -154,7 +154,16 @@
         </div>
       </div>
     </div>
-
+    <div class="field col-12" *ngIf="isAddVisibility">
+      <label for="sku" class="block">SKU <span class="required">*</span></label>
+      <input
+        [(ngModel)]="skuProduct"
+        id="sku"
+        pInputText
+        type="text"
+        class="w-full"
+      />
+    </div>
     <div class="field col-12" *ngIf="isAddVisibility">
       <label for="price" class="block"
         >Giá bán <span class="required">*</span></label
