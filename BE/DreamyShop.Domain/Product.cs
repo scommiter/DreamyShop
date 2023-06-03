@@ -1,6 +1,7 @@
 ﻿using DreamyShop.Domain.Shared.Types;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace DreamyShop.Domain
 {
@@ -10,6 +11,7 @@ namespace DreamyShop.Domain
         public Product() { }
         [Key]
         public int Id { get; set; }
+        [JsonIgnore]
         public int ManufacturerId { get; set; }
         [Required]
         [StringLength(250)]
@@ -30,6 +32,7 @@ namespace DreamyShop.Domain
 
         [ForeignKey(nameof(ManufacturerId))]
         [InverseProperty("Products")]
+        [JsonIgnore]
         public virtual Manufacturer Manufacturer { get; set; }
         [ForeignKey(nameof(CategoryId))]
         [InverseProperty("Products")]

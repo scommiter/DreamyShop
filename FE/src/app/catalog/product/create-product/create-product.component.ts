@@ -25,6 +25,7 @@ export class CreateProductComponent implements OnInit {
     description: '',
     isActive: true,
     isVisibility: true,
+    images: [],
     productOptions: {},
     variantProducts: [],
   };
@@ -196,7 +197,9 @@ export class CreateProductComponent implements OnInit {
         }
       }
     }
+    this.productCreateRequest.images = this.imageProducts;
     console.log('this.productCreateRequest :>> ', this.productCreateRequest);
+    console.log('this.imageProducts :>> ', this.imageProducts);
     this.callApis(this.productCreateRequest, this.images);
   }
 
@@ -205,51 +208,15 @@ export class CreateProductComponent implements OnInit {
       const response1 = await this.productService
         .createProduct(productCreateDto)
         .toPromise();
-      const formData = new FormData();
-      imageFiles.forEach((image) => formData.append('image', image));
-      const response2 = await this.productService
-        .createImageProduct(formData)
-        .toPromise();
+      // const formData = new FormData();
+      // imageFiles.forEach((image) => formData.append('image', image));
+      // const response2 = await this.productService
+      //   .createImageProduct(formData)
+      //   .toPromise();
       this.router.navigateByUrl('/product');
     } catch (error) {
       // Xử lý lỗi
     }
-  }
-
-  // callAPICreateProduct(productCreateDto: ProductCreateDto): void {
-  //   this.productService.createProduct(productCreateDto).subscribe(
-  //     (response) => {
-  //       console.log('Product created successfully');
-  //       // Handle the response as needed
-  //     },
-  //     (error) => {
-  //       console.error('Error creating product:', error);
-  //       // Handle the error as needed
-  //     }
-  //   );
-  // }
-
-  convertToFile(fileContext: string, fileName: string) {
-    if (fileContext === '') {
-      console.log('Hello :>> ');
-      return null;
-    }
-    // Xác định loại tệp tin
-    const fileType = 'image/png';
-
-    // Lấy phần dữ liệu cơ bản (base64 data) từ chuỗi base64
-    const base64Data = fileContext.split(',')[1];
-
-    // Chuyển đổi chuỗi base64 thành mảng byte
-    const byteCharacters = atob(base64Data);
-    const byteNumbers = new Array(byteCharacters.length);
-    for (let i = 0; i < byteCharacters.length; i++) {
-      byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }
-    const byteArray = new Uint8Array(byteNumbers);
-
-    // Tạo đối tượng IFormFile từ mảng byte
-    return new File([byteArray], fileName + '.png', { type: fileType });
   }
 
   convertToProductVariantRequestArray(

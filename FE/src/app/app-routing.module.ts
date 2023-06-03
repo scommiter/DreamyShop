@@ -39,11 +39,6 @@ const routes: Routes = [
         (m) => m.CreateProductModule
       ),
   },
-  {
-    path: 'test',
-    pathMatch: 'full',
-    loadChildren: () => import('./test/test.module').then((m) => m.TestModule),
-  },
 ];
 
 @NgModule({

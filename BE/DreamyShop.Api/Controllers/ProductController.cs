@@ -26,7 +26,7 @@ namespace DreamyShop.Api.Controllers
         public async Task<IActionResult> GetAllProduct([FromQuery] PagingRequest pagingRequest)
         {
             var result = await _productService.GetAllProductPaging(pagingRequest);
-            return Ok(result.Result.Items);
+            return Ok(result.Result);
         }
 
         [HttpPost("create"), DisableRequestSizeLimit]
@@ -39,7 +39,7 @@ namespace DreamyShop.Api.Controllers
                 return BadRequest(ModelState);
             }
             var result = await _productService.CreateProduct(productCreateUpdateDto);
-            return Ok(result);
+            return Ok(result.Result);
         }
 
         [HttpPut("updateProduct")]

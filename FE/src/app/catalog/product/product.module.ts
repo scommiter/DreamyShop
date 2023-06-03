@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { DialogService } from 'primeng/dynamicdialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { EditorModule } from 'primeng/editor';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [ProductComponent],
@@ -27,6 +28,7 @@ import { EditorModule } from 'primeng/editor';
     FileUploadModule,
     EditorModule,
     FormsModule,
+    PaginatorModule,
   ],
   providers: [ProductService, DialogService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

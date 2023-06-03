@@ -5,6 +5,7 @@ import { ProductDto } from '../shared/models/product.dto';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 import { ProductCreateDto } from '../shared/models/product-create-update.dto';
+import { PageResultDto } from '../shared/models/page-result.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -15,9 +16,12 @@ export class ProductService {
     private envUrl: EnvironmentUrlService
   ) {}
 
-  public getProducts(): Observable<ProductDto[]> {
-    return this.http.get<ProductDto[]>(
-      `${environment.apiUrl}/api/Product/getAll?Page=1&Limit=10`
+  public getProducts(
+    maxResultCount: number,
+    currentPage: number
+  ): Observable<PageResultDto<ProductDto>> {
+    return this.http.get<PageResultDto<ProductDto>>(
+      `${environment.apiUrl}/api/Product/getAll?Page=${currentPage}&Limit=${maxResultCount}`
     );
   }
 

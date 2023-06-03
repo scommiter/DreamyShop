@@ -1,4 +1,4 @@
-<p-panel header="PRODUCT">
+<p-panel header="QUẢN LÝ SẢN PHẨM">
   <p-tabMenu [model]="items" [activeItem]="activeItem"></p-tabMenu>
   <p-table [value]="products">
     <ng-template pTemplate="header">
@@ -6,12 +6,12 @@
         <th style="width: 3rem">
           <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
         </th>
-        <th>Name</th>
-        <th>Picture</th>
-        <th>Code</th>
-        <th>Categorization</th>
-        <th>Price</th>
-        <th>Quantity</th>
+        <th>Tên</th>
+        <th>Ảnh</th>
+        <th>Mã</th>
+        <th>Phân loại</th>
+        <th>Giá</th>
+        <th>Số lượng</th>
         <th>SKU</th>
         <th>
           <p-button
@@ -27,8 +27,13 @@
         <td>
           <p-tableCheckbox [value]="product"></p-tableCheckbox>
         </td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.thumbnail_picture }}</td>
+        <td class="nameProduct">{{ product.name }}</td>
+        <td>
+          <img
+            src="../../../assets/ImageProducts/{{ product.thumbnailPicture }}"
+            alt="picture"
+          />
+        </td>
         <td>{{ product.code }}</td>
         <td>
           <p *ngFor="let productVariant of product.productAttributeDisplayDtos">
@@ -58,16 +63,6 @@
           </p>
           <br />
         </td>
-        <!-- <td>
-          <tr
-            *ngFor="let productVariant of product.productAttributeDisplayDtos"
-          >
-            <td>{{ productVariant.attributeNames }}</td>
-            <td>{{ productVariant.price }}</td>
-            <td>{{ productVariant.quantity }}</td>
-            <td>{{ productVariant.sku }}</td>
-          </tr>
-        </td> -->
         <td>
           <button
             pButton
@@ -84,5 +79,19 @@
         </td>
       </tr>
     </ng-template>
+    <ng-template pTemplate="summary">
+      <div style="text-align: left">
+        Tổng số sản phẩm: {{ totalCounts | number }}
+      </div>
+    </ng-template>
   </p-table>
+
+  <div class="card flex justify-content-center">
+    <p-paginator
+      [rows]="maxResultCount"
+      [totalRecords]="totalCounts"
+      (onPageChange)="onPageChange($event)"
+      [rowsPerPageOptions]="[5, 10, 20, 30]"
+    ></p-paginator>
+  </div>
 </p-panel>

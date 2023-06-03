@@ -10,6 +10,7 @@ export interface ProductCreateDto {
   description: string;
   isActive: boolean;
   isVisibility: boolean;
+  images: string[];
   productOptions: { [key: string]: string[] };
   variantProducts: ProductVariantRequestDto[];
 }

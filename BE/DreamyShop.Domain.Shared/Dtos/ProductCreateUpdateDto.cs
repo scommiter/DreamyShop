@@ -10,6 +10,7 @@ namespace DreamyShop.Domain.Shared.Dtos
         public string CategoryName { get; set; }
         public string? ManufacturerName { get; set; }
         public string? Description { get; set; }
+        public List<string> Images { get; set; }
         public bool IsActive { get; set; }
         public bool IsVisibility { get; set; }
         public Dictionary<string, List<string>> ProductOptions { get; set; }
