@@ -4,17 +4,17 @@ export interface ProductDto {
   id: string;
   name: string;
   code: string;
-  thumbnail_picture: string;
-  product_type: ProductTypes;
-  category_name: string;
-  manufacturer_name: string;
+  thumbnailPictures: string[];
+  productType: ProductTypes;
+  categoryName: string;
+  manufacturerName: string;
   description: string;
-  is_active: boolean;
-  is_visibility: boolean;
-  option_names: string[];
-  product_attribute_display: Array<ProductAttributeDisplayDto>;
-  date_created: string;
-  date_updated: string;
+  isActive: boolean;
+  isVisibility: boolean;
+  optionNames: string[];
+  productAttributeDisplayDtos: Array<ProductAttributeDisplayDto>;
+  dateCreated: string;
+  dateUpdated: string;
 }
 
 export interface ProductAttributeDisplayDto {

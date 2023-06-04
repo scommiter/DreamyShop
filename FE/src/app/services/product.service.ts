@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 import { ProductCreateDto } from '../shared/models/product-create-update.dto';
 import { PageResultDto } from '../shared/models/page-result.dto';
+import { ProductTypes } from '../shared/enums/product-types.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -37,5 +38,30 @@ export class ProductService {
       `${environment.apiUrl}/api/Product/uploadMultipleImage`,
       formData
     );
+  }
+
+  productUpdate: ProductDto = {
+    id: '',
+    name: '',
+    code: '',
+    thumbnailPictures: [],
+    productType: ProductTypes.Single,
+    categoryName: '',
+    manufacturerName: '',
+    description: '',
+    isActive: false,
+    isVisibility: false,
+    optionNames: [],
+    productAttributeDisplayDtos: [],
+    dateCreated: '',
+    dateUpdated: '',
+  };
+
+  setProductUpdate(product: ProductDto) {
+    this.productUpdate = product;
+  }
+
+  getProductUpdate() {
+    return this.productUpdate;
   }
 }

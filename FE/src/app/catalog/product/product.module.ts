@@ -14,9 +14,19 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { EditorModule } from 'primeng/editor';
 import { PaginatorModule } from 'primeng/paginator';
 import { UpdateProductComponent } from './update-product/update-product.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { CheckboxModule } from 'primeng/checkbox';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { SplitterModule } from 'primeng/splitter';
+import { DialogModule } from 'primeng/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DividerModule } from 'primeng/divider';
+import { VariationUpdateItemComponent } from './variation-update-item/variation-update-item.component';
 
 @NgModule({
-  declarations: [ProductComponent, UpdateProductComponent],
+  declarations: [ProductComponent, UpdateProductComponent, VariationUpdateItemComponent],
   imports: [
     CommonModule,
     ProductRoutingModule,
@@ -30,6 +40,15 @@ import { UpdateProductComponent } from './update-product/update-product.componen
     EditorModule,
     FormsModule,
     PaginatorModule,
+    InputTextModule,
+    CheckboxModule,
+    RadioButtonModule,
+    SelectButtonModule,
+    BreadcrumbModule,
+    SplitterModule,
+    DialogModule,
+    ConfirmDialogModule,
+    DividerModule,
   ],
   providers: [ProductService, DialogService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

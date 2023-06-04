@@ -1,0 +1,43 @@
+<div
+  class="container-variant"
+  *ngFor="let option of productOptions; let i = index; trackBy: trackByFn"
+>
+  <div class="classify taxonomy-group">
+    <div class="title-variant">Nhóm phân loại</div>
+    <div class="option-list">
+      <div class="input-container">
+        <input
+          type="text"
+          class="input-content"
+          placeholder="Ví dụ: Màu sắc, Size, ..."
+          [(ngModel)]="option.key"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="classify product-classification">
+    <div class="title-variant">Phân loại hàng</div>
+    <div class="option-list">
+      <div
+        class="option-item"
+        *ngFor="
+          let variant of option.value;
+          let j = index;
+          trackBy: trackByFnNested
+        "
+      >
+        <div class="input-container">
+          <input
+            type="text"
+            class="input-content"
+            placeholder="Ví dụ: Trắng, Đỏ ..."
+            [(ngModel)]="option.value[j]"
+          />
+        </div>
+        <div class="icon-trash" *ngIf="option.value[j] !== ''">
+          <i class="pi pi-trash" style="font-size: 1rem; color: #708090"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -97,7 +97,7 @@ namespace DreamyShop.Logic.Product
                                     Id = x.Key.Product.Id,
                                     Name = x.Key.Product.Name,
                                     Code = x.Key.Product.Code,
-                                    ThumbnailPicture = x.GroupBy(p => p.ip).Select(pt => pt.Select(ptt => ptt.ip?.Path ?? "").FirstOrDefault()).ToList().FirstOrDefault(),
+                                    ThumbnailPictures = x.GroupBy(p => p.ip).Select(pt => pt.Select(ptt => ptt.ip?.Path ?? "").FirstOrDefault()).ToList(),
                                     ProductType = x.Key.Product?.ProductType ?? ProductType.Single,
                                     CategoryName = x.FirstOrDefault()?.CategoryName ?? "",
                                     ManufacturerName = x.FirstOrDefault()?.ManufacturerName ?? "",

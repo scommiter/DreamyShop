@@ -3,11 +3,11 @@ import { MenuItem } from 'primeng/api';
 import { ProductService } from 'src/app/services/product.service';
 import { ProductDto } from 'src/app/shared/models/product.dto';
 import { DialogService } from 'primeng/dynamicdialog';
-import { CreateProductComponent } from './create-product/create-product.component';
 import { Router } from '@angular/router';
 import { PageResultDto } from 'src/app/shared/models/page-result.dto';
 import { Subject, takeUntil } from 'rxjs';
 import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
+import { UpdateProductComponent } from './update-product/update-product.component';
 
 @Component({
   selector: 'app-product',
@@ -58,13 +58,6 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  showAddModal(): void {
-    const ref = this.dialogService.open(CreateProductComponent, {
-      header: 'Create new product',
-      width: '70%',
-    });
-  }
-
   redirectToProduct() {
     this.router.navigateByUrl('/product/create');
   }
@@ -74,21 +67,25 @@ export class ProductComponent implements OnInit, OnDestroy {
     id: '',
     name: '',
     code: '',
-    thumbnail_picture: '',
-    product_type: ProductTypes.Single,
-    category_name: '',
-    manufacturer_name: '',
+    thumbnailPictures: [],
+    productType: ProductTypes.Single,
+    categoryName: '',
+    manufacturerName: '',
     description: '',
-    is_active: false,
-    is_visibility: false,
-    option_names: [],
-    product_attribute_display: [],
-    date_created: '',
-    date_updated: '',
+    isActive: false,
+    isVisibility: false,
+    optionNames: [],
+    productAttributeDisplayDtos: [],
+    dateCreated: '',
+    dateUpdated: '',
   };
   updateProduct(id: string) {
     this.productUpdate = this.getProductById(id) as ProductDto;
-    console.log(id);
+    this.productService.setProductUpdate(this.productUpdate);
+    const ref = this.dialogService.open(UpdateProductComponent, {
+      header: 'Update product',
+      width: '70%',
+    });
     console.log('this.productUpdate :>> ', this.productUpdate);
   }
 

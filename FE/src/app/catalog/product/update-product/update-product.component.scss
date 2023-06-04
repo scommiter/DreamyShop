@@ -1,0 +1,101 @@
+.container{
+    max-width: 1000px;
+    margin-left: auto;   
+    margin-right: auto;
+}
+
+.required{
+    color: red;
+}
+
+.field.col-12 {
+    margin: 0;
+}
+
+#true-false{
+    display: flex;
+    gap: 100px;
+}
+
+.label-active-visibility {
+    margin-bottom: 10px;
+}
+
+.p-breadcrumb {
+    border: none;
+    background: none;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+.ppanel{
+    margin-bottom: 20px;
+}
+
+.title-variant-wrapper {
+    width: 135px;
+    min-height: 100px;
+    padding-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.product-variant{
+    display: flex;
+    min-height: 100px;
+}
+
+.option-list {
+    display: block;
+    width: 100%;
+}
+
+.option-variant-wrapper{
+    display: flex;
+}
+
+.button-add-picture {
+    border-style: dashed;
+    padding: 5px;
+    background-color: #fff;
+    border-color: #b7b7b7;
+    color: red;
+    border-radius: 5px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.list-image-product{
+    display: flex;
+    align-items: center;
+}
+
+img{
+    margin: 10px;
+}
+
+.image-container{
+    position: relative;
+}
+.close-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-right: 18px;
+    padding-top: 10px;
+    color: red;
+    cursor: pointer;
+}
+.close-image:hover{
+    color: blue;
+}
+
+p-button.p-element.button-submit {
+    padding-bottom: 20px;
+    float: right;
+}
+

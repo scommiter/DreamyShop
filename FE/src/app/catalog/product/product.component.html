@@ -30,7 +30,9 @@
         <td class="nameProduct">{{ product.name }}</td>
         <td>
           <img
-            src="../../../assets/ImageProducts/{{ product.thumbnailPicture }}"
+            src="../../../assets/ImageProducts/{{
+              product.thumbnailPictures[0]
+            }}"
             alt="picture"
           />
         </td>
