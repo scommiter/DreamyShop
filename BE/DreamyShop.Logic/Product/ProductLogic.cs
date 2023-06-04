@@ -59,6 +59,16 @@ namespace DreamyShop.Logic.Product
 
         private async Task<List<ProductDto>> GetAllProductDto()
         {
+            var attributes = _repository.Attribute.GetAll().ToList();
+            var attributeValues = _repository.ProductAttribute.GetAll().ToList();
+            var attributeProducts = _context.Attributes.Join(_context.ProductAttributes,
+                                        a => a.Id,
+                                        b => b.AttributeId,
+                                        (a, b) => new
+                                        {
+                                            AttributeName = a.Name,
+                                            ProductId = b.ProductId
+                                        });
             var query = await(from p in _context.Products
                               join m in _context.Manufacturers on p.ManufacturerId equals m.Id
                               join c in _context.ProductCategories on p.CategoryId equals c.Id
@@ -81,7 +91,7 @@ namespace DreamyShop.Logic.Product
                                   ip
                               }).ToListAsync();
 
-            return query.GroupBy(r => new { r.Product })
+            var productDtos =  query.GroupBy(r => new { r.Product })
                                 .Select(x => new ProductDto
                                 {
                                     Id = x.Key.Product.Id,
@@ -96,6 +106,7 @@ namespace DreamyShop.Logic.Product
                                     IsVisibility = x.Key.Product?.IsVisibility ?? true,
                                     DateCreated = x.Key.Product?.DateCreated ?? DateTime.Now,
                                     DateUpdated = x.Key.Product?.DateUpdated ?? DateTime.Now,
+                                    OptionNames = attributeProducts.Where(a => a.ProductId == x.Key.Product.Id)?.Select(a => a.AttributeName).ToList(),
                                     ProductAttributeDisplayDtos = x.GroupBy(p => p.ProductVariantId)
                                                                 .Select(pAttr => new ProductAttributeDisplayDto
                                                                 {
@@ -106,15 +117,11 @@ namespace DreamyShop.Logic.Product
                                                                     Image = pAttr.Select(p => p.ip?.Path ?? "").FirstOrDefault()
                                                                 }).ToList()
                                 }).ToList();
+            return productDtos;
         }
 
         public async Task<ApiResult<bool>> CreateProduct(ProductCreateDto productCreateDto)
         {
-            var attributes =  _repository.Attribute.GetAll().ToList();
-            if(productCreateDto.ProductOptions.Count > 0 && productCreateDto.VariantProducts.Count > 1)
-            {
-                AddAttribute(productCreateDto.VariantProducts, productCreateDto.ProductOptions, attributes);
-            }
             AddManufacturer(productCreateDto.ManufacturerName);
             AddCategory(productCreateDto.CategoryName);
 
@@ -135,6 +142,11 @@ namespace DreamyShop.Logic.Product
             };
             await _repository.Product.AddAsync(newProduct);
             _repository.Save();
+
+            if (productCreateDto.ProductOptions.Count > 0 && productCreateDto.VariantProducts.Count > 1)
+            {
+                AddAttribute(productCreateDto.VariantProducts, productCreateDto.ProductOptions, newProduct.Id);
+            }
 
             AddOrUpdateProductVariant(productCreateDto.VariantProducts, newProduct.Id, false);
             if (productCreateDto.ProductOptions.Count > 0 && productCreateDto.VariantProducts.Count > 1)
@@ -332,8 +344,9 @@ namespace DreamyShop.Logic.Product
         /// </summary>
         /// <param name="productCreateUpdateDto"></param>
         /// <param name="attributes"></param>
-        private async void AddAttribute(List<VariantProduct> variantProducts, Dictionary<string, List<string>> productOptions, List<Domain.Attribute> attributes)
+        private async void AddAttribute(List<VariantProduct> variantProducts, Dictionary<string, List<string>> productOptions, int productId)
         {
+            var attributes = _repository.Attribute.GetAll().ToList();
             if (variantProducts.Any(pAttr => pAttr.AttributeNames != null) && variantProducts.Count > 1)
             {
                 productOptions.Values.ToList().ForEach(list => list.RemoveAt(list.Count - 1));
@@ -350,6 +363,19 @@ namespace DreamyShop.Logic.Product
                     DateCreated = DateTime.Now
                 }).ToList();
                 await _repository.Attribute.AddRangeAsync(newAttributes);
+                _repository.Save();
+
+                attributes = _repository.Attribute.GetAll().ToList();
+                var attributeCurrentProduct = attributes.Where(a => attributeNames.Contains(a.Name)).ToList();
+                var newProductAttributes = attributeCurrentProduct.Select(na => new Domain.ProductAttribute
+                {
+                    ProductId = productId,
+                    AttributeId = na.Id,
+                    StatusID = 1,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = DateTime.Now
+                }).ToList();
+                await _repository.ProductAttribute.AddRangeAsync(newProductAttributes);
                 _repository.Save();
             }
         }
@@ -501,7 +527,7 @@ namespace DreamyShop.Logic.Product
             var attributes = _repository.Attribute.GetAll().ToList();
             if(productUpdateDto.ProductOptions != null && productUpdateDto.VariantProducts != null)
             {
-                AddAttribute(productUpdateDto.VariantProducts, productUpdateDto.ProductOptions, attributes);
+                AddAttribute(productUpdateDto.VariantProducts, productUpdateDto.ProductOptions, id);
                 AddOrUpdateProductVariant(productUpdateDto.VariantProducts, id, true);
                 AddOrUpdateProductAttributeValue(productUpdateDto.ProductOptions, id, true);
                 AddOrUpdateProductVariantValue(id, productUpdateDto.VariantProducts, productUpdateDto.ProductOptions);

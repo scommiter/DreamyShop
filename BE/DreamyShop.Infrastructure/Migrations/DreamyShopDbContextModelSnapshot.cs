@@ -68,50 +68,6 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Attributes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Code = "COLOR",
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            IsUnique = true,
-                            IsVisibility = true,
-                            Name = "COLOR",
-                            Note = "Product color",
-                            SortOrder = 1,
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Code = "SIZE",
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            IsUnique = true,
-                            IsVisibility = true,
-                            Name = "SIZE",
-                            Note = "",
-                            SortOrder = 2,
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Code = "MATERIAL",
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            IsUnique = true,
-                            IsVisibility = true,
-                            Name = "MATERIAL",
-                            Note = "",
-                            SortOrder = 3,
-                            StatusID = (byte)0
-                        });
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.Bill", b =>
@@ -433,63 +389,6 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Manufacturers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Code = "SN",
-                            Country = "Japan",
-                            CoverPicture = "",
-                            IsActive = true,
-                            IsVisibility = true,
-                            Name = "Sony",
-                            Slug = "sony"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Code = "GCCI",
-                            Country = "Italy",
-                            CoverPicture = "",
-                            IsActive = true,
-                            IsVisibility = true,
-                            Name = "Gucci",
-                            Slug = "gucci"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Code = "IPAPL",
-                            Country = "US",
-                            CoverPicture = "",
-                            IsActive = true,
-                            IsVisibility = true,
-                            Name = "Apple",
-                            Slug = "apple"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Code = "dell",
-                            Country = "Texas-USA",
-                            CoverPicture = "",
-                            IsActive = true,
-                            IsVisibility = true,
-                            Name = "DELL",
-                            Slug = "dell"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Code = "asus",
-                            Country = "Taiwan",
-                            CoverPicture = "",
-                            IsActive = true,
-                            IsVisibility = true,
-                            Name = "ASUS",
-                            Slug = "asus"
-                        });
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.Product", b =>
@@ -554,98 +453,6 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.HasIndex("ManufacturerId");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 1,
-                            Code = "CMRSKS",
-                            DateCreated = new DateTime(2023, 6, 2, 9, 0, 1, 374, DateTimeKind.Local).AddTicks(3992),
-                            DateUpdated = new DateTime(2023, 6, 2, 9, 0, 1, 374, DateTimeKind.Local).AddTicks(4008),
-                            Description = "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring",
-                            IsActive = true,
-                            IsVisibility = true,
-                            ManufacturerId = 1,
-                            Name = "Camera-SKS",
-                            ProductType = 1,
-                            SeoMetaDescription = "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring",
-                            Slug = "camera-sks",
-                            SortOrder = 1,
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 1,
-                            Code = "CMRUFG",
-                            DateCreated = new DateTime(2023, 6, 2, 9, 0, 1, 374, DateTimeKind.Local).AddTicks(4012),
-                            DateUpdated = new DateTime(2023, 6, 2, 9, 0, 1, 374, DateTimeKind.Local).AddTicks(4013),
-                            Description = "XYZ wireless security camera with high resolution.",
-                            IsActive = true,
-                            IsVisibility = true,
-                            ManufacturerId = 4,
-                            Name = "Camera-UFG",
-                            ProductType = 1,
-                            SeoMetaDescription = "XYZ wireless security camera with high resolution, built-in motion sensor, supports wifi connection, helps you observe your family, home, shop, office whenever and wherever.",
-                            Slug = "camera-ufg",
-                            SortOrder = 2,
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 2,
-                            Code = "IP14XSM",
-                            DateCreated = new DateTime(2023, 6, 2, 9, 0, 1, 374, DateTimeKind.Local).AddTicks(4015),
-                            DateUpdated = new DateTime(2023, 6, 2, 9, 0, 1, 374, DateTimeKind.Local).AddTicks(4016),
-                            Description = "",
-                            IsActive = true,
-                            IsVisibility = true,
-                            ManufacturerId = 3,
-                            Name = "Iphone 14 XSMax",
-                            ProductType = 2,
-                            SeoMetaDescription = "Find out about Apple's latest line of iPhones at Apple Store Vietnam. Order online and get instant deals.",
-                            Slug = "ip14-xsmax",
-                            SortOrder = 3,
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryId = 3,
-                            Code = "DELLDEMON",
-                            DateCreated = new DateTime(2023, 6, 2, 9, 0, 1, 374, DateTimeKind.Local).AddTicks(4018),
-                            DateUpdated = new DateTime(2023, 6, 2, 9, 0, 1, 374, DateTimeKind.Local).AddTicks(4019),
-                            Description = "Buy genuine Laptop at our store with best quality and affordable price. We supply laptop products from reputable brands. Order now to get a free laptop backpack!",
-                            IsActive = true,
-                            IsVisibility = true,
-                            ManufacturerId = 4,
-                            Name = "Laptop DELL DEMON",
-                            ProductType = 2,
-                            SeoMetaDescription = "",
-                            Slug = "dell-demon",
-                            SortOrder = 4,
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CategoryId = 4,
-                            Code = "CLBGCCI",
-                            DateCreated = new DateTime(2023, 6, 2, 9, 0, 1, 374, DateTimeKind.Local).AddTicks(4027),
-                            DateUpdated = new DateTime(2023, 6, 2, 9, 0, 1, 374, DateTimeKind.Local).AddTicks(4028),
-                            Description = "",
-                            IsActive = true,
-                            IsVisibility = true,
-                            ManufacturerId = 2,
-                            Name = "Crocodile leather bag",
-                            ProductType = 2,
-                            SeoMetaDescription = "",
-                            Slug = "clbcci",
-                            SortOrder = 4,
-                            StatusID = (byte)0
-                        });
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.ProductAttribute", b =>
@@ -672,32 +479,6 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.HasIndex("AttributeId");
 
                     b.ToTable("ProductAttributes");
-
-                    b.HasData(
-                        new
-                        {
-                            ProductId = 5,
-                            AttributeId = 1,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            ProductId = 5,
-                            AttributeId = 2,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            ProductId = 5,
-                            AttributeId = 3,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StatusID = (byte)0
-                        });
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.ProductAttributeValue", b =>
@@ -731,89 +512,6 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductAttributeValues");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AttributeId = 1,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 5,
-                            Value = "Red"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AttributeId = 1,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 5,
-                            Value = "Blue"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AttributeId = 2,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 5,
-                            Value = "M"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AttributeId = 2,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 5,
-                            Value = "L"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AttributeId = 3,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 5,
-                            Value = "Leather"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AttributeId = 3,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 5,
-                            Value = "Cotton"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AttributeId = 3,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 5,
-                            Value = "Crocodile skin"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            AttributeId = 1,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 3,
-                            Value = "White"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            AttributeId = 1,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ProductId = 3,
-                            Value = "Black"
-                        });
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.ProductCategory", b =>
@@ -871,68 +569,6 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProductCategories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Code = "CMR",
-                            CoverPicture = "",
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            IsVisibility = true,
-                            Name = "Camera",
-                            SeoMetaDescription = "",
-                            Slug = "camera",
-                            SortOrder = 1,
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Code = "IP",
-                            CoverPicture = "",
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            IsVisibility = true,
-                            Name = "Iphone",
-                            SeoMetaDescription = "",
-                            Slug = "iphone",
-                            SortOrder = 2,
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Code = "LP",
-                            CoverPicture = "",
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            IsVisibility = true,
-                            Name = "Laptop",
-                            SeoMetaDescription = "",
-                            Slug = "laptop",
-                            SortOrder = 3,
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Code = "JLY",
-                            CoverPicture = "",
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IsActive = true,
-                            IsVisibility = true,
-                            Name = "Jewelry",
-                            SeoMetaDescription = "",
-                            Slug = "jly",
-                            SortOrder = 4,
-                            StatusID = (byte)0
-                        });
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.ProductReview", b =>
@@ -1044,7 +680,6 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         .HasColumnType("tinyint");
 
                     b.Property<string>("ThumbnailPicture")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -1052,83 +687,6 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductVariants");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "",
-                            IsActive = true,
-                            IsVisibility = true,
-                            Price = 1200.0,
-                            ProductId = 3,
-                            Quantity = 12,
-                            SKU = "IP14-A",
-                            StatusID = (byte)0,
-                            ThumbnailPicture = ""
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "",
-                            IsActive = true,
-                            IsVisibility = true,
-                            Price = 1250.0,
-                            ProductId = 3,
-                            Quantity = 20,
-                            SKU = "IP14-B",
-                            StatusID = (byte)0,
-                            ThumbnailPicture = ""
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "",
-                            IsActive = true,
-                            IsVisibility = true,
-                            Price = 5000.0,
-                            ProductId = 5,
-                            Quantity = 10,
-                            SKU = "BAGGUCCI-A",
-                            StatusID = (byte)0,
-                            ThumbnailPicture = ""
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "",
-                            IsActive = true,
-                            IsVisibility = true,
-                            Price = 4500.0,
-                            ProductId = 5,
-                            Quantity = 15,
-                            SKU = "BAGGUCCI-B",
-                            StatusID = (byte)0,
-                            ThumbnailPicture = ""
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "",
-                            IsActive = true,
-                            IsVisibility = true,
-                            Price = 9500.0,
-                            ProductId = 5,
-                            Quantity = 5,
-                            SKU = "BAGGUCCI-VIP",
-                            StatusID = (byte)0,
-                            ThumbnailPicture = ""
-                        });
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.ProductVariantValue", b =>
@@ -1167,108 +725,6 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductVariantValues");
-
-                    b.HasData(
-                        new
-                        {
-                            ProductVariantId = 3,
-                            ProductId = 5,
-                            AttributeId = 1,
-                            ProductAttributeValueId = 1,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            ProductVariantId = 3,
-                            ProductId = 5,
-                            AttributeId = 2,
-                            ProductAttributeValueId = 3,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            ProductVariantId = 3,
-                            ProductId = 5,
-                            AttributeId = 3,
-                            ProductAttributeValueId = 5,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            ProductVariantId = 4,
-                            ProductId = 5,
-                            AttributeId = 1,
-                            ProductAttributeValueId = 2,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            ProductVariantId = 4,
-                            ProductId = 5,
-                            AttributeId = 2,
-                            ProductAttributeValueId = 4,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            ProductVariantId = 4,
-                            ProductId = 5,
-                            AttributeId = 3,
-                            ProductAttributeValueId = 6,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            ProductVariantId = 5,
-                            ProductId = 5,
-                            AttributeId = 1,
-                            ProductAttributeValueId = 2,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            ProductVariantId = 5,
-                            ProductId = 5,
-                            AttributeId = 2,
-                            ProductAttributeValueId = 7,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            ProductVariantId = 1,
-                            ProductId = 3,
-                            AttributeId = 1,
-                            ProductAttributeValueId = 8,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StatusID = (byte)0
-                        },
-                        new
-                        {
-                            ProductVariantId = 2,
-                            ProductId = 3,
-                            AttributeId = 1,
-                            ProductAttributeValueId = 9,
-                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StatusID = (byte)0
-                        });
                 });
 
             modelBuilder.Entity("DreamyShop.Domain.Promotion", b =>

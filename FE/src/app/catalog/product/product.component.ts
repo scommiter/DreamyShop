@@ -7,6 +7,7 @@ import { CreateProductComponent } from './create-product/create-product.componen
 import { Router } from '@angular/router';
 import { PageResultDto } from 'src/app/shared/models/page-result.dto';
 import { Subject, takeUntil } from 'rxjs';
+import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
 
 @Component({
   selector: 'app-product',
@@ -66,6 +67,33 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   redirectToProduct() {
     this.router.navigateByUrl('/product/create');
+  }
+
+  //UPDATE PRODUCT
+  productUpdate: ProductDto = {
+    id: '',
+    name: '',
+    code: '',
+    thumbnail_picture: '',
+    product_type: ProductTypes.Single,
+    category_name: '',
+    manufacturer_name: '',
+    description: '',
+    is_active: false,
+    is_visibility: false,
+    option_names: [],
+    product_attribute_display: [],
+    date_created: '',
+    date_updated: '',
+  };
+  updateProduct(id: string) {
+    this.productUpdate = this.getProductById(id) as ProductDto;
+    console.log(id);
+    console.log('this.productUpdate :>> ', this.productUpdate);
+  }
+
+  getProductById(id: string): ProductDto | undefined {
+    return this.products.find((product) => product.id === id);
   }
 
   //PAGING

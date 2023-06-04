@@ -534,7 +534,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    ThumbnailPicture = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ThumbnailPicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StatusID = table.Column<byte>(type: "tinyint", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -645,106 +645,6 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                         column: x => x.ProductVariantId,
                         principalTable: "ProductVariants",
                         principalColumn: "Id");
-                });
-
-            migrationBuilder.InsertData(
-                table: "Attributes",
-                columns: new[] { "Id", "Code", "DateCreated", "DateUpdated", "IsActive", "IsUnique", "IsVisibility", "Name", "Note", "SortOrder", "StatusID" },
-                values: new object[,]
-                {
-                    { 1, "COLOR", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, true, "COLOR", "Product color", 1, (byte)0 },
-                    { 2, "SIZE", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, true, "SIZE", "", 2, (byte)0 },
-                    { 3, "MATERIAL", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, true, "MATERIAL", "", 3, (byte)0 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Manufacturers",
-                columns: new[] { "Id", "Code", "Country", "CoverPicture", "IsActive", "IsVisibility", "Name", "Slug" },
-                values: new object[,]
-                {
-                    { 1, "SN", "Japan", "", true, true, "Sony", "sony" },
-                    { 2, "GCCI", "Italy", "", true, true, "Gucci", "gucci" },
-                    { 3, "IPAPL", "US", "", true, true, "Apple", "apple" },
-                    { 4, "dell", "Texas-USA", "", true, true, "DELL", "dell" },
-                    { 5, "asus", "Taiwan", "", true, true, "ASUS", "asus" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ProductCategories",
-                columns: new[] { "Id", "Code", "CoverPicture", "DateCreated", "DateUpdated", "IsActive", "IsVisibility", "Name", "ParentId", "SeoMetaDescription", "Slug", "SortOrder", "StatusID" },
-                values: new object[,]
-                {
-                    { 1, "CMR", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, "Camera", null, "", "camera", 1, (byte)0 },
-                    { 2, "IP", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, "Iphone", null, "", "iphone", 2, (byte)0 },
-                    { 3, "LP", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, "Laptop", null, "", "laptop", 3, (byte)0 },
-                    { 4, "JLY", "", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, "Jewelry", null, "", "jly", 4, (byte)0 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "Id", "CategoryId", "Code", "DateCreated", "DateUpdated", "Description", "IsActive", "IsVisibility", "ManufacturerId", "Name", "ProductType", "SeoMetaDescription", "Slug", "SortOrder", "StatusID" },
-                values: new object[,]
-                {
-                    { 1, 1, "CMRSKS", new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2114), new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2128), "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring", true, true, 1, "Camera-SKS", 1, "Security camera, surveillance camera, wireless camera, wifi camera, high resolution, motion sensor, remote monitoring", "camera-sks", 1, (byte)0 },
-                    { 2, 1, "CMRUFG", new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2131), new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2132), "XYZ wireless security camera with high resolution.", true, true, 4, "Camera-UFG", 1, "XYZ wireless security camera with high resolution, built-in motion sensor, supports wifi connection, helps you observe your family, home, shop, office whenever and wherever.", "camera-ufg", 2, (byte)0 },
-                    { 3, 2, "IP14XSM", new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2133), new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2134), "", true, true, 3, "Iphone 14 XSMax", 2, "Find out about Apple's latest line of iPhones at Apple Store Vietnam. Order online and get instant deals.", "ip14-xsmax", 3, (byte)0 },
-                    { 4, 3, "DELLDEMON", new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2135), new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2139), "Buy genuine Laptop at our store with best quality and affordable price. We supply laptop products from reputable brands. Order now to get a free laptop backpack!", true, true, 4, "Laptop DELL DEMON", 2, "", "dell-demon", 4, (byte)0 },
-                    { 5, 4, "CLBGCCI", new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2154), new DateTime(2023, 5, 23, 0, 28, 35, 329, DateTimeKind.Local).AddTicks(2155), "", true, true, 2, "Crocodile leather bag", 2, "", "clbcci", 4, (byte)0 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ProductAttributeValues",
-                columns: new[] { "Id", "AttributeId", "DateCreated", "DateUpdated", "ProductId", "Value" },
-                values: new object[,]
-                {
-                    { 1, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Red" },
-                    { 2, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Blue" },
-                    { 3, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "M" },
-                    { 4, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "L" },
-                    { 5, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Leather" },
-                    { 6, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Cotton" },
-                    { 7, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, "Crocodile skin" },
-                    { 8, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "White" },
-                    { 9, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, "Black" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ProductAttributes",
-                columns: new[] { "AttributeId", "ProductId", "DateCreated", "DateUpdated", "StatusID" },
-                values: new object[,]
-                {
-                    { 1, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { 2, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { 3, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ProductVariants",
-                columns: new[] { "Id", "DateCreated", "DateUpdated", "Description", "IsActive", "IsVisibility", "Price", "ProductId", "Quantity", "SKU", "StatusID", "ThumbnailPicture" },
-                values: new object[,]
-                {
-                    { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 1200.0, 3, 12, "IP14-A", (byte)0, "" },
-                    { 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 1250.0, 3, 20, "IP14-B", (byte)0, "" },
-                    { 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 5000.0, 5, 10, "BAGGUCCI-A", (byte)0, "" },
-                    { 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 4500.0, 5, 15, "BAGGUCCI-B", (byte)0, "" },
-                    { 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", true, true, 9500.0, 5, 5, "BAGGUCCI-VIP", (byte)0, "" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ProductVariantValues",
-                columns: new[] { "AttributeId", "ProductAttributeValueId", "ProductId", "ProductVariantId", "DateCreated", "DateUpdated", "StatusID" },
-                values: new object[,]
-                {
-                    { 1, 8, 3, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { 1, 9, 3, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { 1, 1, 5, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { 2, 3, 5, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { 3, 5, 5, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { 1, 2, 5, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { 2, 4, 5, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { 3, 6, 5, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { 1, 2, 5, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 },
-                    { 2, 7, 5, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), (byte)0 }
                 });
 
             migrationBuilder.CreateIndex(

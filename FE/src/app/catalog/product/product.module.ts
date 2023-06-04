@@ -13,9 +13,10 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { FileUploadModule } from 'primeng/fileupload';
 import { EditorModule } from 'primeng/editor';
 import { PaginatorModule } from 'primeng/paginator';
+import { UpdateProductComponent } from './update-product/update-product.component';
 
 @NgModule({
-  declarations: [ProductComponent],
+  declarations: [ProductComponent, UpdateProductComponent],
   imports: [
     CommonModule,
     ProductRoutingModule,

@@ -35,7 +35,11 @@
             (blur)="onInputOptionValue(i, option.value[j], j)"
           />
         </div>
-        <div class="icon-trash" (click)="onDeleteVariant(i, j)">
+        <div
+          class="icon-trash"
+          *ngIf="option.value[j] !== ''"
+          (click)="onDeleteVariant(i, j)"
+        >
           <i class="pi pi-trash" style="font-size: 1rem; color: #708090"></i>
         </div>
       </div>

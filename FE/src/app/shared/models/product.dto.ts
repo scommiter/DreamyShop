@@ -11,6 +11,7 @@ export interface ProductDto {
   description: string;
   is_active: boolean;
   is_visibility: boolean;
+  option_names: string[];
   product_attribute_display: Array<ProductAttributeDisplayDto>;
   date_created: string;
   date_updated: string;
