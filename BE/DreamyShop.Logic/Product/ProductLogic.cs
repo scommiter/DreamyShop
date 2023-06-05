@@ -114,7 +114,7 @@ namespace DreamyShop.Logic.Product
                                                                     SKU = pAttr.Select(x => x.pv?.SKU ?? "").FirstOrDefault(),
                                                                     Quantity = pAttr.Select(x => x.pv?.Quantity ?? 0).FirstOrDefault(),
                                                                     Price = pAttr.Select(x => x.pv?.Price ?? 0).FirstOrDefault(),
-                                                                    Image = pAttr.Select(p => p.ip?.Path ?? "").FirstOrDefault()
+                                                                    Image = pAttr.Select(p => p.pv?.ThumbnailPicture ?? "").FirstOrDefault()
                                                                 }).ToList()
                                 }).ToList();
             return productDtos;

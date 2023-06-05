@@ -86,7 +86,6 @@ export class ProductComponent implements OnInit, OnDestroy {
       header: 'Update product',
       width: '70%',
     });
-    console.log('this.productUpdate :>> ', this.productUpdate);
   }
 
   getProductById(id: string): ProductDto | undefined {

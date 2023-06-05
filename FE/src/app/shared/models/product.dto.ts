@@ -18,8 +18,9 @@ export interface ProductDto {
 }
 
 export interface ProductAttributeDisplayDto {
-  attribute_names: Array<string>;
+  attributeNames: Array<string>;
   sku: string;
   quantity: number;
   price: number;
+  image: string;
 }
