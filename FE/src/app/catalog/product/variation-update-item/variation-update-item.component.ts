@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
 import {
@@ -35,15 +35,24 @@ export class VariationUpdateItemComponent implements OnInit {
   productOptions: { key: string; value: string[] }[] = [];
   addClassifyProduct: boolean = false;
   productVariantTwos: ProductVariantRequestDto[][] = [];
+  productVariants: ProductVariantRequestDto[] = [];
   isVisibilityTwo: boolean[][] = [];
   checkCountOptionsOne: number = 0;
   checkIsAddVariant: boolean = false;
   imageVariants: File[] = [];
+  checkNumberOfOptionNames: number = 0;
+  @Output() productVariantOutputsCaseOne = new EventEmitter<
+    ProductVariantRequestDto[][]
+  >();
+  @Output() productOptionOutputsCaseOne = new EventEmitter<
+    { key: string; value: string[] }[]
+  >();
 
   constructor(public productService: ProductService) {}
 
   ngOnInit(): void {
     this.productUpdate = this.productService.getProductUpdate();
+    this.checkNumberOfOptionNames = this.productUpdate.optionNames.length;
     this.convertToProductOptions(
       this.productUpdate.optionNames,
       this.productUpdate.productAttributeDisplayDtos
@@ -57,6 +66,11 @@ export class VariationUpdateItemComponent implements OnInit {
         this.productUpdate.productAttributeDisplayDtos
       );
       console.log('this.productVariantTwos :>> ', this.productVariantTwos);
+    } else {
+      this.convertToProductVariant(
+        this.productUpdate.productAttributeDisplayDtos
+      );
+      console.log('this.productVariants :>> ', this.productVariants);
     }
   }
 
@@ -76,10 +90,17 @@ export class VariationUpdateItemComponent implements OnInit {
     }
   }
 
-  convertProductAttributeDisplayDtos(
-    productAttributes: ProductAttributeDisplayDto[]
-  ) {
-    for (let i = 0; i < this.productOptions[0].value.length - 1; i++) {}
+  convertToProductVariant(productAttributes: ProductAttributeDisplayDto[]) {
+    for (let i = 0; i < productAttributes.length; i++) {
+      this.productVariants.push({
+        attributeNames: productAttributes[i].attributeNames,
+        sKU: productAttributes[i].sku,
+        quantity: productAttributes[i].quantity,
+        price: productAttributes[i].price,
+        thumbnailPicture: productAttributes[i].image,
+      });
+    }
+    console.log('productAttributes :>> ', productAttributes);
   }
 
   convertToProductVariantTwos(productAttributes: ProductAttributeDisplayDto[]) {
@@ -100,7 +121,6 @@ export class VariationUpdateItemComponent implements OnInit {
         let productOptionValues: string[] = [];
         productOptionValues.push(this.productOptions[0].value[i]);
         productOptionValues.push(this.productOptions[1].value[j]);
-        console.log('productOptionsValues :>> ', productOptionValues);
         this.productVariantTwos[i][j].attributeNames = productOptionValues;
         this.productVariantTwos[i][j].sKU = productAttributes[cache].sku;
         this.productVariantTwos[i][j].quantity =
@@ -111,16 +131,111 @@ export class VariationUpdateItemComponent implements OnInit {
         if (cache + productOptionLength < this.productOptions[1].value.length) {
           cache = cache + productOptionLength;
         }
-        console.log('productAttributes[cache] :>> ', productAttributes[cache]);
         index++;
       }
-      console.log('----------------------------');
     }
   }
 
-  addClassifyProductVariant() {}
+  addClassifyProductVariant() {
+    this.addClassifyProduct = true;
+    this.productOptions.push({ key: '', value: [''] });
+    this.checkIsAddVariant = true;
+  }
 
-  onInputValue() {}
+  onInputValue() {
+    this.productVariantOutputsCaseOne.emit(this.productVariantTwos);
+    this.productOptionOutputsCaseOne.emit(this.productOptions);
+  }
+
+  onInputOptionValue(index: number, value: string, indexChild: number) {
+    if (this.checkNumberOfOptionNames > 1) {
+      this.handleInputOptionHasTwo(index, value, indexChild);
+    } else {
+      this.handleInputOptionHasOne(index, value, indexChild);
+    }
+  }
+
+  handleInputOptionHasTwo(index: number, value: string, indexChild: number) {
+    if (
+      value !== '' &&
+      indexChild === this.productOptions[index].value.length - 1 &&
+      index === 0
+    ) {
+      this.productOptions[index].value.push('');
+
+      this.productVariantTwos.push([]);
+      let indexVariant = this.productVariantTwos.length - 1;
+      for (let i = 0; i < this.productOptions[1].value.length - 1; i++) {
+        this.productVariantTwos[indexVariant].push({
+          attributeNames: [''],
+          sKU: '',
+          quantity: 0,
+          price: 0,
+          thumbnailPicture: '',
+        });
+      }
+
+      console.log('Hellooooooooo', this.productOptions[index]);
+      console.log('this.productVariantTwos', this.productVariantTwos);
+    } else if (
+      value !== '' &&
+      indexChild === this.productOptions[index].value.length - 1 &&
+      index === 1
+    ) {
+      this.productOptions[index].value.push('');
+      for (let i = 0; i < this.productVariantTwos.length; i++) {
+        this.productVariantTwos[i].push({
+          attributeNames: [''],
+          sKU: '',
+          quantity: 0,
+          price: 0,
+          thumbnailPicture: '',
+        });
+      }
+    }
+  }
+
+  handleInputOptionHasOne(index: number, value: string, indexChild: number) {
+    if (
+      (index === 1 && this.checkIsAddVariant == true) ||
+      (this.productOptions[0].value.length !== this.checkCountOptionsOne &&
+        this.checkIsAddVariant == true)
+    ) {
+      this.productVariantTwos = [];
+      this.isVisibilityTwo = [];
+      for (let i = 0; i < this.productOptions[0].value.length; i++) {
+        this.productVariantTwos[i] = [];
+        this.isVisibilityTwo[i] = [];
+        for (let j = 0; j < this.productOptions[1].value.length; j++) {
+          this.productVariantTwos[i].push({
+            attributeNames: [''],
+            sKU: '',
+            quantity: 0,
+            price: 0,
+            thumbnailPicture: '',
+          });
+          this.isVisibilityTwo[i].push(true);
+        }
+      }
+    }
+    if (
+      value !== '' &&
+      indexChild === this.productOptions[index].value.length - 1
+    ) {
+      this.productOptions[index].value.push('');
+      if (index === 0 && this.checkIsAddVariant == false) {
+        this.checkCountOptionsOne = this.productOptions[0].value.length;
+        this.productVariants.push({
+          attributeNames: [''],
+          sKU: '',
+          quantity: 0,
+          price: 0,
+          thumbnailPicture: '',
+        });
+        this.isVisibility.push(true);
+      }
+    }
+  }
 
   //upload thumnail Image
   isVisibility: boolean[] = [];
@@ -130,7 +245,20 @@ export class VariationUpdateItemComponent implements OnInit {
     event: any,
     indexOption1: number,
     indexOption2: number
-  ) {}
+  ) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => {
+        // called once readAsDataURL is completed
+        this.productVariantTwos[indexOption1][indexOption2].thumbnailPicture =
+          event.target?.result as string;
+        this.url.push(event.target?.result as string);
+      };
+      this.isVisibilityTwo[indexOption1][indexOption2] = false;
+    }
+  }
 
   //trackby return index of of the element inside the loop to determine the change
   trackByFn(index: number, item: { key: string; value: string[] }) {

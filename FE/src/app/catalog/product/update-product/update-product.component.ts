@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { ProductService } from 'src/app/services/product.service';
 import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
+import { ProductVariantRequestDto } from 'src/app/shared/models/product-variant.dto';
 import { ProductDto } from 'src/app/shared/models/product.dto';
 
 @Component({
@@ -66,13 +67,27 @@ export class UpdateProductComponent implements OnInit {
       : 'False';
     this.imageCount = this.productUpdate.thumbnailPictures.length;
     this.imageProducts = this.productUpdate.thumbnailPictures;
-    this.productUpdate.productAttributeDisplayDtos.length > 0
-      ? (this.isAddVisibility = false)
-      : true;
+    if (this.productUpdate.productAttributeDisplayDtos.length > 1) {
+      this.isAddVisibility = false;
+    }
+    this.skuProduct = this.productUpdate.productAttributeDisplayDtos[0].sku;
+    this.priceProduct = this.productUpdate.productAttributeDisplayDtos[0].price;
+    this.quantityProduct =
+      this.productUpdate.productAttributeDisplayDtos[0].quantity;
     console.log('this.productUpdate :>> ', this.productUpdate);
   }
 
-  updateProduct() {}
+  updateProduct() {
+    this.productVariantOutputsCaseOne.pop();
+    console.log(
+      'productOptionOutputsCaseOne :>> ',
+      this.productOptionOutputsCaseOne
+    );
+    console.log(
+      'productVariantOutputsCaseOne :>> ',
+      this.productVariantOutputsCaseOne
+    );
+  }
 
   closeImage(index: number) {
     this.imageProducts.splice(index, 1);
@@ -104,6 +119,17 @@ export class UpdateProductComponent implements OnInit {
         }
       }
     }
+  }
+
+  //receive Data
+  productVariantOutputsCaseOne: ProductVariantRequestDto[][] = [];
+  productOptionOutputsCaseOne: { key: string; value: string[] }[] = [];
+  receiveProductOptionCaseOneData(data: any) {
+    this.productOptionOutputsCaseOne = data;
+  }
+
+  receiveVariantCaseOneData(data: any) {
+    this.productVariantOutputsCaseOne = data;
   }
 
   addProductOptions() {}

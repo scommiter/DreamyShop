@@ -36,6 +36,7 @@
               src="../../../assets/ImageProducts/{{ img }}"
               height="100"
               width="100"
+              class="img-update"
             />
             <div class="close-image" (click)="closeImage(i)">x</div>
           </div>
@@ -151,7 +152,12 @@
       <div class="option-variant-wrapper">
         <div class="title-variant-wrapper">Phân loại hàng</div>
         <div class="product-variant option-list">
-          <app-variation-update-item></app-variation-update-item>
+          <app-variation-update-item
+            (productOptionOutputsCaseOne)="
+              receiveProductOptionCaseOneData($event)
+            "
+            (productVariantOutputsCaseOne)="receiveVariantCaseOneData($event)"
+          ></app-variation-update-item>
         </div>
       </div>
     </div>

@@ -83,7 +83,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.productUpdate = this.getProductById(id) as ProductDto;
     this.productService.setProductUpdate(this.productUpdate);
     const ref = this.dialogService.open(UpdateProductComponent, {
-      header: 'Update product',
+      header: 'CẬP NHẬT SẢN PHẨM',
       width: '70%',
     });
   }

@@ -32,6 +32,7 @@
             class="input-content"
             placeholder="Ví dụ: Trắng, Đỏ ..."
             [(ngModel)]="option.value[j]"
+            (blur)="onInputOptionValue(i, option.value[j], j)"
           />
         </div>
         <div class="icon-trash" *ngIf="option.value[j] !== ''">
@@ -77,26 +78,35 @@
               <input
                 type="number"
                 class="input-content-variant"
-                (blur)="onInputValue()"
+                [(ngModel)]="productVariants[index0].price"
               />
             </td>
             <td>
               <input
                 type="number"
                 class="input-content-variant"
-                (blur)="onInputValue()"
+                [(ngModel)]="productVariants[index0].quantity"
               />
             </td>
             <td>
               <input
                 type="text"
                 class="input-content-variant"
-                (blur)="onInputValue()"
+                [(ngModel)]="productVariants[index0].sKU"
               />
             </td>
             <td class="picture">
-              <div class="image-container" *ngIf="!isVisibility[index0]">
-                <img height="50" width="50" />
+              <div
+                class="image-container"
+                *ngIf="productVariants[index0].thumbnailPicture !== ''"
+              >
+                <img
+                  height="50"
+                  width="50"
+                  src="../../../../assets/ImageProducts/{{
+                    productVariants[index0].thumbnailPicture
+                  }}"
+                />
                 <br />
                 <input
                   type="file"
@@ -120,7 +130,7 @@
               <label
                 class="button-add-picture-variant"
                 [for]="'upload-' + index0"
-                *ngIf="isVisibility[index0]"
+                *ngIf="productVariants[index0].thumbnailPicture === ''"
               >
                 <i class="pi pi-plus" style="font-size: 1rem; color: red"></i>
               </label>
@@ -167,15 +177,43 @@
                 />
               </td>
               <td class="picture">
-                <!-- <div
+                <div
                   class="image-container"
-                  *ngIf="!isVisibilityTwo[index0][index1]"
+                  *ngIf="
+                    productVariantTwos[index0][index1].thumbnailPicture !== ''
+                  "
                 >
-                  <img
-                    [src]="productVariantTwos[index0][index1].thumbnail_picture"
-                    height="50"
-                    width="50"
-                  />
+                  <ng-container
+                    *ngIf="
+                      !productVariantTwos[index0][
+                        index1
+                      ].thumbnailPicture.startsWith('data:image/jpeg;base64')
+                    "
+                  >
+                    <img
+                      src="../../../../assets/ImageProducts/{{
+                        productVariantTwos[index0][index1].thumbnailPicture
+                      }}"
+                      height="50"
+                      width="50"
+                    />
+                  </ng-container>
+                  <ng-container
+                    *ngIf="
+                      productVariantTwos[index0][
+                        index1
+                      ].thumbnailPicture.startsWith('data:image/jpeg;base64')
+                    "
+                  >
+                    <img
+                      [src]="
+                        productVariantTwos[index0][index1].thumbnailPicture
+                      "
+                      height="50"
+                      width="50"
+                    />
+                  </ng-container>
+
                   <br />
                   <input
                     type="file"
@@ -200,12 +238,14 @@
                   hidden
                 />
                 <label
+                  *ngIf="
+                    productVariantTwos[index0][index1].thumbnailPicture === ''
+                  "
                   class="button-add-picture-variant"
                   [for]="'upload-' + index0 + index1"
-                  *ngIf="isVisibilityTwo[index0][index1]"
                 >
                   <i class="pi pi-plus" style="font-size: 1rem; color: red"></i>
-                </label> -->
+                </label>
               </td>
             </tr>
           </ng-container>
