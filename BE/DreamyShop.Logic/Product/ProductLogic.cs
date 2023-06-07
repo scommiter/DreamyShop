@@ -488,22 +488,7 @@ namespace DreamyShop.Logic.Product
 
             if (productUpdateDto.ProductType != null)
             {
-                product.ProductType = productUpdateDto.ProductType ?? ProductType.Single;
-            }
-
-            if (productUpdateDto.SeoMetaDescription != null)
-            {
-                product.SeoMetaDescription = productUpdateDto.SeoMetaDescription;
-            }
-
-            if (productUpdateDto.Slug != null)
-            {
-                product.Slug = productUpdateDto.Slug;
-            }
-
-            if (productUpdateDto.SortOrder != null)
-            {
-                product.SortOrder = productUpdateDto.SortOrder;
+                product.ProductType = (ProductType)Enum.Parse(typeof(ProductType), productUpdateDto.ProductType);
             }
 
             if (productUpdateDto.IsActive != null)

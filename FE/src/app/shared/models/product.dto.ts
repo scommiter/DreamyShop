@@ -1,7 +1,7 @@
 import { ProductTypes } from '../enums/product-types.enum';
 
 export interface ProductDto {
-  id: string;
+  id: number;
   name: string;
   code: string;
   thumbnailPictures: string[];

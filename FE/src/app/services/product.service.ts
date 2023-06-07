@@ -33,6 +33,12 @@ export class ProductService {
     );
   }
 
+  public updateProduct(id: number, productUpdateDto: ProductCreateDto) {
+    const url = `${environment.apiUrl}/api/Product/${id}`;
+    console.log('Helllo :>> ', url);
+    return this.http.put<any>(url, productUpdateDto).subscribe((data) => {});
+  }
+
   public createImageProduct(formData: FormData): Observable<any> {
     return this.http.post<any>(
       `${environment.apiUrl}/api/Product/uploadMultipleImage`,
@@ -41,7 +47,7 @@ export class ProductService {
   }
 
   productUpdate: ProductDto = {
-    id: '',
+    id: 0,
     name: '',
     code: '',
     thumbnailPictures: [],

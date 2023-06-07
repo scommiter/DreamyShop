@@ -17,7 +17,7 @@ import {
 })
 export class VariationUpdateItemComponent implements OnInit {
   productUpdate: ProductDto = {
-    id: '',
+    id: 0,
     name: '',
     code: '',
     thumbnailPictures: [],
@@ -45,6 +45,12 @@ export class VariationUpdateItemComponent implements OnInit {
     ProductVariantRequestDto[][]
   >();
   @Output() productOptionOutputsCaseOne = new EventEmitter<
+    { key: string; value: string[] }[]
+  >();
+  @Output() productVariantOutputsCaseTwo = new EventEmitter<
+    ProductVariantRequestDto[][]
+  >();
+  @Output() productOptionOutputsCaseTwo = new EventEmitter<
     { key: string; value: string[] }[]
   >();
 
@@ -145,6 +151,9 @@ export class VariationUpdateItemComponent implements OnInit {
   onInputValue() {
     this.productVariantOutputsCaseOne.emit(this.productVariantTwos);
     this.productOptionOutputsCaseOne.emit(this.productOptions);
+    this.productVariantOutputsCaseTwo.emit(this.productVariantTwos);
+    this.productOptionOutputsCaseTwo.emit(this.productOptions);
+    console.log('HELLLLLLLLLLLLLLLLLLLLLLLL :>> ', this.productVariantTwos);
   }
 
   onInputOptionValue(index: number, value: string, indexChild: number) {
@@ -237,6 +246,19 @@ export class VariationUpdateItemComponent implements OnInit {
     }
   }
 
+  onDeleteVariant(index: number, indexChild: number) {
+    this.productOptions[index].value.splice(indexChild, 1);
+    if (index === 0) {
+      this.productVariantTwos.splice(index, 1);
+      this.checkCountOptionsOne = this.productOptions[0].value.length;
+    }
+    if (index === 1) {
+      for (let i = 0; i < this.productOptions[0].value.length - 1; i++) {
+        this.productVariantTwos[i].splice(indexChild, 1);
+      }
+    }
+  }
+
   //upload thumnail Image
   isVisibility: boolean[] = [];
   url: string[] = [''];
@@ -257,6 +279,10 @@ export class VariationUpdateItemComponent implements OnInit {
         this.url.push(event.target?.result as string);
       };
       this.isVisibilityTwo[indexOption1][indexOption2] = false;
+      this.productVariantOutputsCaseOne.emit(this.productVariantTwos);
+      this.productOptionOutputsCaseOne.emit(this.productOptions);
+      this.productVariantOutputsCaseTwo.emit(this.productVariantTwos);
+      this.productOptionOutputsCaseTwo.emit(this.productOptions);
     }
   }
 

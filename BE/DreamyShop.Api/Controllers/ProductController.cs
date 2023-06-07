@@ -42,7 +42,7 @@ namespace DreamyShop.Api.Controllers
             return Ok(result.Result);
         }
 
-        [HttpPut("updateProduct")]
+        [HttpPut("{id}")]
         //[Authorize]
         //[Member]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductUpdateDto productCreateUpdateDto)

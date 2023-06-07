@@ -2,7 +2,11 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { ProductService } from 'src/app/services/product.service';
 import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
-import { ProductVariantRequestDto } from 'src/app/shared/models/product-variant.dto';
+import { ProductCreateDto } from 'src/app/shared/models/product-create-update.dto';
+import {
+  ProductVariantDto,
+  ProductVariantRequestDto,
+} from 'src/app/shared/models/product-variant.dto';
 import { ProductDto } from 'src/app/shared/models/product.dto';
 
 @Component({
@@ -13,7 +17,7 @@ import { ProductDto } from 'src/app/shared/models/product.dto';
 })
 export class UpdateProductComponent implements OnInit {
   productUpdate: ProductDto = {
-    id: '',
+    id: 0,
     name: '',
     code: '',
     thumbnailPictures: [],
@@ -27,6 +31,19 @@ export class UpdateProductComponent implements OnInit {
     productAttributeDisplayDtos: [],
     dateCreated: '',
     dateUpdated: '',
+  };
+  productUpdateRequest: ProductCreateDto = {
+    name: '',
+    code: '',
+    productType: ProductTypes.Single,
+    categoryName: '',
+    manufacturerName: '',
+    description: '',
+    isActive: true,
+    isVisibility: true,
+    images: [],
+    productOptions: {},
+    variantProducts: [],
   };
   items: MenuItem[] = [];
   home: MenuItem = {};
@@ -42,6 +59,7 @@ export class UpdateProductComponent implements OnInit {
   skuProduct: string = '';
   priceProduct: number = 0;
   quantityProduct: number = 0;
+  checkCountProductOptions: number = 0;
 
   constructor(public productService: ProductService) {}
 
@@ -74,19 +92,8 @@ export class UpdateProductComponent implements OnInit {
     this.priceProduct = this.productUpdate.productAttributeDisplayDtos[0].price;
     this.quantityProduct =
       this.productUpdate.productAttributeDisplayDtos[0].quantity;
+    this.checkCountProductOptions = this.productUpdate.optionNames.length;
     console.log('this.productUpdate :>> ', this.productUpdate);
-  }
-
-  updateProduct() {
-    this.productVariantOutputsCaseOne.pop();
-    console.log(
-      'productOptionOutputsCaseOne :>> ',
-      this.productOptionOutputsCaseOne
-    );
-    console.log(
-      'productVariantOutputsCaseOne :>> ',
-      this.productVariantOutputsCaseOne
-    );
   }
 
   closeImage(index: number) {
@@ -122,15 +129,93 @@ export class UpdateProductComponent implements OnInit {
   }
 
   //receive Data
-  productVariantOutputsCaseOne: ProductVariantRequestDto[][] = [];
-  productOptionOutputsCaseOne: { key: string; value: string[] }[] = [];
+  productVariantOutputs: ProductVariantRequestDto[][] = [];
+  productOptionOutputs: { key: string; value: string[] }[] = [];
+
   receiveProductOptionCaseOneData(data: any) {
-    this.productOptionOutputsCaseOne = data;
+    if (this.checkCountProductOptions === 1) {
+      this.productOptionOutputs = data;
+    }
   }
 
   receiveVariantCaseOneData(data: any) {
-    this.productVariantOutputsCaseOne = data;
+    if (this.checkCountProductOptions === 1) {
+      this.productVariantOutputs = data;
+    }
+  }
+
+  receiveProductOptionCaseTwoData(data: any) {
+    if (this.checkCountProductOptions === 2) {
+      this.productOptionOutputs = data;
+    }
+  }
+
+  receiveVariantCaseTwoData(data: any) {
+    if (this.checkCountProductOptions === 2) {
+      this.productVariantOutputs = data;
+    }
   }
 
   addProductOptions() {}
+
+  updateProduct() {
+    if (this.checkCountProductOptions === 1) {
+      this.productVariantOutputs.pop();
+    }
+    this.productUpdateRequest.name = this.productUpdate.name;
+    this.productUpdateRequest.code = this.productUpdate.code;
+    this.productUpdateRequest.productType = this.productUpdate.productType;
+    this.productUpdateRequest.categoryName = this.productUpdate.categoryName;
+    this.productUpdateRequest.manufacturerName =
+      this.productUpdate.manufacturerName;
+    this.productUpdateRequest.description = this.productUpdate.description;
+    this.productUpdateRequest.isActive = this.productUpdate.isActive;
+    this.productUpdateRequest.isVisibility = this.productUpdate.isVisibility;
+    this.productUpdateRequest.images = this.productUpdate.thumbnailPictures;
+    const convertedProductOptions: { [key: string]: string[] } =
+      this.productOptionOutputs.reduce(
+        (acc: { [key: string]: string[] }, obj) => {
+          acc[obj.key] = obj.value;
+          return acc;
+        },
+        {}
+      );
+    this.productUpdateRequest.productOptions = convertedProductOptions;
+    this.productUpdateRequest.variantProducts = this.convertToVariantProducts(
+      this.productVariantOutputs.flat(),
+      this.productOptionOutputs
+    );
+    console.log('PRODUCT UPDATE :>> ', this.productUpdateRequest);
+    this.productService.updateProduct(
+      this.productUpdate.id,
+      this.productUpdateRequest
+    );
+  }
+
+  convertToVariantProducts(
+    productVariantOutputs: ProductVariantRequestDto[],
+    productOptions: { key: string; value: string[] }[]
+  ) {
+    console.log('productOptions :>> ', productOptions);
+    const attributeNames: string[][] = [];
+    if (productOptions.length > 1) {
+      let index = 0;
+      for (let i = 0; i < productOptions[0].value.length - 1; i++) {
+        for (let j = 0; j < productOptions[1].value.length - 1; j++) {
+          attributeNames.push([]);
+          attributeNames[index].push(productOptions[0].value[i]);
+          attributeNames[index].push(productOptions[1].value[j]);
+          productVariantOutputs[index].attributeNames = attributeNames[index];
+          index++;
+        }
+      }
+    } else {
+      for (let i = 0; i < productOptions[0].value.length - 1; i++) {
+        attributeNames.push([]);
+        attributeNames[i].push(productOptions[0].value[i]);
+        productVariantOutputs[i].attributeNames = attributeNames[i];
+      }
+    }
+    return productVariantOutputs;
+  }
 }

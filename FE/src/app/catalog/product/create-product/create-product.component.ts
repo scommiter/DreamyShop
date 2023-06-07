@@ -159,7 +159,6 @@ export class CreateProductComponent implements OnInit {
         acc[obj.key] = obj.value;
         return acc;
       }, {});
-    console.log('convertedProductOptions :>> ', convertedProductOptions);
     this.productCreateRequest.productOptions = convertedProductOptions;
 
     if (this.isAddVisibility) {

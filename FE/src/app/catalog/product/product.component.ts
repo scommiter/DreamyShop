@@ -64,7 +64,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   //UPDATE PRODUCT
   productUpdate: ProductDto = {
-    id: '',
+    id: 0,
     name: '',
     code: '',
     thumbnailPictures: [],
@@ -79,7 +79,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     dateCreated: '',
     dateUpdated: '',
   };
-  updateProduct(id: string) {
+  updateProduct(id: number) {
     this.productUpdate = this.getProductById(id) as ProductDto;
     this.productService.setProductUpdate(this.productUpdate);
     const ref = this.dialogService.open(UpdateProductComponent, {
@@ -88,7 +88,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     });
   }
 
-  getProductById(id: string): ProductDto | undefined {
+  getProductById(id: number): ProductDto | undefined {
     return this.products.find((product) => product.id === id);
   }
 
