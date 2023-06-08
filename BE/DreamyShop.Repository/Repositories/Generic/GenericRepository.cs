@@ -83,9 +83,22 @@ namespace DreamyShop.Repository.Repositories.Generic
             }
         }
 
+        public async Task UpdateRangeAsync(IEnumerable<T> entities)
+        {
+            try
+            {
+                await _dbSet.AddRangeAsync(entities);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public IQueryable<T> Where(Expression<Func<T, bool>> expression)
         {
             return _dbSet.Where(expression);
         }
+
     }
 }

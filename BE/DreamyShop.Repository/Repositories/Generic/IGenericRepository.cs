@@ -22,6 +22,7 @@ namespace DreamyShop.Repository.Repositories.Generic
         Task AddRangeAsync(IEnumerable<T> entities);
 
         void Update(T entity);
+        Task UpdateRangeAsync(IEnumerable<T> entities);
 
         void Remove(int id);
 

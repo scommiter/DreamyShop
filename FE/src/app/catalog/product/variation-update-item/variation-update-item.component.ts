@@ -58,6 +58,7 @@ export class VariationUpdateItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.productUpdate = this.productService.getProductUpdate();
+    console.log('this.productUpdate :>> ', this.productUpdate);
     this.checkNumberOfOptionNames = this.productUpdate.optionNames.length;
     this.convertToProductOptions(
       this.productUpdate.optionNames,
@@ -66,17 +67,14 @@ export class VariationUpdateItemComponent implements OnInit {
     this.productUpdate.optionNames.length > 1
       ? (this.addClassifyProduct = true)
       : (this.addClassifyProduct = false);
-    console.log('this.productUpdate :>> ', this.productUpdate);
     if (this.addClassifyProduct == true) {
       this.convertToProductVariantTwos(
         this.productUpdate.productAttributeDisplayDtos
       );
-      console.log('this.productVariantTwos :>> ', this.productVariantTwos);
     } else {
       this.convertToProductVariant(
         this.productUpdate.productAttributeDisplayDtos
       );
-      console.log('this.productVariants :>> ', this.productVariants);
     }
   }
 
@@ -111,10 +109,7 @@ export class VariationUpdateItemComponent implements OnInit {
 
   convertToProductVariantTwos(productAttributes: ProductAttributeDisplayDto[]) {
     let index = 0;
-    let productOptionLength = this.productOptions[0].value.length - 1;
-    let cache = 0;
-    for (let i = 0; i < productOptionLength; i++) {
-      cache = i;
+    for (let i = 0; i < this.productOptions[0].value.length - 1; i++) {
       this.productVariantTwos.push([]);
       for (let j = 0; j < this.productOptions[1].value.length - 1; j++) {
         this.productVariantTwos[i].push({
@@ -128,18 +123,16 @@ export class VariationUpdateItemComponent implements OnInit {
         productOptionValues.push(this.productOptions[0].value[i]);
         productOptionValues.push(this.productOptions[1].value[j]);
         this.productVariantTwos[i][j].attributeNames = productOptionValues;
-        this.productVariantTwos[i][j].sKU = productAttributes[cache].sku;
+        this.productVariantTwos[i][j].sKU = productAttributes[index].sku;
         this.productVariantTwos[i][j].quantity =
-          productAttributes[cache].quantity;
-        this.productVariantTwos[i][j].price = productAttributes[cache].price;
+          productAttributes[index].quantity;
+        this.productVariantTwos[i][j].price = productAttributes[index].price;
         this.productVariantTwos[i][j].thumbnailPicture =
-          productAttributes[cache].image;
-        if (cache + productOptionLength < this.productOptions[1].value.length) {
-          cache = cache + productOptionLength;
-        }
+          productAttributes[index].image;
         index++;
       }
     }
+    console.log('this.productVariantTwos :>> ', this.productVariantTwos);
   }
 
   addClassifyProductVariant() {

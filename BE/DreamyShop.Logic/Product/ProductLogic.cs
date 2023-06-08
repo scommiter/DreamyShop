@@ -117,6 +117,10 @@ namespace DreamyShop.Logic.Product
                                                                     Image = pAttr.Select(p => p.pv?.ThumbnailPicture ?? "").FirstOrDefault()
                                                                 }).ToList()
                                 }).ToList();
+            foreach (var product in productDtos)
+            {
+                product.ProductAttributeDisplayDtos = product.ProductAttributeDisplayDtos.OrderByDescending(a => string.Join(", ", a.AttributeNames)).ToList();
+            }
             return productDtos;
         }
 
@@ -174,7 +178,7 @@ namespace DreamyShop.Logic.Product
             var attributes = _repository.Attribute.GetAll().ToList();
             productVariantValues.RemoveAll(product => product.SKU == "");
 
-            var productVariants = _repository.ProductVariant.GetAll().ToList();
+            var productVariants = _repository.ProductVariant.GetAll().Where(p => p.ProductId == productId).ToList();
             var productAttributeValues = _repository.ProductAttributeValue.GetAll().ToList();
             foreach (var productVariantValue in productVariantValues)
             {
@@ -344,7 +348,12 @@ namespace DreamyShop.Logic.Product
         /// </summary>
         /// <param name="productCreateUpdateDto"></param>
         /// <param name="attributes"></param>
-        private async void AddAttribute(List<VariantProduct> variantProducts, Dictionary<string, List<string>> productOptions, int productId)
+        private async void AddAttribute(
+            List<VariantProduct> variantProducts, 
+            Dictionary<string, 
+            List<string>> productOptions, 
+            int productId,
+            bool isUpdate = false)
         {
             var attributes = _repository.Attribute.GetAll().ToList();
             if (variantProducts.Any(pAttr => pAttr.AttributeNames != null) && variantProducts.Count > 1)
@@ -367,16 +376,40 @@ namespace DreamyShop.Logic.Product
 
                 attributes = _repository.Attribute.GetAll().ToList();
                 var attributeCurrentProduct = attributes.Where(a => attributeNames.Contains(a.Name)).ToList();
-                var newProductAttributes = attributeCurrentProduct.Select(na => new Domain.ProductAttribute
+                if (!isUpdate)
                 {
-                    ProductId = productId,
-                    AttributeId = na.Id,
-                    StatusID = 1,
-                    DateCreated = DateTime.Now,
-                    DateUpdated = DateTime.Now
-                }).ToList();
-                await _repository.ProductAttribute.AddRangeAsync(newProductAttributes);
-                _repository.Save();
+                    var newProductAttributes = attributeCurrentProduct.Select(na => new Domain.ProductAttribute
+                    {
+                        ProductId = productId,
+                        AttributeId = na.Id,
+                        StatusID = 1,
+                        DateCreated = DateTime.Now,
+                        DateUpdated = DateTime.Now
+                    }).ToList();
+                    await _repository.ProductAttribute.AddRangeAsync(newProductAttributes);
+                    _repository.Save();
+                }
+                else
+                {
+                    var existingProductAttributes = _repository.ProductAttribute.GetProductAttributesByProductId(productId);
+                    var paUpdates = new List<ProductAttribute>();
+                    foreach (var attribute in attributeCurrentProduct)
+                    {
+                        var productAttributeUpdate = existingProductAttributes.Where(e => e.AttributeId == attribute.Id).FirstOrDefault();
+                        if(productAttributeUpdate == null)
+                        {
+                            var paUpdate = new ProductAttribute();
+                            paUpdate.ProductId = productId;
+                            paUpdate.AttributeId = attribute.Id;
+                            paUpdate.DateUpdated = DateTime.Now;
+                            paUpdates.Add(paUpdate);
+                        }
+                    }
+                    var deleteProductAttributes = existingProductAttributes.Where(e => !attributeCurrentProduct.Any(a => a.Id == e.AttributeId)).ToList();
+                    _repository.ProductAttribute.RemoveMultiple(deleteProductAttributes);
+                    await _repository.ProductAttribute.UpdateRangeAsync(paUpdates);
+                    _repository.Save();
+                }
             }
         }
 
@@ -512,7 +545,7 @@ namespace DreamyShop.Logic.Product
             var attributes = _repository.Attribute.GetAll().ToList();
             if(productUpdateDto.ProductOptions != null && productUpdateDto.VariantProducts != null)
             {
-                AddAttribute(productUpdateDto.VariantProducts, productUpdateDto.ProductOptions, id);
+                AddAttribute(productUpdateDto.VariantProducts, productUpdateDto.ProductOptions, id, true);
                 AddOrUpdateProductVariant(productUpdateDto.VariantProducts, id, true);
                 AddOrUpdateProductAttributeValue(productUpdateDto.ProductOptions, id, true);
                 AddOrUpdateProductVariantValue(id, productUpdateDto.VariantProducts, productUpdateDto.ProductOptions);
