@@ -1,10 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/services/product.service';
 import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
-import {
-  ProductVariantDto,
-  ProductVariantRequestDto,
-} from 'src/app/shared/models/product-variant.dto';
+import { ProductVariantRequestDto } from 'src/app/shared/models/product-variant.dto';
 import {
   ProductAttributeDisplayDto,
   ProductDto,
@@ -54,7 +52,10 @@ export class VariationUpdateItemComponent implements OnInit {
     { key: string; value: string[] }[]
   >();
 
-  constructor(public productService: ProductService) {}
+  constructor(
+    public productService: ProductService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit(): void {
     this.productUpdate = this.productService.getProductUpdate();
@@ -150,7 +151,50 @@ export class VariationUpdateItemComponent implements OnInit {
     this.productOptionOutputsCaseOne.emit(this.productOptions);
     this.productVariantOutputsCaseTwo.emit(this.productVariantTwos);
     this.productOptionOutputsCaseTwo.emit(this.productOptions);
-    console.log('HELLLLLLLLLLLLLLLLLLLLLLLL :>> ', this.productVariantTwos);
+  }
+
+  @Output() checkSKU = new EventEmitter<boolean>();
+  skuCaches: string[] = [];
+  checkCssSKU: boolean = false;
+  onInputSKUValue(sku: string, index: number) {
+    console.log('hello');
+    this.productVariantOutputsCaseOne.emit(this.productVariantTwos);
+    this.productOptionOutputsCaseOne.emit(this.productOptions);
+    this.productVariantOutputsCaseTwo.emit(this.productVariantTwos);
+    this.productOptionOutputsCaseTwo.emit(this.productOptions);
+    this.checkCssSKU = false;
+    //check sku of product variant is unique
+    if (this.productOptions.length == 1) {
+      for (let i = 0; i < this.productVariants.length - 1; i++) {
+        if (sku === this.productVariants[i].sKU && index !== i) {
+          this.showWarn();
+          this.checkSKU.emit(true);
+          this.checkCssSKU = true;
+          break;
+        }
+      }
+    } else if (this.productOptions.length == 2) {
+      let skus = this.productVariantTwos
+        .flat()
+        .filter((item) => item.sKU !== '')
+        .map((item) => item.sKU);
+      if (this.skuCaches.includes(sku)) {
+        this.showWarn();
+        this.checkSKU.emit(true);
+        this.checkCssSKU = true;
+      }
+      this.skuCaches = skus;
+    }
+    if (!this.checkCssSKU) {
+      this.checkSKU.emit(false);
+    }
+  }
+  showWarn() {
+    this.messageService.add({
+      severity: 'warn',
+      summary: 'Warn',
+      detail: 'SKU phải là duy nhất',
+    });
   }
 
   onInputOptionValue(index: number, value: string, indexChild: number) {

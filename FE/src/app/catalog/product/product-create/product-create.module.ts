@@ -18,6 +18,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DividerModule } from 'primeng/divider';
 import { ProductCreateComponent } from './product-create.component';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 import { VariationEditItemComponent } from '../variation-edit-item/variation-edit-item.component';
 
 @NgModule({
@@ -41,7 +43,9 @@ import { VariationEditItemComponent } from '../variation-edit-item/variation-edi
     DialogModule,
     ConfirmDialogModule,
     DividerModule,
+    ToastModule,
   ],
   exports: [VariationEditItemComponent],
+  providers: [MessageService],
 })
 export class ProductCreateModule {}

@@ -17,6 +17,8 @@ import { DividerModule } from 'primeng/divider';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { PanelModule } from 'primeng/panel';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [],
@@ -38,7 +40,8 @@ import { PanelModule } from 'primeng/panel';
     ConfirmDialogModule,
     DividerModule,
     ButtonModule,
+    ToastModule,
   ],
-  providers: [DialogService],
+  providers: [DialogService, MessageService],
 })
 export class UpdateProductModule {}

@@ -55,7 +55,7 @@ namespace DreamyShop.Api.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("removeProduct")]
+        [HttpDelete("{id}")]
         //[Authorize]
         //[Member]
         public async Task<IActionResult> RemoveProduct(int id)

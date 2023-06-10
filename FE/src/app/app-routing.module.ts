@@ -35,14 +35,6 @@ const routes: Routes = [
     path: 'product/create',
     pathMatch: 'full',
     loadChildren: () =>
-      import('./catalog/product/create-product/create-product.module').then(
-        (m) => m.CreateProductModule
-      ),
-  },
-  {
-    path: 'product/createProduct',
-    pathMatch: 'full',
-    loadChildren: () =>
       import('./catalog/product/product-create/product-create.module').then(
         (m) => m.ProductCreateModule
       ),

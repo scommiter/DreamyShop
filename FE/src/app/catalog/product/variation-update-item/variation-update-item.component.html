@@ -95,9 +95,16 @@
             <td>
               <input
                 type="text"
-                class="input-content-variant"
+                class="input-content-variant-sku"
                 [(ngModel)]="productVariants[index0].sKU"
+                (blur)="onInputSKUValue(productVariants[index0].sKU, index0)"
+                [ngStyle]="{
+                  border: checkCssSKU
+                    ? '1px solid #e90e0e'
+                    : '1px solid #e5e5e5'
+                }"
               />
+              <p-toast></p-toast>
             </td>
             <td class="picture">
               <div
@@ -175,10 +182,21 @@
               <td>
                 <input
                   type="text"
-                  class="input-content-variant"
-                  (blur)="onInputValue()"
+                  class="input-content-variant-sku"
                   [(ngModel)]="productVariantTwos[index0][index1].sKU"
+                  (blur)="
+                    onInputSKUValue(
+                      productVariantTwos[index0][index1].sKU,
+                      index0
+                    )
+                  "
+                  [ngStyle]="{
+                    border: checkCssSKU
+                      ? '1px solid #e90e0e'
+                      : '1px solid #e5e5e5'
+                  }"
                 />
+                <p-toast></p-toast>
               </td>
               <td class="picture">
                 <div

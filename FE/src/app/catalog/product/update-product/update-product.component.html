@@ -1,4 +1,4 @@
-<!-- <div class="container">
+<div class="container">
   <p-panel header="Thông tin cơ bản" class="ppanel">
     <div class="field col-12">
       <label for="name" class="block"
@@ -164,6 +164,7 @@
               receiveProductOptionCaseTwoData($event)
             "
             (productVariantOutputsCaseTwo)="receiveVariantCaseTwoData($event)"
+            (checkSKU)="receiveCheckSKU($event)"
           ></app-variation-update-item>
         </div>
         <div
@@ -177,6 +178,7 @@
             (checkAddProductClassify)="receiveCheckAddData($event)"
             (imageVariantOutputs)="receiveImageVariantData($event)"
             (atrributeNameOutputs)="receiveAtrributeNameData($event)"
+            (checkSKU)="receiveCheckSKU($event)"
           ></app-variation-edit-item>
         </div>
       </div>
@@ -223,5 +225,7 @@
     icon="pi pi-check"
     class="button-submit"
     (onClick)="updateProduct()"
+    [disabled]="isSKUduplicate"
   ></p-button>
-</div> -->
+  <p-toast></p-toast>
+</div>

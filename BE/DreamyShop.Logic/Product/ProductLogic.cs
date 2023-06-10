@@ -235,8 +235,14 @@ namespace DreamyShop.Logic.Product
             }
         }
 
-        private async void UploadProductImages(List<string> fileContexts, int productId)
+        private async void UploadProductImages(List<string> fileContexts, int productId, bool isProductUpdate = false)
         {
+            if(isProductUpdate == true)
+            {
+                var imgExistingProduct = _repository.ProductImage.GetAll().Where(p => p.ProductId == productId).ToList();
+                _repository.ProductImage.RemoveMultiple(imgExistingProduct);
+                _repository.Save();
+            }
             var imageProducts = new List<ImageProduct>();
             var product = await _repository.Product.GetByIdAsync(productId);
             var count = 0;
@@ -245,7 +251,7 @@ namespace DreamyShop.Logic.Product
                 foreach (var fileContext in fileContexts)
                 {
                     var fileName = product.Name.RemoveAllWhiteSpace();
-                    fileName = fileName.RemoveVietnameseDiacritics() + count++ + ".png";
+                    fileName = fileName + count++ + ".png";
                     string base64Data = fileContext.Split(',')[1];
                     byte[] imageBytes = Convert.FromBase64String(base64Data);
                     //Tạo MemoryStream từ mảng byte
@@ -541,16 +547,16 @@ namespace DreamyShop.Logic.Product
                 product.IsVisibility = productUpdateDto.IsVisibility ?? true;
             }
 
+            if (productUpdateDto.Images != null)
+            {
+                UploadProductImages(productUpdateDto.Images, id, true);
+            }
+
             _repository.Product.Update(product);
             _repository.Save();
 
-            //if (productUpdateDto.ThumbnailPicture != null)
-            //{
-            //    AddProductImage(productUpdateDto.ThumbnailPicture, id);
-            //}
-
             var attributes = _repository.Attribute.GetAll().ToList();
-            if(productUpdateDto.ProductOptions != null && productUpdateDto.VariantProducts != null)
+            if(productUpdateDto.ProductOptions.Count != 0 && productUpdateDto.VariantProducts.Count != 0)
             {
                 AddAttribute(productUpdateDto.VariantProducts, productUpdateDto.ProductOptions, id, true);
                 AddOrUpdateProductVariant(productUpdateDto.VariantProducts, id, true);

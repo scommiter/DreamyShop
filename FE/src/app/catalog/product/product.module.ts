@@ -24,7 +24,9 @@ import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DividerModule } from 'primeng/divider';
 import { VariationUpdateItemComponent } from './variation-update-item/variation-update-item.component';
-import { CreateProductModule } from './create-product/create-product.module';
+import { ProductCreateModule } from './product-create/product-create.module';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -54,9 +56,10 @@ import { CreateProductModule } from './create-product/create-product.module';
     DialogModule,
     ConfirmDialogModule,
     DividerModule,
-    CreateProductModule,
+    ProductCreateModule,
+    ToastModule,
   ],
-  providers: [ProductService, DialogService],
+  providers: [DialogService, MessageService, ConfirmationService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ProductModule {}

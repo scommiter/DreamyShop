@@ -78,16 +78,20 @@
             pRipple
             icon="pi pi-trash"
             class="p-button-rounded p-button-warning"
+            (click)="deleteProduct(product.id)"
           ></button>
         </td>
       </tr>
     </ng-template>
+
     <ng-template pTemplate="summary">
       <div style="text-align: left">
         Tổng số sản phẩm: {{ totalCounts | number }}
       </div>
     </ng-template>
   </p-table>
+  <p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
+  <p-toast></p-toast>
 
   <div class="card flex justify-content-center">
     <p-paginator
@@ -97,4 +101,5 @@
       [rowsPerPageOptions]="[5, 10, 20, 30]"
     ></p-paginator>
   </div>
+  <p-toast></p-toast>
 </p-panel>

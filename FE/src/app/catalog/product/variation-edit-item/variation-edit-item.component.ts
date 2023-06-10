@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ProductVariantDto } from 'src/app/shared/models/product-variant.dto';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-variation-edit-item',
@@ -25,6 +26,7 @@ export class VariationEditItemComponent {
   ];
   @Output() imageVariantOutputs = new EventEmitter<File[]>();
   @Output() atrributeNameOutputs = new EventEmitter<string[][]>();
+  @Output() checkSKU = new EventEmitter<boolean>();
   productVariants: ProductVariantDto[] = [
     {
       attribute_names: [''],
@@ -49,6 +51,8 @@ export class VariationEditItemComponent {
   checkCountOptionsOne: number = 0;
   checkIsAddVariant: boolean = false;
   imageVariants: File[] = [];
+
+  constructor(private messageService: MessageService) {}
 
   addClassifyProductVariant() {
     this.addClassifyProduct = true;
@@ -109,6 +113,55 @@ export class VariationEditItemComponent {
       this.productOptions
     );
     this.atrributeNameOutputs.emit(productOptions);
+  }
+
+  skuCaches: string[] = [];
+  checkCssSKU: boolean = false;
+  onInputSKUValue(sku: string, index: number) {
+    this.productOptionOuputs.emit(this.productOptions);
+    this.productVariantOutputs.emit(this.productVariants);
+    if (this.productOptions.length > 1) {
+      this.productVariantTwoOutputs.emit(this.productVariantTwos);
+    }
+    let productOptions = this.convertProductOptionsToAttributeName(
+      this.productOptions
+    );
+    this.atrributeNameOutputs.emit(productOptions);
+    this.checkCssSKU = false;
+
+    //check sku of product variant is unique
+    if (this.productOptions.length == 1) {
+      for (let i = 0; i < this.productVariants.length - 1; i++) {
+        if (sku === this.productVariants[i].sku && index !== i) {
+          this.showWarn();
+          this.checkSKU.emit(true);
+          this.checkCssSKU = true;
+          break;
+        }
+      }
+    } else if (this.productOptions.length == 2) {
+      let skus = this.productVariantTwos
+        .flat()
+        .filter((item) => item.sku !== '')
+        .map((item) => item.sku);
+      if (this.skuCaches.includes(sku)) {
+        this.showWarn();
+        this.checkSKU.emit(true);
+        this.checkCssSKU = true;
+      }
+      this.skuCaches = skus;
+    }
+    if (!this.checkCssSKU) {
+      this.checkSKU.emit(false);
+    }
+  }
+
+  showWarn() {
+    this.messageService.add({
+      severity: 'warn',
+      summary: 'Warn',
+      detail: 'SKU phải là duy nhất',
+    });
   }
 
   onDeleteVariant(index: number, indexChild: number) {

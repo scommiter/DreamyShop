@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { MenuItem } from 'primeng/api';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MenuItem, MessageService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Subject, takeUntil } from 'rxjs';
+import { ProductService } from 'src/app/services/product.service';
 import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
 import { ProductCreateDto } from 'src/app/shared/models/product-create-update.dto';
 import {
@@ -19,8 +22,9 @@ import {
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.scss'],
 })
-export class ProductCreateComponent {
+export class ProductCreateComponent implements OnDestroy {
   public formProductCreate: FormGroup;
+  private ngUnsubsribe = new Subject<void>();
   items: MenuItem[] = [];
   home: MenuItem = {};
   productTypes: string[] = [];
@@ -39,7 +43,13 @@ export class ProductCreateComponent {
     variantProducts: [],
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private productService: ProductService,
+    private router: Router,
+    private messageService: MessageService,
+    private route: ActivatedRoute
+  ) {
     this.formProductCreate = this.fb.group({
       name: new FormControl('', [
         Validators.minLength(3),
@@ -77,9 +87,120 @@ export class ProductCreateComponent {
     this.stateOptions = ['True', 'False'];
   }
 
-  saveChange(loginFormValue: FormGroup) {
-    console.log('this.form :>> ', loginFormValue);
-    console.log('this.imageProducts :>> ', this.imageProducts);
+  ngOnDestroy(): void {
+    this.ngUnsubsribe.next();
+    this.ngUnsubsribe.complete();
+  }
+
+  saveChange() {
+    //Convert modal
+    this.productCreateRequest.isActive =
+      this.formProductCreate.get('isActive')?.value === 'True' ? true : false;
+    this.productCreateRequest.isVisibility =
+      this.formProductCreate.get('isVisibily')?.value === 'True' ? true : false;
+    this.productCreateRequest.categoryName =
+      this.formProductCreate.get('categoryName')?.value;
+    this.productCreateRequest.productType =
+      this.formProductCreate.get('productType')?.value;
+    this.productCreateRequest.code = this.formProductCreate.get('code')?.value;
+    this.productCreateRequest.description =
+      this.formProductCreate.get('description')?.value;
+    this.productCreateRequest.manufacturerName =
+      this.formProductCreate.get('manufacturerName')?.value;
+    this.productCreateRequest.name = this.formProductCreate.get('name')?.value;
+
+    const convertedProductOptions: { [key: string]: string[] } =
+      this.productOptions.reduce((acc: { [key: string]: string[] }, obj) => {
+        acc[obj.key] = obj.value;
+        return acc;
+      }, {});
+    this.productCreateRequest.productOptions = convertedProductOptions;
+
+    if (this.isAddVisibility) {
+      let productVariant: ProductVariantDto = {
+        attribute_names: [''],
+        sku: this.formProductCreate.get('sku')?.value,
+        quantity: this.formProductCreate.get('quantity')?.value,
+        price: this.formProductCreate.get('price')?.value,
+        thumbnail_picture: '',
+      };
+      this.productCreateRequest.variantProducts.push(
+        this.convertToProductVariantRequestDto(productVariant)
+      );
+    } else {
+      if (!this.checkAddProductClassify) {
+        for (let i = 0; i < this.productVariants.length; i++) {
+          this.productVariants[i].attribute_names = this.attributeNames[i];
+        }
+        this.productVariants.pop();
+        this.productCreateRequest.variantProducts =
+          this.convertToProductVariantRequestArray(this.productVariants);
+      } else {
+        this.productVariantTwos.pop();
+        this.productCreateRequest.variantProducts =
+          this.convertToProductVariantRequestArray(
+            this.productVariantTwos.flat()
+          );
+        for (
+          let i = 0;
+          i < this.productCreateRequest.variantProducts.length;
+          i++
+        ) {
+          this.productCreateRequest.variantProducts[i].attributeNames =
+            this.attributeNames[i];
+        }
+      }
+    }
+    this.productCreateRequest.images = this.imageProducts;
+    console.log('this.productCreateRequest :>> ', this.productCreateRequest);
+    //call api
+    this.productService
+      .createProduct(this.productCreateRequest)
+      .pipe(takeUntil(this.ngUnsubsribe))
+      .subscribe({
+        next: () => {
+          this.productService.SetCreateSuccess(true);
+          this.router.navigate(['/product']);
+        },
+        error: () => {},
+      });
+  }
+
+  convertToProductVariantRequestDto(
+    dto: ProductVariantDto
+  ): ProductVariantRequestDto {
+    const requestDto: ProductVariantRequestDto = {
+      attributeNames: dto.attribute_names,
+      sKU: dto.sku,
+      quantity: dto.quantity,
+      price: dto.price,
+      // thumbnailPicture: this.convertToFile(
+      //   dto.thumbnail_picture,
+      //   dto.attribute_names.join('')
+      // ),
+      thumbnailPicture: dto.thumbnail_picture,
+    };
+
+    return requestDto;
+  }
+
+  convertToProductVariantRequestArray(
+    dtos: ProductVariantDto[]
+  ): ProductVariantRequestDto[] {
+    return dtos.map((dto: ProductVariantDto) => {
+      const requestDto: ProductVariantRequestDto = {
+        attributeNames: dto.attribute_names,
+        sKU: dto.sku,
+        quantity: dto.quantity,
+        price: dto.price,
+        // thumbnailPicture: this.convertToFile(
+        //   dto.thumbnail_picture,
+        //   dto.attribute_names.join('')
+        // ),
+        thumbnailPicture: dto.thumbnail_picture,
+      };
+      return requestDto;
+    });
   }
 
   //check input
@@ -127,6 +248,7 @@ export class ProductCreateComponent {
 
   //PRODUCT VARIANT
   isAddVisibility: boolean = true;
+  isSKUduplicate: boolean = false;
   addProductOptions() {
     this.isAddVisibility = false;
     //clear validator
@@ -167,5 +289,9 @@ export class ProductCreateComponent {
 
   receiveAtrributeNameData(data: any) {
     this.attributeNames = data;
+  }
+
+  receiveCheckSKU(data: any) {
+    this.isSKUduplicate = data;
   }
 }

@@ -6,7 +6,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/services/product.service';
 import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
 import { ProductCreateDto } from 'src/app/shared/models/product-create-update.dto';
@@ -69,12 +69,12 @@ export class UpdateProductComponent implements OnInit {
   priceProduct: number = 0;
   quantityProduct: number = 0;
   checkCountProductOptions: number = 0;
+  isSKUduplicate: boolean = false;
 
   constructor(
     public productService: ProductService,
-    private router: Router,
-    private config: DynamicDialogConfig,
-    private ref: DynamicDialogRef
+    private ref: DynamicDialogRef,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -154,30 +154,41 @@ export class UpdateProductComponent implements OnInit {
     if (this.checkCountProductOptions === 1) {
       this.productOptionOutputs = data;
     }
+    this.checkIsUpdateOptionVariant = true;
   }
 
   receiveVariantCaseOneData(data: any) {
     if (this.checkCountProductOptions === 1) {
       this.productVariantOutputs = data;
     }
+    this.checkIsUpdateOptionVariant = true;
   }
 
   receiveProductOptionCaseTwoData(data: any) {
     if (this.checkCountProductOptions === 2) {
       this.productOptionOutputs = data;
     }
+    this.checkIsUpdateOptionVariant = true;
   }
 
   receiveVariantCaseTwoData(data: any) {
     if (this.checkCountProductOptions === 2) {
       this.productVariantOutputs = data;
     }
+    this.checkIsUpdateOptionVariant = true;
+  }
+
+  receiveCheckSKU(data: any) {
+    this.isSKUduplicate = data;
+    this.checkIsUpdateOptionVariant = true;
   }
 
   addProductOptions() {
     this.isAddVisibility = false;
+    this.checkIsUpdateOptionVariant = true;
   }
 
+  checkIsUpdateOptionVariant: boolean = false;
   updateProduct() {
     if (this.checkCountProductOptions === 1) {
       this.productVariantOutputs.pop();
@@ -192,6 +203,7 @@ export class UpdateProductComponent implements OnInit {
     this.productUpdateRequest.isActive = this.productUpdate.isActive;
     this.productUpdateRequest.isVisibility = this.productUpdate.isVisibility;
     this.productUpdateRequest.images = this.productUpdate.thumbnailPictures;
+
     const convertedProductOptions: { [key: string]: string[] } =
       this.productOptionOutputs.reduce(
         (acc: { [key: string]: string[] }, obj) => {
@@ -200,61 +212,74 @@ export class UpdateProductComponent implements OnInit {
         },
         {}
       );
-    this.productUpdateRequest.productOptions = convertedProductOptions;
-    if (this.checkCountProductOptions !== 0) {
-      this.productUpdateRequest.variantProducts = this.convertToVariantProducts(
-        this.productVariantOutputs.flat(),
-        this.productOptionOutputs
-      );
-    } else {
-      if (this.isAddVisibility) {
-        let productVariant: ProductVariantDto = {
-          attribute_names: [''],
-          sku: this.skuProduct,
-          quantity: this.quantityProduct,
-          price: this.priceProduct,
-          thumbnail_picture: '',
-        };
-        this.productUpdateRequest.variantProducts.push(
-          this.convertToProductVariantRequestDto(productVariant)
-        );
+    if (this.checkIsUpdateOptionVariant) {
+      this.productUpdateRequest.productOptions = convertedProductOptions;
+
+      if (this.checkCountProductOptions !== 0) {
+        this.productUpdateRequest.variantProducts =
+          this.convertToVariantProducts(
+            this.productVariantOutputs.flat(),
+            this.productOptionOutputs
+          );
       } else {
-        if (!this.checkAddProductClassify) {
-          for (let i = 0; i < this.productVariants.length; i++) {
-            this.productVariants[i].attribute_names = this.attributeNames[i];
-          }
-          this.productVariants.pop();
-          this.productUpdateRequest.variantProducts =
-            this.convertToProductVariantRequestArray(this.productVariants);
+        if (this.isAddVisibility) {
+          let productVariant: ProductVariantDto = {
+            attribute_names: [''],
+            sku: this.skuProduct,
+            quantity: this.quantityProduct,
+            price: this.priceProduct,
+            thumbnail_picture: '',
+          };
+          this.productUpdateRequest.variantProducts.push(
+            this.convertToProductVariantRequestDto(productVariant)
+          );
         } else {
-          this.productVariantTwos.pop();
-          this.productUpdateRequest.variantProducts =
-            this.convertToProductVariantRequestArray(
-              this.productVariantTwos.flat()
-            );
-          for (
-            let i = 0;
-            i < this.productUpdateRequest.variantProducts.length;
-            i++
-          ) {
-            this.productUpdateRequest.variantProducts[i].attributeNames =
-              this.attributeNames[i];
+          if (!this.checkAddProductClassify) {
+            for (let i = 0; i < this.productVariants.length; i++) {
+              this.productVariants[i].attribute_names = this.attributeNames[i];
+            }
+            this.productVariants.pop();
+            this.productUpdateRequest.variantProducts =
+              this.convertToProductVariantRequestArray(this.productVariants);
+          } else {
+            this.productVariantTwos.pop();
+            this.productUpdateRequest.variantProducts =
+              this.convertToProductVariantRequestArray(
+                this.productVariantTwos.flat()
+              );
+            for (
+              let i = 0;
+              i < this.productUpdateRequest.variantProducts.length;
+              i++
+            ) {
+              this.productUpdateRequest.variantProducts[i].attributeNames =
+                this.attributeNames[i];
+            }
           }
         }
       }
     }
-
+    console.log(this.checkIsUpdateOptionVariant);
     console.log('PRODUCT UPDATE :>> ', this.productUpdateRequest);
     this.productService
       .updateProduct(this.productUpdate.id, this.productUpdateRequest)
       .subscribe({
         next: () => {
           this.ref.close(this);
+          this.show();
         },
         error: (err) => {},
       });
     this.updateCompleted.emit();
   }
+  show() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Thành công',
+      detail: 'Cập nhật sản phẩm thành công',
+    });
+  }
+
   @Output() updateCompleted: EventEmitter<void> = new EventEmitter<void>();
 
   convertToVariantProducts(

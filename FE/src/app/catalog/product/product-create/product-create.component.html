@@ -1,8 +1,4 @@
-<form
-  [formGroup]="formProductCreate"
-  skipValidation
-  (ngSubmit)="saveChange(formProductCreate)"
->
+<form [formGroup]="formProductCreate" skipValidation (ngSubmit)="saveChange()">
   <div class="container">
     <p-breadcrumb
       class="max-w-full"
@@ -207,6 +203,7 @@
               (checkAddProductClassify)="receiveCheckAddData($event)"
               (imageVariantOutputs)="receiveImageVariantData($event)"
               (atrributeNameOutputs)="receiveAtrributeNameData($event)"
+              (checkSKU)="receiveCheckSKU($event)"
             ></app-variation-edit-item>
           </div>
         </div>
@@ -280,7 +277,7 @@
       icon="pi pi-check"
       class="button-submit"
       type="submit"
-      [disabled]="!formProductCreate.valid"
+      [disabled]="!formProductCreate.valid || isSKUduplicate"
     ></p-button>
   </div>
 </form>

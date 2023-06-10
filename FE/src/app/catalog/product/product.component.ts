@@ -1,5 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import {
+  ConfirmEventType,
+  ConfirmationService,
+  MenuItem,
+  MessageService,
+} from 'primeng/api';
 import { ProductService } from 'src/app/services/product.service';
 import { ProductDto } from 'src/app/shared/models/product.dto';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -24,7 +29,9 @@ export class ProductComponent implements OnInit, OnDestroy {
   constructor(
     private productService: ProductService,
     private dialogService: DialogService,
-    private router: Router
+    private router: Router,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -52,6 +59,11 @@ export class ProductComponent implements OnInit, OnDestroy {
         },
         error: () => {},
       });
+    if (this.productService.CheckCreateSuccess()) {
+      setTimeout(() => {
+        this.showCreateSuccess();
+      }, 500);
+    }
   }
 
   ngOnDestroy(): void {
@@ -91,6 +103,42 @@ export class ProductComponent implements OnInit, OnDestroy {
       if (data) {
         this.getAllProducts();
       }
+    });
+  }
+
+  showCreateSuccess() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Thành công',
+      detail: 'Tạo mới sản phẩm thành công',
+    });
+  }
+
+  deleteProduct(id: number) {
+    this.confirmationService.confirm({
+      message: 'Bạn có chắc muốn xóa không?',
+      header: 'Xác nhận',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.messageService.add({
+          severity: 'info',
+          summary: 'Xác nhận',
+          detail: 'Xóa thành công',
+        });
+        this.productService.deleteProduct(id).subscribe({
+          next: () => {
+            this.getAllProducts();
+          },
+          error: (err) => {},
+        });
+      },
+      reject: (type: any) => {
+        this.messageService.add({
+          severity: 'warn',
+          summary: 'Đã hủy',
+          detail: 'Bạn đã hủy xóa',
+        });
+      },
     });
   }
 

@@ -17,6 +17,7 @@ export class ProductService {
     private envUrl: EnvironmentUrlService
   ) {}
   private isProductUpdated: boolean = false;
+  private isSuccessCreate: boolean = false;
 
   public getProducts(
     maxResultCount: number,
@@ -25,6 +26,18 @@ export class ProductService {
     return this.http.get<PageResultDto<ProductDto>>(
       `${environment.apiUrl}/api/Product/getAll?Page=${currentPage}&Limit=${maxResultCount}`
     );
+  }
+
+  public SetCreateSuccess(isSuccess: boolean): void {
+    this.isSuccessCreate = isSuccess;
+    console.log(
+      'Linhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh :>> ',
+      this.isSuccessCreate
+    );
+  }
+  public CheckCreateSuccess(): boolean {
+    console.log('this.isSuccessCreate :>> ', this.isSuccessCreate);
+    return this.isSuccessCreate === true;
   }
 
   public createProduct(productCreateDto: ProductCreateDto): Observable<any> {
@@ -36,7 +49,6 @@ export class ProductService {
 
   public updateProduct(id: number, productUpdateDto: ProductCreateDto) {
     const url = `${environment.apiUrl}/api/Product/${id}`;
-    console.log('Helllo :>> ', url);
     return this.http.put<any>(url, productUpdateDto);
   }
 
@@ -45,6 +57,11 @@ export class ProductService {
       `${environment.apiUrl}/api/Product/uploadMultipleImage`,
       formData
     );
+  }
+
+  public deleteProduct(id: number): Observable<any> {
+    const url = `${environment.apiUrl}/api/Product/${id}`;
+    return this.http.delete<any>(url);
   }
 
   productUpdate: ProductDto = {
