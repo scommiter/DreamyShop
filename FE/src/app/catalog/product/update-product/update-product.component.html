@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <p-panel header="Thông tin cơ bản" class="ppanel">
     <div class="field col-12">
       <label for="name" class="block"
@@ -151,7 +151,10 @@
     <div class="product-variant-wrapper" *ngIf="!isAddVisibility">
       <div class="option-variant-wrapper">
         <div class="title-variant-wrapper">Phân loại hàng</div>
-        <div class="product-variant option-list">
+        <div
+          class="product-variant option-list"
+          *ngIf="checkCountProductOptions !== 0"
+        >
           <app-variation-update-item
             (productOptionOutputsCaseOne)="
               receiveProductOptionCaseOneData($event)
@@ -162,6 +165,19 @@
             "
             (productVariantOutputsCaseTwo)="receiveVariantCaseTwoData($event)"
           ></app-variation-update-item>
+        </div>
+        <div
+          class="product-variant option-list"
+          *ngIf="checkCountProductOptions === 0"
+        >
+          <app-variation-edit-item
+            (productOptionOuputs)="receiveData($event)"
+            (productVariantOutputs)="receiveVariantData($event)"
+            (productVariantTwoOutputs)="receiveVariantTwoData($event)"
+            (checkAddProductClassify)="receiveCheckAddData($event)"
+            (imageVariantOutputs)="receiveImageVariantData($event)"
+            (atrributeNameOutputs)="receiveAtrributeNameData($event)"
+          ></app-variation-edit-item>
         </div>
       </div>
     </div>
@@ -208,4 +224,4 @@
     class="button-submit"
     (onClick)="updateProduct()"
   ></p-button>
-</div>
+</div> -->

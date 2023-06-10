@@ -483,10 +483,17 @@ namespace DreamyShop.Logic.Product
         public async Task<ApiResult<bool>> UpdateProduct(int id, ProductUpdateDto productUpdateDto)
         {
             var product = await _repository.Product.GetByIdAsync(id);
-
             if (product == null)
             {
                 return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
+            }
+
+            if(!_repository.ProductAttributeValue.GetAll().Any(p => p.ProductId == id))
+            {
+                var productVariantvalueDelete = _repository.ProductVariantValue.GetAll().Where(pv => pv.ProductVariant.ProductId == id).ToList();
+                _repository.ProductVariantValue.RemoveMultiple(productVariantvalueDelete);
+                _repository.ProductVariant.RemoveMultiple(_context.ProductVariants.Where(p => p.ProductId == id).ToList());
+                _repository.Save();
             }
 
             if (productUpdateDto.Name != null)

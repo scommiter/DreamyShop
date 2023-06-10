@@ -39,6 +39,14 @@ const routes: Routes = [
         (m) => m.CreateProductModule
       ),
   },
+  {
+    path: 'product/createProduct',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./catalog/product/product-create/product-create.module').then(
+        (m) => m.ProductCreateModule
+      ),
+  },
 ];
 
 @NgModule({

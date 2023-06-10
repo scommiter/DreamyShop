@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { ProductService } from 'src/app/services/product.service';
 import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
@@ -8,6 +15,8 @@ import {
   ProductVariantRequestDto,
 } from 'src/app/shared/models/product-variant.dto';
 import { ProductDto } from 'src/app/shared/models/product.dto';
+import { MatDialogRef } from '@angular/material/dialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-update-product',
@@ -61,7 +70,12 @@ export class UpdateProductComponent implements OnInit {
   quantityProduct: number = 0;
   checkCountProductOptions: number = 0;
 
-  constructor(public productService: ProductService) {}
+  constructor(
+    public productService: ProductService,
+    private router: Router,
+    private config: DynamicDialogConfig,
+    private ref: DynamicDialogRef
+  ) {}
 
   ngOnInit(): void {
     this.productUpdate = this.productService.getProductUpdate();
@@ -94,6 +108,10 @@ export class UpdateProductComponent implements OnInit {
       this.productUpdate.productAttributeDisplayDtos[0].quantity;
     this.checkCountProductOptions = this.productUpdate.optionNames.length;
     console.log('this.productUpdate :>> ', this.productUpdate);
+    console.log(
+      'this.checkCountProductOptions :>> ',
+      this.checkCountProductOptions
+    );
   }
 
   closeImage(index: number) {
@@ -156,7 +174,9 @@ export class UpdateProductComponent implements OnInit {
     }
   }
 
-  addProductOptions() {}
+  addProductOptions() {
+    this.isAddVisibility = false;
+  }
 
   updateProduct() {
     if (this.checkCountProductOptions === 1) {
@@ -181,16 +201,61 @@ export class UpdateProductComponent implements OnInit {
         {}
       );
     this.productUpdateRequest.productOptions = convertedProductOptions;
-    this.productUpdateRequest.variantProducts = this.convertToVariantProducts(
-      this.productVariantOutputs.flat(),
-      this.productOptionOutputs
-    );
+    if (this.checkCountProductOptions !== 0) {
+      this.productUpdateRequest.variantProducts = this.convertToVariantProducts(
+        this.productVariantOutputs.flat(),
+        this.productOptionOutputs
+      );
+    } else {
+      if (this.isAddVisibility) {
+        let productVariant: ProductVariantDto = {
+          attribute_names: [''],
+          sku: this.skuProduct,
+          quantity: this.quantityProduct,
+          price: this.priceProduct,
+          thumbnail_picture: '',
+        };
+        this.productUpdateRequest.variantProducts.push(
+          this.convertToProductVariantRequestDto(productVariant)
+        );
+      } else {
+        if (!this.checkAddProductClassify) {
+          for (let i = 0; i < this.productVariants.length; i++) {
+            this.productVariants[i].attribute_names = this.attributeNames[i];
+          }
+          this.productVariants.pop();
+          this.productUpdateRequest.variantProducts =
+            this.convertToProductVariantRequestArray(this.productVariants);
+        } else {
+          this.productVariantTwos.pop();
+          this.productUpdateRequest.variantProducts =
+            this.convertToProductVariantRequestArray(
+              this.productVariantTwos.flat()
+            );
+          for (
+            let i = 0;
+            i < this.productUpdateRequest.variantProducts.length;
+            i++
+          ) {
+            this.productUpdateRequest.variantProducts[i].attributeNames =
+              this.attributeNames[i];
+          }
+        }
+      }
+    }
+
     console.log('PRODUCT UPDATE :>> ', this.productUpdateRequest);
-    this.productService.updateProduct(
-      this.productUpdate.id,
-      this.productUpdateRequest
-    );
+    this.productService
+      .updateProduct(this.productUpdate.id, this.productUpdateRequest)
+      .subscribe({
+        next: () => {
+          this.ref.close(this);
+        },
+        error: (err) => {},
+      });
+    this.updateCompleted.emit();
   }
+  @Output() updateCompleted: EventEmitter<void> = new EventEmitter<void>();
 
   convertToVariantProducts(
     productVariantOutputs: ProductVariantRequestDto[],
@@ -217,5 +282,77 @@ export class UpdateProductComponent implements OnInit {
       }
     }
     return productVariantOutputs;
+  }
+
+  //Case Add product variant
+  productOptions: { key: string; value: string[] }[] = [];
+  productVariants: ProductVariantDto[] = [];
+  productVariantRequests: ProductVariantRequestDto[] = [];
+  productVariantTwos: ProductVariantDto[][] = [];
+  productVariantTwoRequests: ProductVariantRequestDto[][] = [];
+  checkAddProductClassify: boolean = false;
+  imageVariants: File[] = [];
+  attributeNames: string[][] = [];
+  receiveData(data: any) {
+    if (this.checkCountProductOptions === 0) {
+      this.productOptionOutputs = data;
+    }
+  }
+
+  receiveVariantData(data: any) {
+    this.productVariants = data;
+  }
+
+  receiveVariantTwoData(data: any) {
+    this.productVariantTwos = data;
+  }
+
+  receiveCheckAddData(data: boolean) {
+    this.checkAddProductClassify = data;
+  }
+
+  receiveImageVariantData(data: any) {
+    this.imageVariants = data;
+  }
+
+  receiveAtrributeNameData(data: any) {
+    this.attributeNames = data;
+  }
+
+  convertToProductVariantRequestDto(
+    dto: ProductVariantDto
+  ): ProductVariantRequestDto {
+    const requestDto: ProductVariantRequestDto = {
+      attributeNames: dto.attribute_names,
+      sKU: dto.sku,
+      quantity: dto.quantity,
+      price: dto.price,
+      // thumbnailPicture: this.convertToFile(
+      //   dto.thumbnail_picture,
+      //   dto.attribute_names.join('')
+      // ),
+      thumbnailPicture: dto.thumbnail_picture,
+    };
+
+    return requestDto;
+  }
+
+  convertToProductVariantRequestArray(
+    dtos: ProductVariantDto[]
+  ): ProductVariantRequestDto[] {
+    return dtos.map((dto: ProductVariantDto) => {
+      const requestDto: ProductVariantRequestDto = {
+        attributeNames: dto.attribute_names,
+        sKU: dto.sku,
+        quantity: dto.quantity,
+        price: dto.price,
+        // thumbnailPicture: this.convertToFile(
+        //   dto.thumbnail_picture,
+        //   dto.attribute_names.join('')
+        // ),
+        thumbnailPicture: dto.thumbnail_picture,
+      };
+      return requestDto;
+    });
   }
 }

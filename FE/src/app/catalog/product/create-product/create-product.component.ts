@@ -95,24 +95,6 @@ export class CreateProductComponent implements OnInit {
     }
   }
 
-  // addImage(imageFiles: File[]) {
-  //   const formData = new FormData();
-  //   imageFiles.forEach((image) => formData.append('image', image));
-  //   this.productService.createImageProduct(formData);
-  //   // this.http
-  //   //   .post(`${environment.apiUrl}/api/Product/uploadMultipleImage`, formData)
-  //   //   .subscribe(
-  //   //     (response) => {
-  //   //       // Xử lý phản hồi từ API (nếu cần)
-  //   //       console.log('Image added successfully');
-  //   //     },
-  //   //     (error) => {
-  //   //       // Xử lý lỗi (nếu có)
-  //   //       console.error('Failed to add image', error);
-  //   //     }
-  //   //   );
-  // }
-
   closeImage(index: number) {
     this.imageProducts.splice(index, 1);
     this.images.splice(index, 1);

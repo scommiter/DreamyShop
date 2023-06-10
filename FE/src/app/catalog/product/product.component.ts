@@ -8,6 +8,7 @@ import { PageResultDto } from 'src/app/shared/models/page-result.dto';
 import { Subject, takeUntil } from 'rxjs';
 import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
 import { UpdateProductComponent } from './update-product/update-product.component';
+import { ProductCreateDto } from 'src/app/shared/models/product-create-update.dto';
 
 @Component({
   selector: 'app-product',
@@ -81,10 +82,15 @@ export class ProductComponent implements OnInit, OnDestroy {
   };
   updateProduct(id: number) {
     this.productUpdate = this.getProductById(id) as ProductDto;
-    this.productService.setProductUpdate(this.productUpdate);
+    this.productService.setProductUpdate(this.productUpdate, false);
     const ref = this.dialogService.open(UpdateProductComponent, {
       header: 'CẬP NHẬT SẢN PHẨM',
       width: '70%',
+    });
+    ref.onClose.subscribe((data: ProductCreateDto) => {
+      if (data) {
+        this.getAllProducts();
+      }
     });
   }
 

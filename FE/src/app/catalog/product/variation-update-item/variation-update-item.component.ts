@@ -60,21 +60,25 @@ export class VariationUpdateItemComponent implements OnInit {
     this.productUpdate = this.productService.getProductUpdate();
     console.log('this.productUpdate :>> ', this.productUpdate);
     this.checkNumberOfOptionNames = this.productUpdate.optionNames.length;
-    this.convertToProductOptions(
-      this.productUpdate.optionNames,
-      this.productUpdate.productAttributeDisplayDtos
-    );
-    this.productUpdate.optionNames.length > 1
-      ? (this.addClassifyProduct = true)
-      : (this.addClassifyProduct = false);
-    if (this.addClassifyProduct == true) {
-      this.convertToProductVariantTwos(
+    if (this.checkNumberOfOptionNames !== 0) {
+      this.convertToProductOptions(
+        this.productUpdate.optionNames,
         this.productUpdate.productAttributeDisplayDtos
       );
+      this.productUpdate.optionNames.length > 1
+        ? (this.addClassifyProduct = true)
+        : (this.addClassifyProduct = false);
+      if (this.addClassifyProduct == true) {
+        this.convertToProductVariantTwos(
+          this.productUpdate.productAttributeDisplayDtos
+        );
+      } else {
+        this.convertToProductVariant(
+          this.productUpdate.productAttributeDisplayDtos
+        );
+      }
     } else {
-      this.convertToProductVariant(
-        this.productUpdate.productAttributeDisplayDtos
-      );
+      this.productOptions = [{ key: '', value: [''] }];
     }
   }
 
@@ -150,11 +154,15 @@ export class VariationUpdateItemComponent implements OnInit {
   }
 
   onInputOptionValue(index: number, value: string, indexChild: number) {
-    if (this.checkNumberOfOptionNames > 1) {
+    if (this.checkNumberOfOptionNames !== 1) {
       this.handleInputOptionHasTwo(index, value, indexChild);
     } else {
       this.handleInputOptionHasOne(index, value, indexChild);
     }
+    this.productVariantOutputsCaseOne.emit(this.productVariantTwos);
+    this.productOptionOutputsCaseOne.emit(this.productOptions);
+    this.productVariantOutputsCaseTwo.emit(this.productVariantTwos);
+    this.productOptionOutputsCaseTwo.emit(this.productOptions);
   }
 
   handleInputOptionHasTwo(index: number, value: string, indexChild: number) {
@@ -164,7 +172,6 @@ export class VariationUpdateItemComponent implements OnInit {
       index === 0
     ) {
       this.productOptions[index].value.push('');
-
       this.productVariantTwos.push([]);
       let indexVariant = this.productVariantTwos.length - 1;
       for (let i = 0; i < this.productOptions[1].value.length - 1; i++) {

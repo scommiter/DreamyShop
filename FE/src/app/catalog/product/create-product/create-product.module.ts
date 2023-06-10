@@ -18,10 +18,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DividerModule } from 'primeng/divider';
 import { CommonModule } from '@angular/common';
-import { VariationEditItemComponent } from '../variation-edit-item/variation-edit-item.component';
 
 @NgModule({
-  declarations: [CreateProductComponent, VariationEditItemComponent],
+  declarations: [CreateProductComponent],
   imports: [
     CommonModule,
     CreateProductRoutingModule,
@@ -41,6 +40,7 @@ import { VariationEditItemComponent } from '../variation-edit-item/variation-edi
     DividerModule,
     ReactiveFormsModule,
   ],
+  exports: [],
   providers: [DialogService],
 })
 export class CreateProductModule {}

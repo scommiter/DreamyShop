@@ -16,6 +16,7 @@ export class ProductService {
     private http: HttpClient,
     private envUrl: EnvironmentUrlService
   ) {}
+  private isProductUpdated: boolean = false;
 
   public getProducts(
     maxResultCount: number,
@@ -36,7 +37,7 @@ export class ProductService {
   public updateProduct(id: number, productUpdateDto: ProductCreateDto) {
     const url = `${environment.apiUrl}/api/Product/${id}`;
     console.log('Helllo :>> ', url);
-    return this.http.put<any>(url, productUpdateDto).subscribe((data) => {});
+    return this.http.put<any>(url, productUpdateDto);
   }
 
   public createImageProduct(formData: FormData): Observable<any> {
@@ -63,8 +64,13 @@ export class ProductService {
     dateUpdated: '',
   };
 
-  setProductUpdate(product: ProductDto) {
+  setProductUpdate(product: ProductDto, value: boolean) {
     this.productUpdate = product;
+    this.isProductUpdated = value;
+  }
+
+  getIsProductUpdated() {
+    return this.isProductUpdated;
   }
 
   getProductUpdate() {

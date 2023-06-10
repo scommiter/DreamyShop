@@ -24,9 +24,14 @@ import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DividerModule } from 'primeng/divider';
 import { VariationUpdateItemComponent } from './variation-update-item/variation-update-item.component';
+import { CreateProductModule } from './create-product/create-product.module';
 
 @NgModule({
-  declarations: [ProductComponent, UpdateProductComponent, VariationUpdateItemComponent],
+  declarations: [
+    ProductComponent,
+    UpdateProductComponent,
+    VariationUpdateItemComponent,
+  ],
   imports: [
     CommonModule,
     ProductRoutingModule,
@@ -49,6 +54,7 @@ import { VariationUpdateItemComponent } from './variation-update-item/variation-
     DialogModule,
     ConfirmDialogModule,
     DividerModule,
+    CreateProductModule,
   ],
   providers: [ProductService, DialogService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
