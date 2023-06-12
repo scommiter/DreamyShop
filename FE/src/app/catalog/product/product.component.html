@@ -6,9 +6,23 @@
         <th style="width: 3rem">
           <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
         </th>
-        <th>Tên</th>
+        <th>
+          Tên
+          <p-columnFilter
+            type="text"
+            field="name"
+            display="menu"
+          ></p-columnFilter>
+        </th>
         <th>Ảnh</th>
-        <th>Mã</th>
+        <th>
+          Mã
+          <p-columnFilter
+            type="text"
+            field="code"
+            display="menu"
+          ></p-columnFilter>
+        </th>
         <th>Phân loại</th>
         <th>Giá</th>
         <th>Số lượng</th>
@@ -102,4 +116,30 @@
     ></p-paginator>
   </div>
   <p-toast></p-toast>
+  <div class="excel-file">
+    <div class="import-file">
+      <input
+        type="file"
+        name="file"
+        id="file"
+        (change)="importFile($event)"
+        class="inputfile"
+        hidden
+      />
+      <label for="file" class="button-file file-import"
+        ><i class="pi pi-file-import"></i> Import File</label
+      >
+    </div>
+    <div class="export-file">
+      <!-- <p-button
+        label="Export file"
+        icon="pi pi-file-export"
+        styleClass="p-button-help"
+        (click)="downloadReport()"
+      ></p-button> -->
+      <button (click)="downloadReport()" class="button-file file-export">
+        <i class="pi pi-file-export"></i> Export File
+      </button>
+    </div>
+  </div>
 </p-panel>

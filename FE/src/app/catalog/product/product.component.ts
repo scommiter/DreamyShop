@@ -157,4 +157,19 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.maxResultCount = event.rows;
     this.getAllProducts();
   }
+
+  //File Excell
+  importFile(event: any) {
+    const file: File = event.target.files[0];
+    this.productService.uploadFile(file).subscribe({
+      next: () => {
+        this.getAllProducts();
+      },
+      error: (err) => {},
+    });
+  }
+
+  downloadReport() {
+    this.productService.downloadReport();
+  }
 }

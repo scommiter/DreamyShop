@@ -22,7 +22,7 @@ namespace DreamyShop.Api.Controllers
             _reportService = reportService;
         }
 
-        [HttpPost("excell/Export")]
+        [HttpGet("excell/Export")]
         public async Task<IActionResult> DownloadReport()
         {
             string reportname = $"ProductReport-{DateTime.Now.ToString("MM/dd/yyyy")}.xlsx";
