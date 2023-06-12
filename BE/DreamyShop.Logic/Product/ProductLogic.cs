@@ -287,7 +287,6 @@ namespace DreamyShop.Logic.Product
         {
             string base64Data = fileContext.Split(',')[1];
             byte[] imageBytes = Convert.FromBase64String(base64Data);
-            //Tạo MemoryStream từ mảng byte
             using (MemoryStream memoryStream = new MemoryStream(imageBytes))
             {
                 IFormFile file = new FormFile(memoryStream, 0, memoryStream.Length, Path.GetFileNameWithoutExtension(fileName), $"{fileName}.png");
@@ -384,7 +383,7 @@ namespace DreamyShop.Logic.Product
                 var attributeCurrentProduct = attributes.Where(a => attributeNames.Contains(a.Name)).ToList();
                 if (!isUpdate)
                 {
-                    var newProductAttributes = attributeCurrentProduct.Select(na => new Domain.ProductAttribute
+                    var newProductAttributes = attributeCurrentProduct.Select(na => new ProductAttribute
                     {
                         ProductId = productId,
                         AttributeId = na.Id,
@@ -404,11 +403,12 @@ namespace DreamyShop.Logic.Product
                         var productAttributeUpdate = existingProductAttributes.Where(e => e.AttributeId == attribute.Id).FirstOrDefault();
                         if(productAttributeUpdate == null)
                         {
-                            var paUpdate = new ProductAttribute();
-                            paUpdate.ProductId = productId;
-                            paUpdate.AttributeId = attribute.Id;
-                            paUpdate.DateUpdated = DateTime.Now;
-                            paUpdates.Add(paUpdate);
+                            paUpdates.Add(new ProductAttribute()
+                            {
+                                ProductId = productId,
+                                AttributeId = attribute.Id,
+                                DateUpdated = DateTime.Now
+                            });
                         }
                     }
                     var deleteProductAttributes = existingProductAttributes.Where(e => !attributeCurrentProduct.Any(a => a.Id == e.AttributeId)).ToList();
