@@ -147,13 +147,13 @@ namespace DreamyShop.Logic.Product
             await _repository.Product.AddAsync(newProduct);
             _repository.Save();
 
-            if (productCreateDto.ProductOptions.Count > 0 && productCreateDto.VariantProducts.Count > 1)
+            if (productCreateDto.ProductOptions.Count > 0 && productCreateDto.VariantProducts.Count > 0)
             {
                 AddAttribute(productCreateDto.VariantProducts, productCreateDto.ProductOptions, newProduct.Id);
             }
 
             AddOrUpdateProductVariant(productCreateDto.VariantProducts, newProduct.Id, false);
-            if (productCreateDto.ProductOptions.Count > 0 && productCreateDto.VariantProducts.Count > 1)
+            if (productCreateDto.ProductOptions.Count > 0 && productCreateDto.VariantProducts.Count > 0)
             {
                 AddOrUpdateProductAttributeValue(productCreateDto.ProductOptions, newProduct.Id, false);
                 AddOrUpdateProductVariantValue(newProduct.Id, productCreateDto.VariantProducts, productCreateDto.ProductOptions);
@@ -365,7 +365,7 @@ namespace DreamyShop.Logic.Product
             bool isUpdate = false)
         {
             var attributes = _repository.Attribute.GetAll().ToList();
-            if (variantProducts.Any(pAttr => pAttr.AttributeNames != null) && variantProducts.Count > 1)
+            if (variantProducts.Any(pAttr => pAttr.AttributeNames != null) && variantProducts.Count > 0)
             {
                 productOptions.Values.ToList().ForEach(list => list.RemoveAll(item => item == ""));
                 var attributeNames = productOptions.Select(pad => pad.Key.Standard()).Distinct().ToList();
