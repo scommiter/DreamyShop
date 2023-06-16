@@ -10,11 +10,7 @@ namespace DreamyShop.Domain
         public int Id { get; set; }
         public int UserId { get; set; }
         public bool Status { get; set; }
-
-        [ForeignKey(nameof(UserId))]
-        [InverseProperty("Carts")]
-        public virtual User User { get; set; }
-
+        public User User { get; set; }
 
         [InverseProperty(nameof(CartDetail.Cart))]
         public virtual ICollection<CartDetail> CartDetails { get; set; }

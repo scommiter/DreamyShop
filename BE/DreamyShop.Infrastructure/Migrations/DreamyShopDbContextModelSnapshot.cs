@@ -189,7 +189,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Carts");
                 });
@@ -1030,8 +1031,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
             modelBuilder.Entity("DreamyShop.Domain.Cart", b =>
                 {
                     b.HasOne("DreamyShop.Domain.User", "User")
-                        .WithMany("Carts")
-                        .HasForeignKey("UserId")
+                        .WithOne("Cart")
+                        .HasForeignKey("DreamyShop.Domain.Cart", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1355,7 +1356,8 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 {
                     b.Navigation("Bills");
 
-                    b.Navigation("Carts");
+                    b.Navigation("Cart")
+                        .IsRequired();
 
                     b.Navigation("Roles");
                 });

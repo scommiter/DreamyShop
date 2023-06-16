@@ -44,13 +44,12 @@ namespace DreamyShop.Domain
 
         public byte[] StoredSalt { get; set; }
 
+        public Cart Cart { get; set; }
+
         [InverseProperty(nameof(Role.User))]
         public virtual ICollection<Role> Roles { get; set; }
 
         [InverseProperty(nameof(Bill.User))]
         public virtual ICollection<Bill> Bills { get; set; }
-
-        [InverseProperty(nameof(Cart.User))]
-        public virtual ICollection<Cart> Carts { get; set; }
     }
 }
