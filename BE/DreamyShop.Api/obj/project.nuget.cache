@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "O6+X0YE8JZEvDbS1EdHcEBF2mG61gX/JlL2yWgHOaOJuWz5t/WOm0zwgsdlCjDd322jsRMHsRVuZQhojvKwfog==",
+  "dgSpecHash": "6qINne9Rs/mGwGwHhqLduE1Vnp9mtWpvpqwylnLH6YF9Wc+wLuzrY1CmzCHfXP1WXAMvFSnj8tonnF3AhL/TKw==",
   "success": true,
   "projectFilePath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Api\\DreamyShop.Api.csproj",
   "expectedPackageFiles": [
@@ -84,11 +84,7 @@
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.12\\microsoft.netcore.app.host.win-x64.6.0.12.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.12\\microsoft.aspnetcore.app.ref.6.0.12.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.12\\microsoft.windowsdesktop.app.ref.6.0.12.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.12\\microsoft.netcore.app.ref.6.0.12.nupkg.sha512"
+    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
   ],
   "logs": []
 }

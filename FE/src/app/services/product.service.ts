@@ -85,12 +85,29 @@ export class ProductService {
     this.productUpdate = product;
     this.isProductUpdated = value;
   }
-
   getIsProductUpdated() {
     return this.isProductUpdated;
   }
-
   getProductUpdate() {
     return this.productUpdate;
+  }
+
+  //Excell
+  downloadReport() {
+    const url = `${environment.apiUrl}/api/Report/excell/Export`;
+    this.http.get(url, { responseType: 'blob' }).subscribe((response: Blob) => {
+      const downloadUrl = URL.createObjectURL(response);
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.download = `ProductReport-${new Date().toLocaleDateString()}.xlsx`; // Đặt tên cho file
+      link.click();
+    });
+  }
+
+  uploadFile(file: File): Observable<any> {
+    const url = `${environment.apiUrl}/api/Report/excell/Import`;
+    const formData = new FormData();
+    formData.append('reportFile', file);
+    return this.http.post<any>(url, formData);
   }
 }

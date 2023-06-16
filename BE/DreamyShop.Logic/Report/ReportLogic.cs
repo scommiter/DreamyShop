@@ -144,10 +144,15 @@ namespace DreamyShop.Logic.Report
                                 var listOptionValues = sheet.Cells[subRow, 10].Value.ToString().Split(",");
                                 productOptions.Add(sheet.Cells[subRow, 9].Value.ToString().Trim(), listOptionValues.ToList());
                             }
-                            var listAttributeNames = sheet.Cells[subRow, 11].Value.ToString().Split(",");
+                            var listAttributeNames = new List<string>();
+                            if (sheet.Cells[subRow, 11].Value != null)
+                            {
+                                listAttributeNames = sheet.Cells[subRow, 11].Value.ToString().Split(",").ToList();
+
+                            }
                             variants.Add(new VariantProduct
                             {
-                                AttributeNames = listAttributeNames.ToList(),
+                                AttributeNames = listAttributeNames,
                                 SKU = sheet.Cells[subRow, 12].Value.ToString().Trim(),
                                 Quantity = int.Parse(sheet.Cells[subRow, 13].Value.ToString()),
                                 Price = float.Parse(sheet.Cells[subRow, 14].Value.ToString())

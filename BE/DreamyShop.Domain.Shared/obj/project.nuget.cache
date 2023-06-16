@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "1vndZXP7cBhAXKWI1L4BpbE+DO8+GeBQ2XZZpuJ2dc3WEpo4h3I8ReiOhC8YCLBS/vahMXllIZP2ZjvcQHoRZg==",
+  "dgSpecHash": "QaC1pBbX7JDzle+/DfMp8foFZEHbYyYXYyXAuKnLndJ+lEpFmGHEv1cAALS/kKMUQBKFVZIuB2QZqHxY9gfNyA==",
   "success": true,
   "projectFilePath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
   "expectedPackageFiles": [
@@ -8,10 +8,7 @@
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.12\\microsoft.aspnetcore.app.ref.6.0.12.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.12\\microsoft.windowsdesktop.app.ref.6.0.12.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.12\\microsoft.netcore.app.ref.6.0.12.nupkg.sha512"
+    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512"
   ],
   "logs": []
 }

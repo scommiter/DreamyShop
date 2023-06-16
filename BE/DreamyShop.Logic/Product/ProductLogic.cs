@@ -147,18 +147,21 @@ namespace DreamyShop.Logic.Product
             await _repository.Product.AddAsync(newProduct);
             _repository.Save();
 
-            if (productCreateDto.ProductOptions.Count > 0 && productCreateDto.VariantProducts.Count > 1)
+            if (productCreateDto.ProductOptions.Count > 0 && productCreateDto.VariantProducts.Count > 0)
             {
                 AddAttribute(productCreateDto.VariantProducts, productCreateDto.ProductOptions, newProduct.Id);
             }
 
             AddOrUpdateProductVariant(productCreateDto.VariantProducts, newProduct.Id, false);
-            if (productCreateDto.ProductOptions.Count > 0 && productCreateDto.VariantProducts.Count > 1)
+            if (productCreateDto.ProductOptions.Count > 0 && productCreateDto.VariantProducts.Count > 0)
             {
                 AddOrUpdateProductAttributeValue(productCreateDto.ProductOptions, newProduct.Id, false);
                 AddOrUpdateProductVariantValue(newProduct.Id, productCreateDto.VariantProducts, productCreateDto.ProductOptions);
             }
-            UploadProductImages(productCreateDto.Images, newProduct.Id);
+            if(productCreateDto.Images != null && productCreateDto.Images.Count > 1)
+            {
+                UploadProductImages(productCreateDto.Images, newProduct.Id);
+            }
             return new ApiSuccessResult<bool>(true);
         }
 
@@ -227,7 +230,7 @@ namespace DreamyShop.Logic.Product
                     await _repository.ProductVariant.AddAsync(newVariantProduct);
                     _repository.Save();
 
-                    if(variant.ThumbnailPicture != "")
+                    if(variant.ThumbnailPicture != null && variant.ThumbnailPicture != "")
                     {
                         AddImageVariantProduct(variant.ThumbnailPicture, newVariantProduct.Id, $"{variant.SKU}Product.png");
                     }
@@ -361,9 +364,9 @@ namespace DreamyShop.Logic.Product
             bool isUpdate = false)
         {
             var attributes = _repository.Attribute.GetAll().ToList();
-            if (variantProducts.Any(pAttr => pAttr.AttributeNames != null) && variantProducts.Count > 1)
+            if (variantProducts.Any(pAttr => pAttr.AttributeNames != null) && variantProducts.Count > 0)
             {
-                productOptions.Values.ToList().ForEach(list => list.RemoveAt(list.Count - 1));
+                productOptions.Values.ToList().ForEach(list => list.RemoveAll(item => item == ""));
                 var attributeNames = productOptions.Select(pad => pad.Key.Standard()).Distinct().ToList();
                 var newAttributeNames = attributeNames.Where(a => !attributes.Select(attr => attr.Name.Standard()).Contains(a.Standard())).ToList();
                 var newAttributes = newAttributeNames.Select(an => new Domain.Attribute

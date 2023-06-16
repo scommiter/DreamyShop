@@ -16,11 +16,11 @@ const routes: Routes = [
       import('./catalog/authentication/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: 'admin',
+    path: 'admin/dash-board',
     pathMatch: 'full',
     loadChildren: () =>
-      import('./catalog/admin-page/admin-page-routing.module').then(
-        (m) => m.AdminPageRoutingModule
+      import('./catalog/admin-dash-board/admin-dash-board-routing.module').then(
+        (m) => m.AdminDashBoardRoutingModule
       ),
     component: AppLayoutComponent,
   },

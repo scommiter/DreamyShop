@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5pgJg7hnoGzFjxt2QJkASsTfKq5dx8/uda3IK3LxOvSjtJeTK3ortZvVga3hEEoSgbXl7iMNj8rbAKcSEzq/rA==",
+  "dgSpecHash": "yeNuX+XEws7MV9Z7jTaxoEdVPf7j3PZvBXOP4YwbZA30xIBqVXYLSU8wOO9ZP0+hROIW1ogYJVOyU9SGa85KVg==",
   "success": true,
   "projectFilePath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj",
   "expectedPackageFiles": [
@@ -49,10 +49,7 @@
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\system.security.permissions\\4.7.0\\system.security.permissions.4.7.0.nupkg.sha512",
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
     "C:\\Users\\linh.nguyen22\\.nuget\\packages\\system.text.encoding.codepages\\4.7.0\\system.text.encoding.codepages.4.7.0.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.12\\microsoft.aspnetcore.app.ref.6.0.12.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.12\\microsoft.windowsdesktop.app.ref.6.0.12.nupkg.sha512",
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.12\\microsoft.netcore.app.ref.6.0.12.nupkg.sha512"
+    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
   ],
   "logs": []
 }
