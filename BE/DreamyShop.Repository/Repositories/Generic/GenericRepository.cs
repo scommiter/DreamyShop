@@ -75,7 +75,7 @@ namespace DreamyShop.Repository.Repositories.Generic
         {
             try
             {
-                _dbSet.Attach(entity);
+                _dbSet.Update(entity);
             }
             catch (Exception ex)
             {

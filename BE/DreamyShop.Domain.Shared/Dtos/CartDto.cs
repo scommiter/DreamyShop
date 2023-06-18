@@ -8,4 +8,11 @@
         public double Price { get; set; }
         public double Tax { get; set; }
     }
+
+    public class CartAddDto
+    {
+        public int UserId { get; set; }
+        public int ProductVariantId { get; set; }
+        public int Quantity { get; set; }
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Repository.Repositories.Auth;
+using DreamyShop.Repository.Repositories.Cart;
 using DreamyShop.Repository.Repositories.Category;
 using DreamyShop.Repository.Repositories.Manufacturer;
 using DreamyShop.Repository.Repositories.Product;
@@ -22,6 +23,8 @@ namespace DreamyShop.Repository.RepositoryWrapper
         private IProductAttributeValueRepository _productAttributeValue;
         private IManufacturerRepository _manufacturer;
         private ICategoryRepository _category;
+        private ICartRepository _cart;
+        private ICartDetailRepository _cartDetail;
         private IRoleRepository _role;
         public RepositoryWrapper(
             DreamyShopDbContext context, 
@@ -36,7 +39,9 @@ namespace DreamyShop.Repository.RepositoryWrapper
             IAttributeRepository attribute,
             IProductVariantRepository productVariant,
             IProductVariantValueRepository productVariantValue,
-            IProductImageRepository productImage)
+            IProductImageRepository productImage,
+            ICartRepository cart,
+            ICartDetailRepository cartDetail)
         {
             _context = context;
             _auth = auth;
@@ -51,6 +56,8 @@ namespace DreamyShop.Repository.RepositoryWrapper
             _productVariant = productVariant;
             _productVariantValue = productVariantValue;
             _productImage = productImage;
+            _cart = cart;
+            _cartDetail = cartDetail;
         }
 
         public IAuthRepository Auth
@@ -193,6 +200,30 @@ namespace DreamyShop.Repository.RepositoryWrapper
                     _productImage = new ProductImageRepository(_context);
                 }
                 return _productImage;
+            }
+        }
+
+        public ICartRepository Cart
+        {
+            get
+            {
+                if (_cart == null)
+                {
+                    _cart = new CartRepository(_context);
+                }
+                return _cart;
+            }
+        }
+
+        public ICartDetailRepository CartDetail
+        {
+            get
+            {
+                if (_cartDetail == null)
+                {
+                    _cartDetail = new CartDetailRepository(_context);
+                }
+                return _cartDetail;
             }
         }
 

@@ -15,52 +15,6 @@ namespace DreamyShop.Repository.AutoMapper
 
             CreateMap<Product, ProductCreateDto>();
 
-            //CreateMap<Product, ProductDto>()
-            //    .ForMember(pt => pt.CategoryName, opt =>
-            //        opt.MapFrom(src => src.ProductCategory.Name))
-            //    .ForMember(pt => pt.ManufacturerName, opt =>
-            //        opt.MapFrom(src => src.Manufacturer.Name))
-            //    .ForMember(dest => dest.ProductAttributeDisplayDtos, opt => opt.MapFrom(src => src.ProductVariants
-            //        .Select(variant => src.ProductVariantValues.GroupBy(p => p.ProductVariantId)
-            //            .Select(variantValue => new ProductAttributeDisplayDto
-            //            {
-            //                AttributeName = string.Join(" ", variantValue.Select(p =>
-            //                                src.ProductAttributeValues.FirstOrDefault(pav => pav.Id == p.ProductAttributeValueId)!.Value).ToString()),
-            //                Quantity = variant.Quantity,
-            //                Price = variant.Price
-            //            })
-            //        ))
-            //    );
-
-
-            //CreateMap<Product, ProductDto>()
-            //    .ForMember(pt => pt.CategoryName, opt =>
-            //        opt.MapFrom(src => src.ProductCategory.Name))
-            //    .ForMember(pt => pt.ManufacturerName, opt =>
-            //        opt.MapFrom(src => src.Manufacturer.Name))
-            //    .ForMember(dest => dest.ProductAttributeDisplayDtos, opt => opt.MapFrom(src =>
-            //        src.ProductVariants
-            //            .Select(variant =>
-            //                new
-            //                {
-            //                    variant.Quantity,
-            //                    variant.Price,
-            //                    ProductAttributeValueStrings = src.ProductAttributeValues
-            //                        .Join(src.ProductVariantValues, pat => pat.Id, pvvt => pvvt.ProductAttributeValueId,
-            //                            (pat, pvvt) => new { pat, pvvt })
-            //                        .Where(joined => joined.pvvt.ProductId == src.Id)
-            //                        .Select(joined => joined.pat)
-            //                })
-            //            .GroupBy(p => string.Join(",", p.ProductAttributeValueStrings.Select(pat => pat.Id)))
-            //            .Select(g => new ProductAttributeDisplayDto
-            //            {
-            //                AttributeName = string.Join(", ", g.SelectMany(p => p.ProductAttributeValueStrings).Select(pat => pat.Value)),
-            //                Quantity = g.Sum(p => p.Quantity),
-            //                Price = g.Sum(p => p.Price)
-            //            })
-            //            .ToList()));
-
-
             CreateMap<Domain.Attribute, ProductAttributeDto>();
 
             CreateMap<Manufacturer, ManufacturerDto>();

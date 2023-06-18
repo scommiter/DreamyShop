@@ -10,9 +10,8 @@ namespace DreamyShop.Logic.Cart
 {
     public interface ICartLogic
     {
-        Task<ApiResult<PageResult<CartItemsDto>>> GetAllCart(PagingRequest pagingRequest);
-        //Task<ApiResult<CategoryDto>> CreateCategory(CategoryCreateUpdateDto categoryCreateUpdateDto);
-        //Task<ApiResult<CategoryDto>> UpdateCategory(int id, CategoryCreateUpdateDto categoryCreateUpdateDto);
-        //Task<ApiResult<bool>> RemoveCategory(int id);
+        Task<ApiResult<PageResult<CartItemsDto>>> GetAllCart(int userId, PagingRequest pagingRequest);
+        Task<ApiResult<bool>> AddToCart(CartAddDto cartAddDto);
+        Task<ApiResult<bool>> RemoveFromCart(int userId, int cartDetailId);
     }
 }

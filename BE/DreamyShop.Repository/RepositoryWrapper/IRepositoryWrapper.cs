@@ -1,4 +1,5 @@
 ﻿using DreamyShop.Repository.Repositories.Auth;
+using DreamyShop.Repository.Repositories.Cart;
 using DreamyShop.Repository.Repositories.Category;
 using DreamyShop.Repository.Repositories.Manufacturer;
 using DreamyShop.Repository.Repositories.Product;
@@ -21,6 +22,8 @@ namespace DreamyShop.Repository.RepositoryWrapper
         IProductAttributeValueRepository ProductAttributeValue { get; }
         IManufacturerRepository Manufacturer { get; }
         ICategoryRepository Category { get; }
+        ICartRepository Cart { get; }
+        ICartDetailRepository CartDetail { get; }
 
         void Save();
     }

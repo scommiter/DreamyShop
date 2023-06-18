@@ -1,0 +1,55 @@
+<div class="statistical-wrapper">
+  <ul class="box-info">
+    <li>
+      <i class="pi pi-dollar"></i>
+      <span class="text">
+        <h3>$432124</h3>
+        <p>Tổng doanh thu</p>
+      </span>
+    </li>
+    <li>
+      <i class="pi pi-dollar"></i>
+      <span class="text">
+        <h3>$432124</h3>
+        <p>Tiền mặt</p>
+      </span>
+    </li>
+    <li>
+      <i class="pi pi-dollar"></i>
+      <span class="text">
+        <h3>$432124</h3>
+        <p>Banking</p>
+      </span>
+    </li>
+    <li>
+      <i class="pi pi-dollar"></i>
+      <span class="text">
+        <h3>$432124</h3>
+        <p>Ghi nợ</p>
+      </span>
+    </li>
+  </ul>
+</div>
+<div class="chart-price">
+  <apx-chart
+    [series]="chartPriceOptions.series"
+    [chart]="chartPriceOptions.chart"
+    [xaxis]="chartPriceOptions.xaxis"
+    [stroke]="chartPriceOptions.stroke"
+    [tooltip]="chartPriceOptions.tooltip"
+    [dataLabels]="chartPriceOptions.dataLabels"
+  ></apx-chart>
+</div>
+<div class="chart-price">
+  <apx-chart
+    [series]="chartProfitOptions.series"
+    [chart]="chartProfitOptions.chart"
+    [dataLabels]="chartProfitOptions.dataLabels"
+    [plotOptions]="chartProfitOptions.plotOptions"
+    [yaxis]="chartProfitOptions.yaxis"
+    [fill]="chartProfitOptions.fill"
+    [stroke]="chartProfitOptions.stroke"
+    [tooltip]="chartProfitOptions.tooltip"
+    [xaxis]="chartProfitOptions.xaxis"
+  ></apx-chart>
+</div>

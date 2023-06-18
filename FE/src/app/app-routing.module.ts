@@ -39,6 +39,24 @@ const routes: Routes = [
         (m) => m.ProductCreateModule
       ),
   },
+  {
+    path: 'statistical/sales-volume',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import(
+        './catalog/statistical/statistical-price/statistical-price.module'
+      ).then((m) => m.StatisticalPriceModule),
+    component: AppLayoutComponent,
+  },
+  {
+    path: 'statistical/access-volume',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import(
+        './catalog/statistical/statistical-access/statistical-access.module'
+      ).then((m) => m.StatisticalAccessModule),
+    component: AppLayoutComponent,
+  },
 ];
 
 @NgModule({

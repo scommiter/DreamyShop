@@ -10,9 +10,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { EditorModule } from 'primeng/editor';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { AdminDashBoardComponent } from './catalog/admin-dash-board/admin-dash-board.component';
+import { StatisticalPriceComponent } from './catalog/statistical/statistical-price/statistical-price.component';
+import { StatisticalAccessComponent } from './catalog/statistical/statistical-access/statistical-access.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    AdminDashBoardComponent,
+    StatisticalPriceComponent,
+    StatisticalAccessComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -23,6 +32,7 @@ import { EditorModule } from 'primeng/editor';
     DropdownModule,
     FormsModule,
     EditorModule,
+    NgApexchartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

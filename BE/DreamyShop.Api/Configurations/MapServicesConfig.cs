@@ -15,6 +15,8 @@ using DreamyShop.Repository.Repositories.Category;
 using DreamyShop.Logic.Role;
 using DreamyShop.Logic.Category;
 using DreamyShop.Logic.Report;
+using DreamyShop.Repository.Repositories.Cart;
+using DreamyShop.Logic.Cart;
 
 namespace DreamyShop.Api.Configurations
 {
@@ -41,6 +43,8 @@ namespace DreamyShop.Api.Configurations
             services.AddScoped<IProductAttributeValueRepository, ProductAttributeValueRepository>();
             services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<ICartDetailRepository, CartDetailRepository>();
             #endregion
 
             #region Logic
@@ -51,6 +55,7 @@ namespace DreamyShop.Api.Configurations
             services.AddScoped<IManufacturerLogic, ManufacturerLogic>();
             services.AddScoped<ICategoryLogic, CategoryLogic>();
             services.AddScoped<IReportLogic, ReportLogic>();
+            services.AddScoped<ICartLogic, CartLogic>();
             #endregion
         }
     }

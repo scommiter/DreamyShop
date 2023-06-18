@@ -24,6 +24,29 @@
     </li>
   </ul>
 
+  <div class="chart-revenue">
+    <div class="chart-area">
+      <apx-chart
+        [series]="chartSaleVolumns.series"
+        [chart]="chartSaleVolumns.chart"
+        [dataLabels]="chartSaleVolumns.dataLabels"
+        [plotOptions]="chartSaleVolumns.plotOptions"
+        [yaxis]="chartSaleVolumns.yaxis"
+        [xaxis]="chartSaleVolumns.xaxis"
+        [fill]="chartSaleVolumns.fill"
+        [title]="chartSaleVolumns.title"
+      ></apx-chart>
+    </div>
+    <div class="chart-circle">
+      <apx-chart
+        [series]="chartCircles.series"
+        [chart]="chartCircles.chart"
+        [labels]="chartCircles.labels"
+        [responsive]="chartCircles.responsive"
+      ></apx-chart>
+    </div>
+  </div>
+
   <div class="table-data">
     <div class="order">
       <div class="head">

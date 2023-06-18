@@ -2,10 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminDashBoardRoutingModule } from './admin-dash-board-routing.module';
-import { AdminDashBoardComponent } from './admin-dash-board.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AdminDashBoardComponent],
-  imports: [CommonModule, AdminDashBoardRoutingModule],
+  declarations: [],
+  imports: [
+    CommonModule,
+    AdminDashBoardRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class AdminDashBoardModule {}
