@@ -10,6 +10,8 @@ namespace DreamyShop.Domain
     {
         [Key]
         public int Id { get; set; }
+        [Required]
+        public string BillCode { get; set; }
         public int UserId { get; set; }
         [Required]
         public double TotalMoney { get; set; }

@@ -19,6 +19,7 @@ using DreamyShop.Repository.Repositories.Cart;
 using DreamyShop.Logic.Cart;
 using DreamyShop.Repository.Repositories.Bill;
 using DreamyShop.Logic.Bill;
+using DreamyShop.Logic.Chart;
 
 namespace DreamyShop.Api.Configurations
 {
@@ -61,6 +62,7 @@ namespace DreamyShop.Api.Configurations
             services.AddScoped<IReportLogic, ReportLogic>();
             services.AddScoped<ICartLogic, CartLogic>();
             services.AddScoped<IBillLogic, BillLogic>();
+            services.AddScoped<IChartLogic, ChartLogic>();
             #endregion
         }
     }

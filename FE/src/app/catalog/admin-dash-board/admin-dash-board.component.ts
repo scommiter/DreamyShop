@@ -43,7 +43,7 @@ export class AdminDashBoardComponent implements OnInit {
       series: [
         {
           name: 'Inflation',
-          data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2],
+          data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2],
         },
       ],
       chart: {
@@ -70,20 +70,7 @@ export class AdminDashBoardComponent implements OnInit {
       },
 
       xaxis: {
-        categories: [
-          'Jan',
-          'Feb',
-          'Mar',
-          'Apr',
-          'May',
-          'Jun',
-          'Jul',
-          'Aug',
-          'Sep',
-          'Oct',
-          'Nov',
-          'Dec',
-        ],
+        categories: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
         position: 'top',
         labels: {
           offsetY: -18,
@@ -139,12 +126,14 @@ export class AdminDashBoardComponent implements OnInit {
         },
       },
       title: {
-        text: 'Monthly Inflation in Argentina, 2002',
+        text: 'Sơ đồ lượng bán tuần vừa qua',
         floating: true,
         offsetY: 320,
         align: 'center',
+        margin: 25,
         style: {
           color: '#444',
+          fontWeight: 700,
         },
       },
     };
