@@ -32,6 +32,10 @@ namespace DreamyShop.Logic.Chart
         {
             throw new NotImplementedException();
         }
+        public Task<ApiResult<PricePaymentTypeDto>> GetPricePaymentType()
+        {
+            throw new NotImplementedException();
+        }
 
         //Get all sales by day of the last week
         public async Task<ApiResult<ChartWeeklySaleDtos>> GetChartWeeklySale()
@@ -46,6 +50,12 @@ namespace DreamyShop.Logic.Chart
             throw new NotImplementedException();
         }
         public async Task<ApiResult<ChartCategoryDtos>> GetChartCategory()
+        {
+            throw new NotImplementedException();
+        }
+
+        //Get all sales by week of two month
+        public Task<ApiResult<ChartMonthlySaleDtos>> GetChartMonthlySale()
         {
             throw new NotImplementedException();
         }

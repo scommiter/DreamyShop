@@ -12,10 +12,14 @@ namespace DreamyShop.Logic.Chart
     {
         //STATISTIC NUMBER
         Task<ApiResult<StatisticDashboardDto>> GetStatisticDashboard();
+        Task<ApiResult<PricePaymentTypeDto>> GetPricePaymentType();
 
 
         //STATISTIC FOR CHAR
         Task<ApiResult<ChartWeeklySaleDtos>> GetChartWeeklySale();
         Task<ApiResult<ChartCategoryDtos>> GetChartCategory();
+
+        Task<ApiResult<ChartMonthlySaleDtos>> GetChartMonthlySale();
+
     }
 }
