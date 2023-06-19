@@ -27,6 +27,12 @@ namespace DreamyShop.Logic.Chart
             _mapper = mapper;
         }
 
+        //Get number for dashborad
+        public Task<ApiResult<StatisticDashboardDto>> GetStatisticDashboard()
+        {
+            throw new NotImplementedException();
+        }
+
         //Get all sales by day of the last week
         public async Task<ApiResult<ChartWeeklySaleDtos>> GetChartWeeklySale()
         {
@@ -37,6 +43,10 @@ namespace DreamyShop.Logic.Chart
             }
             DateTime startDate = date;
             DateTime endDate = date.AddDays(7);
+            throw new NotImplementedException();
+        }
+        public async Task<ApiResult<ChartCategoryDtos>> GetChartCategory()
+        {
             throw new NotImplementedException();
         }
     }

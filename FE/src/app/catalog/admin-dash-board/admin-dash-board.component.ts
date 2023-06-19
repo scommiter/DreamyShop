@@ -143,7 +143,7 @@ export class AdminDashBoardComponent implements OnInit {
         width: 380,
         type: 'pie',
       },
-      labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+      labels: ['Thời trang', 'Đồ điện tử', 'Đồ ăn', 'Đồ gia dụng', 'Khác'],
       responsive: [
         {
           breakpoint: 480,

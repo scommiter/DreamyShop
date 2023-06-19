@@ -10,6 +10,12 @@ namespace DreamyShop.Logic.Chart
 {
     public interface IChartLogic
     {
+        //STATISTIC NUMBER
+        Task<ApiResult<StatisticDashboardDto>> GetStatisticDashboard();
+
+
+        //STATISTIC FOR CHAR
         Task<ApiResult<ChartWeeklySaleDtos>> GetChartWeeklySale();
+        Task<ApiResult<ChartCategoryDtos>> GetChartCategory();
     }
 }
