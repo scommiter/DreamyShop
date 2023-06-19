@@ -1,7 +1,14 @@
-﻿namespace DreamyShop.Domain.Shared.Dtos
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DreamyShop.Domain.Shared.Dtos.Manufacturer
 {
-    public class ManufacturerCreateUpdateDto
+    public class ManufacturerDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
         public string Slug { get; set; }

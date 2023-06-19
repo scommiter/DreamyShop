@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
 using DreamyShop.Domain.Shared.Types;
-using DreamyShop.Domain.Shared.Dtos;
 using System.Data;
+using DreamyShop.Domain.Shared.Dtos.User;
 
 namespace DreamyShop.Api.Authorization
 {

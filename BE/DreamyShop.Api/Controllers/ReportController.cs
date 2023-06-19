@@ -1,4 +1,4 @@
-﻿using DreamyShop.Domain.Shared.Dtos;
+﻿using DreamyShop.Domain.Shared.Dtos.Product;
 using DreamyShop.Logic.Product;
 using DreamyShop.Logic.Report;
 using Microsoft.AspNetCore.Mvc;

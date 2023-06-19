@@ -3,6 +3,7 @@ using DreamyShop.Common.Exceptions;
 using DreamyShop.Common.Extensions;
 using DreamyShop.Common.Results;
 using DreamyShop.Domain.Shared.Dtos;
+using DreamyShop.Domain.Shared.Dtos.User;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Logic.Auth.Security;
 using DreamyShop.Logic.Conditions;

@@ -1,4 +1,4 @@
-﻿namespace DreamyShop.Domain.Shared.Dtos
+﻿namespace DreamyShop.Domain.Shared.Dtos.Category
 {
     public class CategoryCreateUpdateDto
     {

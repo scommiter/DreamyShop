@@ -1,5 +1,6 @@
 ﻿using DreamyShop.Common.Results;
 using DreamyShop.Domain.Shared.Dtos;
+using DreamyShop.Domain.Shared.Dtos.User;
 using DreamyShop.Logic.Conditions;
 
 namespace DreamyShop.Logic.User

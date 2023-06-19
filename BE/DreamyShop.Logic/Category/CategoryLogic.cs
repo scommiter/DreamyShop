@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using DreamyShop.Common.Exceptions;
 using DreamyShop.Common.Results;
 using DreamyShop.Domain.Shared.Dtos;
+using DreamyShop.Domain.Shared.Dtos.Category;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Repository.RepositoryWrapper;
 using Microsoft.EntityFrameworkCore;

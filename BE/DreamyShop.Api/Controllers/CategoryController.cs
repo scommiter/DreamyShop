@@ -1,5 +1,6 @@
 ﻿using DreamyShop.Api.Authorization;
 using DreamyShop.Domain.Shared.Dtos;
+using DreamyShop.Domain.Shared.Dtos.Category;
 using DreamyShop.Logic.Category;
 using Microsoft.AspNetCore.Mvc;
 

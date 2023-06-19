@@ -1,4 +1,5 @@
 ﻿using DreamyShop.EntityFrameworkCore;
+using EFCore.BulkExtensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
@@ -100,5 +101,32 @@ namespace DreamyShop.Repository.Repositories.Generic
             return _dbSet.Where(expression);
         }
 
+        //BULK CRUD
+        public async Task BulkRangeInsert(IList<T> entities)
+        {
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                await _context.BulkInsertAsync<T>(entities);
+                transaction.Commit();
+            }  
+        }
+
+        public async Task BulkRangeUpdate(IList<T> entities)
+        {
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                await _context.BulkUpdateAsync<T>(entities);
+                transaction.Commit();
+            }
+        }
+
+        public async Task BulkRangeDelete(IList<T> entities)
+        {
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                await _context.BulkDeleteAsync<T>(entities);
+                transaction.Commit();
+            }
+        }
     }
 }

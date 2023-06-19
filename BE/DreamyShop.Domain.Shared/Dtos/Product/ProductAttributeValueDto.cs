@@ -1,6 +1,6 @@
 ﻿using DreamyShop.Domain.Shared.Types;
 
-namespace DreamyShop.Domain.Shared.Dtos
+namespace DreamyShop.Domain.Shared.Dtos.Product
 {
     public class ProductAttributeValueDto
     {

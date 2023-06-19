@@ -1,13 +1,8 @@
 ﻿using AutoMapper;
 using DreamyShop.Common.Results;
-using DreamyShop.Domain.Shared.Dtos;
+using DreamyShop.Domain.Shared.Dtos.Chart;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Repository.RepositoryWrapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DreamyShop.Logic.Chart
 {

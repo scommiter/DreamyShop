@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DreamyShop.Domain.Shared.Dtos
+namespace DreamyShop.Domain.Shared.Dtos.Product
 {
     public class ProductDto
     {
@@ -27,7 +27,7 @@ namespace DreamyShop.Domain.Shared.Dtos
     }
 
     public class ProductAttributeDisplayDto
-    {  
+    {
         public List<string>? AttributeNames { get; set; }
         public string SKU { get; set; }
         public int Quantity { get; set; }

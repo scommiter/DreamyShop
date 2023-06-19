@@ -2,7 +2,8 @@
 using DreamyShop.Common.Exceptions;
 using DreamyShop.Common.Results;
 using DreamyShop.Domain;
-using DreamyShop.Domain.Shared.Dtos;
+using DreamyShop.Domain.Shared.Dtos.Bill;
+using DreamyShop.Domain.Shared.Dtos.Cart;
 using DreamyShop.Domain.Shared.Types;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Logic.Conditions;

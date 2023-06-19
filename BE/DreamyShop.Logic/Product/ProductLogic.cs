@@ -1,16 +1,17 @@
 ﻿using AutoMapper;
-using System.Net.Http.Headers;
 using DreamyShop.Common.Exceptions;
 using DreamyShop.Common.Extensions;
 using DreamyShop.Common.Results;
 using DreamyShop.Domain;
 using DreamyShop.Domain.Shared.Dtos;
+using DreamyShop.Domain.Shared.Dtos.Product;
 using DreamyShop.Domain.Shared.Types;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Logic.Conditions;
 using DreamyShop.Repository.RepositoryWrapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http.Headers;
 
 namespace DreamyShop.Logic.Product
 {
@@ -29,91 +30,6 @@ namespace DreamyShop.Logic.Product
             _repository = repository;
             _mapper = mapper;
         }
-
-        //public async Task<ApiResult<PageResult<ProductDto>>> GetAllProductPaging(PagingRequest pagingRequest)
-        //{
-        //    var attributes = _repository.Attribute.GetAll().ToList();
-        //    var attributeValues = _repository.ProductAttribute.GetAll().ToList();
-        //    var attributeProducts = _context.Attributes.Join(_context.ProductAttributes,
-        //                                a => a.Id,
-        //                                b => b.AttributeId,
-        //                                (a, b) => new
-        //                                {
-        //                                    AttributeName = a.Name,
-        //                                    ProductId = b.ProductId
-        //                                });
-        //    var query = (from p in _context.Products
-        //                join m in _context.Manufacturers on p.ManufacturerId equals m.Id
-        //                join c in _context.ProductCategories on p.CategoryId equals c.Id
-        //                join pv in _context.ProductVariants on p.Id equals pv.ProductId into pvN
-        //                from pv in pvN.DefaultIfEmpty()
-        //                join ip in _context.ImageProducts on p.Id equals ip.ProductId into ipvN
-        //                from ip in ipvN.DefaultIfEmpty()
-        //                join pvv in _context.ProductVariantValues on pv.Id equals pvv.ProductVariantId into pvvN
-        //                from pvv in pvvN.DefaultIfEmpty()
-        //                join pav in _context.ProductAttributeValues on pvv.ProductAttributeValueId equals pav.Id into pavN
-        //                from pav in pavN.DefaultIfEmpty()
-        //                orderby p.DateCreated
-        //                select new
-        //                {
-        //                    Product = p,
-        //                    ManufacturerName = m.Name,
-        //                    CategoryName = c.Name,
-        //                    pvv,
-        //                    pv,
-        //                    pav,
-        //                    ip
-        //                });
-
-        //    var groupedQuery = query.GroupBy(item => item.Product.Id)
-        //                            .Select(group => new
-        //                            {
-        //                                ProductId = group.Key,
-        //                                Product = group.FirstOrDefault().Product,
-        //                                ManufacturerName = group.Select(item => item.ManufacturerName).FirstOrDefault(),
-        //                                CategoryName = group.Select(item => item.CategoryName).FirstOrDefault(),
-        //                                pvv = group.Where(item => item.pvv != null).Select(item => item.pvv).Distinct(),
-        //                                pv = group.Where(item => item.pv != null).Select(item => item.pv).Distinct(),
-        //                                pav = group.Where(item => item.pav != null).Select(item => item.pav).Distinct(),
-        //                                ip = group.Where(item => item.ip != null).Select(item => item.ip).Distinct()
-        //                            }).Skip((pagingRequest.Page - 1) * pagingRequest.Limit).Take(pagingRequest.Limit);
-
-        //    var productsPaging = await groupedQuery.ToListAsync();
-        //    var totalCount = await _context.Products.CountAsync();
-        //    var productDtos = productsPaging.Select(x => new ProductDto
-        //    {
-        //                            Id = x.ProductId,
-        //                            Name = x.Product.Name,
-        //                            Code = x.Product.Code,
-        //                            ThumbnailPictures = x.ip.GroupBy(p => p.ProductId).Select(pt => pt.Select(ptt => ptt.Path ?? "").FirstOrDefault()).ToList(),
-        //                            ProductType = x.Product.ProductType,
-        //                            CategoryName = x.CategoryName ?? "",
-        //                            ManufacturerName = x.ManufacturerName ?? "",
-        //                            Description = x.Product.Description ?? "",
-        //                            IsActive = x.Product.IsActive,
-        //                            IsVisibility = x.Product.IsVisibility,
-        //                            DateCreated = x.Product.DateCreated,
-        //                            DateUpdated = x.Product.DateUpdated,
-        //                            OptionNames = attributeProducts.Where(a => a.ProductId == x.ProductId)?.Select(a => a.AttributeName).ToList(),
-        //                            ProductAttributeDisplayDtos = x.pv.Select(pv => new ProductAttributeDisplayDto
-        //                            {
-        //                                                                AttributeNames = x.pav.Where(e => e.ProductId == x.ProductId)
-        //                                                                                 .Where(p => (x.pvv.GroupBy(pvv => pvv.ProductVariantId).Where(pc => pc.Key == pv.Id).FirstOrDefault().Select(pi => pi.ProductAttributeValueId)).Contains(p.Id))
-        //                                                                                 .Select(e => e.Value).ToList(),                   
-        //                                                                SKU = pv.SKU,
-        //                                                                Quantity = pv.Quantity,
-        //                                                                Price = pv.Price,
-        //                                                                Image = pv.ThumbnailPicture
-        //                                                            }).OrderByDescending(a => a.AttributeNames.FirstOrDefault()).ToList()
-        //                            }).ToList();
-
-        //    var pageResult = new PageResult<ProductDto>()
-        //    {
-        //        Items = productDtos,
-        //        Totals = totalCount
-        //    };
-        //    return new ApiSuccessResult<PageResult<ProductDto>>(pageResult);
-        //}
 
         public async Task<ApiResult<PageResult<ProductDto>>> GetAllProductPaging(PagingRequest pagingRequest)
         {
@@ -224,29 +140,29 @@ namespace DreamyShop.Logic.Product
                                             AttributeName = a.Name,
                                             ProductId = b.ProductId
                                         });
-            var query = await(from p in _context.Products
-                              join m in _context.Manufacturers on p.ManufacturerId equals m.Id
-                              join c in _context.ProductCategories on p.CategoryId equals c.Id
-                              join pv in _context.ProductVariants on p.Id equals pv.ProductId into pvN
-                              from pv in pvN.DefaultIfEmpty()
-                              join ip in _context.ImageProducts on p.Id equals ip.ProductId into ipvN
-                              from ip in ipvN.DefaultIfEmpty()
-                              join pvv in _context.ProductVariantValues on pv.Id equals pvv.ProductVariantId into pvvN
-                              from pvv in pvvN.DefaultIfEmpty()
-                              join pav in _context.ProductAttributeValues on pvv.ProductAttributeValueId equals pav.Id into pavN
-                              from pav in pavN.DefaultIfEmpty()
-                              select new
-                              {
-                                  Product = p,
-                                  ProductVariantId = pvv.ProductVariantId == null ? new int() : pvv.ProductVariantId,
-                                  ManufacturerName = m.Name,
-                                  CategoryName = c.Name,
-                                  pv,
-                                  pav,
-                                  ip
-                              }).ToListAsync();
+            var query = await (from p in _context.Products
+                               join m in _context.Manufacturers on p.ManufacturerId equals m.Id
+                               join c in _context.ProductCategories on p.CategoryId equals c.Id
+                               join pv in _context.ProductVariants on p.Id equals pv.ProductId into pvN
+                               from pv in pvN.DefaultIfEmpty()
+                               join ip in _context.ImageProducts on p.Id equals ip.ProductId into ipvN
+                               from ip in ipvN.DefaultIfEmpty()
+                               join pvv in _context.ProductVariantValues on pv.Id equals pvv.ProductVariantId into pvvN
+                               from pvv in pvvN.DefaultIfEmpty()
+                               join pav in _context.ProductAttributeValues on pvv.ProductAttributeValueId equals pav.Id into pavN
+                               from pav in pavN.DefaultIfEmpty()
+                               select new
+                               {
+                                   Product = p,
+                                   ProductVariantId = pvv.ProductVariantId == null ? new int() : pvv.ProductVariantId,
+                                   ManufacturerName = m.Name,
+                                   CategoryName = c.Name,
+                                   pv,
+                                   pav,
+                                   ip
+                               }).ToListAsync();
 
-            var productDtos =  query.GroupBy(r => new { r.Product })
+            var productDtos = query.GroupBy(r => new { r.Product })
                                 .Select(x => new ProductDto
                                 {
                                     Id = x.Key.Product.Id,
@@ -313,7 +229,7 @@ namespace DreamyShop.Logic.Product
                 AddOrUpdateProductAttributeValue(productCreateDto.ProductOptions, newProduct.Id, false);
                 AddOrUpdateProductVariantValue(newProduct.Id, productCreateDto.VariantProducts, productCreateDto.ProductOptions);
             }
-            if(productCreateDto.Images != null && productCreateDto.Images.Count > 1)
+            if (productCreateDto.Images != null && productCreateDto.Images.Count > 1)
             {
                 UploadProductImages(productCreateDto.Images, newProduct.Id);
             }
@@ -329,8 +245,8 @@ namespace DreamyShop.Logic.Product
         /// <param name="attributes"></param>
         /// <param name="isUpdate"></param>
         private async void AddOrUpdateProductVariantValue(
-            int productId, 
-            List<VariantProduct> productVariantValues, 
+            int productId,
+            List<VariantProduct> productVariantValues,
             Dictionary<string, List<string>> productOptions)
         {
             var attributes = _repository.Attribute.GetAll().ToList();
@@ -341,7 +257,8 @@ namespace DreamyShop.Logic.Product
             foreach (var productVariantValue in productVariantValues)
             {
                 var newProductVariantValues = productVariantValue.AttributeNames.Select(
-                    p => new ProductVariantValue{
+                    p => new ProductVariantValue
+                    {
                         ProductVariantId = productVariants.Where(pV => pV.SKU == productVariantValue.SKU).FirstOrDefault().Id,
                         ProductId = productId,
                         AttributeId = attributes.Where(a => a.Name.Standard()
@@ -366,7 +283,7 @@ namespace DreamyShop.Logic.Product
                 var variantProductByProductIds = _context.ProductVariants.Where(pv => pv.ProductId == productId);
                 variantProducts = variantProducts.Where(v => !variantProductByProductIds.Any(vp => vp.SKU == v.SKU && vp.ProductId == productId)).ToList();
             }
-            if(variantProducts != null)
+            if (variantProducts != null)
             {
                 foreach (var variant in variantProducts)
                 {
@@ -385,7 +302,7 @@ namespace DreamyShop.Logic.Product
                     await _repository.ProductVariant.AddAsync(newVariantProduct);
                     _repository.Save();
 
-                    if(variant.ThumbnailPicture != null && variant.ThumbnailPicture != "")
+                    if (variant.ThumbnailPicture != null && variant.ThumbnailPicture != "")
                     {
                         AddImageVariantProduct(variant.ThumbnailPicture, newVariantProduct.Id, $"{variant.SKU}Product.png");
                     }
@@ -395,7 +312,7 @@ namespace DreamyShop.Logic.Product
 
         private async void UploadProductImages(List<string> fileContexts, int productId, bool isProductUpdate = false)
         {
-            if(isProductUpdate == true)
+            if (isProductUpdate == true)
             {
                 var imgExistingProduct = _repository.ProductImage.GetAll().Where(p => p.ProductId == productId).ToList();
                 _repository.ProductImage.RemoveMultiple(imgExistingProduct);
@@ -404,7 +321,7 @@ namespace DreamyShop.Logic.Product
             var imageProducts = new List<ImageProduct>();
             var product = await _repository.Product.GetByIdAsync(productId);
             var count = 0;
-            if(product != null)
+            if (product != null)
             {
                 foreach (var fileContext in fileContexts)
                 {
@@ -439,7 +356,7 @@ namespace DreamyShop.Logic.Product
                 }
                 await _repository.ProductImage.AddRangeAsync(imageProducts);
                 _repository.Save();
-            }         
+            }
         }
         private async void AddImageVariantProduct(string fileContext, int variantId, string fileName)
         {
@@ -512,9 +429,9 @@ namespace DreamyShop.Logic.Product
         /// <param name="productCreateUpdateDto"></param>
         /// <param name="attributes"></param>
         private async void AddAttribute(
-            List<VariantProduct> variantProducts, 
-            Dictionary<string, 
-            List<string>> productOptions, 
+            List<VariantProduct> variantProducts,
+            Dictionary<string,
+            List<string>> productOptions,
             int productId,
             bool isUpdate = false)
         {
@@ -559,7 +476,7 @@ namespace DreamyShop.Logic.Product
                     foreach (var attribute in attributeCurrentProduct)
                     {
                         var productAttributeUpdate = existingProductAttributes.Where(e => e.AttributeId == attribute.Id).FirstOrDefault();
-                        if(productAttributeUpdate == null)
+                        if (productAttributeUpdate == null)
                         {
                             paUpdates.Add(new ProductAttribute()
                             {
@@ -652,7 +569,7 @@ namespace DreamyShop.Logic.Product
                 return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
             }
 
-            if(!_repository.ProductAttributeValue.GetAll().Any(p => p.ProductId == id))
+            if (!_repository.ProductAttributeValue.GetAll().Any(p => p.ProductId == id))
             {
                 var productVariantvalueDelete = _repository.ProductVariantValue.GetAll().Where(pv => pv.ProductVariant.ProductId == id).ToList();
                 _repository.ProductVariantValue.RemoveMultiple(productVariantvalueDelete);
@@ -715,7 +632,7 @@ namespace DreamyShop.Logic.Product
             _repository.Save();
 
             var attributes = _repository.Attribute.GetAll().ToList();
-            if(productUpdateDto.ProductOptions.Count != 0 && productUpdateDto.VariantProducts.Count != 0)
+            if (productUpdateDto.ProductOptions.Count != 0 && productUpdateDto.VariantProducts.Count != 0)
             {
                 AddAttribute(productUpdateDto.VariantProducts, productUpdateDto.ProductOptions, id, true);
                 AddOrUpdateProductVariant(productUpdateDto.VariantProducts, id, true);
@@ -903,5 +820,66 @@ namespace DreamyShop.Logic.Product
                 return new ApiErrorResult<bool>((int)ErrorCodes.UploadFailed);
             }
         }
+
+
+        //IMPORT LIST OF PRODUCTS
+        public async Task<ApiResult<bool>> ImportProducts(List<ProductCreateDto> productCreateDto)
+        {
+            var manufacturerNames = productCreateDto.Select(p => p.ManufacturerName);
+            //AddManufacturer(productCreateDto.ManufacturerName);
+            //AddCategory(productCreateDto.CategoryName);
+
+            //var newProduct = new Domain.Product
+            //{
+            //    ManufacturerId = _repository.Manufacturer.GetByName(productCreateDto.ManufacturerName).Id,
+            //    Name = productCreateDto.Name,
+            //    Code = productCreateDto.Code,
+            //    Slug = productCreateDto.Name.ToLower(),
+            //    SortOrder = 1,
+            //    ProductType = (ProductType)Enum.Parse(typeof(ProductType), productCreateDto.ProductType),
+            //    CategoryId = _repository.Category.GetByName(productCreateDto.CategoryName).Id,
+            //    SeoMetaDescription = null,
+            //    Description = productCreateDto.Description,
+            //    IsActive = productCreateDto.IsActive,
+            //    IsVisibility = productCreateDto.IsVisibility,
+            //    DateCreated = DateTime.Now
+            //};
+            //await _repository.Product.AddAsync(newProduct);
+            //_repository.Save();
+
+            //if (productCreateDto.ProductOptions.Count > 0 && productCreateDto.VariantProducts.Count > 0)
+            //{
+            //    AddAttribute(productCreateDto.VariantProducts, productCreateDto.ProductOptions, newProduct.Id);
+            //}
+
+            //AddOrUpdateProductVariant(productCreateDto.VariantProducts, newProduct.Id, false);
+            //if (productCreateDto.ProductOptions.Count > 0 && productCreateDto.VariantProducts.Count > 0)
+            //{
+            //    AddOrUpdateProductAttributeValue(productCreateDto.ProductOptions, newProduct.Id, false);
+            //    AddOrUpdateProductVariantValue(newProduct.Id, productCreateDto.VariantProducts, productCreateDto.ProductOptions);
+            //}
+            //if (productCreateDto.Images != null && productCreateDto.Images.Count > 1)
+            //{
+            //    UploadProductImages(productCreateDto.Images, newProduct.Id);
+            //}
+            return new ApiSuccessResult<bool>(true);
+        }
+
+        private async void AddManufacturerList(List<string> manufacturerName)
+        {
+            var manufacturers = _repository.Manufacturer.GetAll();
+            var newManufacturerNames = manufacturerName.Where(mn => !manufacturers.Any(m => m.Name == mn));
+            var newManufacturers = newManufacturerNames.Select(m => new Domain.Manufacturer
+            {
+                Name = m,
+                Code = m.ToUpper(),
+                Slug = m.ToLower(),
+                CoverPicture = "",
+                IsVisibility = true,
+                IsActive = true,
+                Country = ""
+            });
+
+        }
     }
-}   
+}

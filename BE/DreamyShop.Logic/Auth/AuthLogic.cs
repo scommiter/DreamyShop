@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using DreamyShop.Common.Exceptions;
 using DreamyShop.Common.Results;
-using DreamyShop.Domain.Shared.Dtos;
+using DreamyShop.Domain.Shared.Dtos.User;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Logic.Auth.Result;
 using DreamyShop.Logic.Auth.Security;

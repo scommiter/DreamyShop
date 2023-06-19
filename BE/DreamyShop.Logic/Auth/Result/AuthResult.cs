@@ -1,4 +1,4 @@
-﻿using DreamyShop.Domain.Shared.Dtos;
+﻿using DreamyShop.Domain.Shared.Dtos.User;
 
 namespace DreamyShop.Logic.Auth.Result
 {

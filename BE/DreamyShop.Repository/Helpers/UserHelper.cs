@@ -2,7 +2,7 @@
 using DreamyShop.Common.Extensions;
 using DreamyShop.Common.Results;
 using DreamyShop.Domain;
-using DreamyShop.Domain.Shared.Dtos;
+using DreamyShop.Domain.Shared.Dtos.User;
 using DreamyShop.Domain.Shared.Types;
 
 namespace DreamyShop.Repository.Helpers

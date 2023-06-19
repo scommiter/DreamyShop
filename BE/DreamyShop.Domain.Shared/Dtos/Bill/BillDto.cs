@@ -1,7 +1,8 @@
-﻿using DreamyShop.Domain.Shared.Types;
+﻿using DreamyShop.Domain.Shared.Dtos.Cart;
+using DreamyShop.Domain.Shared.Types;
 using System.ComponentModel.DataAnnotations;
 
-namespace DreamyShop.Domain.Shared.Dtos
+namespace DreamyShop.Domain.Shared.Dtos.Bill
 {
     public class BillDto
     {
@@ -12,7 +13,7 @@ namespace DreamyShop.Domain.Shared.Dtos
         public double ShippingFee { get; set; }
         public double Discount { get; set; }
         public double TotalMoney { get; set; }
-        public PaymentType PaymentType { get; set; }  
+        public PaymentType PaymentType { get; set; }
         public string ZipCode { get; set; }
         public DateTime DateCreated { get; set; }
     }

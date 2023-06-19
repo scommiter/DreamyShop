@@ -2,7 +2,7 @@
 using DreamyShop.Common.Extensions;
 using DreamyShop.Common.Results;
 using DreamyShop.Domain;
-using DreamyShop.Domain.Shared.Dtos;
+using DreamyShop.Domain.Shared.Dtos.Product;
 using DreamyShop.Domain.Shared.Types;
 using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;

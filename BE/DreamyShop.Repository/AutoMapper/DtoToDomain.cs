@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using DreamyShop.Domain;
-using DreamyShop.Domain.Shared.Dtos;
+using DreamyShop.Domain.Shared.Dtos.Category;
+using DreamyShop.Domain.Shared.Dtos.Manufacturer;
+using DreamyShop.Domain.Shared.Dtos.Product;
+using DreamyShop.Domain.Shared.Dtos.User;
 using Microsoft.Data.SqlClient;
 
 namespace DreamyShop.Repository.AutoMapper

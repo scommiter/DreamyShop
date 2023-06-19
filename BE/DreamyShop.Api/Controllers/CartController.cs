@@ -1,4 +1,5 @@
 ﻿using DreamyShop.Domain.Shared.Dtos;
+using DreamyShop.Domain.Shared.Dtos.Cart;
 using DreamyShop.Logic.Cart;
 using Microsoft.AspNetCore.Mvc;
 

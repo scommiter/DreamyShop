@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DreamyShop.Domain.Shared.Dtos
+namespace DreamyShop.Domain.Shared.Dtos.User
 {
     public class RegisterDto
     {

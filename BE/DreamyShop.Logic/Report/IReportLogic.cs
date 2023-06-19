@@ -1,5 +1,5 @@
 ﻿using DreamyShop.Common.Results;
-using DreamyShop.Domain.Shared.Dtos;
+using DreamyShop.Domain.Shared.Dtos.Product;
 using Microsoft.AspNetCore.Http;
 
 namespace DreamyShop.Logic.Report

@@ -1,5 +1,6 @@
 ﻿using DreamyShop.Api.Authorization;
 using DreamyShop.Domain.Shared.Dtos;
+using DreamyShop.Domain.Shared.Dtos.Product;
 using DreamyShop.Logic.Conditions;
 using DreamyShop.Logic.Product;
 using Microsoft.AspNetCore.Authorization;

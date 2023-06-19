@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 
-namespace DreamyShop.Domain.Shared.Dtos
+namespace DreamyShop.Domain.Shared.Dtos.User
 {
     public class UserDto
     {
