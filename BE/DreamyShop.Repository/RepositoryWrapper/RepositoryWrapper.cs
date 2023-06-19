@@ -1,5 +1,6 @@
 ﻿using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Repository.Repositories.Auth;
+using DreamyShop.Repository.Repositories.Bill;
 using DreamyShop.Repository.Repositories.Cart;
 using DreamyShop.Repository.Repositories.Category;
 using DreamyShop.Repository.Repositories.Manufacturer;
@@ -25,6 +26,8 @@ namespace DreamyShop.Repository.RepositoryWrapper
         private ICategoryRepository _category;
         private ICartRepository _cart;
         private ICartDetailRepository _cartDetail;
+        private IBillRepository _bill;
+        private IBillDetailRepository _billDetail;
         private IRoleRepository _role;
         public RepositoryWrapper(
             DreamyShopDbContext context, 
@@ -41,7 +44,10 @@ namespace DreamyShop.Repository.RepositoryWrapper
             IProductVariantValueRepository productVariantValue,
             IProductImageRepository productImage,
             ICartRepository cart,
-            ICartDetailRepository cartDetail)
+            ICartDetailRepository cartDetail,
+            IBillRepository bill,
+            IBillDetailRepository billDetail
+            )
         {
             _context = context;
             _auth = auth;
@@ -58,6 +64,8 @@ namespace DreamyShop.Repository.RepositoryWrapper
             _productImage = productImage;
             _cart = cart;
             _cartDetail = cartDetail;
+            _bill = bill;
+            _billDetail = billDetail;
         }
 
         public IAuthRepository Auth
@@ -224,6 +232,30 @@ namespace DreamyShop.Repository.RepositoryWrapper
                     _cartDetail = new CartDetailRepository(_context);
                 }
                 return _cartDetail;
+            }
+        }
+
+        public IBillRepository Bill
+        {
+            get
+            {
+                if (_bill == null)
+                {
+                    _bill = new BillRepository(_context);
+                }
+                return _bill;
+            }
+        }
+
+        public IBillDetailRepository BillDetail
+        {
+            get
+            {
+                if (_billDetail == null)
+                {
+                    _billDetail = new BillDetailRepository(_context);
+                }
+                return _billDetail;
             }
         }
 
