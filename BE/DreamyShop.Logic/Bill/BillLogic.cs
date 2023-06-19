@@ -5,13 +5,9 @@ using DreamyShop.Domain;
 using DreamyShop.Domain.Shared.Dtos;
 using DreamyShop.Domain.Shared.Types;
 using DreamyShop.EntityFrameworkCore;
+using DreamyShop.Logic.Conditions;
 using DreamyShop.Repository.RepositoryWrapper;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DreamyShop.Logic.Bill
 {
@@ -104,6 +100,43 @@ namespace DreamyShop.Logic.Bill
                     }).ToList()
                 }).OrderByDescending(pp => pp.DateCreated).ToListAsync();
             return new ApiSuccessResult<List<BillDto>>(billDtos);
+        }
+
+        public Task<ApiResult<List<BillDto>>> SearchBill(SearchBillCondition searchBillCondition)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<ApiResult<bool>> UpdateBill(BillUpdateDto billUpdateDto, int userId, int billId)
+        {
+            var bills = _repository.Bill.GetAll().Where(b => b.UserId == userId);
+            if (!bills.Any())
+            {
+                return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
+            }
+            var billUpdate = bills.Where(b => b.Id == billId).ToList().FirstOrDefault();
+            if (billUpdate == null)
+            {
+                return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
+            }
+            billUpdate.Phone ??= billUpdateDto.Phone;
+            billUpdate.Address ??= billUpdateDto.Address;
+            billUpdate.Note ??= billUpdateDto.Note;
+            _repository.Bill.Update(billUpdate);
+            _repository.Save();
+            return new ApiSuccessResult<bool>(true);
+        }
+
+        public async Task<ApiResult<bool>> DeleteBill(int userId, int billId)
+        {
+            var bills = _repository.Bill.GetAll().Where(b => b.UserId == userId);
+            if (!bills.Any())
+            {
+                return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
+            }
+            _repository.Bill.Remove(billId);
+            _repository.Save();
+            return new ApiSuccessResult<bool>(true);
         }
     }
 }

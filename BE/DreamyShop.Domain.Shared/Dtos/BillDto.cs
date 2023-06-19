@@ -39,4 +39,11 @@ namespace DreamyShop.Domain.Shared.Dtos
         public int Quantity { get; set; }
         public double Price { get; set; }
     }
+
+    public class BillUpdateDto
+    {
+        public string Phone { get; set; }
+        public string? Note { get; set; }
+        public string Address { get; set; }
+    }
 }
