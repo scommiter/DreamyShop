@@ -23,9 +23,23 @@ namespace DreamyShop.Logic.Chart
         }
 
         //Get number for dashborad
-        public Task<ApiResult<StatisticDashboardDto>> GetStatisticDashboard()
+        public async Task<ApiResult<StatisticDashboardDto>> GetStatisticDashboard()
         {
-            throw new NotImplementedException();
+            DateTime date = DateTime.Now.AddDays(-7);
+            while (date.DayOfWeek != DayOfWeek.Monday)
+            {
+                date = date.AddDays(-1);
+            }
+            DateTime startDate = date;
+            DateTime endDate = date.AddDays(7);
+            var totalBillLastWeek = _repository.Bill.GetAll().Where(b => b.DateCreated <= endDate && b.DateCreated >= startDate);
+            var result = new StatisticDashboardDto
+            {
+                NumberCustomers = _repository.User.GetAll().Count(),
+                NumberNewOrders = totalBillLastWeek.Count(),
+                TotalPrices = _repository.Bill.GetAll().Select(b => b.TotalMoney).Sum()
+            };
+            return new ApiSuccessResult<StatisticDashboardDto>(result);
         }
         public Task<ApiResult<PricePaymentTypeDto>> GetPricePaymentType()
         {
