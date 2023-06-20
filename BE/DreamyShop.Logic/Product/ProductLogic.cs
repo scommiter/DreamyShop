@@ -10,6 +10,7 @@ using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Logic.Conditions;
 using DreamyShop.Repository.RepositoryWrapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Headers;
 
@@ -296,7 +297,7 @@ namespace DreamyShop.Logic.Product
                         Description = "",
                         Quantity = variant.Quantity,
                         Price = variant.Price,
-                        ThumbnailPicture = "",
+                        ThumbnailPicture = variant.ThumbnailPicture,
                         DateCreated = DateTime.Now
                     };
                     await _repository.ProductVariant.AddAsync(newVariantProduct);
@@ -304,7 +305,7 @@ namespace DreamyShop.Logic.Product
 
                     if (variant.ThumbnailPicture != null && variant.ThumbnailPicture != "")
                     {
-                        AddImageVariantProduct(variant.ThumbnailPicture, newVariantProduct.Id, $"{variant.SKU}Product.png");
+                        AddImageVariantProduct(variant.ThumbnailPicture, $"{variant.SKU}Product.png");
                     }
                 }
             }
@@ -358,15 +359,13 @@ namespace DreamyShop.Logic.Product
                 _repository.Save();
             }
         }
-        private async void AddImageVariantProduct(string fileContext, int variantId, string fileName)
+        private async void AddImageVariantProduct(string fileContext, string fileName)
         {
             string base64Data = fileContext.Split(',')[1];
             byte[] imageBytes = Convert.FromBase64String(base64Data);
             using (MemoryStream memoryStream = new MemoryStream(imageBytes))
             {
                 IFormFile file = new FormFile(memoryStream, 0, memoryStream.Length, Path.GetFileNameWithoutExtension(fileName), $"{fileName}.png");
-
-                var productVariant = await _repository.ProductVariant.GetByIdAsync(variantId);
                 var pathToSave = Directory.GetCurrentDirectory().Replace("BE\\DreamyShop.Api", "FE\\src\\assets\\ImageProducts");
                 if (!Directory.Exists(pathToSave))
                 {
@@ -380,8 +379,6 @@ namespace DreamyShop.Logic.Product
                     {
                         file.CopyTo(stream);
                     }
-                    productVariant.ThumbnailPicture = dbPath;
-                    _repository.Save();
                 }
             }
         }
@@ -455,10 +452,10 @@ namespace DreamyShop.Logic.Product
                 _repository.Save();
 
                 attributes = _repository.Attribute.GetAll().ToList();
-                var attributeCurrentProduct = attributes.Where(a => attributeNames.Contains(a.Name)).ToList();
+                var attributeCurrentProducts = attributes.Where(a => attributeNames.Contains(a.Name)).ToList();
                 if (!isUpdate)
                 {
-                    var newProductAttributes = attributeCurrentProduct.Select(na => new ProductAttribute
+                    var newProductAttributes = attributeCurrentProducts.Select(na => new ProductAttribute
                     {
                         ProductId = productId,
                         AttributeId = na.Id,
@@ -473,7 +470,7 @@ namespace DreamyShop.Logic.Product
                 {
                     var existingProductAttributes = _repository.ProductAttribute.GetProductAttributesByProductId(productId);
                     var paUpdates = new List<ProductAttribute>();
-                    foreach (var attribute in attributeCurrentProduct)
+                    foreach (var attribute in attributeCurrentProducts)
                     {
                         var productAttributeUpdate = existingProductAttributes.Where(e => e.AttributeId == attribute.Id).FirstOrDefault();
                         if (productAttributeUpdate == null)
@@ -486,7 +483,7 @@ namespace DreamyShop.Logic.Product
                             });
                         }
                     }
-                    var deleteProductAttributes = existingProductAttributes.Where(e => !attributeCurrentProduct.Any(a => a.Id == e.AttributeId)).ToList();
+                    var deleteProductAttributes = existingProductAttributes.Where(e => !attributeCurrentProducts.Any(a => a.Id == e.AttributeId)).ToList();
                     _repository.ProductAttribute.RemoveMultiple(deleteProductAttributes);
                     await _repository.ProductAttribute.UpdateRangeAsync(paUpdates);
                     _repository.Save();
@@ -822,35 +819,40 @@ namespace DreamyShop.Logic.Product
         }
 
 
-        //IMPORT LIST OF PRODUCTS
+        #region IMPORT LIST OF PRODUCTS
+
         public async Task<ApiResult<bool>> ImportProducts(List<ProductCreateDto> productCreateDto)
         {
-            var manufacturerNames = productCreateDto.Select(p => p.ManufacturerName);
-            //AddManufacturer(productCreateDto.ManufacturerName);
-            //AddCategory(productCreateDto.CategoryName);
+            var manufacturerNames = productCreateDto.Select(p => p.ManufacturerName).ToList();
+            AddManufacturerList(manufacturerNames);
+            var categoryNames = productCreateDto.Select(p => p.CategoryName).ToList();
+            AddCategoryList(categoryNames);
 
-            //var newProduct = new Domain.Product
-            //{
-            //    ManufacturerId = _repository.Manufacturer.GetByName(productCreateDto.ManufacturerName).Id,
-            //    Name = productCreateDto.Name,
-            //    Code = productCreateDto.Code,
-            //    Slug = productCreateDto.Name.ToLower(),
-            //    SortOrder = 1,
-            //    ProductType = (ProductType)Enum.Parse(typeof(ProductType), productCreateDto.ProductType),
-            //    CategoryId = _repository.Category.GetByName(productCreateDto.CategoryName).Id,
-            //    SeoMetaDescription = null,
-            //    Description = productCreateDto.Description,
-            //    IsActive = productCreateDto.IsActive,
-            //    IsVisibility = productCreateDto.IsVisibility,
-            //    DateCreated = DateTime.Now
-            //};
-            //await _repository.Product.AddAsync(newProduct);
-            //_repository.Save();
+            var newProducts = productCreateDto.Select(p => new Domain.Product
+            {
+                ManufacturerId = _repository.Manufacturer.GetByName(p.ManufacturerName).Id,
+                Name = p.Name,
+                Code = p.Code,
+                Slug = p.Name.ToLower(),
+                SortOrder = 1,
+                ProductType = (ProductType)Enum.Parse(typeof(ProductType), p.ProductType),
+                CategoryId = _repository.Category.GetByName(p.CategoryName).Id,
+                SeoMetaDescription = null,
+                Description = p.Description,
+                IsActive = p.IsActive,
+                IsVisibility = p.IsVisibility,
+                DateCreated = DateTime.Now
+            }).ToList();
+            await _repository.Product.BulkRangeInsert(newProducts);
+            var newProductIds = newProducts.Select(p => p.Id).ToList();
 
+            var productOptions = productCreateDto.Select(p => p.ProductOptions).ToList();
             //if (productCreateDto.ProductOptions.Count > 0 && productCreateDto.VariantProducts.Count > 0)
             //{
             //    AddAttribute(productCreateDto.VariantProducts, productCreateDto.ProductOptions, newProduct.Id);
             //}
+            AddAttributeList(productOptions, newProductIds);
+            var listVariantProduct = productCreateDto.Select(p => p.VariantProducts).ToList();
 
             //AddOrUpdateProductVariant(productCreateDto.VariantProducts, newProduct.Id, false);
             //if (productCreateDto.ProductOptions.Count > 0 && productCreateDto.VariantProducts.Count > 0)
@@ -865,10 +867,10 @@ namespace DreamyShop.Logic.Product
             return new ApiSuccessResult<bool>(true);
         }
 
-        private async void AddManufacturerList(List<string> manufacturerName)
+        private async void AddManufacturerList(List<string> manufacturerNames)
         {
             var manufacturers = _repository.Manufacturer.GetAll();
-            var newManufacturerNames = manufacturerName.Where(mn => !manufacturers.Any(m => m.Name == mn));
+            var newManufacturerNames = manufacturerNames.Where(mn => !manufacturers.Any(m => m.Name == mn));
             var newManufacturers = newManufacturerNames.Select(m => new Domain.Manufacturer
             {
                 Name = m,
@@ -878,8 +880,135 @@ namespace DreamyShop.Logic.Product
                 IsVisibility = true,
                 IsActive = true,
                 Country = ""
-            });
-
+            }).ToList();
+            await _repository.Manufacturer.BulkRangeInsert(newManufacturers);
         }
+
+        private async void AddCategoryList(List<string> categoryNames)
+        {
+            var categories = _repository.Category.GetAll();
+            var newCategoryNames = categoryNames.Where(mn => !categories.Any(m => m.Name == mn));
+            var newCategories = newCategoryNames.Select(c => new Domain.ProductCategory
+            {
+                Name = c,
+                Code = c.ToUpper(),
+                Slug = c.ToLower(),
+                CoverPicture = "none",
+                IsVisibility = true,
+                IsActive = true,
+                SortOrder = 1,
+                ParentId = null,
+                SeoMetaDescription = "None",
+                DateCreated = DateTime.Now,
+            }).ToList();
+            await _repository.Category.BulkRangeInsert(newCategories);
+        }
+
+        private async void AddAttributeList(List<Dictionary<string, List<string>>> productOptions, List<int> productIds)
+        {
+            var attributes = _repository.Attribute.GetAll().ToList();
+            productOptions.ForEach(p => p.Values.ToList().ForEach(list => list.RemoveAll(item => item == "")));
+            var attributeNames = productOptions
+                .SelectMany(po => po.Select(pad => pad.Key.Standard()))
+                .Distinct()
+                .ToList();
+            var existingAttributes = _repository.Attribute
+                .GetAll()
+                .Where(attr => attributeNames.Contains(attr.Name.Standard()))
+                .ToList();
+
+            var newAttributes = attributeNames
+                .Except(existingAttributes.Select(attr => attr.Name.Standard()))
+                .Select(an => new Domain.Attribute
+                {
+                    Name = an,
+                    Code = an.ToUpper(),
+                    IsActive = true,
+                    IsVisibility = true,
+                    IsUnique = true,
+                    Note = "",
+                    DateCreated = DateTime.Now
+                })
+                .ToList();
+            await _repository.Attribute.BulkRangeInsert(newAttributes);
+
+            attributes = _repository.Attribute.GetAll().ToList();
+            var attributeCurrentProduct = attributes.Where(a => attributeNames.Contains(a.Name)).ToList();
+            int indexProduct = 0;
+            var newProductAttributeList = attributeCurrentProduct.Select(a => new ProductAttribute
+            {
+                ProductId = productIds[indexProduct++],
+                AttributeId = a.Id,
+                StatusID = 1,
+                DateCreated = DateTime.Now,
+                DateUpdated = DateTime.Now
+            }).ToList();
+            await _repository.ProductAttribute.BulkRangeInsert(newProductAttributeList);
+        }
+        private async void AddProductVariantList(List<List<VariantProduct>> variantProductList, List<int> productIds)
+        {
+            var newVariantProductList = new List<ProductVariant>();
+            var pictureVariantList = new Dictionary<string, string>();
+
+            for (var indexProduct = 0; indexProduct < variantProductList.Count; indexProduct++)
+            {
+                var variantProducts = variantProductList[indexProduct];
+                variantProducts.RemoveAll(product => product.SKU == "");
+
+                if (variantProducts != null)
+                {
+                    foreach (var variant in variantProducts)
+                    {
+                        newVariantProductList.Add(new ProductVariant
+                        {
+                            ProductId = productIds[indexProduct],
+                            SKU = variant.SKU,
+                            IsVisibility = true,
+                            IsActive = true,
+                            Description = "",
+                            Quantity = variant.Quantity,
+                            Price = variant.Price,
+                            ThumbnailPicture = variant.ThumbnailPicture,
+                            DateCreated = DateTime.Now
+                        });
+
+                        if (!string.IsNullOrEmpty(variant.ThumbnailPicture))
+                        {
+                            pictureVariantList.Add(variant.ThumbnailPicture, $"{variant.SKU}Product.png");
+                        }
+                    }
+                }
+            }
+            await _repository.ProductVariant.BulkRangeInsert(newVariantProductList);
+            AddImageVariantProductList(pictureVariantList);
+        }
+        private async void AddImageVariantProductList(Dictionary<string, string> pictureVariantList)
+        {
+            foreach (var pricture in pictureVariantList)
+            {
+                string base64Data = pricture.Key.Split(',')[1];
+                byte[] imageBytes = Convert.FromBase64String(base64Data);
+                using (MemoryStream memoryStream = new MemoryStream(imageBytes))
+                {
+                    IFormFile file = new FormFile(memoryStream, 0, memoryStream.Length, Path.GetFileNameWithoutExtension(pricture.Value), $"{pricture.Value}.png");
+                    var pathToSave = Directory.GetCurrentDirectory().Replace("BE\\DreamyShop.Api", "FE\\src\\assets\\ImageProducts");
+                    if (!Directory.Exists(pathToSave))
+                    {
+                        Directory.CreateDirectory(pathToSave);
+                    }
+                    if (file.Length > 0)
+                    {
+                        var fullPath = Path.Combine(pathToSave, pricture.Value);
+                        var dbPath = pricture.Value;
+                        using (var stream = new FileStream(fullPath, FileMode.Create))
+                        {
+                            file.CopyTo(stream);
+                        }
+                    }
+                }
+            }
+        }
+
+        #endregion
     }
 }
