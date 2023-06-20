@@ -56,11 +56,21 @@ namespace DreamyShop.Logic.Chart
             }
             DateTime startDate = date;
             DateTime endDate = date.AddDays(7);
-            var totalBillLastWeek = _repository.Bill.GetAll().Where(b => b.DateCreated <= endDate && b.DateCreated >= startDate);
+            var test = startDate.Date;
+            var totalBillLastWeek = _repository.Bill.GetAll().Where(b => b.DateCreated.Date <= endDate.Date && b.DateCreated.Date >= startDate.Date);
+            var totalMoney = totalBillLastWeek.Select(t => t.TotalMoney).Sum();
             var totalBillPerDayOfWeek = totalBillLastWeek.GroupBy(t => t.DateCreated)
-                                           .Select(g => new { DayOfWeek = g.Key, TotalMoney = g.Select(t => t.TotalMoney).Sum() }).ToList();
+                                           .Select(g => new { 
+                                               Day = g.Key, 
+                                               PercentMoney = Math.Round(((g.Select(t => t.TotalMoney).Sum() / totalMoney) * 100), 2) 
+                                           }).ToList();
             var chartWeeklySales = new ChartWeeklySaleDtos();
-            totalBillPerDayOfWeek.ForEach(t => chartWeeklySales.PercentOfSalesByDay.Add(t.TotalMoney));
+            var percentsOfDay = new Dictionary<string, double>();
+            foreach (var item in totalBillPerDayOfWeek)
+            {
+                percentsOfDay.Add(item.Day.DayOfWeek.ToString(), item.PercentMoney);
+            }
+            chartWeeklySales.PercentOfSalesByDay = percentsOfDay;
             return new ApiSuccessResult<ChartWeeklySaleDtos>(chartWeeklySales);
         }
         public async Task<ApiResult<ChartCategoryDtos>> GetChartCategory()

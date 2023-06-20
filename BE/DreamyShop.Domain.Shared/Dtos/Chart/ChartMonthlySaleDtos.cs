@@ -2,7 +2,7 @@
 {
     public class ChartWeeklySaleDtos
     {
-        public List<double> PercentOfSalesByDay { get; set; }
+        public Dictionary<string, double> PercentOfSalesByDay { get; set; }
     }
     public class ChartMonthlySaleDtos
     {
