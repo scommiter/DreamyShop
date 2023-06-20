@@ -335,3 +335,14 @@ E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.Identity.Cl
 E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\NetTopologySuite.dll
 E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\NetTopologySuite.IO.SqlServerBytes.dll
 E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\SQLitePCLRaw.core.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Azure.Core.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Azure.Identity.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\EFCore.BulkExtensions.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.Data.Sqlite.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Sqlite.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.Identity.Client.Extensions.Msal.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\NetTopologySuite.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\NetTopologySuite.IO.SqlServerBytes.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\SQLitePCLRaw.core.dll

@@ -12,6 +12,7 @@ using DreamyShop.Repository.RepositoryWrapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml.ConditionalFormatting;
 using System.Net.Http.Headers;
 
 namespace DreamyShop.Logic.Product
@@ -847,23 +848,11 @@ namespace DreamyShop.Logic.Product
             var newProductIds = newProducts.Select(p => p.Id).ToList();
 
             var productOptions = productCreateDto.Select(p => p.ProductOptions).ToList();
-            //if (productCreateDto.ProductOptions.Count > 0 && productCreateDto.VariantProducts.Count > 0)
-            //{
-            //    AddAttribute(productCreateDto.VariantProducts, productCreateDto.ProductOptions, newProduct.Id);
-            //}
-            AddAttributeList(productOptions, newProductIds);
             var listVariantProduct = productCreateDto.Select(p => p.VariantProducts).ToList();
-
-            //AddOrUpdateProductVariant(productCreateDto.VariantProducts, newProduct.Id, false);
-            //if (productCreateDto.ProductOptions.Count > 0 && productCreateDto.VariantProducts.Count > 0)
-            //{
-            //    AddOrUpdateProductAttributeValue(productCreateDto.ProductOptions, newProduct.Id, false);
-            //    AddOrUpdateProductVariantValue(newProduct.Id, productCreateDto.VariantProducts, productCreateDto.ProductOptions);
-            //}
-            //if (productCreateDto.Images != null && productCreateDto.Images.Count > 1)
-            //{
-            //    UploadProductImages(productCreateDto.Images, newProduct.Id);
-            //}
+            AddAttributeList(productOptions, newProductIds);
+            AddProductVariantList(listVariantProduct, newProductIds);
+            AddProductAttributeValueList(productOptions, newProductIds);
+            AddProductVariantValueList(newProductIds, listVariantProduct, productOptions);
             return new ApiSuccessResult<bool>(true);
         }
 
@@ -948,8 +937,6 @@ namespace DreamyShop.Logic.Product
         private async void AddProductVariantList(List<List<VariantProduct>> variantProductList, List<int> productIds)
         {
             var newVariantProductList = new List<ProductVariant>();
-            var pictureVariantList = new Dictionary<string, string>();
-
             for (var indexProduct = 0; indexProduct < variantProductList.Count; indexProduct++)
             {
                 var variantProducts = variantProductList[indexProduct];
@@ -971,44 +958,58 @@ namespace DreamyShop.Logic.Product
                             ThumbnailPicture = variant.ThumbnailPicture,
                             DateCreated = DateTime.Now
                         });
-
-                        if (!string.IsNullOrEmpty(variant.ThumbnailPicture))
-                        {
-                            pictureVariantList.Add(variant.ThumbnailPicture, $"{variant.SKU}Product.png");
-                        }
                     }
                 }
             }
             await _repository.ProductVariant.BulkRangeInsert(newVariantProductList);
-            AddImageVariantProductList(pictureVariantList);
         }
-        private async void AddImageVariantProductList(Dictionary<string, string> pictureVariantList)
+        private async void AddProductAttributeValueList(List<Dictionary<string, List<string>>> productOptionsList, List<int> productIds)
         {
-            foreach (var pricture in pictureVariantList)
+            var newProductAttributes = new List<ProductAttributeValue>();
+            var attributes = _repository.Attribute.GetAll().ToList();
+            for (int i = 0; i < productOptionsList.Count; i++)
             {
-                string base64Data = pricture.Key.Split(',')[1];
-                byte[] imageBytes = Convert.FromBase64String(base64Data);
-                using (MemoryStream memoryStream = new MemoryStream(imageBytes))
+                var attributeCreates = productOptionsList[i].ToList();
+                foreach (var p in productOptionsList[i])
                 {
-                    IFormFile file = new FormFile(memoryStream, 0, memoryStream.Length, Path.GetFileNameWithoutExtension(pricture.Value), $"{pricture.Value}.png");
-                    var pathToSave = Directory.GetCurrentDirectory().Replace("BE\\DreamyShop.Api", "FE\\src\\assets\\ImageProducts");
-                    if (!Directory.Exists(pathToSave))
+                    newProductAttributes.AddRange(p.Value.Select(an => new ProductAttributeValue
                     {
-                        Directory.CreateDirectory(pathToSave);
-                    }
-                    if (file.Length > 0)
-                    {
-                        var fullPath = Path.Combine(pathToSave, pricture.Value);
-                        var dbPath = pricture.Value;
-                        using (var stream = new FileStream(fullPath, FileMode.Create))
-                        {
-                            file.CopyTo(stream);
-                        }
-                    }
+                        AttributeId = attributes.Where(attr => attr.Name.Standard() ==
+                                        attributeCreates.Where(a => a.Value.Select(p => p.Standard()).Contains(an.Standard())).FirstOrDefault().Key.Standard())
+                                        .FirstOrDefault().Id,
+                        ProductId = productIds[i],
+                        Value = an,
+                        DateCreated = DateTime.Now
+                    }));
                 }
             }
+            await _repository.ProductAttributeValue.BulkRangeInsert(newProductAttributes);
         }
-
+        private async void AddProductVariantValueList(List<int> productIds, List<List<VariantProduct>> productVariantValuesList, List<Dictionary<string, List<string>>> productOptionsList)
+        {
+            var attributes = _repository.Attribute.GetAll().ToList();
+            productVariantValuesList.ForEach(p => p.RemoveAll(product => product.SKU == ""));
+            var newProductVariantValues = new List<ProductVariantValue>();
+            for (int i = 0; i < productVariantValuesList.Count; i++)
+            {
+                var productVariantValues = productVariantValuesList[i];
+                var productVariants = _repository.ProductVariant.GetAll().Where(p => p.ProductId == productIds[i]).ToList();
+                var productAttributeValues = _repository.ProductAttributeValue.GetAll().ToList();
+                foreach (var productVariantValue in productVariantValues)
+                {
+                    newProductVariantValues.AddRange(productVariantValue.AttributeNames.Select(
+                        p => new ProductVariantValue
+                        {
+                            ProductVariantId = productVariants.Where(pV => pV.SKU == productVariantValue.SKU).FirstOrDefault().Id,
+                            ProductId = productIds[i],
+                            AttributeId = attributes.Where(a => a.Name.Standard()
+                                    == productOptionsList[i].Where(po => po.Value.Select(poo => poo.Standard()).Contains(p.Standard())).Select(po => po.Key.Standard()).FirstOrDefault()).FirstOrDefault().Id,
+                            ProductAttributeValueId = productAttributeValues.Where(a => a.Value.Standard() == p.Standard() && a.ProductId == productIds[i]).FirstOrDefault().Id
+                        }));
+                }
+            }
+            await _repository.ProductVariantValue.BulkRangeInsert(newProductVariantValues);
+        }
         #endregion
     }
 }
