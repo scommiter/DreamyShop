@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -10,7 +10,11 @@ import {
   ApexTitleSubtitle,
   ApexXAxis,
   ApexYAxis,
+  ChartComponent,
 } from 'ng-apexcharts';
+import { Subject, takeUntil } from 'rxjs';
+import { ChartService } from 'src/app/services/chart.service';
+import { ChartWeeklySaleDto } from 'src/app/shared/models/chart-weekly-sale-dto';
 
 export type ChartSaleVolumns = {
   series: ApexAxisChartSeries;
@@ -35,15 +39,33 @@ export type ChartCircles = {
   templateUrl: './admin-dash-board.component.html',
   styleUrls: ['./admin-dash-board.component.scss'],
 })
-export class AdminDashBoardComponent implements OnInit {
+export class AdminDashBoardComponent implements OnInit, OnDestroy {
+  @ViewChild('chart', { static: false })
+  chart!: ChartComponent;
+  private ngUnsubscribe = new Subject<void>();
   public chartSaleVolumns: ChartSaleVolumns;
   public chartCircles: ChartCircles;
-  constructor() {
+  constructor(private chartService: ChartService) {
+    chartService
+      .getChartWeeklySale()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (response: ChartWeeklySaleDto) => {
+          this.chartSaleVolumns.series.map(
+            (p) => (p.data = response.percentOfSalesByDay)
+          );
+          console.log(
+            'this.chartSaleVolumns.series :>> ',
+            this.chartSaleVolumns.series
+          );
+        },
+        error: () => {},
+      });
     this.chartSaleVolumns = {
       series: [
         {
           name: 'Inflation',
-          data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2],
+          data: [0, 0, 0, 0, 0, 0, 0],
         },
       ],
       chart: {
@@ -158,7 +180,13 @@ export class AdminDashBoardComponent implements OnInit {
         },
       ],
     };
+    console.log('aaaaaaaaaaaaaaaaaaaa :>> ', this.chartSaleVolumns.series);
   }
 
   ngOnInit(): void {}
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
 }

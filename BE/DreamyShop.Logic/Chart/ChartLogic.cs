@@ -65,11 +65,31 @@ namespace DreamyShop.Logic.Chart
                                                PercentMoney = Math.Round(((g.Select(t => t.TotalMoney).Sum() / totalMoney) * 100), 2) 
                                            }).ToList();
             var chartWeeklySales = new ChartWeeklySaleDtos();
-            var percentsOfDay = new Dictionary<string, double>();
-            foreach (var item in totalBillPerDayOfWeek)
+            var percentsOfDay = new List<double>();
+            var indexBill = 0;
+            for (int i = 0; i < 7; i++)
             {
-                percentsOfDay.Add(item.Day.DayOfWeek.ToString(), item.PercentMoney);
+                var dayInWeek = startDate.DayOfWeek;
+                if(indexBill >= totalBillPerDayOfWeek.Count())
+                {
+                    percentsOfDay.Add(0);
+                    startDate = startDate.AddDays(1);
+                    continue;
+                }
+                if (dayInWeek != totalBillPerDayOfWeek[indexBill].Day.DayOfWeek)
+                {
+                    percentsOfDay.Add(0);
+                    startDate = startDate.AddDays(1);
+                    continue;
+                }
+                percentsOfDay.Add(totalBillPerDayOfWeek[indexBill].PercentMoney);
+                indexBill++;
+                startDate = startDate.AddDays(1);
             }
+            //foreach (var item in totalBillPerDayOfWeek)
+            //{
+            //    percentsOfDay.Add(item.Day.DayOfWeek.ToString(), item.PercentMoney);
+            //}
             chartWeeklySales.PercentOfSalesByDay = percentsOfDay;
             return new ApiSuccessResult<ChartWeeklySaleDtos>(chartWeeklySales);
         }
