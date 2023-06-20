@@ -42,7 +42,12 @@ namespace DreamyShop.Logic.Chart
             }
             DateTime startDate = date;
             DateTime endDate = date.AddDays(7);
-            throw new NotImplementedException();
+            var totalBillLastWeek = _repository.Bill.GetAll().Where(b => b.DateCreated <= endDate && b.DateCreated >= startDate);
+            var totalBillPerDayOfWeek = totalBillLastWeek.GroupBy(t => t.DateCreated)
+                                           .Select(g => new { DayOfWeek = g.Key, TotalMoney = g.Select(t => t.TotalMoney).Sum() }).ToList();
+            var chartWeeklySales = new ChartWeeklySaleDtos();
+            totalBillPerDayOfWeek.ForEach(t => chartWeeklySales.PercentOfSalesByDay.Add(t.TotalMoney));
+            return new ApiSuccessResult<ChartWeeklySaleDtos>(chartWeeklySales);
         }
         public async Task<ApiResult<ChartCategoryDtos>> GetChartCategory()
         {
