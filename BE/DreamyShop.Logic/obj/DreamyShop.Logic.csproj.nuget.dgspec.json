@@ -340,6 +340,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "EFCore.BulkExtensions": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "EPPlus": {
               "target": "Package",
               "version": "[6.2.2, )"

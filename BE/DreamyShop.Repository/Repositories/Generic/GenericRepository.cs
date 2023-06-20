@@ -124,5 +124,17 @@ namespace DreamyShop.Repository.Repositories.Generic
                 transaction.Commit();
             }
         }
+
+        public async Task BulkInsertDivideData(IList<T> entities, int batchSize)
+        {
+            int totalRecords = entities.Count;
+            int batches = (int)Math.Ceiling((double)totalRecords / batchSize);
+
+            for (int i = 0; i < batches; i++)
+            {
+                var batchEntities = entities.Skip(i * batchSize).Take(batchSize).ToList();
+                _context.BulkInsert<T>(batchEntities);
+            }
+        }
     }
 }

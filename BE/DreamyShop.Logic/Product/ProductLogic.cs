@@ -11,9 +11,8 @@ using DreamyShop.Logic.Conditions;
 using DreamyShop.Repository.RepositoryWrapper;
 using EFCore.BulkExtensions;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
-using OfficeOpenXml.ConditionalFormatting;
+using EFCore.BulkExtensions;
 using System.Net.Http.Headers;
 
 namespace DreamyShop.Logic.Product
@@ -114,7 +113,7 @@ namespace DreamyShop.Logic.Product
             var pageResult = new PageResult<ProductDto>()
             {
                 Items = productDtos,
-                Totals = productDtos.Count()
+                Totals = totalCount
             };
             return new ApiSuccessResult<PageResult<ProductDto>>(pageResult);
         }
@@ -875,7 +874,7 @@ namespace DreamyShop.Logic.Product
                 IsActive = true,
                 Country = ""
             }).ToList();
-            await _repository.Manufacturer.BulkRangeInsert(newManufacturers);
+            await _repository.Manufacturer.BulkInsertDivideData(newManufacturers, 500);
         }
 
         private async void AddCategoryList(List<string> categoryNames)
@@ -895,7 +894,7 @@ namespace DreamyShop.Logic.Product
                 SeoMetaDescription = "None",
                 DateCreated = DateTime.Now,
             }).ToList();
-            await _repository.Category.BulkRangeInsert(newCategories);
+            await _repository.Category.BulkInsertDivideData(newCategories, 500);
         }
 
         private async void AddAttributeList(List<Dictionary<string, List<string>>> productOptions, List<int> productIds)
@@ -921,7 +920,7 @@ namespace DreamyShop.Logic.Product
                     DateCreated = DateTime.Now
                 })
                 .ToList();
-            await _repository.Attribute.BulkRangeInsert(newAttributes);
+            await _repository.Attribute.BulkInsertDivideData(newAttributes, 500);
 
             //attributes = _repository.Attribute.GetAll().ToList();
             //var attributeNameLists = productOptions
@@ -963,7 +962,7 @@ namespace DreamyShop.Logic.Product
                 }).ToList());
                 indexProduct++;
             }
-            await _repository.ProductAttribute.BulkRangeInsert(newProductAttributeList);
+            await _repository.ProductAttribute.BulkInsertDivideData(newProductAttributeList, 500);
         }
         private async void AddProductVariantList(List<List<VariantProduct>> variantProductList, List<int> productIds)
         {
@@ -992,7 +991,7 @@ namespace DreamyShop.Logic.Product
                     }
                 }
             }
-            await _repository.ProductVariant.BulkRangeInsert(newVariantProductList);
+            await _repository.ProductVariant.BulkInsertDivideData(newVariantProductList, 500);
         }
         private async void AddProductAttributeValueList(List<Dictionary<string, List<string>>> productOptionsList, List<int> productIds)
         {
@@ -1014,7 +1013,7 @@ namespace DreamyShop.Logic.Product
                     }));
                 }
             }
-            await _repository.ProductAttributeValue.BulkRangeInsert(newProductAttributes);
+            await _repository.ProductAttributeValue.BulkInsertDivideData(newProductAttributes, 500);
         }
         private async void AddProductVariantValueList(List<int> productIds, List<List<VariantProduct>> productVariantValuesList, List<Dictionary<string, List<string>>> productOptionsList)
         {
@@ -1039,7 +1038,7 @@ namespace DreamyShop.Logic.Product
                         }));
                 }
             }
-            await _repository.ProductVariantValue.BulkRangeInsert(newProductVariantValues);
+            await _repository.ProductVariantValue.BulkInsertDivideData(newProductVariantValues, 500);
         }
         #endregion
     }

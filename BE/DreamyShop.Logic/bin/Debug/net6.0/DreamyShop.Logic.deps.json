@@ -12,6 +12,7 @@
           "DreamyShop.Domain.Shared": "1.0.0",
           "DreamyShop.EntityFrameworkCore": "1.0.0",
           "DreamyShop.Repository": "1.0.0",
+          "EFCore.BulkExtensions": "6.0.0",
           "EPPlus": "6.2.2",
           "Microsoft.AspNetCore.Cryptography.KeyDerivation": "6.0.15",
           "Microsoft.AspNetCore.Http": "2.1.34",
