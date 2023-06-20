@@ -43,10 +43,11 @@ namespace DreamyShop.Api.Controllers
             {
                 return BadRequest(exportfile);
             }
-            foreach (var productCreateDto in exportfile.Result)
-            {
-                await _productService.CreateProduct(productCreateDto);
-            }
+            await _productService.ImportProducts(exportfile.Result);
+            //foreach (var productCreateDto in exportfile.Result)
+            //{
+            //    await _productService.CreateProduct(productCreateDto);
+            //}
             return Ok();
         }
     }

@@ -104,11 +104,7 @@ namespace DreamyShop.Repository.Repositories.Generic
         //BULK CRUD
         public async Task BulkRangeInsert(IList<T> entities)
         {
-            using (var transaction = _context.Database.BeginTransaction())
-            {
-                await _context.BulkInsertAsync<T>(entities);
-                transaction.Commit();
-            }  
+            await _context.BulkInsertAsync<T>(entities);
         }
 
         public async Task BulkRangeUpdate(IList<T> entities)

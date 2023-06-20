@@ -9,6 +9,7 @@ using DreamyShop.Domain.Shared.Types;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Logic.Conditions;
 using DreamyShop.Repository.RepositoryWrapper;
+using EFCore.BulkExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
@@ -106,14 +107,14 @@ namespace DreamyShop.Logic.Product
                     SKU = pv.SKU,
                     Quantity = pv.Quantity,
                     Price = pv.Price,
-                    Image = pv.ThumbnailPicture
+                    Image = pv.ThumbnailPicture == null ? "" : pv.ThumbnailPicture
                 }).OrderByDescending(a => a.AttributeNames.FirstOrDefault()).ToList()
             }).OrderByDescending(p => p.DateCreated).ToList();
 
             var pageResult = new PageResult<ProductDto>()
             {
                 Items = productDtos,
-                Totals = totalCount
+                Totals = productDtos.Count()
             };
             return new ApiSuccessResult<PageResult<ProductDto>>(pageResult);
         }
@@ -845,11 +846,15 @@ namespace DreamyShop.Logic.Product
                 DateCreated = DateTime.Now
             }).ToList();
             await _repository.Product.BulkRangeInsert(newProducts);
-            var newProductIds = newProducts.Select(p => p.Id).ToList();
+
+            var productCodes = newProducts.Select(p => p.Code);
+            var products = _repository.Product.GetAll().Where(p => productCodes.Contains(p.Code));
+            var newProductIds = products.Select(p => p.Id).ToList();
 
             var productOptions = productCreateDto.Select(p => p.ProductOptions).ToList();
             var listVariantProduct = productCreateDto.Select(p => p.VariantProducts).ToList();
             AddAttributeList(productOptions, newProductIds);
+            AddProductAttribute(productOptions, newProductIds);
             AddProductVariantList(listVariantProduct, newProductIds);
             AddProductAttributeValueList(productOptions, newProductIds);
             AddProductVariantValueList(newProductIds, listVariantProduct, productOptions);
@@ -901,10 +906,7 @@ namespace DreamyShop.Logic.Product
                 .SelectMany(po => po.Select(pad => pad.Key.Standard()))
                 .Distinct()
                 .ToList();
-            var existingAttributes = _repository.Attribute
-                .GetAll()
-                .Where(attr => attributeNames.Contains(attr.Name.Standard()))
-                .ToList();
+            var existingAttributes = attributes.Where(attr => attributeNames.Contains(attr.Name.Standard())).ToList();
 
             var newAttributes = attributeNames
                 .Except(existingAttributes.Select(attr => attr.Name.Standard()))
@@ -921,17 +923,46 @@ namespace DreamyShop.Logic.Product
                 .ToList();
             await _repository.Attribute.BulkRangeInsert(newAttributes);
 
-            attributes = _repository.Attribute.GetAll().ToList();
-            var attributeCurrentProduct = attributes.Where(a => attributeNames.Contains(a.Name)).ToList();
+            //attributes = _repository.Attribute.GetAll().ToList();
+            //var attributeNameLists = productOptions
+            //  .Select(po => po.Select(pad => pad.Key.Standard()).ToList()).ToList();
+            //var newProductAttributeList = new List<ProductAttribute>();
+            //int indexProduct = 0;
+            //foreach (var item in attributeNameLists)
+            //{
+            //    var attributeCurrentProduct = attributes.Where(a => item.Contains(a.Name)).ToList();
+            //    newProductAttributeList.AddRange(attributeCurrentProduct.Select(a => new ProductAttribute
+            //    {
+            //        ProductId = productIds[indexProduct],
+            //        AttributeId = a.Id,
+            //        StatusID = 1,
+            //        DateCreated = DateTime.Now,
+            //        DateUpdated = DateTime.Now
+            //    }).ToList());
+            //    indexProduct++;
+            //}
+            //await _repository.ProductAttribute.BulkRangeInsert(newProductAttributeList);
+        }
+        private async void AddProductAttribute(List<Dictionary<string, List<string>>> productOptions, List<int> productIds)
+        {
+            var attributes = _repository.Attribute.GetAll().ToList();
+            var attributeNameLists = productOptions
+              .Select(po => po.Select(pad => pad.Key.Standard()).ToList()).ToList();
+            var newProductAttributeList = new List<ProductAttribute>();
             int indexProduct = 0;
-            var newProductAttributeList = attributeCurrentProduct.Select(a => new ProductAttribute
+            foreach (var item in attributeNameLists)
             {
-                ProductId = productIds[indexProduct++],
-                AttributeId = a.Id,
-                StatusID = 1,
-                DateCreated = DateTime.Now,
-                DateUpdated = DateTime.Now
-            }).ToList();
+                var attributeCurrentProduct = attributes.Where(a => item.Contains(a.Name)).ToList();
+                newProductAttributeList.AddRange(attributeCurrentProduct.Select(a => new ProductAttribute
+                {
+                    ProductId = productIds[indexProduct],
+                    AttributeId = a.Id,
+                    StatusID = 1,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = DateTime.Now
+                }).ToList());
+                indexProduct++;
+            }
             await _repository.ProductAttribute.BulkRangeInsert(newProductAttributeList);
         }
         private async void AddProductVariantList(List<List<VariantProduct>> variantProductList, List<int> productIds)

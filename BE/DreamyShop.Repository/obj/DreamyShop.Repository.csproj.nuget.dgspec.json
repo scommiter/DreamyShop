@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj": {}
+    "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj": {}
   },
   "projects": {
-    "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj": {
+    "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj",
+        "projectUniqueName": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj",
         "projectName": "DreamyShop.Common",
-        "projectPath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj",
-        "packagesPath": "C:\\Users\\linh.nguyen22\\.nuget\\packages\\",
-        "outputPath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Common\\obj\\",
+        "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj",
+        "packagesPath": "C:\\Users\\Linh master\\.nuget\\packages\\",
+        "outputPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\linh.nguyen22\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Linh master\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -54,8 +54,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -64,24 +63,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj": {
+    "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
+        "projectUniqueName": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
         "projectName": "DreamyShop.Domain.Shared",
-        "projectPath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
-        "packagesPath": "C:\\Users\\linh.nguyen22\\.nuget\\packages\\",
-        "outputPath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\obj\\",
+        "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
+        "packagesPath": "C:\\Users\\Linh master\\.nuget\\packages\\",
+        "outputPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\linh.nguyen22\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Linh master\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -122,8 +121,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -132,24 +130,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj": {
+    "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj",
+        "projectUniqueName": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj",
         "projectName": "DreamyShop.Domain",
-        "projectPath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj",
-        "packagesPath": "C:\\Users\\linh.nguyen22\\.nuget\\packages\\",
-        "outputPath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain\\obj\\",
+        "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj",
+        "packagesPath": "C:\\Users\\Linh master\\.nuget\\packages\\",
+        "outputPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\linh.nguyen22\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Linh master\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -163,8 +161,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj": {
-                "projectPath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj"
+              "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj": {
+                "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj"
               }
             }
           }
@@ -200,8 +198,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -210,24 +207,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj": {
+    "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj",
+        "projectUniqueName": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj",
         "projectName": "DreamyShop.EntityFrameworkCore",
-        "projectPath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj",
-        "packagesPath": "C:\\Users\\linh.nguyen22\\.nuget\\packages\\",
-        "outputPath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Infrastructure\\obj\\",
+        "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj",
+        "packagesPath": "C:\\Users\\Linh master\\.nuget\\packages\\",
+        "outputPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\linh.nguyen22\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Linh master\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -241,8 +238,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj": {
-                "projectPath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj"
+              "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj": {
+                "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj"
               }
             }
           }
@@ -278,8 +275,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -288,24 +284,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj": {
+    "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj",
+        "projectUniqueName": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj",
         "projectName": "DreamyShop.Repository",
-        "projectPath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj",
-        "packagesPath": "C:\\Users\\linh.nguyen22\\.nuget\\packages\\",
-        "outputPath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Repository\\obj\\",
+        "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj",
+        "packagesPath": "C:\\Users\\Linh master\\.nuget\\packages\\",
+        "outputPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\linh.nguyen22\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Linh master\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -319,17 +315,17 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj": {
-                "projectPath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj"
+              "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj": {
+                "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj"
               },
-              "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj": {
-                "projectPath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj"
+              "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj": {
+                "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj"
               },
-              "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj": {
-                "projectPath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj"
+              "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj": {
+                "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj"
               },
-              "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj": {
-                "projectPath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj"
+              "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj": {
+                "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj"
               }
             }
           }
@@ -369,8 +365,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -379,7 +374,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

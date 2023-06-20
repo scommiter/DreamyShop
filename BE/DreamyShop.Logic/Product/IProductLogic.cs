@@ -16,5 +16,6 @@ namespace DreamyShop.Logic.Product
         Task<ApiResult<IList<ProductDto>>> SearchProduct(SearchProductCondition condition, PagingRequest pagingRequest);
         Task<ApiResult<bool>> UploadImage(IFormFile file, int productId);
         Task<ApiResult<bool>> UploadMultipleImage(List<IFormFile> files, int productId);
+        Task<ApiResult<bool>> ImportProducts(List<ProductCreateDto> productCreateDto);
     }
 }
