@@ -3,21 +3,21 @@
     <li>
       <i class="pi pi-inbox"></i>
       <span class="text">
-        <h3>1020</h3>
+        <h3>{{ numberNewOrders }}</h3>
         <p>Đơn hàng mới</p>
       </span>
     </li>
     <li>
       <i class="pi pi-users"></i>
       <span class="text">
-        <h3>2343</h3>
+        <h3>{{ numberCustomers }}</h3>
         <p>Lượng khách</p>
       </span>
     </li>
     <li>
       <i class="pi pi-dollar"></i>
       <span class="text">
-        <h3>$432124</h3>
+        <h3>{{ totalPrices }}</h3>
         <p>Tổng thu</p>
       </span>
     </li>
@@ -26,6 +26,7 @@
   <div class="chart-revenue">
     <div class="chart-area">
       <apx-chart
+        *ngIf="dataLoaded"
         [series]="chartSaleVolumns.series"
         [chart]="chartSaleVolumns.chart"
         [dataLabels]="chartSaleVolumns.dataLabels"

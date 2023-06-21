@@ -8,5 +8,17 @@
     {
         public List<double> PercentOfSalesCurrentMonth { get; set; }
         public List<double> PercentOfSalesLastMonth { get; set; }
-    } 
+    }
+
+    public class ChartYearSaleDtos
+    {
+        public List<DataChartYear> DataChartPerMonthOfYear { get; set; }
+    }
+
+    public class DataChartYear
+    {
+        public double Target { get; set; }
+        public double TotalPrice { get; set; }
+    }
+
 }

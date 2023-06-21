@@ -14,7 +14,10 @@ import {
 } from 'ng-apexcharts';
 import { Subject, takeUntil } from 'rxjs';
 import { ChartService } from 'src/app/services/chart.service';
-import { ChartWeeklySaleDto } from 'src/app/shared/models/chart-weekly-sale-dto';
+import {
+  ChartWeeklySaleDto,
+  StatisticDashboardDto,
+} from 'src/app/shared/models/chart-weekly-sale-dto';
 
 export type ChartSaleVolumns = {
   series: ApexAxisChartSeries;
@@ -43,10 +46,133 @@ export class AdminDashBoardComponent implements OnInit, OnDestroy {
   @ViewChild('chart', { static: false })
   chart!: ChartComponent;
   private ngUnsubscribe = new Subject<void>();
-  public chartSaleVolumns: ChartSaleVolumns;
-  public chartCircles: ChartCircles;
+  public chartSaleVolumns: ChartSaleVolumns = {
+    series: [
+      {
+        name: 'Inflation',
+        data: [0, 0, 0, 0, 0, 0, 0],
+      },
+    ],
+    chart: {
+      height: 350,
+      type: 'bar',
+    },
+    plotOptions: {
+      bar: {
+        dataLabels: {
+          position: 'top', // top, center, bottom
+        },
+      },
+    },
+    dataLabels: {
+      enabled: true,
+      formatter: function (val) {
+        return val + '%';
+      },
+      offsetY: -20,
+      style: {
+        fontSize: '12px',
+        colors: ['#304758'],
+      },
+    },
+
+    xaxis: {
+      categories: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
+      position: 'top',
+      labels: {
+        offsetY: -18,
+      },
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+      crosshairs: {
+        fill: {
+          type: 'gradient',
+          gradient: {
+            colorFrom: '#D8E3F0',
+            colorTo: '#BED1E6',
+            stops: [0, 100],
+            opacityFrom: 0.4,
+            opacityTo: 0.5,
+          },
+        },
+      },
+      tooltip: {
+        enabled: true,
+        offsetY: -35,
+      },
+    },
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shade: 'light',
+        type: 'horizontal',
+        shadeIntensity: 0.25,
+        gradientToColors: undefined,
+        inverseColors: true,
+        opacityFrom: 1,
+        opacityTo: 1,
+        stops: [50, 0, 100, 100],
+      },
+    },
+    yaxis: {
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+      labels: {
+        show: false,
+        formatter: function (val) {
+          return val + '%';
+        },
+      },
+    },
+    title: {
+      text: 'Sơ đồ lượng bán tuần vừa qua',
+      floating: true,
+      offsetY: 320,
+      align: 'center',
+      margin: 25,
+      style: {
+        color: '#444',
+        fontWeight: 700,
+      },
+    },
+  };
+  dataLoaded: boolean = false;
+  public chartCircles: ChartCircles = {
+    series: [44, 55, 13, 43, 22],
+    chart: {
+      width: 380,
+      type: 'pie',
+    },
+    labels: ['Thời trang', 'Đồ điện tử', 'Đồ ăn', 'Đồ gia dụng', 'Khác'],
+    responsive: [
+      {
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 200,
+          },
+          legend: {
+            position: 'bottom',
+          },
+        },
+      },
+    ],
+  };
   constructor(private chartService: ChartService) {
-    chartService
+    this.getDataChartSaleVolumn();
+    this.getDataStatisticDashboard();
+  }
+
+  getDataChartSaleVolumn() {
+    this.chartService
       .getChartWeeklySale()
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
@@ -54,133 +180,30 @@ export class AdminDashBoardComponent implements OnInit, OnDestroy {
           this.chartSaleVolumns.series.map(
             (p) => (p.data = response.percentOfSalesByDay)
           );
-          console.log(
-            'this.chartSaleVolumns.series :>> ',
-            this.chartSaleVolumns.series
-          );
+          this.dataLoaded = true;
         },
         error: () => {},
       });
-    this.chartSaleVolumns = {
-      series: [
-        {
-          name: 'Inflation',
-          data: [0, 0, 0, 0, 0, 0, 0],
-        },
-      ],
-      chart: {
-        height: 350,
-        type: 'bar',
-      },
-      plotOptions: {
-        bar: {
-          dataLabels: {
-            position: 'top', // top, center, bottom
-          },
-        },
-      },
-      dataLabels: {
-        enabled: true,
-        formatter: function (val) {
-          return val + '%';
-        },
-        offsetY: -20,
-        style: {
-          fontSize: '12px',
-          colors: ['#304758'],
-        },
-      },
+  }
 
-      xaxis: {
-        categories: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
-        position: 'top',
-        labels: {
-          offsetY: -18,
+  numberNewOrders: number = 0;
+  numberCustomers: number = 0;
+  totalPrices: any;
+  getDataStatisticDashboard() {
+    this.chartService
+      .getStatisticDashboard()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (response: StatisticDashboardDto) => {
+          this.numberNewOrders = response.numberNewOrders;
+          this.numberCustomers = response.numberCustomers;
+          this.totalPrices = response.totalPrices.toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'VND',
+          });
         },
-        axisBorder: {
-          show: false,
-        },
-        axisTicks: {
-          show: false,
-        },
-        crosshairs: {
-          fill: {
-            type: 'gradient',
-            gradient: {
-              colorFrom: '#D8E3F0',
-              colorTo: '#BED1E6',
-              stops: [0, 100],
-              opacityFrom: 0.4,
-              opacityTo: 0.5,
-            },
-          },
-        },
-        tooltip: {
-          enabled: true,
-          offsetY: -35,
-        },
-      },
-      fill: {
-        type: 'gradient',
-        gradient: {
-          shade: 'light',
-          type: 'horizontal',
-          shadeIntensity: 0.25,
-          gradientToColors: undefined,
-          inverseColors: true,
-          opacityFrom: 1,
-          opacityTo: 1,
-          stops: [50, 0, 100, 100],
-        },
-      },
-      yaxis: {
-        axisBorder: {
-          show: false,
-        },
-        axisTicks: {
-          show: false,
-        },
-        labels: {
-          show: false,
-          formatter: function (val) {
-            return val + '%';
-          },
-        },
-      },
-      title: {
-        text: 'Sơ đồ lượng bán tuần vừa qua',
-        floating: true,
-        offsetY: 320,
-        align: 'center',
-        margin: 25,
-        style: {
-          color: '#444',
-          fontWeight: 700,
-        },
-      },
-    };
-    this.chartCircles = {
-      series: [44, 55, 13, 43, 22],
-      chart: {
-        width: 380,
-        type: 'pie',
-      },
-      labels: ['Thời trang', 'Đồ điện tử', 'Đồ ăn', 'Đồ gia dụng', 'Khác'],
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200,
-            },
-            legend: {
-              position: 'bottom',
-            },
-          },
-        },
-      ],
-    };
-    console.log('aaaaaaaaaaaaaaaaaaaa :>> ', this.chartSaleVolumns.series);
+        error: () => {},
+      });
   }
 
   ngOnInit(): void {}

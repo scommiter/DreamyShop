@@ -34,7 +34,7 @@ namespace DreamyShop.Logic.Chart
             }
             DateTime startDate = date;
             DateTime endDate = date.AddDays(7);
-            var totalBillLastWeek = _repository.Bill.GetAll().Where(b => b.DateCreated <= endDate && b.DateCreated >= startDate);
+            var totalBillLastWeek = _repository.Bill.GetAll().Where(b => b.DateCreated < endDate && b.DateCreated >= startDate);
             var result = new StatisticDashboardDto
             {
                 NumberCustomers = _repository.User.GetAll().Count(),
@@ -45,7 +45,7 @@ namespace DreamyShop.Logic.Chart
         }
         public async Task<ApiResult<PricePaymentTypeDto>> GetPricePaymentType()
         {
-            var bills = _repository.Bill.GetAll();
+            var bills = _repository.Bill.GetAll().ToList();
             var totalPrices = bills.Select(p => p.TotalMoney).Sum();
             var groupPaymentTypes = bills.GroupBy(p => p.PaymentType).ToList();
             var pricePaymentType = new PricePaymentTypeDto
@@ -53,7 +53,7 @@ namespace DreamyShop.Logic.Chart
                 TotalPrices = totalPrices,
                 Banking = groupPaymentTypes.Where(g => g.Key == PaymentType.BANK).Select(p => p.Select(t => t.TotalMoney).Sum()).FirstOrDefault(),
                 Cash = groupPaymentTypes.Where(g => g.Key == PaymentType.CASH).Select(p => p.Select(t => t.TotalMoney).Sum()).FirstOrDefault(),
-                VisaMasterCard = groupPaymentTypes.Where(g => g.Key == PaymentType.VISA || g.Key == PaymentType.MASTERCARD).Select(p => p.Select(t => t.TotalMoney).Sum()).FirstOrDefault(),
+                VisaMasterCard = groupPaymentTypes.Where(g => g.Key == PaymentType.VISA || g.Key == PaymentType.MASTERCARD).Select(p => p.Select(t => t.TotalMoney).Sum()).Sum(),
             };
             return new ApiSuccessResult<PricePaymentTypeDto>(pricePaymentType);
         }
@@ -150,11 +150,19 @@ namespace DreamyShop.Logic.Chart
             var checkLastDate = weekendMonths.Last();
             foreach (var week in weekendMonths)
             {
-                if(week == checkFirstDate && weekendMonths.Count == 5)  
+                if(week.Day < 4)
                 {
                     continue;
                 }
-                if(week != checkLastDate)
+                if(week == checkFirstDate && weekendMonths.Count == 5 && week.Day > 3)  
+                {
+                    continue;
+                }
+                if (week == checkLastDate && weekendMonths.Count == 5 && week.Day > checkLastDate.Day)
+                {
+                    continue;
+                }
+                if (week != checkLastDate)
                 {
                     endD = week;
                 }
@@ -162,10 +170,15 @@ namespace DreamyShop.Logic.Chart
                 {
                     endD = lastDate;
                 }
-                result.Add(((totalBills.Where(b => b.DateCreated <= endD && b.DateCreated >= startD).Select(p => p.TotalMoney).Sum()) / totalPriceOfMonth) * 100);
+                result.Add(Math.Round(((totalBills.Where(b => b.DateCreated <= endD && b.DateCreated >= startD).Select(p => p.TotalMoney).Sum()) / totalPriceOfMonth) * 100, 2));
                 startD = week;
             }
             return result;  
+        }
+
+        public async Task<ApiResult<ChartYearSaleDtos>> GetChartInYearSale()
+        {
+            throw new NotImplementedException();
         }
     }
 }
