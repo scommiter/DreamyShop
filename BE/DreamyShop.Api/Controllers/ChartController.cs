@@ -23,5 +23,12 @@ namespace DreamyShop.Api.Controllers
             var result = await _chartService.GetChartWeeklySale();
             return Ok(result.Result);
         }
+
+        [HttpGet("getChartMonthlySale")]
+        public async Task<IActionResult> GetChartMonthlySale()
+        {
+            var result = await _chartService.GetChartMonthlySale();
+            return Ok(result.Result);
+        }
     }
 }

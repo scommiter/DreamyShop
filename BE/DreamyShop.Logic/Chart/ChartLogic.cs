@@ -4,6 +4,7 @@ using DreamyShop.Domain.Shared.Dtos.Chart;
 using DreamyShop.Domain.Shared.Types;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Repository.RepositoryWrapper;
+using OfficeOpenXml.ConditionalFormatting;
 
 namespace DreamyShop.Logic.Chart
 {
@@ -106,9 +107,65 @@ namespace DreamyShop.Logic.Chart
         }
 
         //Get all sales by week of two month
-        public Task<ApiResult<ChartMonthlySaleDtos>> GetChartMonthlySale()
+        public async Task<ApiResult<ChartMonthlySaleDtos>> GetChartMonthlySale()
         {
-            throw new NotImplementedException();
+            var chartMonthlySaleDtos = new ChartMonthlySaleDtos();
+            var totalBills = _repository.Bill.GetAll().ToList();
+            //LAST MONTH
+            var today = DateTime.Today;
+            var month = new DateTime(today.Year, today.Month, 1);
+            var firstDayLastMonth = month.AddMonths(-1);
+            var lastDayLastMonth = month.AddDays(-1);
+            var dateLastMonths = Enumerable.Range(1, DateTime.DaysInMonth(firstDayLastMonth.Year, firstDayLastMonth.Month)).Select(n => new DateTime(firstDayLastMonth.Year, firstDayLastMonth.Month, n));
+            var weekendLastMonths = from d in dateLastMonths
+                           where d.DayOfWeek == DayOfWeek.Monday
+                           select d;
+            var totalPriceLastMonth = totalBills.Where(b => b.DateCreated <= lastDayLastMonth && b.DateCreated >= firstDayLastMonth).Select(p => p.TotalMoney).Sum();
+            chartMonthlySaleDtos.PercentOfSalesLastMonth = CaculatePercentPricesWeeks(weekendLastMonths.ToList(), firstDayLastMonth, lastDayLastMonth, totalBills, totalPriceLastMonth);
+
+            // CURRENT MONTH
+            DateTime date = DateTime.Today;
+            var firstDayCurrentMonth = lastDayLastMonth.AddDays(1);
+            var lastDayCurrentMonth = month.AddMonths(1).AddDays(-1);
+            var dateCurrentMonths = Enumerable.Range(1, DateTime.DaysInMonth(date.Year, date.Month)).Select(n => new DateTime(date.Year, date.Month, n));
+            var weekendCurrentMonths = from d in dateCurrentMonths
+                           where d.DayOfWeek == DayOfWeek.Monday
+                           select d;
+            var totalPriceCurrentMonth = totalBills.Where(b => b.DateCreated <= lastDayCurrentMonth && b.DateCreated >= firstDayCurrentMonth).Select(p => p.TotalMoney).Sum();
+            chartMonthlySaleDtos.PercentOfSalesCurrentMonth = CaculatePercentPricesWeeks(weekendCurrentMonths.ToList(), firstDayCurrentMonth, lastDayCurrentMonth, totalBills, totalPriceCurrentMonth);
+
+            return new ApiSuccessResult<ChartMonthlySaleDtos>(chartMonthlySaleDtos);
+        }
+        private List<double> CaculatePercentPricesWeeks(
+            List<DateTime> weekendMonths, 
+            DateTime startDate, 
+            DateTime lastDate, 
+            List<Domain.Bill> totalBills,
+            double totalPriceOfMonth)
+        {
+            var result = new List<double>();
+            var startD = startDate;
+            var endD = new DateTime();
+            var checkFirstDate = weekendMonths.ToList().First();
+            var checkLastDate = weekendMonths.Last();
+            foreach (var week in weekendMonths)
+            {
+                if(week == checkFirstDate && weekendMonths.Count == 5)  
+                {
+                    continue;
+                }
+                if(week != checkLastDate)
+                {
+                    endD = week;
+                }
+                else
+                {
+                    endD = lastDate;
+                }
+                result.Add(((totalBills.Where(b => b.DateCreated <= endD && b.DateCreated >= startD).Select(p => p.TotalMoney).Sum()) / totalPriceOfMonth) * 100);
+                startD = week;
+            }
+            return result;  
         }
     }
 }
