@@ -54,7 +54,7 @@ export class AppMenuComponent implements OnInit {
           {
             label: 'Người dùng',
             icon: 'pi pi-fw pi-user',
-            routerLink: ['/utilities/icons'],
+            routerLink: ['/admin/user'],
           },
         ],
       },
@@ -64,12 +64,12 @@ export class AppMenuComponent implements OnInit {
           {
             label: 'Phiếu nhập hàng',
             icon: 'pi pi-fw pi-ticket',
-            routerLink: ['/utilities/icons'],
+            routerLink: ['/admin/ware-house'],
           },
           {
             label: 'Tồn kho',
             icon: 'pi pi-fw pi-server',
-            routerLink: ['/utilities/icons'],
+            routerLink: ['/admin/inventory'],
           },
         ],
       },
@@ -79,7 +79,7 @@ export class AppMenuComponent implements OnInit {
           {
             label: 'Quản lý đơn hàng',
             icon: 'pi pi-fw pi-tablet',
-            routerLink: ['/utilities/icons'],
+            routerLink: ['/admin/order'],
           },
         ],
       },

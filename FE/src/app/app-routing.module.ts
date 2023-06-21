@@ -57,6 +57,45 @@ const routes: Routes = [
       ).then((m) => m.StatisticalAccessModule),
     component: AppLayoutComponent,
   },
+  {
+    path: 'admin/user',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./catalog/user/user.module').then((m) => m.UserModule),
+    component: AppLayoutComponent,
+  },
+  {
+    path: 'admin/user',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./catalog/user/user.module').then((m) => m.UserModule),
+    component: AppLayoutComponent,
+  },
+  {
+    path: 'admin/ware-house',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./catalog/ware-house/warehouse/warehouse.module').then(
+        (m) => m.WarehouseModule
+      ),
+    component: AppLayoutComponent,
+  },
+  {
+    path: 'admin/inventory',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./catalog/ware-house/inventory/inventory.module').then(
+        (m) => m.InventoryModule
+      ),
+    component: AppLayoutComponent,
+  },
+  {
+    path: 'admin/order',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./catalog/order/order.module').then((m) => m.OrderModule),
+    component: AppLayoutComponent,
+  },
 ];
 
 @NgModule({
