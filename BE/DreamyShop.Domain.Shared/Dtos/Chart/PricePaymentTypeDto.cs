@@ -5,6 +5,6 @@
         public double TotalPrices { get; set; }
         public double Cash { get; set; }
         public double Banking { get; set; }
-        public double Debt { get; set; }
+        public double VisaMasterCard { get; set; }
     }
 }

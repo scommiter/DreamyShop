@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DreamyShop.Common.Results;
 using DreamyShop.Domain.Shared.Dtos.Chart;
+using DreamyShop.Domain.Shared.Types;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Repository.RepositoryWrapper;
 
@@ -41,9 +42,19 @@ namespace DreamyShop.Logic.Chart
             };
             return new ApiSuccessResult<StatisticDashboardDto>(result);
         }
-        public Task<ApiResult<PricePaymentTypeDto>> GetPricePaymentType()
+        public async Task<ApiResult<PricePaymentTypeDto>> GetPricePaymentType()
         {
-            throw new NotImplementedException();
+            var bills = _repository.Bill.GetAll();
+            var totalPrices = bills.Select(p => p.TotalMoney).Sum();
+            var groupPaymentTypes = bills.GroupBy(p => p.PaymentType).ToList();
+            var pricePaymentType = new PricePaymentTypeDto
+            {
+                TotalPrices = totalPrices,
+                Banking = groupPaymentTypes.Where(g => g.Key == PaymentType.BANK).Select(p => p.Select(t => t.TotalMoney).Sum()).FirstOrDefault(),
+                Cash = groupPaymentTypes.Where(g => g.Key == PaymentType.CASH).Select(p => p.Select(t => t.TotalMoney).Sum()).FirstOrDefault(),
+                VisaMasterCard = groupPaymentTypes.Where(g => g.Key == PaymentType.VISA || g.Key == PaymentType.MASTERCARD).Select(p => p.Select(t => t.TotalMoney).Sum()).FirstOrDefault(),
+            };
+            return new ApiSuccessResult<PricePaymentTypeDto>(pricePaymentType);
         }
 
         //Get all sales by day of the last week
@@ -86,10 +97,6 @@ namespace DreamyShop.Logic.Chart
                 indexBill++;
                 startDate = startDate.AddDays(1);
             }
-            //foreach (var item in totalBillPerDayOfWeek)
-            //{
-            //    percentsOfDay.Add(item.Day.DayOfWeek.ToString(), item.PercentMoney);
-            //}
             chartWeeklySales.PercentOfSalesByDay = percentsOfDay;
             return new ApiSuccessResult<ChartWeeklySaleDtos>(chartWeeklySales);
         }
