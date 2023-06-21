@@ -14,7 +14,6 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { AdminDashBoardComponent } from './catalog/admin-dash-board/admin-dash-board.component';
 import { StatisticalPriceComponent } from './catalog/statistical/statistical-price/statistical-price.component';
 import { StatisticalAccessComponent } from './catalog/statistical/statistical-access/statistical-access.component';
-import { UserComponent } from './catalog/user/user.component';
 import { InventoryComponent } from './catalog/ware-house/inventory/inventory.component';
 import { OrderComponent } from './catalog/order/order.component';
 import { WarehouseComponent } from './catalog/ware-house/warehouse/warehouse.component';
@@ -25,7 +24,6 @@ import { WarehouseComponent } from './catalog/ware-house/warehouse/warehouse.com
     AdminDashBoardComponent,
     StatisticalPriceComponent,
     StatisticalAccessComponent,
-    UserComponent,
     WarehouseComponent,
     InventoryComponent,
     OrderComponent,
