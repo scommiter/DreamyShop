@@ -46,7 +46,7 @@ namespace DreamyShop.Logic.Product
                                             ProductId = b.ProductId
                                         });
 
-            var query = (from p in _context.Products.OrderByDescending(p => p.DateCreated).Skip((pagingRequest.Page - 1) * pagingRequest.Limit).Take(pagingRequest.Limit)
+            var query = (from p in _context.Products
                          join m in _context.Manufacturers on p.ManufacturerId equals m.Id
                          join c in _context.ProductCategories on p.CategoryId equals c.Id
                          join pv in _context.ProductVariants on p.Id equals pv.ProductId into pvN
@@ -68,7 +68,8 @@ namespace DreamyShop.Logic.Product
                              ip
                          });
 
-            var groupedQuery = query.GroupBy(item => item.Product.Id)
+            var groupedQuery = query.OrderByDescending(p => p.Product.DateCreated).Skip((pagingRequest.Page - 1) * pagingRequest.Limit).Take(pagingRequest.Limit)
+                                    .GroupBy(item => item.Product.Id)
                                     .Select(group => new
                                     {
                                         ProductId = group.Key,
