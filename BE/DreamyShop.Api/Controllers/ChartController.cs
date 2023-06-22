@@ -1,4 +1,5 @@
-﻿using DreamyShop.Logic.Chart;
+﻿using DreamyShop.Domain.Shared.Dtos.Chart;
+using DreamyShop.Logic.Chart;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DreamyShop.Api.Controllers
@@ -42,6 +43,13 @@ namespace DreamyShop.Api.Controllers
         public async Task<IActionResult> GetPricePaymentType()
         {
             var result = await _chartService.GetPricePaymentType();
+            return Ok(result.Result);
+        }
+
+        [HttpGet("getChartInYearSale")]
+        public async Task<IActionResult> GetChartInYearSale([FromForm] TargetMonthDtos targetMonthDtos, bool isSetTarGet)
+        {
+            var result = await _chartService.GetChartInYearSale(targetMonthDtos, isSetTarGet);
             return Ok(result.Result);
         }
     }
