@@ -14,6 +14,10 @@
     {
         public List<DataChartYear> DataChartPerMonthOfYear { get; set; }
     }
+    public class TargetMonthDtos
+    {
+        public List<double> TargetOfMonths { get; set; }
+    }
 
     public class DataChartYear
     {

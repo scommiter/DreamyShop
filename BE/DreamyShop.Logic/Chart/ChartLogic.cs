@@ -176,9 +176,37 @@ namespace DreamyShop.Logic.Chart
             return result;  
         }
 
-        public async Task<ApiResult<ChartYearSaleDtos>> GetChartInYearSale()
+        public async Task<ApiResult<ChartYearSaleDtos>> GetChartInYearSale(TargetMonthDtos targetMonthDtos, bool isSetTarGet)
         {
-            throw new NotImplementedException();
+            var result = new ChartYearSaleDtos();
+            var targets = new TargetMonthDtos();
+            targets.TargetOfMonths = new List<double>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+            if (isSetTarGet == true)
+            {
+                targets = targetMonthDtos;
+            }
+            int year = DateTime.Now.Year;
+            DateTime firstDayInCurrentYear = new DateTime(year, 1, 1);
+            DateTime lastDayInCurrentYear = new DateTime(year, 12, 31);
+            var montshBill = _repository.Bill.GetAll()
+                    .Where(bill => bill.DateCreated >= firstDayInCurrentYear && bill.DateCreated <= lastDayInCurrentYear)
+                    .ToList();
+            var totalMoney = montshBill.Select(l => l.TotalMoney).Sum();
+            var last12MonthBillGroup = montshBill.GroupBy(p => p.DateCreated.Month)
+                                        .Select(g => new
+                                        {
+                                            Month = g.Key,
+                                            TotalPrice = g.Select(t => t.TotalMoney).Sum()
+                                        }).ToList();
+            for (int i = 0; i < 12; i++)
+            {
+                result.DataChartPerMonthOfYear.Add(new DataChartYear
+                {
+                    Target = targets.TargetOfMonths[0],
+                    TotalPrice = last12MonthBillGroup[i].TotalPrice
+                });
+            }
+            return new ApiSuccessResult<ChartYearSaleDtos>(result);
         }
     }
 }
