@@ -8,7 +8,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { ButtonModule } from 'primeng/button';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FileUploadModule } from 'primeng/fileupload';
 import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from 'primeng/inputtext';
@@ -21,11 +21,23 @@ import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DividerModule } from 'primeng/divider';
 import { ToastModule } from 'primeng/toast';
+import { AssignRoleComponent } from './assign-role/assign-role.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { UserCreateComponent } from './user-create/user-create.component';
+import { DialogService } from 'primeng/dynamicdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { InputMaskModule } from 'primeng/inputmask';
 
 @NgModule({
-  declarations: [UserComponent],
+  declarations: [
+    UserComponent,
+    AssignRoleComponent,
+    UserEditComponent,
+    UserCreateComponent,
+  ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     UserRoutingModule,
     PanelModule,
     DropdownModule,
@@ -45,6 +57,8 @@ import { ToastModule } from 'primeng/toast';
     ConfirmDialogModule,
     DividerModule,
     ToastModule,
+    InputMaskModule,
   ],
+  providers: [DialogService, MessageService, ConfirmationService],
 })
 export class UserModule {}

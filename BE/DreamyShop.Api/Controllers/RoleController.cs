@@ -20,29 +20,29 @@ namespace DreamyShop.Api.Controllers
             _roleLogic = roleLogic;
         }
 
-        [HttpPost("assignRole")]
-        [Authorize]
-        [Admin]
-        public async Task<IActionResult> AssignRole(int userId, [FromForm] List<byte> roleIds)
+        [HttpPost("assignRole/{id}")]
+        //[Authorize]
+        //[Admin]
+        public async Task<IActionResult> AssignRole(int id, [FromBody] List<byte> roleIds)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var result = await _roleLogic.AssignRole(userId, roleIds);
+            var result = await _roleLogic.AssignRole(id, roleIds);
             return Ok(result);
         }
 
-        [HttpPost("updateRole")]
-        [Authorize]
-        [Admin]
-        public async Task<IActionResult> UpdateRole(int userId, [FromForm] List<byte> roleIds)
+        [HttpPut("updateRole/{id}")]
+        //[Authorize]
+        //[Admin]
+        public async Task<IActionResult> UpdateRole(int id, [FromBody] List<byte> roleIds)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var result = await _roleLogic.UpdateRole(userId, roleIds);
+            var result = await _roleLogic.UpdateRole(id, roleIds);
             return Ok(result);
         }
     }

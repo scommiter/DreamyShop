@@ -28,7 +28,11 @@
           <div class="fix-role">Sửa quyền</div>
         </th>
         <th>
-          <p-button label="Create" icon="pi pi-plus"></p-button>
+          <p-button
+            label="Create"
+            icon="pi pi-plus"
+            (click)="createUser()"
+          ></p-button>
         </th>
       </tr>
     </ng-template>
@@ -60,7 +64,7 @@
         </td>
         <td>
           <div class="fix-role">
-            <i class="pi pi-eye"></i>
+            <i class="pi pi-eye" (click)="showAssignRole(user.id)"></i>
           </div>
         </td>
         <td>
@@ -69,11 +73,13 @@
             pRipple
             icon="pi pi-pencil"
             class="p-button-rounded p-button-success mr-2"
+            (click)="updateUser(user.id)"
           ></button>
           <button
             pButton
             pRipple
             icon="pi pi-trash"
+            (click)="deleteUser()"
             class="p-button-rounded p-button-warning"
           ></button>
         </td>

@@ -1,0 +1,17 @@
+<h3>{{ userName }}</h3>
+<div class="card flex justify-content-center">
+  <div class="flex flex-column gap-2">
+    <div *ngFor="let role of roles" class="field-checkbox">
+      <p-checkbox
+        name="group"
+        [value]="role"
+        [(ngModel)]="selectedRoles"
+        [inputId]="role.key"
+      ></p-checkbox>
+      <label [for]="role.key">{{ role.name }}</label>
+    </div>
+  </div>
+</div>
+<div class="button-check">
+  <p-button icon="pi pi-check" (onClick)="assignRole()"></p-button>
+</div>

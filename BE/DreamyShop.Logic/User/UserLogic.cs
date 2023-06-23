@@ -9,6 +9,7 @@ using DreamyShop.Logic.Auth.Security;
 using DreamyShop.Logic.Conditions;
 using DreamyShop.Repository.Helpers;
 using DreamyShop.Repository.RepositoryWrapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace DreamyShop.Logic.User
@@ -91,22 +92,54 @@ namespace DreamyShop.Logic.User
             return new ApiSuccessResult<IList<UserDto>>(_mapper.Map<List<UserDto>>(userPagingsResult));
         }
 
-        public async Task<ApiResult<bool>> UpdateUser(string userId, UserUpdateDto userUpdateDto)
+        public async Task<ApiResult<bool>> UpdateUser(int userId, UserUpdateDto userUpdateDto)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Id == int.Parse(userId));
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
             if (user == null)
             {
                 return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
             }
-            if (_context.Users.IsEmailExist(userUpdateDto.Email) || _context.Users.IsPhoneExist(userUpdateDto.Phone))
-            {
-                return new ApiErrorResult<bool>((int)ErrorCodes.DuplicatedData);
-            }
+            //if (_context.Users.IsEmailExist(userUpdateDto.Email) || _context.Users.IsPhoneExist(userUpdateDto.Phone))
+            //{
+            //    return new ApiErrorResult<bool>((int)ErrorCodes.DuplicatedData);
+            //}
             var updateUser = _mapper.Map(userUpdateDto, user);
+            if (!String.IsNullOrEmpty(updateUser.Avatar))
+            {
+                var fileName = updateUser.FullName.RemoveAllWhiteSpace().ToLower() + ".png";
+                AddImage(updateUser.Avatar, fileName);
+                updateUser.Avatar = fileName;
+            }
+
             _repository.Auth.Update(updateUser);
             _repository.Save();
             return new ApiSuccessResult<bool>(true);
         }
+
+        private void AddImage(string fileContext, string fileName)
+        {
+            string base64Data = fileContext.Split(',')[1];
+            byte[] imageBytes = Convert.FromBase64String(base64Data);
+            using (MemoryStream memoryStream = new MemoryStream(imageBytes))
+            {
+                IFormFile file = new FormFile(memoryStream, 0, memoryStream.Length, Path.GetFileNameWithoutExtension(fileName), $"{fileName}.png");
+                var pathToSave = Directory.GetCurrentDirectory().Replace("BE\\DreamyShop.Api", "FE\\src\\assets\\ImageProducts");
+                if (!Directory.Exists(pathToSave))
+                {
+                    Directory.CreateDirectory(pathToSave);
+                }
+                if (file.Length > 0)
+                {
+                    var fullPath = Path.Combine(pathToSave, fileName);
+                    var dbPath = fileName;
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+                }
+            }
+        }
+
 
         public async Task<ApiResult<bool>> DeleteUser(string userId)
         {

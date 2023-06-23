@@ -22,19 +22,19 @@ namespace DreamyShop.Api.Controllers
             _userService = userService;
         }
 
-        [HttpPut("update")]
-        [Authorize]
-        [Admin]
-        public async Task<IActionResult> UpdateUser([FromForm] UserUpdateDto userUpdateDto)
+        [HttpPut("update/{id}")]
+        //[Authorize]
+        //[Admin]
+        public async Task<IActionResult> UpdateUser(int id, [FromBody] UserUpdateDto userUpdateDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var user = (AuthEntity)HttpContext.Items["Auth"];
-            if (user == null)
-            {
-                return NotFound(user);
-            }
-            var result = await _userService.UpdateUser(user.UserID, userUpdateDto);
+            //var user = (AuthEntity)HttpContext.Items["Auth"];
+            //if (user == null)
+            //{
+            //    return NotFound(user);
+            //}
+            var result = await _userService.UpdateUser(id, userUpdateDto);
             if (result.Result == null)
             {
                 return BadRequest(result);
