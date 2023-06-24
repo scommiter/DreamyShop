@@ -7,7 +7,6 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
@@ -46,9 +45,7 @@ export class ProductCreateComponent implements OnDestroy {
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
-    private router: Router,
-    private messageService: MessageService,
-    private route: ActivatedRoute
+    private router: Router
   ) {
     this.formProductCreate = this.fb.group({
       name: new FormControl('', [

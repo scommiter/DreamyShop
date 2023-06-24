@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -15,7 +15,9 @@ import { Subject, takeUntil } from 'rxjs';
 import { ChartService } from 'src/app/services/chart.service';
 import {
   ChartMonthlySaleDto,
+  ChartYearSaleDtos,
   PricePaymentTypeDto,
+  TargetMonthDtos,
 } from 'src/app/shared/models/chart-weekly-sale-dto';
 
 export type ChartPriceOptions = {
@@ -44,7 +46,7 @@ export type ChartProfitOptions = {
   templateUrl: './statistical-price.component.html',
   styleUrls: ['./statistical-price.component.scss'],
 })
-export class StatisticalPriceComponent implements OnDestroy {
+export class StatisticalPriceComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject<void>();
   public chartPriceOptions: ChartPriceOptions = {
     series: [
@@ -81,11 +83,11 @@ export class StatisticalPriceComponent implements OnDestroy {
     series: [
       {
         name: 'Mục tiêu',
-        data: [44, 55, 57, 56, 61, 58, 63, 60, 66, 55, 23, 45],
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       },
       {
         name: 'Doanh thu thực tế',
-        data: [76, 85, 101, 98, 87, 105, 91, 114, 94, 23, 54, 34],
+        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       },
     ],
     chart: {
@@ -142,9 +144,12 @@ export class StatisticalPriceComponent implements OnDestroy {
     },
   };
   dataLoaded: boolean = false;
-  constructor(private chartService: ChartService) {
+  constructor(private chartService: ChartService) {}
+
+  ngOnInit(): void {
     this.getDataChartMonthlySale();
     this.getDataPricePaymentType();
+    this.getChartInYearSale();
   }
 
   getDataChartMonthlySale() {
@@ -192,6 +197,34 @@ export class StatisticalPriceComponent implements OnDestroy {
               currency: 'VND',
             }
           );
+        },
+        error: () => {},
+      });
+  }
+
+  dataProfitLoaded: boolean = false;
+  getChartInYearSale() {
+    console.log('Vao roi nha :>> ');
+    this.chartService
+      .getChartInYearSale()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (response: ChartYearSaleDtos) => {
+          console.log('LINHHHHHHHHHHHHHHHHHHHHHHH :>> ', response);
+          this.chartProfitOptions.series[0].data =
+            response.dataChartPerMonthOfYear.map(
+              (dataChart) => dataChart.target
+            );
+
+          this.chartProfitOptions.series[1].data =
+            response.dataChartPerMonthOfYear.map(
+              (dataChart) => dataChart.totalPrice
+            );
+          console.log(
+            'this.chartProfitOptions.series :>> ',
+            this.chartProfitOptions.series
+          );
+          this.dataProfitLoaded = true;
         },
         error: () => {},
       });

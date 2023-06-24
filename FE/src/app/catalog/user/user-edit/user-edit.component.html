@@ -11,6 +11,15 @@
         type="text"
         class="w-full"
       />
+      <em
+        *ngIf="
+          formUserUpdate.controls['fullName']?.errors &&
+          isFieldEmpty('fullName')
+        "
+        class="text-danger"
+      >
+        Tên sản phẩm có độ dài từ 3 đến 20 ký tự
+      </em>
     </div>
     <div class="field col-12">
       <label for="genderType" class="block"
@@ -51,7 +60,12 @@
       <label for="avatar" class="block">Ảnh</label>
       <div class="image-user">
         <div class="image-container" *ngIf="avatar !== null">
-          <img [src]="avatar" height="50" width="50" />
+          <img [src]="avatar" width="100" *ngIf="isSelectedFile === true" />
+          <img
+            src="../../../assets/ImageProducts/{{ avatar }}"
+            alt="picture"
+            *ngIf="isSelectedFile === false"
+          />
         </div>
         <input
           type="file"
@@ -73,6 +87,14 @@
         type="text"
         class="w-full"
       />
+      <em
+        *ngIf="
+          formUserUpdate.controls['email']?.errors && isFieldEmpty('email')
+        "
+        class="text-danger"
+      >
+        Vui lòng nhập email
+      </em>
     </div>
     <div class="field col-12">
       <label for="phone" class="block">Số điện thoại</label>
@@ -83,6 +105,14 @@
         type="text"
         class="w-full"
       />
+      <em
+        *ngIf="
+          formUserUpdate.controls['phone']?.errors && isFieldEmpty('phone')
+        "
+        class="text-danger"
+      >
+        Vui lòng nhập số điện thoại
+      </em>
     </div>
     <div class="field col-12">
       <label for="identityID" class="block">Số căn cước</label>

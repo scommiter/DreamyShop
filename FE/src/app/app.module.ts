@@ -14,9 +14,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { AdminDashBoardComponent } from './catalog/admin-dash-board/admin-dash-board.component';
 import { StatisticalPriceComponent } from './catalog/statistical/statistical-price/statistical-price.component';
 import { StatisticalAccessComponent } from './catalog/statistical/statistical-access/statistical-access.component';
-import { InventoryComponent } from './catalog/ware-house/inventory/inventory.component';
 import { OrderComponent } from './catalog/order/order.component';
-import { WarehouseComponent } from './catalog/ware-house/warehouse/warehouse.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +22,6 @@ import { WarehouseComponent } from './catalog/ware-house/warehouse/warehouse.com
     AdminDashBoardComponent,
     StatisticalPriceComponent,
     StatisticalAccessComponent,
-    WarehouseComponent,
-    InventoryComponent,
     OrderComponent,
   ],
   imports: [

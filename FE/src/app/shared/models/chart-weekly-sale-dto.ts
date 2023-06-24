@@ -19,3 +19,16 @@ export interface StatisticDashboardDto {
   numberCustomers: number;
   totalPrices: number;
 }
+
+export interface TargetMonthDtos {
+  targetOfMonths: number[];
+}
+
+export interface ChartYearSaleDtos {
+  dataChartPerMonthOfYear: DataChartYearDto[];
+}
+
+export interface DataChartYearDto {
+  target: number;
+  totalPrice: number;
+}

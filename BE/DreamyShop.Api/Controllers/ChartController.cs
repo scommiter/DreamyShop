@@ -47,9 +47,9 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpGet("getChartInYearSale")]
-        public async Task<IActionResult> GetChartInYearSale([FromForm] TargetMonthDtos targetMonthDtos, bool isSetTarGet)
+        public async Task<IActionResult> GetChartInYearSale()
         {
-            var result = await _chartService.GetChartInYearSale(targetMonthDtos, isSetTarGet);
+            var result = await _chartService.GetChartInYearSale();
             return Ok(result.Result);
         }
     }

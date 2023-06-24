@@ -176,15 +176,23 @@ namespace DreamyShop.Logic.Chart
             return result;  
         }
 
-        public async Task<ApiResult<ChartYearSaleDtos>> GetChartInYearSale(TargetMonthDtos targetMonthDtos, bool isSetTarGet)
+        public async Task<ApiResult<ChartYearSaleDtos>> GetChartInYearSale()
         {
+            List<double> targetMonthDtos = new List<double>() { 
+                1000000, 
+                2000000, 
+                3000000, 
+                4000000, 
+                5000000, 
+                6000000, 
+                7000000, 
+                8000000, 
+                9000000, 
+                10000000, 
+                11000000, 
+                12000000 };
             var result = new ChartYearSaleDtos();
-            var targets = new TargetMonthDtos();
-            targets.TargetOfMonths = new List<double>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-            if (isSetTarGet == true)
-            {
-                targets = targetMonthDtos;
-            }
+            result.DataChartPerMonthOfYear = new List<DataChartYear>();
             int year = DateTime.Now.Year;
             DateTime firstDayInCurrentYear = new DateTime(year, 1, 1);
             DateTime lastDayInCurrentYear = new DateTime(year, 12, 31);
@@ -197,14 +205,21 @@ namespace DreamyShop.Logic.Chart
                                         {
                                             Month = g.Key,
                                             TotalPrice = g.Select(t => t.TotalMoney).Sum()
-                                        }).ToList();
+                                        }).OrderBy(g => g.Month).ToList();
+            var indexMonth = 0;
             for (int i = 0; i < 12; i++)
             {
-                result.DataChartPerMonthOfYear.Add(new DataChartYear
+                var dataMonth = new DataChartYear()
                 {
-                    Target = targets.TargetOfMonths[0],
-                    TotalPrice = last12MonthBillGroup[i].TotalPrice
-                });
+                    Target = targetMonthDtos[i],
+                    TotalPrice = 0
+                };
+                if (indexMonth < last12MonthBillGroup.Count && i + 1 == last12MonthBillGroup[indexMonth].Month)
+                {
+                    dataMonth.TotalPrice = last12MonthBillGroup[indexMonth].TotalPrice;
+                    indexMonth++;
+                }
+                result.DataChartPerMonthOfYear.Add(dataMonth);
             }
             return new ApiSuccessResult<ChartYearSaleDtos>(result);
         }

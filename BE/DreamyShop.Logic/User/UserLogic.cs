@@ -106,9 +106,12 @@ namespace DreamyShop.Logic.User
             var updateUser = _mapper.Map(userUpdateDto, user);
             if (!String.IsNullOrEmpty(updateUser.Avatar))
             {
-                var fileName = updateUser.FullName.RemoveAllWhiteSpace().ToLower() + ".png";
-                AddImage(updateUser.Avatar, fileName);
-                updateUser.Avatar = fileName;
+                if (updateUser.Avatar.StartsWith("data:image/jpeg"))
+                {
+                    var fileName = updateUser.FullName.RemoveAllWhiteSpace().ToLower() + ".png";
+                    AddImage(updateUser.Avatar, fileName);
+                    updateUser.Avatar = fileName;
+                }
             }
 
             _repository.Auth.Update(updateUser);

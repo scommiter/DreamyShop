@@ -59,8 +59,8 @@ export class UserEditComponent implements OnInit {
       gender: new FormControl(''),
       dob: new FormControl(''),
       avatar: new FormControl(''),
-      email: new FormControl(''),
-      phone: new FormControl(''),
+      email: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required]),
       identityID: new FormControl(''),
       address: new FormControl(''),
       occupation: new FormControl(''),
@@ -68,9 +68,18 @@ export class UserEditComponent implements OnInit {
     });
   }
 
+  //check input
+  isFieldEmpty(fieldName: string): boolean {
+    const field = this.formUserUpdate.get(fieldName);
+    return field !== null && field.invalid && (field.dirty || field.touched);
+  }
+
   ngOnInit(): void {
     this.user = this.userService.getUser();
     this.avatar = this.user.avatar;
+    this.avatar === ''
+      ? (this.isSelectedFile = true)
+      : (this.isSelectedFile = false);
     this.formUserUpdate.setValue({
       fullName: this.user.fullName,
       gender: this.user.genderType == true ? 'male' : 'female',
@@ -86,6 +95,8 @@ export class UserEditComponent implements OnInit {
   }
 
   url: string[] = [''];
+  isSelectedFile: boolean = false;
+  isHadAvatar: boolean = false;
   onSelectFile(event: any) {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0] as File;
@@ -98,6 +109,7 @@ export class UserEditComponent implements OnInit {
           avatar: reader.result as string,
         });
         this.url.push(this.avatar);
+        this.isSelectedFile = true;
       };
     }
   }

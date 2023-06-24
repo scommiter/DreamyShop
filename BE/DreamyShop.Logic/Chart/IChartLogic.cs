@@ -20,7 +20,7 @@ namespace DreamyShop.Logic.Chart
         Task<ApiResult<ChartCategoryDtos>> GetChartCategory();
 
         Task<ApiResult<ChartMonthlySaleDtos>> GetChartMonthlySale();
-        Task<ApiResult<ChartYearSaleDtos>> GetChartInYearSale(TargetMonthDtos targetMonthDtos, bool isSetTarGet);
+        Task<ApiResult<ChartYearSaleDtos>> GetChartInYearSale();
 
     }
 }

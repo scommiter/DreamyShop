@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
@@ -22,7 +22,9 @@ export class UserComponent implements OnInit, OnDestroy {
   userReceives: UserDto[] = [];
   constructor(
     private userService: UserService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -49,7 +51,7 @@ export class UserComponent implements OnInit, OnDestroy {
       return {
         id: userDto.id,
         fullName: userDto.fullName,
-        genderType: userDto.genderType,
+        genderType: userDto.genderType === true ? 'Nam' : 'Nữ',
         dob: userDto.dob,
         avatar: userDto.avatar,
         email: userDto.email,
@@ -64,7 +66,6 @@ export class UserComponent implements OnInit, OnDestroy {
   totalCounts: number = 0;
   maxResultCount: number = 5;
   currentPage: number = 1;
-  //rows: number = this.totalCounts / this.maxResultCount;
 
   onPageChange(event: any): void {
     this.currentPage = event.page + 1;
@@ -108,9 +109,46 @@ export class UserComponent implements OnInit, OnDestroy {
     ref.onClose.subscribe((data: any) => {
       if (data) {
         this.getAllUsers();
+        setTimeout(() => {
+          this.showUpdateSuccess();
+        }, 500);
       }
     });
   }
 
-  deleteUser() {}
+  showUpdateSuccess() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Thành công',
+      detail: 'Cập nhật thành công',
+    });
+  }
+
+  deleteUser(id: number) {
+    this.confirmationService.confirm({
+      message: 'Bạn có chắc muốn xóa không?',
+      header: 'Xác nhận',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.userService.deleteUser(id).subscribe({
+          next: () => {
+            this.getAllUsers();
+            this.messageService.add({
+              severity: 'info',
+              summary: 'Xác nhận',
+              detail: 'Xóa thành công',
+            });
+          },
+          error: (err) => {},
+        });
+      },
+      reject: (type: any) => {
+        this.messageService.add({
+          severity: 'warn',
+          summary: 'Đã hủy',
+          detail: 'Bạn đã hủy xóa',
+        });
+      },
+    });
+  }
 }

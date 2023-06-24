@@ -43,6 +43,7 @@
 </div>
 <div class="chart-price">
   <apx-chart
+    *ngIf="dataProfitLoaded"
     [series]="chartProfitOptions.series"
     [chart]="chartProfitOptions.chart"
     [dataLabels]="chartProfitOptions.dataLabels"

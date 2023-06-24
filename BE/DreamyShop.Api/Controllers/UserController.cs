@@ -66,9 +66,9 @@ namespace DreamyShop.Api.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("delete")]
-        [Authorize]
-        [Admin]
+        [HttpDelete("{userId}")]
+        //[Authorize]
+        //[Admin]
         public async Task<IActionResult> DeleteUser(string userId)
         {
             var result = await _userService.DeleteUser(userId);

@@ -1,12 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EnvironmentUrlService } from './environment-url.service';
 import { Observable } from 'rxjs';
 import {
   ChartMonthlySaleDto,
   ChartWeeklySaleDto,
+  ChartYearSaleDtos,
   PricePaymentTypeDto,
   StatisticDashboardDto,
+  TargetMonthDtos,
 } from '../shared/models/chart-weekly-sale-dto';
 import { environment } from '../environments/environment';
 
@@ -40,6 +42,12 @@ export class ChartService {
   public getPricePaymentType(): Observable<PricePaymentTypeDto> {
     return this.http.get<PricePaymentTypeDto>(
       `${environment.apiUrl}/api/Chart/getPricePaymentType`
+    );
+  }
+
+  public getChartInYearSale(): Observable<ChartYearSaleDtos> {
+    return this.http.get<ChartYearSaleDtos>(
+      `${environment.apiUrl}/api/Chart/getChartInYearSale`
     );
   }
 }

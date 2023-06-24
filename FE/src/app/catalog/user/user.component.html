@@ -79,7 +79,7 @@
             pButton
             pRipple
             icon="pi pi-trash"
-            (click)="deleteUser()"
+            (click)="deleteUser(user.id)"
             class="p-button-rounded p-button-warning"
           ></button>
         </td>
@@ -87,6 +87,8 @@
     </ng-template>
   </p-table>
 </p-panel>
+<p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
+<p-toast></p-toast>
 <div class="card flex justify-content-center">
   <p-paginator
     [rows]="maxResultCount"

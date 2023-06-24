@@ -55,4 +55,9 @@ export class UserService {
     const url = `${environment.apiUrl}/api/User/update/${userId}`;
     return this.http.put<any>(url, userUpdateDto);
   }
+
+  public deleteUser(userId: number): Observable<any> {
+    const url = `${environment.apiUrl}/api/User/${userId}`;
+    return this.http.delete<any>(url);
+  }
 }

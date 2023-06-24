@@ -14,7 +14,7 @@ export interface UserDto {
 
 export interface UserDisplayDto {
   fullName: string;
-  genderType: boolean;
+  genderType: string;
   dob: Date;
   avatar: string;
   email: string;
