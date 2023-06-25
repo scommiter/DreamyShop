@@ -15,6 +15,10 @@ import { AdminDashBoardComponent } from './catalog/admin-dash-board/admin-dash-b
 import { StatisticalPriceComponent } from './catalog/statistical/statistical-price/statistical-price.component';
 import { StatisticalAccessComponent } from './catalog/statistical/statistical-access/statistical-access.component';
 import { OrderComponent } from './catalog/order/order.component';
+import { HomePageComponent } from './shop/home-page/home-page.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { ShopComponent } from './shop/shop/shop.component';
+import { ShopLayoutComponent } from './shop/shop-layout/shop-layout.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,9 @@ import { OrderComponent } from './catalog/order/order.component';
     StatisticalPriceComponent,
     StatisticalAccessComponent,
     OrderComponent,
+    HomePageComponent,
+    ShopComponent,
+    ShopLayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +42,7 @@ import { OrderComponent } from './catalog/order/order.component';
     FormsModule,
     EditorModule,
     NgApexchartsModule,
+    CarouselModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

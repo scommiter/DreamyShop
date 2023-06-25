@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lUIeGR9lgFFJOCHkYRUsRbnAiHWN4p78uGfLLxqrGhUESvxDXjEofHEWhRKHqrZG8/AAXCKR75o6CqyV3C8YdA==",
+  "dgSpecHash": "wq9CLJ7GuNuMpfANQfyrYZ9eN1HlpbRL0kE13XYmzZOfZeQnF+onRFHUDdhm25fBYbUDaBNT7vineZZnvHnBIw==",
   "success": true,
-  "projectFilePath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj",
+  "projectFilePath": "E:\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Linh master\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Linh master\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

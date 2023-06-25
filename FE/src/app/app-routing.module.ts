@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from './layout/app.layout.component';
+import { ShopLayoutComponent } from './shop/shop-layout/shop-layout.component';
 
 const routes: Routes = [
   {
@@ -95,6 +96,20 @@ const routes: Routes = [
     loadChildren: () =>
       import('./catalog/order/order.module').then((m) => m.OrderModule),
     component: AppLayoutComponent,
+  },
+  {
+    path: 'shop',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./shop/home-page/home-page.module').then((m) => m.HomePageModule),
+    component: ShopLayoutComponent,
+  },
+  {
+    path: 'shop/all-product',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./shop/shop/shop.module').then((m) => m.ShopModule),
+    component: ShopLayoutComponent,
   },
 ];
 

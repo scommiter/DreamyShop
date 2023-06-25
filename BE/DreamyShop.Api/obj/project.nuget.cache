@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5z7Fb811hCqJF89F87IHIiuiJg+ibVk/mGVU44hda5CCdlwdE8OSRFUw9rUfQOdldXBgL5Kbh6sumvKS9+Ywyg==",
+  "dgSpecHash": "UuWezfOaIcUEjBdUk3h0NE3+/qOPX8aTWyWtI8DyAl5dDpHPDBrevgq5zME1kjrmStmzfM1s7ZB1VLlD5JOiPw==",
   "success": true,
-  "projectFilePath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Api\\DreamyShop.Api.csproj",
+  "projectFilePath": "E:\\DreamyShop\\BE\\DreamyShop.Api\\DreamyShop.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Linh master\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Linh master\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

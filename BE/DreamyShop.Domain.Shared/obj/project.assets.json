@@ -222,11 +222,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
+      "projectUniqueName": "E:\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
       "projectName": "DreamyShop.Domain.Shared",
-      "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
+      "projectPath": "E:\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
       "packagesPath": "C:\\Users\\Linh master\\.nuget\\packages\\",
-      "outputPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\obj\\",
+      "outputPath": "E:\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

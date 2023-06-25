@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj": {}
+    "E:\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj": {}
   },
   "projects": {
-    "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj": {
+    "E:\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
+        "projectUniqueName": "E:\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
         "projectName": "DreamyShop.Domain.Shared",
-        "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
+        "projectPath": "E:\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
         "packagesPath": "C:\\Users\\Linh master\\.nuget\\packages\\",
-        "outputPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\obj\\",
+        "outputPath": "E:\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -71,14 +71,14 @@
         }
       }
     },
-    "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj": {
+    "E:\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj",
+        "projectUniqueName": "E:\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj",
         "projectName": "DreamyShop.Domain",
-        "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj",
+        "projectPath": "E:\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj",
         "packagesPath": "C:\\Users\\Linh master\\.nuget\\packages\\",
-        "outputPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\obj\\",
+        "outputPath": "E:\\DreamyShop\\BE\\DreamyShop.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -98,8 +98,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj": {
-                "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj"
+              "E:\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj": {
+                "projectPath": "E:\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj"
               }
             }
           }

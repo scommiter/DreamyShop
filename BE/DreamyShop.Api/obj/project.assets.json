@@ -3803,11 +3803,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Api\\DreamyShop.Api.csproj",
+      "projectUniqueName": "E:\\DreamyShop\\BE\\DreamyShop.Api\\DreamyShop.Api.csproj",
       "projectName": "DreamyShop.Api",
-      "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Api\\DreamyShop.Api.csproj",
+      "projectPath": "E:\\DreamyShop\\BE\\DreamyShop.Api\\DreamyShop.Api.csproj",
       "packagesPath": "C:\\Users\\Linh master\\.nuget\\packages\\",
-      "outputPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Api\\obj\\",
+      "outputPath": "E:\\DreamyShop\\BE\\DreamyShop.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -3827,14 +3827,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj": {
-              "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj"
+            "E:\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj": {
+              "projectPath": "E:\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj"
             },
-            "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Logic\\DreamyShop.Logic.csproj": {
-              "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Logic\\DreamyShop.Logic.csproj"
+            "E:\\DreamyShop\\BE\\DreamyShop.Logic\\DreamyShop.Logic.csproj": {
+              "projectPath": "E:\\DreamyShop\\BE\\DreamyShop.Logic\\DreamyShop.Logic.csproj"
             },
-            "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj": {
-              "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj"
+            "E:\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj": {
+              "projectPath": "E:\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj"
             }
           }
         }

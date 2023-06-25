@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Irl3XdiyuApSGHwM2VYwuO5LziuWkng5yQap5JS5BMl3HiF+d7NE6G2IDnAc2LsS99miMZi+7cSbawsuGzXGwg==",
+  "dgSpecHash": "w4q+EPn1b1/DoQHXk2yr0mspoqGQ+b3oUCfr9RhWVAwWJxr40UY6HEF7O8e3owkQOml74JfwRqTaSbXc+621iQ==",
   "success": true,
-  "projectFilePath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj",
+  "projectFilePath": "E:\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Linh master\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Linh master\\.nuget\\packages\\azure.core\\1.6.0\\azure.core.1.6.0.nupkg.sha512",
