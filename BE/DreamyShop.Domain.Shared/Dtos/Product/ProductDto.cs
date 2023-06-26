@@ -34,4 +34,14 @@ namespace DreamyShop.Domain.Shared.Dtos.Product
         public double Price { get; set; }
         public string Image { get; set; }
     }
+
+    public class ProductDisplayDto
+    {
+        public string Name { get; set; }
+        public string Code { get; set; }
+        public string ThumbnailPictures { get; set; }
+        public string RangePrice { get; set; }
+        public int Quantity { get; set; }
+        public int Star { get; set; }
+    }
 }

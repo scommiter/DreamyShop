@@ -30,6 +30,13 @@ namespace DreamyShop.Api.Controllers
             return Ok(result.Result);
         }
 
+        [HttpGet("getAllDisplay")]
+        public async Task<IActionResult> GetAllProductDisplay([FromQuery] PagingRequest pagingRequest)
+        {
+            var result = await _productService.GetAllProductDisplayPaging(pagingRequest);
+            return Ok(result.Result);
+        }
+
         [HttpPost("create"), DisableRequestSizeLimit]
         //[Authorize]
         //[Member]

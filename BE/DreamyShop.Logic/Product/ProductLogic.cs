@@ -9,10 +9,8 @@ using DreamyShop.Domain.Shared.Types;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Logic.Conditions;
 using DreamyShop.Repository.RepositoryWrapper;
-using EFCore.BulkExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using EFCore.BulkExtensions;
 using System.Net.Http.Headers;
 
 namespace DreamyShop.Logic.Product
@@ -117,6 +115,62 @@ namespace DreamyShop.Logic.Product
                 Totals = totalCount
             };
             return new ApiSuccessResult<PageResult<ProductDto>>(pageResult);
+        }
+
+        public async Task<ApiResult<PageResult<ProductDisplayDto>>> GetAllProductDisplayPaging(PagingRequest pagingRequest)
+        {
+            var query = (from p in _context.Products
+                         join m in _context.Manufacturers on p.ManufacturerId equals m.Id
+                         join c in _context.ProductCategories on p.CategoryId equals c.Id
+                         join pv in _context.ProductVariants on p.Id equals pv.ProductId into pvN
+                         from pv in pvN.DefaultIfEmpty()
+                         join ip in _context.ImageProducts on p.Id equals ip.ProductId into ipvN
+                         from ip in ipvN.DefaultIfEmpty()
+                         join pvv in _context.ProductVariantValues on pv.Id equals pvv.ProductVariantId into pvvN
+                         from pvv in pvvN.DefaultIfEmpty()
+                         join pav in _context.ProductAttributeValues on pvv.ProductAttributeValueId equals pav.Id into pavN
+                         from pav in pavN.DefaultIfEmpty()
+                         select new
+                         {
+                             Product = p,
+                             ManufacturerName = m.Name,
+                             CategoryName = c.Name,
+                             pvv,
+                             pv,
+                             pav,
+                             ip
+                         });
+
+            var groupedQuery = query.OrderByDescending(p => p.Product.DateCreated).Skip((pagingRequest.Page - 1) * pagingRequest.Limit).Take(pagingRequest.Limit)
+                                    .GroupBy(item => item.Product.Id)
+                                    .Select(group => new
+                                    {
+                                        ProductId = group.Key,
+                                        Product = group.FirstOrDefault().Product,
+                                        ManufacturerName = group.Select(item => item.ManufacturerName).FirstOrDefault(),
+                                        CategoryName = group.Select(item => item.CategoryName).FirstOrDefault(),
+                                        pvv = group.Where(item => item.pvv != null).Select(item => item.pvv).Distinct(),
+                                        pv = group.Where(item => item.pv != null).Select(item => item.pv).Distinct(),
+                                        pav = group.Where(item => item.pav != null).Select(item => item.pav).Distinct(),
+                                        ip = group.Where(item => item.ip != null).Select(item => item.ip).Distinct()
+                                    });
+            var productsPaging = await groupedQuery.ToListAsync();
+            var totalCount = await _context.Products.CountAsync();
+            var productDtos = productsPaging.Select(x => new ProductDisplayDto
+            {
+                Name = x.Product.Name,
+                Code = x.Product.Code,
+                Quantity = x.pv.Select(pv => pv.Quantity).Sum(),
+                RangePrice = x.pv.Select(pv => pv.Price).Min().ConvertToVND() + "-" + x.pv.Select(pv => pv.Price).Max().ConvertToVND(),
+                ThumbnailPictures = x.ip.GroupBy(p => p.ProductId).Select(pt => pt.Select(ptt => ptt.Path ?? "").FirstOrDefault()).ToList().FirstOrDefault(),
+                Star = 0
+            }).ToList();
+            var pageResult = new PageResult<ProductDisplayDto>()
+            {
+                Items = productDtos,
+                Totals = totalCount
+            };
+            return new ApiSuccessResult<PageResult<ProductDisplayDto>>(pageResult);
         }
 
         public async Task<ApiResult<PageResult<ProductDto>>> GetAllProduct()
