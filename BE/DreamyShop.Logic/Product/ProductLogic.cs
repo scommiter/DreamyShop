@@ -33,8 +33,6 @@ namespace DreamyShop.Logic.Product
 
         public async Task<ApiResult<PageResult<ProductDto>>> GetAllProductPaging(PagingRequest pagingRequest)
         {
-            var attributes = _repository.Attribute.GetAll().ToList();
-            var attributeValues = _repository.ProductAttribute.GetAll().ToList();
             var attributeProducts = _context.Attributes.Join(_context.ProductAttributes,
                                         a => a.Id,
                                         b => b.AttributeId,
@@ -66,8 +64,9 @@ namespace DreamyShop.Logic.Product
                              ip
                          });
 
-            var groupedQuery = query.OrderByDescending(p => p.Product.DateCreated).Skip((pagingRequest.Page - 1) * pagingRequest.Limit).Take(pagingRequest.Limit)
+            var groupedQuery = query.OrderByDescending(p => p.Product.DateCreated)
                                     .GroupBy(item => item.Product.Id)
+                                    .Skip((pagingRequest.Page - 1) * pagingRequest.Limit).Take(pagingRequest.Limit)
                                     .Select(group => new
                                     {
                                         ProductId = group.Key,
@@ -141,8 +140,9 @@ namespace DreamyShop.Logic.Product
                              ip
                          });
 
-            var groupedQuery = query.OrderByDescending(p => p.Product.DateCreated).Skip((pagingRequest.Page - 1) * pagingRequest.Limit).Take(pagingRequest.Limit)
+            var groupedQuery = query.OrderByDescending(p => p.Product.DateCreated)
                                     .GroupBy(item => item.Product.Id)
+                                    .Skip((pagingRequest.Page - 1) * pagingRequest.Limit).Take(pagingRequest.Limit)
                                     .Select(group => new
                                     {
                                         ProductId = group.Key,
@@ -161,7 +161,9 @@ namespace DreamyShop.Logic.Product
                 Name = x.Product.Name,
                 Code = x.Product.Code,
                 Quantity = x.pv.Select(pv => pv.Quantity).Sum(),
-                RangePrice = x.pv.Select(pv => pv.Price).Min().ConvertToVND() + "-" + x.pv.Select(pv => pv.Price).Max().ConvertToVND(),
+                RangePrice = x.pv.Select(pv => pv.Price).Distinct().Count() == 1 
+                                    ? x.pv.Select(pv => pv.Price).FirstOrDefault().ConvertToVND()
+                                    : x.pv.Select(pv => pv.Price).Min().ConvertToVND() + " - " + x.pv.Select(pv => pv.Price).Max().ConvertToVND(),
                 ThumbnailPictures = x.ip.GroupBy(p => p.ProductId).Select(pt => pt.Select(ptt => ptt.Path ?? "").FirstOrDefault()).ToList().FirstOrDefault(),
                 Star = 0
             }).ToList();

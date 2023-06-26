@@ -19,6 +19,7 @@ import { HomePageComponent } from './shop/home-page/home-page.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ShopComponent } from './shop/shop/shop.component';
 import { ShopLayoutComponent } from './shop/shop-layout/shop-layout.component';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ShopLayoutComponent } from './shop/shop-layout/shop-layout.component';
     EditorModule,
     NgApexchartsModule,
     CarouselModule,
+    PaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

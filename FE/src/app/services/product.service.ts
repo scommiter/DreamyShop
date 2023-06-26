@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EnvironmentUrlService } from './environment-url.service';
-import { ProductDto } from '../shared/models/product.dto';
+import { ProductDisplayDto, ProductDto } from '../shared/models/product.dto';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
 import { ProductCreateDto } from '../shared/models/product-create-update.dto';
@@ -25,6 +25,15 @@ export class ProductService {
   ): Observable<PageResultDto<ProductDto>> {
     return this.http.get<PageResultDto<ProductDto>>(
       `${environment.apiUrl}/api/Product/getAll?Page=${currentPage}&Limit=${maxResultCount}`
+    );
+  }
+
+  public getProductDisplayShops(
+    maxResultCount: number,
+    currentPage: number
+  ): Observable<PageResultDto<ProductDisplayDto>> {
+    return this.http.get<PageResultDto<ProductDisplayDto>>(
+      `${environment.apiUrl}/api/Product/getAllDisplay?Page=${currentPage}&Limit=${maxResultCount}`
     );
   }
 

@@ -24,3 +24,12 @@ export interface ProductAttributeDisplayDto {
   price: number;
   image: string;
 }
+
+export interface ProductDisplayDto {
+  name: string;
+  code: string;
+  thumbnailPictures: string;
+  rangePrice: string;
+  quantity: number;
+  star: number;
+}

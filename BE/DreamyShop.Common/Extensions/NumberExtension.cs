@@ -12,7 +12,7 @@ namespace DreamyShop.Common.Extensions
         public static string ConvertToVND(this double number)
         {
             CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
-            return number.ToString("#,###", cul.NumberFormat);
+            return number.ToString("#,###", cul.NumberFormat) + "đ";
         }
     }
 }

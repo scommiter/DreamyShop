@@ -46,3 +46,15 @@ Z:\Project\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\DreamyShop.Do
 Z:\Project\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\refint\DreamyShop.Domain.Shared.dll
 Z:\Project\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\DreamyShop.Domain.Shared.pdb
 Z:\Project\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\ref\DreamyShop.Domain.Shared.dll
+C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Domain.Shared\bin\Debug\net6.0\DreamyShop.Domain.Shared.deps.json
+C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Domain.Shared\bin\Debug\net6.0\DreamyShop.Domain.Shared.dll
+C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Domain.Shared\bin\Debug\net6.0\DreamyShop.Domain.Shared.pdb
+C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\DreamyShop.Domain.Shared.csproj.AssemblyReference.cache
+C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\DreamyShop.Domain.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\DreamyShop.Domain.Shared.AssemblyInfoInputs.cache
+C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\DreamyShop.Domain.Shared.AssemblyInfo.cs
+C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\DreamyShop.Domain.Shared.csproj.CoreCompileInputs.cache
+C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\DreamyShop.Domain.Shared.dll
+C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\refint\DreamyShop.Domain.Shared.dll
+C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\DreamyShop.Domain.Shared.pdb
+C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Domain.Shared\obj\Debug\net6.0\ref\DreamyShop.Domain.Shared.dll
