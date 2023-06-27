@@ -1,8 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
+import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
 import { PageResultDto } from 'src/app/shared/models/page-result.dto';
-import { ProductDisplayDto } from 'src/app/shared/models/product.dto';
+import {
+  ProductDisplayDto,
+  ProductDto,
+} from 'src/app/shared/models/product.dto';
 
 @Component({
   selector: 'app-shop',
@@ -12,8 +17,24 @@ import { ProductDisplayDto } from 'src/app/shared/models/product.dto';
 export class ShopComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject<void>();
   products: ProductDisplayDto[] = [];
+  product: ProductDto = {
+    id: 0,
+    name: '',
+    code: '',
+    thumbnailPictures: [],
+    productType: ProductTypes.Single,
+    categoryName: '',
+    manufacturerName: '',
+    description: '',
+    isActive: false,
+    isVisibility: false,
+    optionNames: [],
+    productAttributeDisplayDtos: [],
+    dateCreated: '',
+    dateUpdated: '',
+  };
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
     this.getAllProducts();
@@ -31,6 +52,10 @@ export class ShopComponent implements OnInit, OnDestroy {
         },
         error: () => {},
       });
+  }
+
+  redirectToProductDetail(id: number) {
+    this.router.navigate(['/shop/product', id]);
   }
 
   //PAGING

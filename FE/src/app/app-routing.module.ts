@@ -105,10 +105,19 @@ const routes: Routes = [
     component: ShopLayoutComponent,
   },
   {
-    path: 'shop/all-product',
+    path: 'shop/product',
     pathMatch: 'full',
     loadChildren: () =>
       import('./shop/shop/shop.module').then((m) => m.ShopModule),
+    component: ShopLayoutComponent,
+  },
+  {
+    path: 'shop/product/:id',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./shop/product-detail/product-detail.module').then(
+        (m) => m.ProductDetailModule
+      ),
     component: ShopLayoutComponent,
   },
 ];

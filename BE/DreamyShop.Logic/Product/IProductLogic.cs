@@ -10,7 +10,7 @@ namespace DreamyShop.Logic.Product
     {
         Task<ApiResult<PageResult<ProductDto>>> GetAllProductPaging(PagingRequest pagingRequest);
         Task<ApiResult<PageResult<ProductDisplayDto>>> GetAllProductDisplayPaging(PagingRequest pagingRequest);
-        Task<ApiResult<ProductDto>> GetProductById(int productId);
+        Task<ApiResult<ProductDetailDto>> GetProductById(int productId);
         Task<ApiResult<PageResult<ProductDto>>> GetAllProduct();
         Task<ApiResult<bool>> CreateProduct(ProductCreateDto productCreateUpdateDto);
         Task<ApiResult<bool>> UpdateProduct(int id, ProductUpdateDto productCreateUpdateDto);

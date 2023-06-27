@@ -158,6 +158,7 @@ namespace DreamyShop.Logic.Product
             var totalCount = await _context.Products.CountAsync();
             var productDtos = productsPaging.Select(x => new ProductDisplayDto
             {
+                Id = x.Product.Id,
                 Name = x.Product.Name,
                 Code = x.Product.Code,
                 Quantity = x.pv.Select(pv => pv.Quantity).Sum(),
@@ -175,7 +176,7 @@ namespace DreamyShop.Logic.Product
             return new ApiSuccessResult<PageResult<ProductDisplayDto>>(pageResult);
         }
 
-        public async Task<ApiResult<ProductDto>> GetProductById(int productId)
+        public async Task<ApiResult<ProductDetailDto>> GetProductById(int productId)
         {
             var attributeProducts = _context.Attributes.Join(_context.ProductAttributes,
                                       a => a.Id,
@@ -183,8 +184,8 @@ namespace DreamyShop.Logic.Product
                                       (a, b) => new
                                       {
                                           AttributeName = a.Name,
-                                          ProductId = productId
-                                      });
+                                          ProductId = b.ProductId
+                                      }).Where(p => p.ProductId == productId);
 
             var product = await _repository.Product.GetByIdAsync(productId);
             var query = (from p in _context.Products
@@ -210,7 +211,7 @@ namespace DreamyShop.Logic.Product
                              ip
                          });
 
-            var groupedQuery = query.OrderByDescending(p => p.Product.DateCreated)
+            var groupedQuery = await query.OrderByDescending(p => p.Product.DateCreated)
                                     .GroupBy(item => item.Product.Id)
                                     .Select(group => new
                                     {
@@ -222,36 +223,67 @@ namespace DreamyShop.Logic.Product
                                         pv = group.Where(item => item.pv != null).Select(item => item.pv).Distinct(),
                                         pav = group.Where(item => item.pav != null).Select(item => item.pav).Distinct(),
                                         ip = group.Where(item => item.ip != null).Select(item => item.ip).Distinct()
-                                    });
-            var productsPaging = await groupedQuery.ToListAsync();
-            var productDtos = productsPaging.Select(x => new ProductDto
-            {
-                Id = x.ProductId,
-                Name = x.Product.Name,
-                Code = x.Product.Code,
-                ThumbnailPictures = x.ip.GroupBy(p => p.ProductId).Select(pt => pt.Select(ptt => ptt.Path ?? "").FirstOrDefault()).ToList(),
-                ProductType = x.Product.ProductType,
-                CategoryName = x.CategoryName ?? "",
-                ManufacturerName = x.ManufacturerName ?? "",
-                Description = x.Product.Description ?? "",
-                IsActive = x.Product.IsActive,
-                IsVisibility = x.Product.IsVisibility,
-                DateCreated = x.Product.DateCreated,
-                DateUpdated = x.Product.DateUpdated,
-                OptionNames = attributeProducts.Where(a => a.ProductId == x.ProductId)?.Select(a => a.AttributeName).ToList(),
-                ProductAttributeDisplayDtos = x.pv.Select(pv => new ProductAttributeDisplayDto
+                                    }).ToListAsync();
+            var productDetail =  groupedQuery.FirstOrDefault();
+            var productDetailDtos = new ProductDetailDto();
+            productDetailDtos.Id = productDetail.ProductId;
+            productDetailDtos.Name = productDetail.Product.Name;
+            productDetailDtos.Code = productDetail.Product.Code;
+            productDetailDtos.ThumbnailPictures = productDetail.ip.GroupBy(p => p.ProductId).Select(pt => pt.Select(ptt => ptt.Path ?? "").FirstOrDefault()).ToList();
+            productDetailDtos.ProductType = productDetail.Product.ProductType;
+            productDetailDtos.CategoryName = productDetail.CategoryName;
+            productDetailDtos.ManufacturerName = productDetail.ManufacturerName;
+            productDetailDtos.Description = productDetail.Product.Description;
+            productDetailDtos.IsActive = productDetail.Product.IsActive;
+            productDetailDtos.IsVisibility = productDetail.Product.IsVisibility;
+            productDetailDtos.ProductAttributeDisplayDtos = productDetail.pv.Select(pv => new ProductAttributeDisplayDto
                 {
-                    AttributeNames = x.pav.Where(e => e.ProductId == x.ProductId)
-                                                                     .Where(p => (x.pvv.GroupBy(pvv => pvv.ProductVariantId).Where(pc => pc.Key == pv.Id).FirstOrDefault().Select(pi => pi.ProductAttributeValueId)).Contains(p.Id))
+                    AttributeNames = productDetail.pav.Where(e => e.ProductId == productDetail.ProductId)
+                                                                     .Where(p => (productDetail.pvv.GroupBy(pvv => pvv.ProductVariantId).Where(pc => pc.Key == pv.Id).FirstOrDefault().Select(pi => pi.ProductAttributeValueId)).Contains(p.Id))
                                                                      .Select(e => e.Value).ToList(),
                     SKU = pv.SKU,
                     Quantity = pv.Quantity,
                     Price = pv.Price,
                     Image = pv.ThumbnailPicture == null ? "" : pv.ThumbnailPicture
-                }).OrderByDescending(a => a.AttributeNames.FirstOrDefault()).ToList()
-            }).ToList().FirstOrDefault();
+                }).OrderByDescending(a => a.AttributeNames.FirstOrDefault()).ToList();
+            var productAttributeValueOfCurrentProduct = productDetail.pav.Where(p => p.ProductId == productId).ToList();
+            var groupAttribute = productAttributeValueOfCurrentProduct.GroupBy(p => p.AttributeId)
+                                    .Join(_context.Attributes,
+                                        a => a.Key,
+                                        b => b.Id,
+                                        (a, b) => new
+                                        {
+                                            AttributeName = b.Name,
+                                            AttributeValue = a.Select(p => p.Value)
+                                        }
+                                    );
+            productDetailDtos.Options = null;
+            //var productDetailDtos = productDetail.Select(x => new ProductDetailDto
+            //{
+            //    Id = x.ProductId,
+            //    Name = x.Product.Name,
+            //    Code = x.Product.Code,
+            //    ThumbnailPictures = x.ip.GroupBy(p => p.ProductId).Select(pt => pt.Select(ptt => ptt.Path ?? "").FirstOrDefault()).ToList(),
+            //    ProductType = x.Product.ProductType,
+            //    CategoryName = x.CategoryName ?? "",
+            //    ManufacturerName = x.ManufacturerName ?? "",
+            //    Description = x.Product.Description ?? "",
+            //    IsActive = x.Product.IsActive,
+            //    IsVisibility = x.Product.IsVisibility,
+            //    Options = null,
+            //ProductAttributeDisplayDtos = x.pv.Select(pv => new ProductAttributeDisplayDto
+            //{
+            //    AttributeNames = x.pav.Where(e => e.ProductId == x.ProductId)
+            //                                                     .Where(p => (x.pvv.GroupBy(pvv => pvv.ProductVariantId).Where(pc => pc.Key == pv.Id).FirstOrDefault().Select(pi => pi.ProductAttributeValueId)).Contains(p.Id))
+            //                                                     .Select(e => e.Value).ToList(),
+            //    SKU = pv.SKU,
+            //    Quantity = pv.Quantity,
+            //    Price = pv.Price,
+            //    Image = pv.ThumbnailPicture == null ? "" : pv.ThumbnailPicture
+            //}).OrderByDescending(a => a.AttributeNames.FirstOrDefault()).ToList()
+            //}).ToList().FirstOrDefault();
 
-            return new ApiSuccessResult<ProductDto>(productDtos);
+            return new ApiSuccessResult<ProductDetailDto>(productDetailDtos);
         }
 
         public async Task<ApiResult<PageResult<ProductDto>>> GetAllProduct()

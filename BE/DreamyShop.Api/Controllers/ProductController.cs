@@ -37,7 +37,7 @@ namespace DreamyShop.Api.Controllers
             return Ok(result.Result);
         }
 
-        [HttpGet("getProductById")]
+        [HttpGet("getProduct/{productId}")]
         public async Task<IActionResult> GetProductById(int productId)
         {
             var result = await _productService.GetProductById(productId);

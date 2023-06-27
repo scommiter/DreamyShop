@@ -20,6 +20,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ShopComponent } from './shop/shop/shop.component';
 import { ShopLayoutComponent } from './shop/shop-layout/shop-layout.component';
 import { PaginatorModule } from 'primeng/paginator';
+import { ProductDetailComponent } from './shop/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { PaginatorModule } from 'primeng/paginator';
     HomePageComponent,
     ShopComponent,
     ShopLayoutComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,

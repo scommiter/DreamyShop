@@ -26,6 +26,7 @@ export interface ProductAttributeDisplayDto {
 }
 
 export interface ProductDisplayDto {
+  id: number;
   name: string;
   code: string;
   thumbnailPictures: string;

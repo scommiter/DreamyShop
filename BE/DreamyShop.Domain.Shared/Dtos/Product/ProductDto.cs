@@ -37,11 +37,28 @@ namespace DreamyShop.Domain.Shared.Dtos.Product
 
     public class ProductDisplayDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
         public string ThumbnailPictures { get; set; }
         public string RangePrice { get; set; }
         public int Quantity { get; set; }
         public int Star { get; set; }
+    }
+
+    public class ProductDetailDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Code { get; set; }
+        public List<string> ThumbnailPictures { get; set; }
+        public ProductType ProductType { get; set; }
+        public string CategoryName { get; set; }
+        public string ManufacturerName { get; set; }
+        public string Description { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsVisibility { get; set; }
+        public Dictionary<string, List<string>>? Options { get; set; }
+        public List<ProductAttributeDisplayDto>? ProductAttributeDisplayDtos { get; set; }
     }
 }

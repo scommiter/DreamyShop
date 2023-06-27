@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "a7qvAb8l4YTKO3iMtacx0JowlSfmuJRB7EVt0j5AAG7Q9X6/xFNgZ+e86ekdGaYBdpa36/gPnZAMq3wquJ87LA==",
+  "dgSpecHash": "itx0TpF5A2ap7bx0CtBO3H5YfScT4p4wEU0NK/xpTpsrBO/Cm6HHJMBgOVJrAqIuY2W9Bv6/jFwVpWBWQWLT8w==",
   "success": true,
-  "projectFilePath": "Z:\\Project\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj",
+  "projectFilePath": "C:\\Users\\Linh master\\Desktop\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\linh.nguyen22\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\Linh master\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }

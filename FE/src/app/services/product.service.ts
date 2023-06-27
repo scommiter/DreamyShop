@@ -28,6 +28,11 @@ export class ProductService {
     );
   }
 
+  public getProductById(id: number): Observable<any> {
+    const url = `${environment.apiUrl}/api/Product/getProduct/${id}`;
+    return this.http.get<any>(url);
+  }
+
   public getProductDisplayShops(
     maxResultCount: number,
     currentPage: number
