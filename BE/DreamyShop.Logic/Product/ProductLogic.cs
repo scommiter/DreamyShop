@@ -254,35 +254,14 @@ namespace DreamyShop.Logic.Product
                                         (a, b) => new
                                         {
                                             AttributeName = b.Name,
-                                            AttributeValue = a.Select(p => p.Value)
+                                            AttributeValue = a.Select(p => p.Value).ToList()
                                         }
-                                    );
-            productDetailDtos.Options = null;
-            //var productDetailDtos = productDetail.Select(x => new ProductDetailDto
-            //{
-            //    Id = x.ProductId,
-            //    Name = x.Product.Name,
-            //    Code = x.Product.Code,
-            //    ThumbnailPictures = x.ip.GroupBy(p => p.ProductId).Select(pt => pt.Select(ptt => ptt.Path ?? "").FirstOrDefault()).ToList(),
-            //    ProductType = x.Product.ProductType,
-            //    CategoryName = x.CategoryName ?? "",
-            //    ManufacturerName = x.ManufacturerName ?? "",
-            //    Description = x.Product.Description ?? "",
-            //    IsActive = x.Product.IsActive,
-            //    IsVisibility = x.Product.IsVisibility,
-            //    Options = null,
-            //ProductAttributeDisplayDtos = x.pv.Select(pv => new ProductAttributeDisplayDto
-            //{
-            //    AttributeNames = x.pav.Where(e => e.ProductId == x.ProductId)
-            //                                                     .Where(p => (x.pvv.GroupBy(pvv => pvv.ProductVariantId).Where(pc => pc.Key == pv.Id).FirstOrDefault().Select(pi => pi.ProductAttributeValueId)).Contains(p.Id))
-            //                                                     .Select(e => e.Value).ToList(),
-            //    SKU = pv.SKU,
-            //    Quantity = pv.Quantity,
-            //    Price = pv.Price,
-            //    Image = pv.ThumbnailPicture == null ? "" : pv.ThumbnailPicture
-            //}).OrderByDescending(a => a.AttributeNames.FirstOrDefault()).ToList()
-            //}).ToList().FirstOrDefault();
-
+                                    ).ToList();
+            productDetailDtos.Options = new Dictionary<string, List<string>>();
+            foreach (var item in groupAttribute)
+            {
+                productDetailDtos.Options.Add(item.AttributeName, item.AttributeValue);
+            }
             return new ApiSuccessResult<ProductDetailDto>(productDetailDtos);
         }
 
