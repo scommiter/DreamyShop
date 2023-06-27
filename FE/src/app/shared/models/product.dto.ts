@@ -17,6 +17,21 @@ export interface ProductDto {
   dateUpdated: string;
 }
 
+export interface ProductDetailDto {
+  id: number;
+  name: string;
+  code: string;
+  thumbnailPictures: string[];
+  productType: ProductTypes;
+  categoryName: string;
+  manufacturerName: string;
+  description: string;
+  isActive: boolean;
+  isVisibility: boolean;
+  options: Map<string, string[]>;
+  productAttributeDisplayDtos: Array<ProductAttributeDisplayDto>;
+}
+
 export interface ProductAttributeDisplayDto {
   attributeNames: Array<string>;
   sku: string;

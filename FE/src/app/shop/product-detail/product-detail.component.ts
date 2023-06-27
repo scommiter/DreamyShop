@@ -3,7 +3,10 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
-import { ProductDto } from 'src/app/shared/models/product.dto';
+import {
+  ProductDetailDto,
+  ProductDto,
+} from 'src/app/shared/models/product.dto';
 
 @Component({
   selector: 'app-product-detail',
@@ -13,7 +16,7 @@ import { ProductDto } from 'src/app/shared/models/product.dto';
 export class ProductDetailComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject<void>();
   priceProductDetail: string = '';
-  productDetail: ProductDto = {
+  productDetail: ProductDetailDto = {
     id: 0,
     name: '',
     code: '',
@@ -24,10 +27,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     description: '',
     isActive: false,
     isVisibility: false,
-    optionNames: [],
+    options: new Map<string, string[]>(),
     productAttributeDisplayDtos: [],
-    dateCreated: '',
-    dateUpdated: '',
   };
 
   constructor(
@@ -44,11 +45,11 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       .getProductById(productId)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: (response: ProductDto) => {
+        next: (response: ProductDetailDto) => {
           this.productDetail = response;
           this.getRangePriceProduct();
 
-          console.log('this.productDetail :>> ', this.productDetail);
+          console.log('productDetail.optionNames :>> ', this.productDetail);
         },
         error: () => {},
       });

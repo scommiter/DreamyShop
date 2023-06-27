@@ -12,7 +12,7 @@
     "DreamyShop.Api": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7251;http://localhost:5251",
       "environmentVariables": {

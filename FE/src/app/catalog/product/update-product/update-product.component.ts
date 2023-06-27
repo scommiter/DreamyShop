@@ -107,11 +107,6 @@ export class UpdateProductComponent implements OnInit {
     this.quantityProduct =
       this.productUpdate.productAttributeDisplayDtos[0].quantity;
     this.checkCountProductOptions = this.productUpdate.optionNames.length;
-    console.log('this.productUpdate :>> ', this.productUpdate);
-    console.log(
-      'this.checkCountProductOptions :>> ',
-      this.checkCountProductOptions
-    );
   }
 
   closeImage(index: number) {
@@ -260,7 +255,6 @@ export class UpdateProductComponent implements OnInit {
       }
     }
     console.log(this.checkIsUpdateOptionVariant);
-    console.log('PRODUCT UPDATE :>> ', this.productUpdateRequest);
     this.productService
       .updateProduct(this.productUpdate.id, this.productUpdateRequest)
       .subscribe({
@@ -286,7 +280,6 @@ export class UpdateProductComponent implements OnInit {
     productVariantOutputs: ProductVariantRequestDto[],
     productOptions: { key: string; value: string[] }[]
   ) {
-    console.log('productOptions :>> ', productOptions);
     const attributeNames: string[][] = [];
     if (productOptions.length > 1) {
       let index = 0;
