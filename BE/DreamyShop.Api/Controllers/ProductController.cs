@@ -37,6 +37,13 @@ namespace DreamyShop.Api.Controllers
             return Ok(result.Result);
         }
 
+        [HttpGet("getProductById")]
+        public async Task<IActionResult> GetProductById(int productId)
+        {
+            var result = await _productService.GetProductById(productId);
+            return Ok(result.Result);
+        }
+
         [HttpPost("create"), DisableRequestSizeLimit]
         //[Authorize]
         //[Member]
