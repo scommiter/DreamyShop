@@ -65,6 +65,58 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     this.priceProductDetail = max + 'đ' + ' - ' + min + 'đ';
   }
 
+  addToCart() {}
+
+  selectedOptions: any[] = [];
+  options: string[] = [];
+  priceVariant: number = 0;
+  updateSelectedOptions(optionKey: string, optionValue: string) {
+    const selectedOption = [optionKey, optionValue];
+    const index = this.selectedOptions.findIndex(
+      (option) => option[0] === optionKey
+    );
+
+    if (index > -1) {
+      this.selectedOptions[index] = selectedOption;
+    } else {
+      this.selectedOptions.push(selectedOption);
+    }
+    this.options = this.selectedOptions.map((p) => p[1].trim());
+
+    //check price of variant
+    this.productDetail.productAttributeDisplayDtos.forEach((aName) => {
+      if (this.areArraysEqual(aName.attributeNames, this.options) == true) {
+        this.priceVariant = aName.price;
+      }
+    });
+  }
+
+  areArraysEqual(arr1: string[], arr2: string[]) {
+    if (arr1.length !== arr2.length) {
+      return false;
+    }
+    const sortedArr1 = arr1.slice().sort();
+    const sortedArr2 = arr2.slice().sort();
+    for (let i = 0; i < sortedArr1.length; i++) {
+      if (sortedArr1[i].trim() !== sortedArr2[i].trim()) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  quantity: number = 1;
+
+  decreaseQuantity() {
+    if (this.quantity > 1) {
+      this.quantity--;
+    }
+  }
+
+  increaseQuantity() {
+    this.quantity++;
+  }
+
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
