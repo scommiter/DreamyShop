@@ -120,6 +120,15 @@ const routes: Routes = [
       ),
     component: ShopLayoutComponent,
   },
+  {
+    path: 'shop/cart',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./catalog/cart/cart.module').then(
+        (m) => m.CartModule
+      ),
+    component: ShopLayoutComponent,
+  },
 ];
 
 @NgModule({

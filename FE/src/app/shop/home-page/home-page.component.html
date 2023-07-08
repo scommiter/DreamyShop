@@ -228,6 +228,7 @@
 </div>
 <!-- Categories End -->
 
+<p-toast></p-toast>
 <!-- Products Start -->
 <div class="container-fluid pt-5 pb-3">
   <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
@@ -246,7 +247,7 @@
             alt=""
           />
           <div class="product-action">
-            <a class="btn btn-outline-dark btn-square" href=""
+            <a (click)="addToCart(product)" class="btn btn-outline-dark btn-square"
               ><i class="fa fa-shopping-cart"></i
             ></a>
             <a class="btn btn-outline-dark btn-square" href=""

@@ -18,9 +18,10 @@ import { OrderComponent } from './catalog/order/order.component';
 import { HomePageComponent } from './shop/home-page/home-page.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ShopComponent } from './shop/shop/shop.component';
-import { ShopLayoutComponent } from './shop/shop-layout/shop-layout.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { ProductDetailComponent } from './shop/product-detail/product-detail.component';
+import { CartComponent } from './catalog/cart/cart.component';
+import { ShopLayoutComponent } from './shop/shop-layout/shop-layout.component';
 
 @NgModule({
   declarations: [
@@ -29,10 +30,10 @@ import { ProductDetailComponent } from './shop/product-detail/product-detail.com
     StatisticalPriceComponent,
     StatisticalAccessComponent,
     OrderComponent,
-    HomePageComponent,
     ShopComponent,
-    ShopLayoutComponent,
     ProductDetailComponent,
+    CartComponent,
+    ShopLayoutComponent
   ],
   imports: [
     BrowserModule,

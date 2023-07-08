@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
+import { CartService } from 'src/app/services/cart.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { ProductService } from 'src/app/services/product.service';
 import { PageResultDto } from 'src/app/shared/models/page-result.dto';
 import { ProductDisplayDto } from 'src/app/shared/models/product.dto';
@@ -14,7 +17,13 @@ import { ProductDisplayDto } from 'src/app/shared/models/product.dto';
 export class HomePageComponent implements OnInit {
   private ngUnsubscribe = new Subject<void>();
   products: ProductDisplayDto[] = [];
-  constructor(private productService: ProductService, private router: Router) {}
+  constructor(
+    private productService: ProductService,  
+    private cartService: CartService,
+    private notificationService: NotificationService, 
+    private messageService: MessageService,
+    private router: Router) 
+    {}
 
   ngOnInit(): void {
     this.getAllProducts();
@@ -69,4 +78,19 @@ export class HomePageComponent implements OnInit {
       description: 'Quý phái, cá tính',
     },
   ];
+
+  //CART
+  addToCart(product: any) {
+    this.cartService.addToCart(product);
+    this.notificationService.notifyAddToCart();
+    this.showCreateSuccess();
+  }
+
+  showCreateSuccess() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Thành công',
+      detail: 'Đã sản phẩm vào giỏ hàng',
+    });
+  }
 }
