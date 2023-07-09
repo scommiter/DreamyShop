@@ -99,35 +99,37 @@ const routes: Routes = [
   },
   {
     path: 'shop',
-    pathMatch: 'full',
-    loadChildren: () =>
-      import('./shop/home-page/home-page.module').then((m) => m.HomePageModule),
-    component: ShopLayoutComponent,
-  },
-  {
-    path: 'shop/product',
-    pathMatch: 'full',
-    loadChildren: () =>
-      import('./shop/shop/shop.module').then((m) => m.ShopModule),
-    component: ShopLayoutComponent,
-  },
-  {
-    path: 'shop/product/:id',
-    pathMatch: 'full',
-    loadChildren: () =>
-      import('./shop/product-detail/product-detail.module').then(
-        (m) => m.ProductDetailModule
-      ),
-    component: ShopLayoutComponent,
-  },
-  {
-    path: 'shop/cart',
-    pathMatch: 'full',
-    loadChildren: () =>
-      import('./catalog/cart/cart.module').then(
-        (m) => m.CartModule
-      ),
-    component: ShopLayoutComponent,
+    component: ShopLayoutComponent, 
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        loadChildren: () =>
+        import('./shop/home-page/home-page.module').then((m) => m.HomePageModule),
+          },
+      {
+        path: 'product/:id',
+        pathMatch: 'full',
+        loadChildren: () =>
+          import('./shop/product-detail/product-detail.module').then(
+            (m) => m.ProductDetailModule
+          ),
+      },
+      {
+        path: 'cart',
+        pathMatch: 'full',
+        loadChildren: () =>
+          import('./catalog/cart/cart.module').then(
+            (m) => m.CartModule
+          ),
+      },
+      {
+        path: 'product',
+        pathMatch: 'full',
+        loadChildren: () =>
+        import('./shop/shop/shop.module').then((m) => m.ShopModule),
+      },
+    ],
   },
 ];
 

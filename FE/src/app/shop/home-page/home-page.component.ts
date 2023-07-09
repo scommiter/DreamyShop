@@ -81,6 +81,7 @@ export class HomePageComponent implements OnInit {
 
   //CART
   addToCart(product: any) {
+    console.log('Hellu :>> ');
     this.cartService.addToCart(product);
     this.notificationService.notifyAddToCart();
     this.showCreateSuccess();

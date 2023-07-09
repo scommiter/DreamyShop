@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DreamyShop.EntityFrameworkCore.Migrations
 {
-    public partial class InitDB : Migration
+    public partial class CreateDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -294,6 +294,7 @@ namespace DreamyShop.EntityFrameworkCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    BillCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     TotalMoney = table.Column<double>(type: "float", nullable: false),
                     ShippingFee = table.Column<double>(type: "float", nullable: false),

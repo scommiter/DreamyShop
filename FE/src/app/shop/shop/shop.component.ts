@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
+import { CartService } from 'src/app/services/cart.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { ProductService } from 'src/app/services/product.service';
 import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
 import { PageResultDto } from 'src/app/shared/models/page-result.dto';
@@ -34,7 +37,12 @@ export class ShopComponent implements OnInit, OnDestroy {
     dateUpdated: '',
   };
 
-  constructor(private productService: ProductService, private router: Router) {}
+  constructor(
+    private productService: ProductService,
+    private router: Router, 
+    private cartService: CartService,
+    private notificationService: NotificationService, 
+    private messageService: MessageService, ) {}
 
   ngOnInit(): void {
     this.getAllProducts();
@@ -56,6 +64,21 @@ export class ShopComponent implements OnInit, OnDestroy {
 
   redirectToProductDetail(id: number) {
     this.router.navigate(['/shop/product', id]);
+  }
+
+  //CART
+  addToCart(product: any) {
+    this.cartService.addToCart(product);
+    this.notificationService.notifyAddToCart();
+    this.showCreateSuccess();
+  }
+
+  showCreateSuccess() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Thành công',
+      detail: 'Đã sản phẩm vào giỏ hàng',
+    });
   }
 
   //PAGING

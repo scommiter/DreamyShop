@@ -247,7 +247,7 @@
             </div>
           </div>
         </div>
-
+        <p-toast></p-toast>
         <div
           class="col-lg-4 col-md-6 col-sm-6 pb-1"
           *ngFor="let product of products"
@@ -262,16 +262,16 @@
                 alt=""
               />
               <div class="product-action">
-                <a class="btn btn-outline-dark btn-square" href=""
+                <a (click)="addToCart(product)" class="btn btn-outline-dark btn-square"
                   ><i class="fa fa-shopping-cart"></i
                 ></a>
-                <a class="btn btn-outline-dark btn-square" href=""
+                <a class="btn btn-outline-dark btn-square"
                   ><i class="far fa-heart"></i
                 ></a>
-                <a class="btn btn-outline-dark btn-square" href=""
+                <a class="btn btn-outline-dark btn-square"
                   ><i class="fa fa-sync-alt"></i
                 ></a>
-                <a class="btn btn-outline-dark btn-square" href=""
+                <a class="btn btn-outline-dark btn-square"
                   ><i class="fa fa-search"></i
                 ></a>
               </div>
