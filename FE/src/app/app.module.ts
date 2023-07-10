@@ -30,7 +30,7 @@ import { ShopLayoutComponent } from './shop/shop-layout/shop-layout.component';
     OrderComponent,
     ProductDetailComponent,
     CartComponent,
-    ShopLayoutComponent
+    ShopLayoutComponent,
   ],
   imports: [
     BrowserModule,

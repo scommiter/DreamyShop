@@ -7,10 +7,14 @@ import { NotificationService } from 'src/app/services/notification.service';
 import { ProductService } from 'src/app/services/product.service';
 import { ProductTypes } from 'src/app/shared/enums/product-types.enum';
 import { PageResultDto } from 'src/app/shared/models/page-result.dto';
+import jwt_decode from "jwt-decode";
 import {
   ProductDisplayDto,
   ProductDto,
 } from 'src/app/shared/models/product.dto';
+import { DialogService } from 'primeng/dynamicdialog';
+import { ProductDetailComponent } from '../product-detail/product-detail.component';
+import { ProductAddToCartComponent } from '../product-add-to-cart/product-add-to-cart.component';
 
 @Component({
   selector: 'app-shop',
@@ -41,6 +45,7 @@ export class ShopComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private router: Router, 
     private cartService: CartService,
+    private dialogService: DialogService,
     private notificationService: NotificationService, 
     private messageService: MessageService, ) {}
 
@@ -67,10 +72,26 @@ export class ShopComponent implements OnInit, OnDestroy {
   }
 
   //CART
+  decodedToken: { [key: string]: string; } = {['']: ''};
   addToCart(product: any) {
-    this.cartService.addToCart(product);
-    this.notificationService.notifyAddToCart();
-    this.showCreateSuccess();
+    const token = localStorage.getItem('TOKEN');
+    this.decodedToken = jwt_decode(token as string);
+    if(this.decodedToken['FullName'] != ''){
+      const ref = this.dialogService.open(ProductAddToCartComponent, {
+        width: '50%',
+        data: product
+      });
+      ref.onClose.subscribe((data: any) => {
+        if (data) {
+          this.notificationService.notifyAddToCart();
+          this.showCreateSuccess();
+        }
+      });
+    }else{
+      this.cartService.addToCartNoLogin(product);
+      this.notificationService.notifyAddToCart();
+      this.showCreateSuccess();
+    }
   }
 
   showCreateSuccess() {

@@ -13,6 +13,7 @@ export class NotificationService  {
     addToCartAction$ = this.addToCartSubject.asObservable();
   
     notifyAddToCart() {
+      console.log("Helooooooooooooooooooooooooooooo")
       this.addToCartSubject.next();
     }
 }

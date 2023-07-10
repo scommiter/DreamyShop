@@ -82,7 +82,7 @@ export class HomePageComponent implements OnInit {
   //CART
   addToCart(product: any) {
     console.log('Hellu :>> ');
-    this.cartService.addToCart(product);
+    this.cartService.addToCartNoLogin(product);
     this.notificationService.notifyAddToCart();
     this.showCreateSuccess();
   }
@@ -93,5 +93,10 @@ export class HomePageComponent implements OnInit {
       summary: 'Thành công',
       detail: 'Đã sản phẩm vào giỏ hàng',
     });
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }
