@@ -60,7 +60,7 @@ namespace DreamyShop.Logic.Cart
         }
         public async Task<ApiResult<bool>> AddToCart(CartAddDto cartAddDto)
         {
-            var productVariant = await _repository.ProductVariant.GetByIdAsync(cartAddDto.ProductVariantId);
+            var productVariant = _repository.ProductVariant.GetAll().Where(c => c.SKU == cartAddDto.Sku).FirstOrDefault();
             if (productVariant == null)
             {
                 return new ApiErrorResult<bool>((int)ErrorCodes.DataEntryIsNotExisted);
@@ -68,7 +68,7 @@ namespace DreamyShop.Logic.Cart
             var cart = _repository.Cart.GetAll().Where(p => p.UserId == cartAddDto.UserId).ToList().FirstOrDefault();
             if (cart != null)
             {
-                var cartUpdate = _repository.CartDetail.GetAll().Where(p => p.CartId == cart.Id && p.VariantId == cartAddDto.ProductVariantId).ToList().FirstOrDefault();
+                var cartUpdate = _repository.CartDetail.GetAll().Where(p => p.CartId == cart.Id && p.VariantId == productVariant.Id).ToList().FirstOrDefault();
                 if (cartUpdate != null)
                 {
                     cartUpdate.Quantity += cartAddDto.Quantity;
@@ -80,7 +80,7 @@ namespace DreamyShop.Logic.Cart
                 await _repository.CartDetail.AddAsync(new Domain.CartDetail
                 {
                     CartId = cart.Id,
-                    VariantId = cartAddDto.ProductVariantId,
+                    VariantId = productVariant.Id,
                     Quantity = cartAddDto.Quantity,
                     DateCreated = DateTime.Now
                 });
@@ -98,7 +98,7 @@ namespace DreamyShop.Logic.Cart
                 await _repository.CartDetail.AddAsync(new Domain.CartDetail
                 {
                     CartId = newCart.Id,
-                    VariantId = cartAddDto.ProductVariantId,
+                    VariantId = productVariant.Id,
                     Quantity = cartAddDto.Quantity,
                     DateCreated = DateTime.Now
                 });

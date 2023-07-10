@@ -19,15 +19,15 @@ namespace DreamyShop.Api.Controllers
             _cartService = cartService;
         }
 
-        [HttpGet("getAll")]
-        public async Task<IActionResult> GetAllCart([FromForm] PagingRequest pagingRequest, int userId)
+        [HttpPut("getAll/{userId}")]
+        public async Task<IActionResult> GetAllCart([FromBody] PagingRequest pagingRequest, int userId)
         {
             var result = await _cartService.GetAllCart(userId, pagingRequest);
             return Ok(result.Result);
         }
 
         [HttpPost("addToCart")]
-        public async Task<IActionResult> AddToCart([FromForm] CartAddDto cartAddDto)
+        public async Task<IActionResult> AddToCart([FromBody] CartAddDto cartAddDto)
         {
             var result = await _cartService.AddToCart(cartAddDto);
             return Ok(result.Result);
