@@ -61,7 +61,6 @@ export class ShopComponent implements OnInit, OnDestroy {
         next: (response: PageResultDto<ProductDisplayDto>) => {
           this.products = response.items;
           this.totalCounts = response.totals;
-          console.log('this.products 1111111111111111:>> ', this.products);
         },
         error: () => {},
       });
