@@ -102,12 +102,17 @@ namespace DreamyShop.Repository.Repositories.Generic
         }
 
         //BULK CRUD
-        public async Task BulkRangeInsert(IList<T> entities)
+        public async Task BulkRangeInsertAsync(IList<T> entities)
         {
             await _context.BulkInsertAsync<T>(entities);
         }
 
-        public async Task BulkRangeUpdate(IList<T> entities)
+        public void BulkRangeInsert(IList<T> entities)
+        {
+            _context.BulkInsert<T>(entities, new BulkConfig { PreserveInsertOrder = true, SetOutputIdentity = true });
+        }
+
+        public async Task BulkRangeUpdateAsync(IList<T> entities)
         {
             using (var transaction = _context.Database.BeginTransaction())
             {
@@ -116,7 +121,7 @@ namespace DreamyShop.Repository.Repositories.Generic
             }
         }
 
-        public async Task BulkRangeDelete(IList<T> entities)
+        public async Task BulkRangeDeleteAsync(IList<T> entities)
         {
             using (var transaction = _context.Database.BeginTransaction())
             {
@@ -129,11 +134,10 @@ namespace DreamyShop.Repository.Repositories.Generic
         {
             int totalRecords = entities.Count;
             int batches = (int)Math.Ceiling((double)totalRecords / batchSize);
-
             for (int i = 0; i < batches; i++)
             {
                 var batchEntities = entities.Skip(i * batchSize).Take(batchSize).ToList();
-                _context.BulkInsert<T>(batchEntities);
+                _context.BulkInsert<T>(batchEntities, new BulkConfig { PreserveInsertOrder = true, SetOutputIdentity = true });
             }
         }
     }

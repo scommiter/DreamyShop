@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using AutoMapper.Execution;
+using DreamyShop.Common.Constants;
 using DreamyShop.Common.Exceptions;
 using DreamyShop.Common.Extensions;
 using DreamyShop.Common.Results;
@@ -9,8 +11,11 @@ using DreamyShop.Domain.Shared.Types;
 using DreamyShop.EntityFrameworkCore;
 using DreamyShop.Logic.Conditions;
 using DreamyShop.Repository.RepositoryWrapper;
+using EFCore.BulkExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 using System.Net.Http.Headers;
 
 namespace DreamyShop.Logic.Product
@@ -20,8 +25,10 @@ namespace DreamyShop.Logic.Product
         private readonly DreamyShopDbContext _context;
         private readonly IRepositoryWrapper _repository;
         private readonly IMapper _mapper;
+        private IMemoryCache _cache;
 
         public ProductLogic(
+            IMemoryCache cache,
             DreamyShopDbContext context,
             IRepositoryWrapper repository,
             IMapper mapper)
@@ -29,6 +36,7 @@ namespace DreamyShop.Logic.Product
             _context = context;
             _repository = repository;
             _mapper = mapper;
+            _cache = cache;
         }
 
         public async Task<ApiResult<PageResult<ProductDto>>> GetAllProductPaging(PagingRequest pagingRequest)
@@ -162,7 +170,7 @@ namespace DreamyShop.Logic.Product
                 Name = x.Product.Name,
                 Code = x.Product.Code,
                 Quantity = x.pv.Select(pv => pv.Quantity).Sum(),
-                RangePrice = x.pv.Select(pv => pv.Price).Distinct().Count() == 1 
+                RangePrice = x.pv.Select(pv => pv.Price).Distinct().Count() == 1
                                     ? x.pv.Select(pv => pv.Price).FirstOrDefault().ConvertToVND()
                                     : x.pv.Select(pv => pv.Price).Min().ConvertToVND() + " - " + x.pv.Select(pv => pv.Price).Max().ConvertToVND(),
                 ThumbnailPictures = x.ip.GroupBy(p => p.ProductId).Select(pt => pt.Select(ptt => ptt.Path ?? "").FirstOrDefault()).ToList().FirstOrDefault(),
@@ -224,7 +232,7 @@ namespace DreamyShop.Logic.Product
                                         pav = group.Where(item => item.pav != null).Select(item => item.pav).Distinct(),
                                         ip = group.Where(item => item.ip != null).Select(item => item.ip).Distinct()
                                     }).ToListAsync();
-            var productDetail =  groupedQuery.FirstOrDefault();
+            var productDetail = groupedQuery.FirstOrDefault();
             var productDetailDtos = new ProductDetailDto();
             productDetailDtos.Id = productDetail.ProductId;
             productDetailDtos.Name = productDetail.Product.Name;
@@ -237,15 +245,15 @@ namespace DreamyShop.Logic.Product
             productDetailDtos.IsActive = productDetail.Product.IsActive;
             productDetailDtos.IsVisibility = productDetail.Product.IsVisibility;
             productDetailDtos.ProductAttributeDisplayDtos = productDetail.pv.Select(pv => new ProductAttributeDisplayDto
-                {
-                    AttributeNames = productDetail.pav.Where(e => e.ProductId == productDetail.ProductId)
+            {
+                AttributeNames = productDetail.pav.Where(e => e.ProductId == productDetail.ProductId)
                                                                      .Where(p => (productDetail.pvv.GroupBy(pvv => pvv.ProductVariantId).Where(pc => pc.Key == pv.Id).FirstOrDefault().Select(pi => pi.ProductAttributeValueId)).Contains(p.Id))
                                                                      .Select(e => e.Value).ToList(),
-                    SKU = pv.SKU,
-                    Quantity = pv.Quantity,
-                    Price = pv.Price,
-                    Image = pv.ThumbnailPicture == null ? "" : pv.ThumbnailPicture
-                }).OrderByDescending(a => a.AttributeNames.FirstOrDefault()).ToList();
+                SKU = pv.SKU,
+                Quantity = pv.Quantity,
+                Price = pv.Price,
+                Image = pv.ThumbnailPicture == null ? "" : pv.ThumbnailPicture
+            }).OrderByDescending(a => a.AttributeNames.FirstOrDefault()).ToList();
             var productAttributeValueOfCurrentProduct = productDetail.pav.Where(p => p.ProductId == productId).ToList();
             var groupAttribute = productAttributeValueOfCurrentProduct.GroupBy(p => p.AttributeId)
                                     .Join(_context.Attributes,
@@ -279,7 +287,15 @@ namespace DreamyShop.Logic.Product
 
         private async Task<List<ProductDto>> GetAllProductDto()
         {
-            var attributes = _repository.Attribute.GetAll().ToList();
+            if (!_cache.TryGetValue(ConstantCaches.ATTRIBUTECACHES, out IEnumerable<Domain.Attribute> attributes))
+            {
+                attributes = _repository.Attribute.GetAll();
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromSeconds(60))
+                        .SetAbsoluteExpiration(TimeSpan.FromSeconds(3600))
+                        .SetPriority(CacheItemPriority.Normal);
+                _cache.Set(ConstantCaches.ATTRIBUTECACHES, attributes, cacheEntryOptions);
+            }
             var attributeValues = _repository.ProductAttribute.GetAll().ToList();
             var attributeProducts = _context.Attributes.Join(_context.ProductAttributes,
                                         a => a.Id,
@@ -976,6 +992,8 @@ namespace DreamyShop.Logic.Product
             var categoryNames = productCreateDto.Select(p => p.CategoryName).ToList();
             AddCategoryList(categoryNames);
 
+            var indexManufacturer = 0;
+            var indexCategory = 0;
             var newProducts = productCreateDto.Select(p => new Domain.Product
             {
                 ManufacturerId = _repository.Manufacturer.GetByName(p.ManufacturerName).Id,
@@ -991,15 +1009,13 @@ namespace DreamyShop.Logic.Product
                 IsVisibility = p.IsVisibility,
                 DateCreated = DateTime.Now
             }).ToList();
-            await _repository.Product.BulkRangeInsert(newProducts);
+            _repository.Product.BulkRangeInsert(newProducts);
 
-            var productCodes = newProducts.Select(p => p.Code);
-            var products = _repository.Product.GetAll().Where(p => productCodes.Contains(p.Code));
-            var newProductIds = products.Select(p => p.Id).ToList();
+            var newProductIds = newProducts.Select(p => p.Id).ToList();
 
             var productOptions = productCreateDto.Select(p => p.ProductOptions).ToList();
             var listVariantProduct = productCreateDto.Select(p => p.VariantProducts).ToList();
-            AddAttributeList(productOptions, newProductIds);
+            AddAttributeList(productOptions);
             AddProductAttribute(productOptions, newProductIds);
             AddProductVariantList(listVariantProduct, newProductIds);
             AddProductAttributeValueList(productOptions, newProductIds);
@@ -1044,7 +1060,7 @@ namespace DreamyShop.Logic.Product
             await _repository.Category.BulkInsertDivideData(newCategories, 500);
         }
 
-        private async void AddAttributeList(List<Dictionary<string, List<string>>> productOptions, List<int> productIds)
+        private async void AddAttributeList(List<Dictionary<string, List<string>>> productOptions)
         {
             var attributes = _repository.Attribute.GetAll().ToList();
             productOptions.ForEach(p => p.Values.ToList().ForEach(list => list.RemoveAll(item => item == "")));
@@ -1162,7 +1178,10 @@ namespace DreamyShop.Logic.Product
             }
             await _repository.ProductAttributeValue.BulkInsertDivideData(newProductAttributes, 500);
         }
-        private async void AddProductVariantValueList(List<int> productIds, List<List<VariantProduct>> productVariantValuesList, List<Dictionary<string, List<string>>> productOptionsList)
+        private async void AddProductVariantValueList(
+            List<int> productIds,
+            List<List<VariantProduct>> productVariantValuesList,
+            List<Dictionary<string, List<string>>> productOptionsList)
         {
             var attributes = _repository.Attribute.GetAll().ToList();
             productVariantValuesList.ForEach(p => p.RemoveAll(product => product.SKU == ""));

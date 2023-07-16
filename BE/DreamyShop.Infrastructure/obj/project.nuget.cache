@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RI9csgU0zO2nphj2FloDvksRNnEzZA6NAm9PMIlU2wyX+xKL3ZYMpVQVtlDqV70x/ny5UiM55o6B8zBdcSN9Lw==",
+  "dgSpecHash": "YxZV9AXWnWVA1tS1UNP2FEY7RKGqkT1rAztPqY+MNYErue6M4MCJutMoSMENzem+P+pj+/QSieiYQ0XRynqjqw==",
   "success": true,
-  "projectFilePath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj",
+  "projectFilePath": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

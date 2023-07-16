@@ -89,3 +89,22 @@ C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Infrastructure\obj\Debug\n
 C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Infrastructure\obj\Debug\net6.0\DreamyShop.EntityFrameworkCore.pdb
 C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Infrastructure\obj\Debug\net6.0\DreamyShop.EntityFrameworkCore.genruntimeconfig.cache
 C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Infrastructure\obj\Debug\net6.0\ref\DreamyShop.EntityFrameworkCore.dll
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Infrastructure\bin\Debug\net6.0\DreamyShop.EntityFrameworkCore.deps.json
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Infrastructure\bin\Debug\net6.0\DreamyShop.EntityFrameworkCore.runtimeconfig.json
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Infrastructure\bin\Debug\net6.0\DreamyShop.EntityFrameworkCore.dll
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Infrastructure\bin\Debug\net6.0\DreamyShop.EntityFrameworkCore.pdb
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Infrastructure\bin\Debug\net6.0\DreamyShop.Domain.dll
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Infrastructure\bin\Debug\net6.0\DreamyShop.Domain.Shared.dll
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Infrastructure\bin\Debug\net6.0\DreamyShop.Domain.pdb
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Infrastructure\bin\Debug\net6.0\DreamyShop.Domain.Shared.pdb
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Infrastructure\obj\Debug\net6.0\DreamyShop.EntityFrameworkCore.csproj.AssemblyReference.cache
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Infrastructure\obj\Debug\net6.0\DreamyShop.EntityFrameworkCore.GeneratedMSBuildEditorConfig.editorconfig
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Infrastructure\obj\Debug\net6.0\DreamyShop.EntityFrameworkCore.AssemblyInfoInputs.cache
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Infrastructure\obj\Debug\net6.0\DreamyShop.EntityFrameworkCore.AssemblyInfo.cs
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Infrastructure\obj\Debug\net6.0\DreamyShop.EntityFrameworkCore.csproj.CoreCompileInputs.cache
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Infrastructure\obj\Debug\net6.0\DreamyShop.EntityFrameworkCore.csproj.CopyComplete
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Infrastructure\obj\Debug\net6.0\DreamyShop.EntityFrameworkCore.dll
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Infrastructure\obj\Debug\net6.0\refint\DreamyShop.EntityFrameworkCore.dll
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Infrastructure\obj\Debug\net6.0\DreamyShop.EntityFrameworkCore.pdb
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Infrastructure\obj\Debug\net6.0\DreamyShop.EntityFrameworkCore.genruntimeconfig.cache
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Infrastructure\obj\Debug\net6.0\ref\DreamyShop.EntityFrameworkCore.dll

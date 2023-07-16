@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5e2IR6NIIvvREGqwFXlBqS9x9qfwShA0RjEq8IZ5ruuioFyFeuWNYngERX+t8WzrSgT4i12EmfHL1SSK2Fdb3A==",
+  "dgSpecHash": "ep615cbs8kvq1Ch7k3shVRxxVhrsmQD78rUmFTRPRQQCLCf0lkxq6g80RGrjVIZYIh08AsXOyvM9TORGN8he6g==",
   "success": true,
-  "projectFilePath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
+  "projectFilePath": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",

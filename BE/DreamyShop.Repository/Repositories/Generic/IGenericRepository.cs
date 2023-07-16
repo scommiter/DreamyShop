@@ -28,9 +28,10 @@ namespace DreamyShop.Repository.Repositories.Generic
 
         void RemoveMultiple(List<T> entities);
 
-        public Task BulkRangeInsert(IList<T> entities);
+        public Task BulkRangeInsertAsync(IList<T> entities);
+        public void BulkRangeInsert(IList<T> entities);
         public Task BulkInsertDivideData(IList<T> entities, int batchSize);
-        public Task BulkRangeUpdate(IList<T> entities);
-        public Task BulkRangeDelete(IList<T> entities);
+        public Task BulkRangeUpdateAsync(IList<T> entities);
+        public Task BulkRangeDeleteAsync(IList<T> entities);
     }
 }

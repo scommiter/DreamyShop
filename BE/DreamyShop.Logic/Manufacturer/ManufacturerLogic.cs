@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using DreamyShop.Common.Constants;
 using DreamyShop.Common.Exceptions;
 using DreamyShop.Common.Results;
 using DreamyShop.Domain.Shared.Dtos;
 using DreamyShop.Domain.Shared.Dtos.Manufacturer;
 using DreamyShop.EntityFrameworkCore;
+using DreamyShop.Repository.Helpers;
 using DreamyShop.Repository.RepositoryWrapper;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace DreamyShop.Logic.Manufacturer
 {
@@ -14,15 +17,18 @@ namespace DreamyShop.Logic.Manufacturer
         private readonly DreamyShopDbContext _context;
         private readonly IRepositoryWrapper _repository;
         private readonly IMapper _mapper;
+        private readonly IMemoryCache _memoryCache;
 
         public ManufacturerLogic(
             DreamyShopDbContext context,
             IRepositoryWrapper repository,
-            IMapper mapper)
+            IMapper mapper,
+            IMemoryCache memoryCache)
         {
             _context = context;
             _repository = repository;
             _mapper = mapper;
+            _memoryCache = memoryCache;
         }
 
         public async Task<ApiResult<ManufacturerDto>> CreateManufacturer(ManufacturerCreateUpdateDto manufacturerCreateUpdateDto)
@@ -35,11 +41,15 @@ namespace DreamyShop.Logic.Manufacturer
 
         public async Task<ApiResult<PageResult<ManufacturerDto>>> GetAllManufacturer(PagingRequest pagingRequest)
         {
+            //var _manufacturerCache = new CacheHelper<IQueryable<Domain.Manufacturer>>(cache);
+            //var manufacturers = await _manufacturerCache.GetOrCreate(ConstantCaches.MANUFACTURERCACHES, async () => _repository.Manufacturer.GetAll());
+
             var manufacturerPagings = _repository.Manufacturer.GetAll()
                                 .ProjectTo<ManufacturerDto>(_mapper.ConfigurationProvider)
                                 .Skip((pagingRequest.Page - 1) * pagingRequest.Limit)
                                 .Take(pagingRequest.Limit)
                                 .ToList();
+
             var pageResult = new PageResult<ManufacturerDto>()
             {
                 Items = manufacturerPagings ?? new List<ManufacturerDto>(),

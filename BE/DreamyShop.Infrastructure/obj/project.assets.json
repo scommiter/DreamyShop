@@ -2166,11 +2166,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj",
+      "projectUniqueName": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj",
       "projectName": "DreamyShop.EntityFrameworkCore",
-      "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj",
+      "projectPath": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Infrastructure\\obj\\",
+      "outputPath": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2191,8 +2191,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj": {
-              "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj"
+            "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj": {
+              "projectPath": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj"
             }
           }
         }

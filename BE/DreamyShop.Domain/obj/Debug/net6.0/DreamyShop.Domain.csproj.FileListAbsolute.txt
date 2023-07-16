@@ -77,3 +77,20 @@ C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\re
 C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.pdb
 C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.genruntimeconfig.cache
 C:\Users\Linh master\Desktop\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\ref\DreamyShop.Domain.dll
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Domain\bin\Debug\net6.0\DreamyShop.Domain.deps.json
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Domain\bin\Debug\net6.0\DreamyShop.Domain.runtimeconfig.json
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Domain\bin\Debug\net6.0\DreamyShop.Domain.dll
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Domain\bin\Debug\net6.0\DreamyShop.Domain.pdb
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Domain\bin\Debug\net6.0\DreamyShop.Domain.Shared.dll
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Domain\bin\Debug\net6.0\DreamyShop.Domain.Shared.pdb
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.csproj.AssemblyReference.cache
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.AssemblyInfoInputs.cache
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.AssemblyInfo.cs
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.csproj.CoreCompileInputs.cache
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.csproj.CopyComplete
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.dll
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\refint\DreamyShop.Domain.dll
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.pdb
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\DreamyShop.Domain.genruntimeconfig.cache
+E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Domain\obj\Debug\net6.0\ref\DreamyShop.Domain.dll
