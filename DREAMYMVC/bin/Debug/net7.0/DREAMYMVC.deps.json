@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "DREAMYMVC/1.0.0": {
+        "runtime": {
+          "DREAMYMVC.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DREAMYMVC/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
