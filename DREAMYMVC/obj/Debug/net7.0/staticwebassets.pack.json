@@ -5,12 +5,20 @@
       "PackagePath": "staticwebassets\\DREAMYMVC.bundle.scp.css"
     },
     {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\css\\main.css",
+      "PackagePath": "staticwebassets\\css\\main.css"
+    },
+    {
       "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\planet-1702788.jpg",
+      "PackagePath": "staticwebassets\\img\\planet-1702788.jpg"
     },
     {
       "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\js\\site.js",

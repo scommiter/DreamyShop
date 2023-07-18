@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "HW3Thds3seBuNRykUWpwJypZayrl1xYrS0eidYS8sng=",
+  "Hash": "4JiVIKD11/c/hnWiZ7/9oNgcGpfSd7s3Uh1B89NYV7M=",
   "Source": "DREAMYMVC",
   "BasePath": "_content/DREAMYMVC",
   "Mode": "Default",
@@ -51,6 +51,23 @@
       "OriginalItemSpec": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\DREAMYMVC.bundle.scp.css"
     },
     {
+      "Identity": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\css\\main.css",
+      "SourceId": "DREAMYMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\",
+      "BasePath": "_content/DREAMYMVC",
+      "RelativePath": "css/main.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\main.css"
+    },
+    {
       "Identity": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\css\\site.css",
       "SourceId": "DREAMYMVC",
       "SourceType": "Discovered",
@@ -83,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\planet-1702788.jpg",
+      "SourceId": "DREAMYMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\",
+      "BasePath": "_content/DREAMYMVC",
+      "RelativePath": "img/planet-1702788.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\planet-1702788.jpg"
     },
     {
       "Identity": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\js\\site.js",

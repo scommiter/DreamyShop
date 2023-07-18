@@ -1,0 +1,132 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+/* LOGIN */
+body {
+    background-image: url("../img/planet-1702788.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.login-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-container {
+    position: relative;
+    width: 420px;
+    display: flex;
+    flex-direction: column;
+    margin: 0px 20px;
+    padding: 40px 50px;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+header {
+    color: #fff;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0 20px 0;
+    font-weight: 700;
+}
+
+.input-login {
+    position: relative;
+    margin: 15px 0;
+}
+
+    .input-login input {
+        width: 100%;
+        height: 50px;
+        border: none;
+        border-radius: 30px;
+        background: rgba(255,255,255,0.1);
+        outline: none;
+        color: #fff;
+        padding: 20px 45px 20px 45px;
+    }
+
+        .input-login input::placeholder {
+            color: #fff;
+            font-size: 15px;
+        }
+
+i {
+    position: absolute;
+    color: white;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14.5px;
+    margin: -5px 0 15px;
+    color: #fff;
+}
+
+    .remember-forgot label input {
+        color: #fff;
+        margin-right: 3px;
+    }
+
+    .remember-forgot a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+        .remember-forgot a:hover {
+            text-decoration: underline;
+        }
+
+button {
+    width: 100%;
+    height: 40px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+.register-link {
+    font-size: 14.5px;
+    text-align: center;
+    margin-top: 20px;
+    color: #fff;
+}
+
+    .register-link p a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+        .register-link p a:hover {
+            text-decoration: underline;
+        }

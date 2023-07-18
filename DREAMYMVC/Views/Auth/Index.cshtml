@@ -1,0 +1,34 @@
+﻿@model Dreamy.Domain.Shared.Dtos.Auth.LoginDto;
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="login-box">
+    <div class="login-container">
+        <form asp-controller="Auth" asp-action="Index" method="post">
+            <div class="login-text">
+                <header>ĐĂNG NHẬP</header>
+            </div>
+            <div class="input-login">
+                <input class="input" asp-for="Email" type="username" placeholder="Tên đăng nhập">
+                <i class="bi bi-person"></i>
+            </div>
+            <div class="input-login">
+                <input class="input" asp-for="Password" type="password" placeholder="Mật khẩu">
+                <i class="bi bi-lock"></i>
+            </div>
+            <div class="remember-forgot">
+                <label><input type="checkbox"> Ghi nhớ</label>
+                <a href="#">Quên mật khẩu?</a>
+            </div>
+            <div class="button-login">
+                <button type="submit">Xác nhận</button>
+            </div>
+            <div class="register-link">
+                <p>
+                    Chưa có tài khoản?
+                    <a href="#">Register</a>
+                </p>
+            </div>
+        </form>
+</div>
