@@ -1,0 +1,12 @@
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Infrastucture\bin\Debug\net7.0\Dreamy.Infrastucture.deps.json
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Infrastucture\bin\Debug\net7.0\Dreamy.Infrastucture.dll
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Infrastucture\bin\Debug\net7.0\Dreamy.Infrastucture.pdb
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Infrastucture\obj\Debug\net7.0\Dreamy.Infrastucture.csproj.AssemblyReference.cache
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Infrastucture\obj\Debug\net7.0\Dreamy.Infrastucture.GeneratedMSBuildEditorConfig.editorconfig
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Infrastucture\obj\Debug\net7.0\Dreamy.Infrastucture.AssemblyInfoInputs.cache
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Infrastucture\obj\Debug\net7.0\Dreamy.Infrastucture.AssemblyInfo.cs
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Infrastucture\obj\Debug\net7.0\Dreamy.Infrastucture.csproj.CoreCompileInputs.cache
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Infrastucture\obj\Debug\net7.0\Dreamy.Infrastucture.dll
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Infrastucture\obj\Debug\net7.0\refint\Dreamy.Infrastucture.dll
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Infrastucture\obj\Debug\net7.0\Dreamy.Infrastucture.pdb
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Infrastucture\obj\Debug\net7.0\ref\Dreamy.Infrastucture.dll

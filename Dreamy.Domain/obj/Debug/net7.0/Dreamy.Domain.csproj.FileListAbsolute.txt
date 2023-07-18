@@ -1,0 +1,15 @@
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Domain\obj\Debug\net7.0\Dreamy.Domain.csproj.AssemblyReference.cache
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Domain\obj\Debug\net7.0\Dreamy.Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Domain\obj\Debug\net7.0\Dreamy.Domain.AssemblyInfoInputs.cache
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Domain\obj\Debug\net7.0\Dreamy.Domain.AssemblyInfo.cs
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Domain\obj\Debug\net7.0\Dreamy.Domain.csproj.CoreCompileInputs.cache
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Domain\bin\Debug\net7.0\Dreamy.Domain.deps.json
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Domain\bin\Debug\net7.0\Dreamy.Domain.dll
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Domain\bin\Debug\net7.0\Dreamy.Domain.pdb
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Domain\bin\Debug\net7.0\Dreamy.Domain.Shared.dll
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Domain\bin\Debug\net7.0\Dreamy.Domain.Shared.pdb
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Domain\obj\Debug\net7.0\Dreamy.Domain.csproj.CopyComplete
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Domain\obj\Debug\net7.0\Dreamy.Domain.dll
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Domain\obj\Debug\net7.0\refint\Dreamy.Domain.dll
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Domain\obj\Debug\net7.0\Dreamy.Domain.pdb
+E:\MyProject\DREAMY\MVC\DreamyShop\Dreamy.Domain\obj\Debug\net7.0\ref\Dreamy.Domain.dll
