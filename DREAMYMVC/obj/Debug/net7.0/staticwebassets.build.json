@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4JiVIKD11/c/hnWiZ7/9oNgcGpfSd7s3Uh1B89NYV7M=",
+  "Hash": "9t1LTs4aX+OQc1GbUCY31iAhZ3PJ1dySLFWIv75IwzQ=",
   "Source": "DREAMYMVC",
   "BasePath": "_content/DREAMYMVC",
   "Mode": "Default",
@@ -117,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\planet-1702788.jpg"
+    },
+    {
+      "Identity": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\js\\main.js",
+      "SourceId": "DREAMYMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\",
+      "BasePath": "_content/DREAMYMVC",
+      "RelativePath": "js/main.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\main.js"
     },
     {
       "Identity": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\js\\site.js",

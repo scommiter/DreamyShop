@@ -1,6 +1,8 @@
 ﻿using Dreamy.Domain.Shared.Dtos.Auth;
 using Dreamy.Logic.Auth;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
+using System.Reflection;
 
 namespace DREAMYMVC.Controllers
 {
@@ -24,6 +26,26 @@ namespace DREAMYMVC.Controllers
             if (!ModelState.IsValid)
                 return View(ModelState);
             var result = _authLogic.Login(request);
+            if (result.Result.Code != 0)
+            {
+                ModelState.AddModelError("", result.Result.Message);
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterDto request)
+        {
+            if (!ModelState.IsValid)
+                return View(ModelState);
+            var result = _authLogic.Register(request);
             if (result.Result.Code != 0)
             {
                 ModelState.AddModelError("", result.Result.Message);

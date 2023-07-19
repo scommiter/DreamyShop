@@ -1,0 +1,51 @@
+﻿@model Dreamy.Domain.Shared.Dtos.Auth.RegisterDto;
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+<div class="register-box">
+    <div class="register-container">
+         <form asp-controller="Auth" asp-action="Register" method="post">
+            <div class="login-text">
+                <header>ĐĂNG KÝ</header>
+            </div>
+            <div class="input-register">
+                <input asp-for="FullName" type="text" placeholder="Họ và tên">
+                <i class="bi bi-person"></i>
+            </div>
+            <div class="input-register">
+                <input asp-for="Email" type="email" placeholder="Email">
+                <i class="bi bi-envelope"></i>
+            </div>
+            <div class="input-register">
+                <input type="password" placeholder="Mật khẩu">
+                <i class="bi bi-lock"></i>
+            </div>
+            <div class="input-register">
+                <input asp-for="Password" type="password" placeholder="Nhập lại mật khẩu">
+                <i class="bi bi-lock"></i>
+            </div>
+            <div class="radio-register">
+                <div class="radio-male">
+                    <input asp-for="GenderType" type="radio" id="male" value="male">
+                    <label for="male">Nam</label><br>
+                </div>
+                <div class="radio-female">
+                    <input asp-for="GenderType" type="radio" id="female" value="female">
+                    <label for="female">Nữ</label><br>
+                </div>
+                <i class="bi bi-gender-ambiguous"></i>
+            </div>
+            <div class="input-register">
+                <input asp-for="Phone" type="number" placeholder="Số điện thoại">
+                <i class="bi bi-telephone"></i>
+            </div>
+            <div class="date-register">
+                <input asp-for="Dob" type="date" id="dob" name="dob">
+                <i class="bi bi-balloon"></i>
+            </div>
+            <div class="button-register">
+                <button type="submit">Xác nhận</button>
+            </div>
+         </form>
+    </div>
+</div>

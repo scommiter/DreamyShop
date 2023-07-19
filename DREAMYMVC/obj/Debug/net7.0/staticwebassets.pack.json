@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\img\\planet-1702788.jpg"
     },
     {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\js\\main.js",
+      "PackagePath": "staticwebassets\\js\\main.js"
+    },
+    {
       "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

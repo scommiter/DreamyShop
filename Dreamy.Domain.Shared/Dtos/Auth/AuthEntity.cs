@@ -1,13 +1,15 @@
-﻿namespace Dreamy.Domain.Shared.Dtos.Auth
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Dreamy.Domain.Shared.Dtos.Auth
 {
     public class RegisterDto
     {
         public string FullName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public bool GenderType { get; set; }
+        public string GenderType { get; set; }
         public string Phone { get; set; }
-        public DateTime Dob { get; set; }
+        public string Dob { get; set; }
     }
 
     public class AuthEntity
