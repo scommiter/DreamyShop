@@ -63,7 +63,7 @@ namespace Dreamy.Logic.Auth
             }
         }
 
-        public async Task<ApiResult<AuthResult>> Register(RegisterDto registerDto)
+        public async Task<ApiResult<bool>> Register(RegisterDto registerDto)
         {
             //if (_repository.Auth.GetAll().Result.AsQueryable().IsEmailExist(registerDto.Email) || _repository.Auth.GetAll().Result.AsQueryable().IsPhoneExist(registerDto.Phone))
             //{
@@ -87,15 +87,16 @@ namespace Dreamy.Logic.Auth
                 user.Password = hashsalt.Hash;
                 user.StoredSalt = hashsalt.Salt;
             }
+
             await _repository.Auth.Register(user);
-            var userResult = _repository.Auth.GetAll().Result.AsQueryable().GetAuthEntity(_repository.Role.GetAll().Result.ToList());
-            var result = new AuthResult()
-            {
-                Token = _tokenService.GenerateJwtToken(userResult),
-                IsAuthSuccessful = true,
-                User = userResult,
-            };
-            return new ApiSuccessResult<AuthResult>(result);
+            //var userResult = _repository.Auth.GetAll().Result.AsQueryable().GetAuthEntity(_repository.Role.GetAll().Result.ToList());
+            //var result = new AuthResult()
+            //{
+            //    Token = _tokenService.GenerateJwtToken(userResult),
+            //    IsAuthSuccessful = true,
+            //    User = userResult,
+            //};
+            return new ApiSuccessResult<bool>(true);
         }
     }
 }

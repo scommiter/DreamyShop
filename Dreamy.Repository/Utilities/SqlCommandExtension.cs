@@ -144,9 +144,11 @@ namespace Dreamy.Repository.Utilities
                 if (prop.Name == "Id") continue;
                 if (prop.GetGetMethod().IsVirtual) continue;
                 sqlColumnName.Append($"{quotes}{prop.Name}");
+                sqlColumnName.Append($"{quotes}'{prop.GetValue(entity)}'");
                 if (prop.PropertyType.FullName == "System.Byte[]")
                 {
-                    sqlColumnName.Append($"{quotes}'CONVERT(varbinary, {prop.GetValue(entity)})'");
+                    var t = prop.GetValue(entity);
+                    sqlColumnValue.Append($"{quotes}'CONVERT(varbinary, {prop.GetValue(entity)})'");
                 }
                 else
                 {

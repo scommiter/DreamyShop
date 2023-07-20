@@ -262,7 +262,8 @@
       "Dreamy.Repository/1.0.0": {
         "dependencies": {
           "Dapper": "2.0.143",
-          "Dreamy.Domain": "1.0.0"
+          "Dreamy.Domain": "1.0.0",
+          "System.Data.SqlClient": "4.8.5"
         },
         "runtime": {
           "Dreamy.Repository.dll": {}

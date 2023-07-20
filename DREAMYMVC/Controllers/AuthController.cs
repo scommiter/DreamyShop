@@ -46,7 +46,7 @@ namespace DREAMYMVC.Controllers
             if (!ModelState.IsValid)
                 return View(ModelState);
             var result = _authLogic.Register(request);
-            if (result.Result.Code != 0)
+            if (result.Result.Result)
             {
                 ModelState.AddModelError("", result.Result.Message);
                 return View();
