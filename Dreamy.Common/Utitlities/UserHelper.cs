@@ -58,7 +58,7 @@ namespace Dreamy.Common.Utitlities
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        public static AuthEntity GetAuthEntity(this IQueryable<User> query)
+        public static AuthEntity GetAuthEntity(this IQueryable<User> query, List<Role> roles)
         {
             var user = query.Select(u => new AuthEntity()
             {
@@ -67,7 +67,7 @@ namespace Dreamy.Common.Utitlities
                 FullName = u.FullName,
                 Avatar = u.Avatar,
                 Phone = u.Phone,
-                RoleTypes = u.Roles.Where(r => r.RoleType != (byte)RoleType.Customer).Select(r => r.RoleType).ToList()
+                RoleTypes = roles.Where(r => r.RoleType != (byte)RoleType.Customer).Select(r => r.RoleType).ToList()
             }).FirstOrDefault();
             if (user == null)
             {

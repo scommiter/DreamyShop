@@ -22,12 +22,12 @@ namespace Dreamy.Repository.Generic
         //private IProductAttributeValueRepository _productAttributeValue;
         //private IManufacturerRepository _manufacturer;
         //private ICategoryRepository _category;
-        //private IRoleRepository _role;
+        private IRoleRepository _role;
         public RepositoryWrapper(
             IDbConnection db,
-            IAuthRepository auth
+            IAuthRepository auth,
             //IUserRepository user,
-            //IRoleRepository role,
+            IRoleRepository role
             //IProductRepository product,
             //IProductAttributeRepository productAttribute,
             //IProductAttributeValueRepository productAttributeValue,
@@ -47,7 +47,7 @@ namespace Dreamy.Repository.Generic
             //_productAttributeValue = productAttributeValue;
             //_manufacturer = manufacturer;
             //_category = category;
-            //_role = role;
+            _role = role;
             //_attribute = attribute;
             //_productVariant = productVariant;
             //_productVariantValue = productVariantValue;
@@ -78,17 +78,17 @@ namespace Dreamy.Repository.Generic
         //    }
         //}
 
-        //public IRoleRepository Role
-        //{
-        //    get
-        //    {
-        //        if (_role == null)
-        //        {
-        //            _role = new RoleRepository(_context);
-        //        }
-        //        return _role;
-        //    }
-        //}
+        public IRoleRepository Role
+        {
+            get
+            {
+                if (_role == null)
+                {
+                    _role = new RoleRepository(_db);
+                }
+                return _role;
+            }
+        }
 
         //public IProductRepository Product
         //{

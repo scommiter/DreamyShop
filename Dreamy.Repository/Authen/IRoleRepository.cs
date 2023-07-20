@@ -3,8 +3,7 @@ using Dreamy.Repository.Generic;
 
 namespace Dreamy.Repository.Authen
 {
-    public interface IAuthRepository : IGenericRepository<User>
+    public interface IRoleRepository : IGenericRepository<Role>
     {
-        Task Register(User userRegister);
     }
 }

@@ -42,7 +42,7 @@ namespace Dreamy.Logic.Auth
             var isPasswordMatched = Cryptography.VerifyPassword(loginDto.Password, user.StoredSalt, user.Password);
             if (isPasswordMatched)
             {
-                var userResult = _repository.Auth.GetAll().Result.ToList().Where(u => u.Email.ToLower() == email || u.Phone.Contains(phone)).AsQueryable().GetAuthEntity();
+                var userResult = _repository.Auth.GetAll().Result.ToList().Where(u => u.Email.ToLower() == email || u.Phone.Contains(phone)).AsQueryable().GetAuthEntity(_repository.Role.GetAll().Result.ToList());
 
                 if (userResult == null)
                 {
@@ -63,9 +63,39 @@ namespace Dreamy.Logic.Auth
             }
         }
 
-        public Task<ApiResult<AuthResult>> Register(RegisterDto registerDto)
+        public async Task<ApiResult<AuthResult>> Register(RegisterDto registerDto)
         {
-            throw new NotImplementedException();
+            //if (_repository.Auth.GetAll().Result.AsQueryable().IsEmailExist(registerDto.Email) || _repository.Auth.GetAll().Result.AsQueryable().IsPhoneExist(registerDto.Phone))
+            //{
+            //    return new ApiErrorResult<AuthResult>((int)ErrorCodes.DuplicatedData);
+            //}
+            var test = _repository.Auth.GetAll();
+
+            var user = new Domain.User()
+            {
+                FullName = registerDto.FullName,
+                GenderType = registerDto.GenderType == "male" ? false : true,
+                Phone = registerDto.Phone,
+                Dob = registerDto.Dob,
+                Email = registerDto.Email,
+                DateCreated = DateTime.Now,
+            };
+
+            var hashsalt = Cryptography.EncryptPassword(registerDto.Password);
+            if (!string.IsNullOrEmpty(registerDto.Password))
+            {
+                user.Password = hashsalt.Hash;
+                user.StoredSalt = hashsalt.Salt;
+            }
+            await _repository.Auth.Register(user);
+            var userResult = _repository.Auth.GetAll().Result.AsQueryable().GetAuthEntity(_repository.Role.GetAll().Result.ToList());
+            var result = new AuthResult()
+            {
+                Token = _tokenService.GenerateJwtToken(userResult),
+                IsAuthSuccessful = true,
+                User = userResult,
+            };
+            return new ApiSuccessResult<AuthResult>(result);
         }
     }
 }

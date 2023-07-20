@@ -132,6 +132,32 @@ namespace Dreamy.Repository.Utilities
             return $"INSERT INTO {tableName} ({sqlColumnName}) VALUES ({sqlColumnValue})";
         }
 
+        public static string RegisterUser<T>(T entity) where T : class
+        {
+            var sqlColumnName = new StringBuilder();
+            var sqlColumnValue = new StringBuilder();
+            var tableName = GetTableName<T>();
+            var props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            string quotes = "";
+            foreach (var prop in props)
+            {
+                if (prop.Name == "Id") continue;
+                if (prop.GetGetMethod().IsVirtual) continue;
+                sqlColumnName.Append($"{quotes}{prop.Name}");
+                if (prop.PropertyType.FullName == "System.Byte[]")
+                {
+                    sqlColumnName.Append($"{quotes}'CONVERT(varbinary, {prop.GetValue(entity)})'");
+                }
+                else
+                {
+                    sqlColumnValue.Append($"{quotes}'{prop.GetValue(entity)}'");
+                }
+                quotes = ",";
+            }
+            var test = $"INSERT INTO {tableName} ({sqlColumnName}) VALUES ({sqlColumnValue})";
+            return $"INSERT INTO {tableName} ({sqlColumnName}) VALUES ({sqlColumnValue})";
+        }
+
         /// <summary>
         /// Create select specific column in specific table
         /// </summary>

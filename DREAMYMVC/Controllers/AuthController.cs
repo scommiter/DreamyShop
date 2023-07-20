@@ -51,7 +51,7 @@ namespace DREAMYMVC.Controllers
                 ModelState.AddModelError("", result.Result.Message);
                 return View();
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Auth");
         }
     }
 }

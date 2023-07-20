@@ -9,7 +9,7 @@ namespace Dreamy.Domain.Shared.Dtos.Auth
         public string Password { get; set; }
         public string GenderType { get; set; }
         public string Phone { get; set; }
-        public string Dob { get; set; }
+        public DateTime Dob { get; set; }
     }
 
     public class AuthEntity

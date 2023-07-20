@@ -16,14 +16,14 @@ namespace DREAMYMVC.Configurations
             string connectionString = configuration.GetConnectionString("DreamyShopDBContext");
             services.AddSingleton<AccessToken>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSingleton<IDbConnection>((sp) => new SqlConnection(connectionString));
+            services.AddScoped<IDbConnection>((sp) => new SqlConnection(connectionString));
 
             #region REPOSITORY
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             //services.AddScoped<IUserRepository, UserRepository>();
-            //services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
             //services.AddScoped<IProductRepository, ProductRepository>();
             //services.AddScoped<IProductVariantRepository, ProductVariantRepository>();
             //services.AddScoped<IProductImageRepository, ProductImageRepository>();

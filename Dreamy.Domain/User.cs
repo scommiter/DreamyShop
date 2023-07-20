@@ -1,5 +1,8 @@
-﻿namespace Dreamy.Domain
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Dreamy.Domain
 {
+    [Table("Users")]
     public class User : AuditEntity
     {
         public int Id { get; set; }
@@ -18,6 +21,5 @@
         public string Password { get; set; }
 
         public byte[] StoredSalt { get; set; }
-        public virtual ICollection<Role> Roles { get; set; }
     }
 }
