@@ -2,3 +2,8 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+hamburger = document.querySelector(".hamburger");
+hamburger.onclick = function () {
+    navBar = document.querySelector(".nav-bar");
+    navBar.classList.toggle("active");
+}

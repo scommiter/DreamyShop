@@ -17,6 +17,158 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\app.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\app.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\b10.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\b10.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\b14.png",
+      "PackagePath": "staticwebassets\\img\\HomePage\\b14.png"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\b16.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\b16.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\b17.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\b17.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\b18.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\b18.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\b19.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\b19.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\b20.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\b20.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\b4.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\b4.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\b7.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\b7.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\button.png",
+      "PackagePath": "staticwebassets\\img\\HomePage\\button.png"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\f1.png",
+      "PackagePath": "staticwebassets\\img\\HomePage\\f1.png"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\f2.png",
+      "PackagePath": "staticwebassets\\img\\HomePage\\f2.png"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\f3.png",
+      "PackagePath": "staticwebassets\\img\\HomePage\\f3.png"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\f4.png",
+      "PackagePath": "staticwebassets\\img\\HomePage\\f4.png"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\f5.png",
+      "PackagePath": "staticwebassets\\img\\HomePage\\f5.png"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\f6.png",
+      "PackagePath": "staticwebassets\\img\\HomePage\\f6.png"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\hero.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\hero.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\mountains-55067.png",
+      "PackagePath": "staticwebassets\\img\\HomePage\\mountains-55067.png"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\pay.png",
+      "PackagePath": "staticwebassets\\img\\HomePage\\pay.png"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\planet-1702788.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\planet-1702788.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\play.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\play.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\products\\f1.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\products\\f1.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\products\\f2.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\products\\f2.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\products\\f3.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\products\\f3.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\products\\f4.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\products\\f4.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\products\\f5.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\products\\f5.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\products\\f6.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\products\\f6.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\products\\f7.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\products\\f7.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\products\\f8.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\products\\f8.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\products\\n1.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\products\\n1.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\products\\n2.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\products\\n2.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\products\\n3.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\products\\n3.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\products\\n4.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\products\\n4.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\products\\n5.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\products\\n5.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\products\\n6.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\products\\n6.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\products\\n7.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\products\\n7.jpg"
+    },
+    {
+      "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\HomePage\\products\\n8.jpg",
+      "PackagePath": "staticwebassets\\img\\HomePage\\products\\n8.jpg"
+    },
+    {
       "Id": "E:\\MyProject\\DREAMY\\MVC\\DreamyShop\\DREAMYMVC\\wwwroot\\img\\planet-1702788.jpg",
       "PackagePath": "staticwebassets\\img\\planet-1702788.jpg"
     },
