@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dreamy.Domain
 {
+    [Table("ProductAttributes")]
     public class ProductAttribute : AuditEntity
     {
         public int ProductId { get; set; }

@@ -1,5 +1,8 @@
-﻿namespace Dreamy.Domain
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Dreamy.Domain
 {
+    [Table("ImageProducts")]
     public class ImageProduct : TrackEntity
     {
         public int Id { get; set; }

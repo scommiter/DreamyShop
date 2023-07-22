@@ -1,5 +1,8 @@
-﻿namespace Dreamy.Domain
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Dreamy.Domain
 {
+    [Table("CartDetails")]
     public class CartDetail
     {
         public int Id { get; set; }

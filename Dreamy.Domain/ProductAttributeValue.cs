@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dreamy.Domain
 {
+    [Table("ProductAttributeValues")]
     public class ProductAttributeValue : TrackEntity
     {
         public ProductAttributeValue() { }

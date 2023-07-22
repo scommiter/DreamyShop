@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dreamy.Domain
 {
+    [Table("Bills")]
     public class Bill : AuditEntity
     {
         public int Id { get; set; }

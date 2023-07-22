@@ -1,5 +1,8 @@
-﻿namespace Dreamy.Domain
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Dreamy.Domain
 {
+    [Table("Attributes")]
     public class Attribute : AuditEntity
     {
         public int Id { get; set; }

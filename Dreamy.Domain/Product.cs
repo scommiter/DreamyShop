@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Dreamy.Domain
 {
+    [Table("Products")]
     public class Product : AuditEntity
     {
         public Product() { }

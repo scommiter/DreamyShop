@@ -1,5 +1,8 @@
-﻿namespace Dreamy.Domain
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Dreamy.Domain
 {
+    [Table("PromotionCategories")]
     public class PromotionCategory : AuditEntity
     {
         public int Id { get; set; }

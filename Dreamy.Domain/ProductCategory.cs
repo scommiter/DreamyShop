@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dreamy.Domain
 {
+    [Table("ProductCategories")]
     public class ProductCategory : AuditEntity
     {
         public ProductCategory() { }

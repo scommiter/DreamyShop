@@ -1,5 +1,8 @@
-﻿namespace Dreamy.Domain
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Dreamy.Domain
 {
+    [Table("ProductVariants")]
     public class ProductVariant : AuditEntity
     {
         public int Id { get; set; }

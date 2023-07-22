@@ -5,6 +5,7 @@ using Dreamy.Domain.Shared.Dtos.Auth;
 using Dreamy.Logic.Auth.Result;
 using Dreamy.Logic.Auth.Security;
 using Dreamy.Repository.Generic;
+using Microsoft.AspNetCore.Http;
 
 namespace Dreamy.Logic.Auth
 {

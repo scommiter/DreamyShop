@@ -1,6 +1,8 @@
-﻿using Dreamy.Domain.Shared.Dtos.Auth;
+﻿using Dreamy.Common.Utitlities;
+using Dreamy.Domain.Shared.Dtos.Auth;
 using Dreamy.Logic.Auth;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using System.Globalization;
 using System.Reflection;
 
@@ -31,6 +33,7 @@ namespace DREAMYMVC.Controllers
                 ModelState.AddModelError("", result.Result.Message);
                 return View();
             }
+            HttpContext.Session.SetString("token", result.Result.Result.Token);
             return RedirectToAction("Index", "Home");
         }
 
@@ -46,7 +49,7 @@ namespace DREAMYMVC.Controllers
             if (!ModelState.IsValid)
                 return View(ModelState);
             var result = _authLogic.Register(request);
-            if (result.Result.Result)
+            if (!result.Result.Result)
             {
                 ModelState.AddModelError("", result.Result.Message);
                 return View();
