@@ -120,10 +120,3 @@ E:\MyProject\DREAMY\MVC\DreamyShop\DREAMYMVC\bin\Debug\net7.0\runtimes\win\lib\n
 E:\MyProject\DREAMY\MVC\DreamyShop\DREAMYMVC\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 E:\MyProject\DREAMY\MVC\DreamyShop\DREAMYMVC\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
 E:\MyProject\DREAMY\MVC\DreamyShop\DREAMYMVC\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
-E:\MyProject\DREAMY\MVC\DreamyShop\DREAMYMVC\bin\Debug\net7.0\System.Web.Mvc.dll
-E:\MyProject\DREAMY\MVC\DreamyShop\DREAMYMVC\bin\Debug\net7.0\System.Web.Razor.dll
-E:\MyProject\DREAMY\MVC\DreamyShop\DREAMYMVC\bin\Debug\net7.0\System.Web.Helpers.dll
-E:\MyProject\DREAMY\MVC\DreamyShop\DREAMYMVC\bin\Debug\net7.0\System.Web.WebPages.Deployment.dll
-E:\MyProject\DREAMY\MVC\DreamyShop\DREAMYMVC\bin\Debug\net7.0\System.Web.WebPages.Razor.dll
-E:\MyProject\DREAMY\MVC\DreamyShop\DREAMYMVC\bin\Debug\net7.0\System.Web.WebPages.dll
-E:\MyProject\DREAMY\MVC\DreamyShop\DREAMYMVC\bin\Debug\net7.0\Microsoft.Web.Infrastructure.dll

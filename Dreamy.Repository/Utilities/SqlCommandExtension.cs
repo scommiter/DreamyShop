@@ -228,7 +228,7 @@ namespace Dreamy.Repository.Utilities
             return $"dbo.{toTable} {shortNameTableTo} ON {shortNameTableFrom}.{fromColumn} = {shortNameTableTo}.{toColumn}";
         }
 
-        private static string GetTableName<T>() where T : class
+        public static string GetTableName<T>() where T : class
         {
             string tableName = typeof(T).GetCustomAttributes(typeof(TableAttribute), true)
                 .OfType<TableAttribute>()
@@ -241,7 +241,7 @@ namespace Dreamy.Repository.Utilities
         /// </summary>
         /// <param name="tableName"></param>
         /// <returns></returns>
-        private static string GetTableShortName(string tableName)
+        public static string GetTableShortName(string tableName)
         {
             Regex regex = new Regex("[^A-Z]");
             return regex.Replace(tableName, "");

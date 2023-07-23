@@ -1,4 +1,7 @@
-﻿using DREAMYMVC.Models;
+﻿using Dreamy.Domain.Shared.Dtos;
+using Dreamy.Logic.Auth;
+using Dreamy.Logic.Product;
+using DREAMYMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,17 +9,17 @@ namespace DREAMYMVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IProductLogic _productLogic;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IProductLogic productLogic)
         {
-            _logger = logger;
+            _productLogic = productLogic;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            string token = HttpContext.Session.GetString("token");
-            return View();
+            var productPagings = await _productLogic.GetAllProductPaging(new PagingRequest { Limit = 8, Page = 1});
+            return View(productPagings.Result);
         }
     }
 }

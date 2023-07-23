@@ -1,10 +1,5 @@
 ﻿using Dreamy.Repository.Authen;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dreamy.Repository.Generic
 {
@@ -13,7 +8,7 @@ namespace Dreamy.Repository.Generic
         private readonly IDbConnection _db;
         private IAuthRepository _auth;
         //private IUserRepository _user;
-        //private IProductRepository _product;
+        private IProductRepository _product;
         //private IProductVariantRepository _productVariant;
         //private IProductVariantImageRepository _productVariantImage;
         //private IProductVariantValueRepository _productVariantValue;
@@ -27,8 +22,8 @@ namespace Dreamy.Repository.Generic
             IDbConnection db,
             IAuthRepository auth,
             //IUserRepository user,
-            IRoleRepository role
-            //IProductRepository product,
+            IRoleRepository role,
+            IProductRepository product
             //IProductAttributeRepository productAttribute,
             //IProductAttributeValueRepository productAttributeValue,
             //IManufacturerRepository manufacturer
@@ -42,7 +37,7 @@ namespace Dreamy.Repository.Generic
             _db = db;
             _auth = auth;
             //_user = user;
-            //_product = product;
+            _product = product;
             //_productAttribute = productAttribute;
             //_productAttributeValue = productAttributeValue;
             //_manufacturer = manufacturer;
@@ -90,17 +85,17 @@ namespace Dreamy.Repository.Generic
             }
         }
 
-        //public IProductRepository Product
-        //{
-        //    get
-        //    {
-        //        if (_product == null)
-        //        {
-        //            _product = new ProductRepository(_db);
-        //        }
-        //        return _product;
-        //    }
-        //}
+        public IProductRepository Product
+        {
+            get
+            {
+                if (_product == null)
+                {
+                    _product = new ProductRepository(_db);
+                }
+                return _product;
+            }
+        }
 
         //public IProductAttributeRepository ProductAttribute
         //{

@@ -15,15 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dreamy.Logic", "Dreamy.Logi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dreamy.Repository", "Dreamy.Repository", "{8D9F8A22-8E81-4EC4-8AAE-EE2B3E8DF625}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dreamy.Repository", "Dreamy.Repository\Dreamy.Repository.csproj", "{CC43D399-E5E9-4BED-8346-4F69B8EC5FF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dreamy.Repository", "Dreamy.Repository\Dreamy.Repository.csproj", "{CC43D399-E5E9-4BED-8346-4F69B8EC5FF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dreamy.Logic", "Dreamy.Logic\Dreamy.Logic.csproj", "{CEABF36C-06E2-4A5C-B7FC-3DEAF6D2A368}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dreamy.Logic", "Dreamy.Logic\Dreamy.Logic.csproj", "{CEABF36C-06E2-4A5C-B7FC-3DEAF6D2A368}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dreamy.Domain", "Dreamy.Domain\Dreamy.Domain.csproj", "{D67ECA9D-FCC2-48F3-A616-42E5200F0D83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dreamy.Domain", "Dreamy.Domain\Dreamy.Domain.csproj", "{D67ECA9D-FCC2-48F3-A616-42E5200F0D83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dreamy.Common", "Dreamy.Common\Dreamy.Common.csproj", "{437FC502-61CE-4060-9F2F-9CD271E31A52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dreamy.Common", "Dreamy.Common\Dreamy.Common.csproj", "{437FC502-61CE-4060-9F2F-9CD271E31A52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dreamy.Domain.Shared", "Dreamy.Domain.Shared\Dreamy.Domain.Shared.csproj", "{A9544832-7E1E-4136-B1DC-A4305FA32429}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dreamy.Domain.Shared", "Dreamy.Domain.Shared\Dreamy.Domain.Shared.csproj", "{A9544832-7E1E-4136-B1DC-A4305FA32429}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

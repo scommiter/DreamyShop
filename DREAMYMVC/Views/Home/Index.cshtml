@@ -1,5 +1,5 @@
-﻿@{
-}
+﻿@using Dreamy.Common.Results;
+@model PageResult<Dreamy.Domain.Shared.Dtos.Product.ProductDto>
 
 <section id="hero">
     <div class="hero-content">
@@ -36,134 +36,25 @@
     <p class="featured-context-1">Sản phẩm nổi bật<p>
     <p class="featured-context-2">Thiết kế mới hiện tại cho mùa hè sôi động</p>
     <div class="pro-container">
-        <div class="pro">
-            <img src="./img/HomePage/products/f1.jpg" alt="">
-            <div class="des">
-                <span>ADIDAS</span>
-                <p class="featured-name">Cartoon Astronaut</p>
-                <div class="star">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
+         @foreach (var item in Model.Items)
+         {
+            <div class="pro">
+                <img src="./img/HomePage/products/f1.jpg" alt="">
+                <div class="des">
+                    <span>@item.Code</span>
+                    <p class="featured-name">@item.Name</p>
+                    <div class="star">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="featured-money">@item.RangPrice</p>
                 </div>
-                <p class="featured-money">$77</p>
+                <a href="#"><i class="bi bi-cart-check cart"></i></a>
             </div>
-            <a href="#"><i class="bi bi-cart-check cart"></i></a>
-        </div>
-        <div class="pro">
-            <img src="./img/HomePage/products/f1.jpg" alt="">
-            <div class="des">
-                <span>ADIDAS</span>
-                <p class="featured-name">Cartoon Astronaut</p>
-                <div class="star">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                </div>
-                <p class="featured-money">$77</p>
-            </div>
-            <a href="#"><i class="bi bi-cart-check cart"></i></a>
-        </div>
-        <div class="pro">
-            <img src="./img/HomePage/products/f1.jpg" alt="">
-            <div class="des">
-                <span>ADIDAS</span>
-                <p class="featured-name">Cartoon Astronaut</p>
-                <div class="star">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                </div>
-                <p class="featured-money">$77</p>
-            </div>
-            <a href="#"><i class="bi bi-cart-check cart"></i></a>
-        </div>
-        <div class="pro">
-            <img src="./img/HomePage/products/f1.jpg" alt="">
-            <div class="des">
-                <span>ADIDAS</span>
-                <p class="featured-name">Cartoon Astronaut</p>
-                <div class="star">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                </div>
-                <p class="featured-money">$77</p>
-            </div>
-            <a href="#"><i class="bi bi-cart-check cart"></i></a>
-        </div>
-        <div class="pro">
-            <img src="./img/HomePage/products/f1.jpg" alt="">
-            <div class="des">
-                <span>ADIDAS</span>
-                <p class="featured-name">Cartoon Astronaut</p>
-                <div class="star">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                </div>
-                <p class="featured-money">$77</p>
-            </div>
-            <a href="#"><i class="bi bi-cart-check cart"></i></a>
-        </div>
-        <div class="pro">
-            <img src="./img/HomePage/products/f1.jpg" alt="">
-            <div class="des">
-                <span>ADIDAS</span>
-                <p class="featured-name">Cartoon Astronaut</p>
-                <div class="star">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                </div>
-                <p class="featured-money">$77</p>
-            </div>
-            <a href="#"><i class="bi bi-cart-check cart"></i></a>
-        </div>
-        <div class="pro">
-            <img src="./img/HomePage/products/f1.jpg" alt="">
-            <div class="des">
-                <span>ADIDAS</span>
-                <p class="featured-name">Cartoon Astronaut</p>
-                <div class="star">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                </div>
-                <p class="featured-money">$77</p>
-            </div>
-            <a href="#"><i class="bi bi-cart-check cart"></i></a>
-        </div>
-        <div class="pro">
-            <img src="./img/HomePage/products/f1.jpg" alt="">
-            <div class="des">
-                <span>ADIDAS</span>
-                <p class="featured-name">Cartoon Astronaut</p>
-                <div class="star">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                </div>
-                <p class="featured-money">$77</p>
-            </div>
-            <a href="#"><i class="bi bi-cart-check cart"></i></a>
-        </div>
+         }      
     </div>
 </section>
 <section id="banner" class="section-m1">

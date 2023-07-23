@@ -5,6 +5,7 @@ using Dreamy.Repository.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Dreamy.Logic.Product;
 
 namespace DREAMYMVC.Configurations
 {
@@ -24,7 +25,7 @@ namespace DREAMYMVC.Configurations
             services.AddScoped<IAuthRepository, AuthRepository>();
             //services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
-            //services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             //services.AddScoped<IProductVariantRepository, ProductVariantRepository>();
             //services.AddScoped<IProductImageRepository, ProductImageRepository>();
             //services.AddScoped<IProductVariantValueRepository, ProductVariantValueRepository>();
@@ -43,7 +44,7 @@ namespace DREAMYMVC.Configurations
             services.AddScoped<IAuthLogic, AuthLogic>();
             //services.AddScoped<IUserLogic, UserLogic>();
             //services.AddScoped<IRoleLogic, RoleLogic>();
-            //services.AddScoped<IProductLogic, ProductLogic>();
+            services.AddScoped<IProductLogic, ProductLogic>();
             //services.AddScoped<IManufacturerLogic, ManufacturerLogic>();
             //services.AddScoped<ICategoryLogic, CategoryLogic>();
             //services.AddScoped<IReportLogic, ReportLogic>();
