@@ -1,14 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "ep615cbs8kvq1Ch7k3shVRxxVhrsmQD78rUmFTRPRQQCLCf0lkxq6g80RGrjVIZYIh08AsXOyvM9TORGN8he6g==",
+  "dgSpecHash": "VPYz6ZBvk868Ucc8OPs6fF6r1tQJXGo/nybpYXLrZTfefC7501VBQ6A2c9xOKvxhc2RIrjQIezu4MyNMkETLgg==",
   "success": true,
-  "projectFilePath": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
+  "projectFilePath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
-    "C:\\Users\\admin\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512"
+    "C:\\Users\\admin\\.nuget\\packages\\system.io.pipelines\\5.0.2\\system.io.pipelines.5.0.2.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.20\\microsoft.windowsdesktop.app.ref.6.0.20.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.20\\microsoft.netcore.app.ref.6.0.20.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.20\\microsoft.aspnetcore.app.ref.6.0.20.nupkg.sha512"
   ],
   "logs": []
 }

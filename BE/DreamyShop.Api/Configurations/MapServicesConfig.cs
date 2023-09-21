@@ -20,6 +20,7 @@ using DreamyShop.Logic.Cart;
 using DreamyShop.Repository.Repositories.Bill;
 using DreamyShop.Logic.Bill;
 using DreamyShop.Logic.Chart;
+using DreamyShop.Common.Caches;
 
 namespace DreamyShop.Api.Configurations
 {
@@ -30,6 +31,7 @@ namespace DreamyShop.Api.Configurations
             services.AddSingleton<AccessToken>();
             services.AddSingleton(AutoMapperProfile.RegisterMappings().CreateMapper());
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IRedisCacheService, RedisCacheService>();
 
             #region REPOSITORY
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));

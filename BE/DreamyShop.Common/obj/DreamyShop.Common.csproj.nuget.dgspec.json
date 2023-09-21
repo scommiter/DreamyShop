@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj": {}
+    "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj": {}
   },
   "projects": {
-    "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj": {
+    "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj",
+        "projectUniqueName": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj",
         "projectName": "DreamyShop.Common",
-        "projectPath": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj",
+        "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj",
         "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Common\\obj\\",
+        "outputPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -44,6 +44,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.Extensions.Caching.Abstractions": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
@@ -60,12 +64,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     }

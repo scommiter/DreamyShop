@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cOjlrZDjEbgdiX7e3fHnfXQTcQ7JgWyIYPELsXA8CcpeX1wZ0/s75TiA8Iom/4pcY7oP5L4UyTohHr0acrsM8A==",
+  "dgSpecHash": "hN0R3B/sg4ZGVMdhqUugImFmXC0sHddzABC+ymmoEo1W8ynEt2GtAQ967mG8R9aYpgEw3xm1+RhCcgtnY7nb9Q==",
   "success": true,
-  "projectFilePath": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj",
+  "projectFilePath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\azure.core\\1.6.0\\azure.core.1.6.0.nupkg.sha512",
@@ -67,7 +67,10 @@
     "C:\\Users\\admin\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.2\\system.threading.tasks.extensions.4.5.2.nupkg.sha512",
-    "C:\\Users\\admin\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
+    "C:\\Users\\admin\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.20\\microsoft.windowsdesktop.app.ref.6.0.20.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.20\\microsoft.netcore.app.ref.6.0.20.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.20\\microsoft.aspnetcore.app.ref.6.0.20.nupkg.sha512"
   ],
   "logs": []
 }

@@ -20,6 +20,13 @@ builder.Services.AddDbContext<DreamyShopDbContext>(options => options.UseSqlServ
     ));
 builder.Services.MapServices();
 
+builder.Services.AddMemoryCache();
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetSection("CacheSettings:ConnectionString").Value;
+});
+
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services.AddControllers();

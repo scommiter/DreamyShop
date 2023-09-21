@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj": {}
+    "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj": {}
   },
   "projects": {
-    "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj": {
+    "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
+        "projectUniqueName": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
         "projectName": "DreamyShop.Domain.Shared",
-        "projectPath": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
+        "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj",
         "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\obj\\",
+        "outputPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -64,23 +64,37 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj": {
+    "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj",
+        "projectUniqueName": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj",
         "projectName": "DreamyShop.Domain",
-        "projectPath": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj",
+        "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\DreamyShop.Domain.csproj",
         "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-        "outputPath": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Domain\\obj\\",
+        "outputPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -101,8 +115,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj": {
-                "projectPath": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj"
+              "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj": {
+                "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj"
               }
             }
           }
@@ -143,12 +157,26 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     }

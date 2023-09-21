@@ -560,3 +560,6 @@ E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Api\obj\Debug\net6.0\refint\DreamyS
 E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Api\obj\Debug\net6.0\DreamyShop.Api.pdb
 E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Api\obj\Debug\net6.0\DreamyShop.Api.genruntimeconfig.cache
 E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Api\obj\Debug\net6.0\ref\DreamyShop.Api.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.Extensions.Caching.StackExchangeRedis.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Pipelines.Sockets.Unofficial.dll
+E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\StackExchange.Redis.dll

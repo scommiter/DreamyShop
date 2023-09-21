@@ -575,6 +575,24 @@
           }
         }
       },
+      "Microsoft.Extensions.Caching.StackExchangeRedis/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Caching.Abstractions": "6.0.0",
+          "Microsoft.Extensions.Options": "6.0.0",
+          "StackExchange.Redis": "2.2.4"
+        },
+        "compile": {
+          "lib/net6.0/Microsoft.Extensions.Caching.StackExchangeRedis.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.Extensions.Caching.StackExchangeRedis.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.Extensions.Configuration/6.0.0": {
         "type": "package",
         "dependencies": {
@@ -1134,6 +1152,22 @@
           }
         }
       },
+      "Pipelines.Sockets.Unofficial/2.2.8": {
+        "type": "package",
+        "dependencies": {
+          "System.IO.Pipelines": "5.0.1"
+        },
+        "compile": {
+          "lib/net5.0/Pipelines.Sockets.Unofficial.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/Pipelines.Sockets.Unofficial.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "SQLitePCLRaw.core/2.0.6": {
         "type": "package",
         "dependencies": {
@@ -1144,6 +1178,22 @@
         },
         "runtime": {
           "lib/netstandard2.0/SQLitePCLRaw.core.dll": {}
+        }
+      },
+      "StackExchange.Redis/2.6.122": {
+        "type": "package",
+        "dependencies": {
+          "Pipelines.Sockets.Unofficial": "2.2.8"
+        },
+        "compile": {
+          "lib/net6.0/StackExchange.Redis.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/StackExchange.Redis.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Swashbuckle.AspNetCore/6.2.3": {
@@ -1633,6 +1683,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "Microsoft.Extensions.Caching.Abstractions": "6.0.0",
           "Newtonsoft.Json": "13.0.3"
         },
         "compile": {
@@ -2433,6 +2484,25 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "Microsoft.Extensions.Caching.StackExchangeRedis/6.0.0": {
+      "sha512": "RKMfmo0a8thbKuPizV40slVWIEJFRyM94p9/ClgGEVTppwdnFFymrJJAr8G/FQ8fI062j08bpBlQedDLk2ePJw==",
+      "type": "package",
+      "path": "microsoft.extensions.caching.stackexchangeredis/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/Microsoft.Extensions.Caching.StackExchangeRedis.dll",
+        "lib/net461/Microsoft.Extensions.Caching.StackExchangeRedis.xml",
+        "lib/net6.0/Microsoft.Extensions.Caching.StackExchangeRedis.dll",
+        "lib/net6.0/Microsoft.Extensions.Caching.StackExchangeRedis.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Caching.StackExchangeRedis.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Caching.StackExchangeRedis.xml",
+        "microsoft.extensions.caching.stackexchangeredis.6.0.0.nupkg.sha512",
+        "microsoft.extensions.caching.stackexchangeredis.nuspec"
+      ]
+    },
     "Microsoft.Extensions.Configuration/6.0.0": {
       "sha512": "tq2wXyh3fL17EMF2bXgRhU7JrbO3on93MRKYxzz4JzzvuGSA1l0W3GI9/tl8EO89TH+KWEymP7bcFway6z9fXg==",
       "type": "package",
@@ -3178,6 +3248,29 @@
         "packageIcon.png"
       ]
     },
+    "Pipelines.Sockets.Unofficial/2.2.8": {
+      "sha512": "zG2FApP5zxSx6OcdJQLbZDk2AVlN2BNQD6MorwIfV6gVj0RRxWPEp2LXAxqDGZqeNV1Zp0BNPcNaey/GXmTdvQ==",
+      "type": "package",
+      "path": "pipelines.sockets.unofficial/2.2.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net461/Pipelines.Sockets.Unofficial.dll",
+        "lib/net461/Pipelines.Sockets.Unofficial.xml",
+        "lib/net472/Pipelines.Sockets.Unofficial.dll",
+        "lib/net472/Pipelines.Sockets.Unofficial.xml",
+        "lib/net5.0/Pipelines.Sockets.Unofficial.dll",
+        "lib/net5.0/Pipelines.Sockets.Unofficial.xml",
+        "lib/netcoreapp3.1/Pipelines.Sockets.Unofficial.dll",
+        "lib/netcoreapp3.1/Pipelines.Sockets.Unofficial.xml",
+        "lib/netstandard2.0/Pipelines.Sockets.Unofficial.dll",
+        "lib/netstandard2.0/Pipelines.Sockets.Unofficial.xml",
+        "lib/netstandard2.1/Pipelines.Sockets.Unofficial.dll",
+        "lib/netstandard2.1/Pipelines.Sockets.Unofficial.xml",
+        "pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
+        "pipelines.sockets.unofficial.nuspec"
+      ]
+    },
     "SQLitePCLRaw.core/2.0.6": {
       "sha512": "Vh8n0dTvwXkCGur2WqQTITvk4BUO8i8h9ucSx3wwuaej3s2S6ZC0R7vqCTf9TfS/I4QkXO6g3W2YQIRFkOcijA==",
       "type": "package",
@@ -3188,6 +3281,27 @@
         "lib/netstandard2.0/SQLitePCLRaw.core.dll",
         "sqlitepclraw.core.2.0.6.nupkg.sha512",
         "sqlitepclraw.core.nuspec"
+      ]
+    },
+    "StackExchange.Redis/2.6.122": {
+      "sha512": "wp7mvGpFXaevfZ07/SDeh/6YHUJEgwJIGyjbDWKBYbPwKMJQYFz9zFEmBptqtVzqvSgft5nlewwutoaMaG0LPA==",
+      "type": "package",
+      "path": "stackexchange.redis/2.6.122",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net461/StackExchange.Redis.dll",
+        "lib/net461/StackExchange.Redis.xml",
+        "lib/net472/StackExchange.Redis.dll",
+        "lib/net472/StackExchange.Redis.xml",
+        "lib/net6.0/StackExchange.Redis.dll",
+        "lib/net6.0/StackExchange.Redis.xml",
+        "lib/netcoreapp3.1/StackExchange.Redis.dll",
+        "lib/netcoreapp3.1/StackExchange.Redis.xml",
+        "lib/netstandard2.0/StackExchange.Redis.dll",
+        "lib/netstandard2.0/StackExchange.Redis.xml",
+        "stackexchange.redis.2.6.122.nupkg.sha512",
+        "stackexchange.redis.nuspec"
       ]
     },
     "Swashbuckle.AspNetCore/6.2.3": {
@@ -4104,7 +4218,9 @@
       "Microsoft.EntityFrameworkCore.Design >= 6.0.15",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.15",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.15",
+      "Microsoft.Extensions.Caching.StackExchangeRedis >= 6.0.0",
       "Microsoft.Extensions.Logging.Log4Net.AspNetCore >= 6.1.0",
+      "StackExchange.Redis >= 2.6.122",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
   },
@@ -4115,11 +4231,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Api\\DreamyShop.Api.csproj",
+      "projectUniqueName": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Api\\DreamyShop.Api.csproj",
       "projectName": "DreamyShop.Api",
-      "projectPath": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Api\\DreamyShop.Api.csproj",
+      "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Api\\DreamyShop.Api.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Api\\obj\\",
+      "outputPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4134,21 +4250,21 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+        "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj": {
-              "projectPath": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj"
+            "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj": {
+              "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj"
             },
-            "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Logic\\DreamyShop.Logic.csproj": {
-              "projectPath": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Logic\\DreamyShop.Logic.csproj"
+            "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Logic\\DreamyShop.Logic.csproj": {
+              "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Logic\\DreamyShop.Logic.csproj"
             },
-            "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj": {
-              "projectPath": "E:\\MyProject\\DREAMY\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj"
+            "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj": {
+              "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj"
             }
           }
         }
@@ -4203,9 +4319,17 @@
             "target": "Package",
             "version": "[6.0.15, )"
           },
+          "Microsoft.Extensions.Caching.StackExchangeRedis": {
+            "target": "Package",
+            "version": "[6.0.0, )"
+          },
           "Microsoft.Extensions.Logging.Log4Net.AspNetCore": {
             "target": "Package",
             "version": "[6.1.0, )"
+          },
+          "StackExchange.Redis": {
+            "target": "Package",
+            "version": "[2.6.122, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
@@ -4223,6 +4347,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.20, 6.0.20]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[6.0.20, 6.0.20]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.20, 6.0.20]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.20, 6.0.20]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -4231,7 +4373,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
       }
     }
   }
