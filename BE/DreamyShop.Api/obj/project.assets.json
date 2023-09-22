@@ -168,6 +168,32 @@
           }
         }
       },
+      "MediatR/9.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/MediatR.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/MediatR.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MediatR.Extensions.Microsoft.DependencyInjection/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "MediatR": "6.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/MediatR.Extensions.Microsoft.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MediatR.Extensions.Microsoft.DependencyInjection.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Authentication.Google/6.0.15": {
         "type": "package",
         "compile": {
@@ -1693,6 +1719,23 @@
           "bin/placeholder/DreamyShop.Common.dll": {}
         }
       },
+      "DreamyShop.CQRS.Logic/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "DreamyShop.Common": "1.0.0",
+          "DreamyShop.Domain.Shared": "1.0.0",
+          "DreamyShop.Repository": "1.0.0",
+          "MediatR": "9.0.0",
+          "MediatR.Extensions.Microsoft.DependencyInjection": "6.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DreamyShop.CQRS.Logic.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DreamyShop.CQRS.Logic.dll": {}
+        }
+      },
       "DreamyShop.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -1970,6 +2013,36 @@
         "log4net.2.0.13.nupkg.sha512",
         "log4net.nuspec",
         "package-icon.png"
+      ]
+    },
+    "MediatR/9.0.0": {
+      "sha512": "8b3UYNxegHVYcJMG2zH8wn+YqxLvXG+eMfj0cMCq/jTW72p6O3PCKMkrIv0mqyxdW7bA4gblsocw7n+/9Akg5g==",
+      "type": "package",
+      "path": "mediatr/9.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "gradient_128x128.png",
+        "lib/net461/MediatR.dll",
+        "lib/net461/MediatR.xml",
+        "lib/netstandard2.0/MediatR.dll",
+        "lib/netstandard2.0/MediatR.xml",
+        "lib/netstandard2.1/MediatR.dll",
+        "lib/netstandard2.1/MediatR.xml",
+        "mediatr.9.0.0.nupkg.sha512",
+        "mediatr.nuspec"
+      ]
+    },
+    "MediatR.Extensions.Microsoft.DependencyInjection/6.0.0": {
+      "sha512": "J20SuBmdOnSy/AZEmrtPVWqUzozpODpQvpfXJgqA8sd3op2JOKEC/uFZ63Sdm+efD+IQ/4Rt7IR0FSa7Ut3ZuA==",
+      "type": "package",
+      "path": "mediatr.extensions.microsoft.dependencyinjection/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/MediatR.Extensions.Microsoft.DependencyInjection.dll",
+        "mediatr.extensions.microsoft.dependencyinjection.6.0.0.nupkg.sha512",
+        "mediatr.extensions.microsoft.dependencyinjection.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Authentication.Google/6.0.15": {
@@ -4178,6 +4251,11 @@
       "path": "../DreamyShop.Common/DreamyShop.Common.csproj",
       "msbuildProject": "../DreamyShop.Common/DreamyShop.Common.csproj"
     },
+    "DreamyShop.CQRS.Logic/1.0.0": {
+      "type": "project",
+      "path": "../DreamyShop.CQRS.Logic/DreamyShop.CQRS.Logic.csproj",
+      "msbuildProject": "../DreamyShop.CQRS.Logic/DreamyShop.CQRS.Logic.csproj"
+    },
     "DreamyShop.Domain/1.0.0": {
       "type": "project",
       "path": "../DreamyShop.Domain/DreamyShop.Domain.csproj",
@@ -4208,10 +4286,13 @@
     "net6.0": [
       "AutoMapper >= 12.0.1",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.0",
+      "DreamyShop.CQRS.Logic >= 1.0.0",
       "DreamyShop.EntityFrameworkCore >= 1.0.0",
       "DreamyShop.Logic >= 1.0.0",
       "DreamyShop.Repository >= 1.0.0",
       "EPPlus >= 6.2.2",
+      "MediatR >= 9.0.0",
+      "MediatR.Extensions.Microsoft.DependencyInjection >= 6.0.0",
       "Microsoft.AspNetCore.Authentication.Google >= 6.0.15",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.15",
       "Microsoft.EntityFrameworkCore >= 6.0.15",
@@ -4257,6 +4338,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.CQRS.Logic\\DreamyShop.CQRS.Logic.csproj": {
+              "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.CQRS.Logic\\DreamyShop.CQRS.Logic.csproj"
+            },
             "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj": {
               "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj"
             },
@@ -4290,6 +4374,14 @@
           "EPPlus": {
             "target": "Package",
             "version": "[6.2.2, )"
+          },
+          "MediatR": {
+            "target": "Package",
+            "version": "[9.0.0, )"
+          },
+          "MediatR.Extensions.Microsoft.DependencyInjection": {
+            "target": "Package",
+            "version": "[6.0.0, )"
           },
           "Microsoft.AspNetCore.Authentication.Google": {
             "target": "Package",

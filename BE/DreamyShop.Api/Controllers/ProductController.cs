@@ -1,11 +1,11 @@
-﻿using DreamyShop.Api.Authorization;
+﻿using DreamyShop.CQRS.Logic.Queries.Product.GetPagingProduct;
 using DreamyShop.Domain.Shared.Dtos;
 using DreamyShop.Domain.Shared.Dtos.Product;
 using DreamyShop.Logic.Conditions;
 using DreamyShop.Logic.Product;
-using Microsoft.AspNetCore.Authorization;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using AuthorizeAttribute = DreamyShop.Api.Authorization.AuthorizeAttribute;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DreamyShop.Api.Controllers
 {
@@ -15,20 +15,23 @@ namespace DreamyShop.Api.Controllers
     {
         private readonly IProductLogic _productService;
         private readonly ILogger<ProductController> _logger;
+        private readonly IMediator _mediator;
         public ProductController(
             IProductLogic productService,
-            ILogger<ProductController> logger)
+            ILogger<ProductController> logger,
+            IMediator mediator)
         {
             _logger = logger;
             _productService = productService;
+            _mediator = mediator;
         }
 
-        [HttpGet("getAll")]
-        public async Task<IActionResult> GetAllProduct([FromQuery] PagingRequest pagingRequest)
-        {
-            var result = await _productService.GetAllProductPaging(pagingRequest);
-            return Ok(result.Result);
-        }
+        //[HttpGet("getAll")]
+        //public async Task<IActionResult> GetAllProduct([FromQuery] PagingRequest pagingRequest)
+        //{
+        //    var result = await _productService.GetAllProductPaging(pagingRequest);
+        //    return Ok(result.Result);
+        //}
 
         [HttpGet("getAllDisplay")]
         public async Task<IActionResult> GetAllProductDisplay([FromQuery] PagingRequest pagingRequest)
@@ -112,5 +115,15 @@ namespace DreamyShop.Api.Controllers
             }
             return Ok(result);
         }
+
+
+        #region CQRS
+        [HttpGet("getAll")]
+        public async Task<IActionResult> GetAllProduct([FromQuery] GetPagingProductQuery pagingRequest)
+        {
+            var result = await _mediator.Send(pagingRequest);
+            return Ok(result.Result);
+        }
+        #endregion
     }
 }

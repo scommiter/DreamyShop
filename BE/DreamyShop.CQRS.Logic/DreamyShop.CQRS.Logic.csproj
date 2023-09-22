@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="MediatR" Version="9.0.0" />
+	  <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DreamyShop.Common\DreamyShop.Common.csproj" />
+    <ProjectReference Include="..\DreamyShop.Domain.Shared\DreamyShop.Domain.Shared.csproj" />
+    <ProjectReference Include="..\DreamyShop.Repository\DreamyShop.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

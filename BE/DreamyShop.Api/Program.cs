@@ -11,6 +11,8 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using DreamyShop.CQRS.Logic;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +28,8 @@ builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = builder.Configuration.GetSection("CacheSettings:ConnectionString").Value;
 });
+
+builder.Services.AddApplicationServices();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 

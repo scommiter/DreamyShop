@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DreamyShop.Repository", "Dr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DreamyShop.Common", "DreamyShop.Common\DreamyShop.Common.csproj", "{D4AA5A62-16AA-40D9-8A76-8111B8A032C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DreamyShop.CQRS.Logic", "DreamyShop.CQRS.Logic\DreamyShop.CQRS.Logic.csproj", "{E47957A6-CC81-417A-B86C-ED516B249DE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{D4AA5A62-16AA-40D9-8A76-8111B8A032C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4AA5A62-16AA-40D9-8A76-8111B8A032C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4AA5A62-16AA-40D9-8A76-8111B8A032C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E47957A6-CC81-417A-B86C-ED516B249DE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E47957A6-CC81-417A-B86C-ED516B249DE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E47957A6-CC81-417A-B86C-ED516B249DE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E47957A6-CC81-417A-B86C-ED516B249DE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{9793DD53-1CD3-479F-BB9B-E9825612A90C} = {E48C6916-DE0A-4368-99BF-16AA971535EB}
 		{098B3CCF-3496-4C6A-A816-63EC486A162C} = {955BE3A7-8E67-43F6-AE44-C8557532EB13}
 		{D4AA5A62-16AA-40D9-8A76-8111B8A032C3} = {D39373E5-06D1-4827-89DB-E380A31C1817}
+		{E47957A6-CC81-417A-B86C-ED516B249DE2} = {E48C6916-DE0A-4368-99BF-16AA971535EB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {24B0160A-8959-42F5-B056-CDFD184B3AD1}

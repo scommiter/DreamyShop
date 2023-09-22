@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "t99UpWL+cTLa5LZCnMQHs/FYzUaq1DidUC0C8EHULam8W8Urk+NDZ5VtEiB22/A7GUNKR0YYhcCxMLYXzX1tyg==",
+  "dgSpecHash": "XWtDsJ7P1n1sKzkmPAabNqc2a2L0FfrDwDoidieGxaXtrYodUEvY1+7TGtCGMlb0JQhfV8o/mjyWIKx7Wwq0tQ==",
   "success": true,
   "projectFilePath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Api\\DreamyShop.Api.csproj",
   "expectedPackageFiles": [
@@ -14,6 +14,8 @@
     "C:\\Users\\admin\\.nuget\\packages\\epplus.system.drawing\\6.1.1\\epplus.system.drawing.6.1.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\log4net\\2.0.13\\log4net.2.0.13.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\mediatr\\9.0.0\\mediatr.9.0.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\6.0.0\\mediatr.extensions.microsoft.dependencyinjection.6.0.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\6.0.15\\microsoft.aspnetcore.authentication.google.6.0.15.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.15\\microsoft.aspnetcore.authentication.jwtbearer.6.0.15.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.15\\microsoft.aspnetcore.cryptography.internal.6.0.15.nupkg.sha512",

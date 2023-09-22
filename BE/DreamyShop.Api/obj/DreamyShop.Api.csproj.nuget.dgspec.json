@@ -33,6 +33,9 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
+              "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.CQRS.Logic\\DreamyShop.CQRS.Logic.csproj": {
+                "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.CQRS.Logic\\DreamyShop.CQRS.Logic.csproj"
+              },
               "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj": {
                 "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Infrastructure\\DreamyShop.EntityFrameworkCore.csproj"
               },
@@ -66,6 +69,14 @@
             "EPPlus": {
               "target": "Package",
               "version": "[6.2.2, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             },
             "Microsoft.AspNetCore.Authentication.Google": {
               "target": "Package",
@@ -200,6 +211,99 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.CQRS.Logic\\DreamyShop.CQRS.Logic.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.CQRS.Logic\\DreamyShop.CQRS.Logic.csproj",
+        "projectName": "DreamyShop.CQRS.Logic",
+        "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.CQRS.Logic\\DreamyShop.CQRS.Logic.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.CQRS.Logic\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj": {
+                "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Common\\DreamyShop.Common.csproj"
+              },
+              "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj": {
+                "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Domain.Shared\\DreamyShop.Domain.Shared.csproj"
+              },
+              "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj": {
+                "projectPath": "E:\\MyProject\\DreamyShop\\BE\\DreamyShop.Repository\\DreamyShop.Repository.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             }
           },
           "imports": [
