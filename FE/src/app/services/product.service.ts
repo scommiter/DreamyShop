@@ -23,6 +23,8 @@ export class ProductService {
     maxResultCount: number,
     currentPage: number
   ): Observable<PageResultDto<ProductDto>> {
+    console.log("token:", localStorage.getItem('TOKEN'));
+    console.log("http:", this.http.request);
     return this.http.get<PageResultDto<ProductDto>>(
       `${environment.apiUrl}/api/Product/getAll?Page=${currentPage}&Limit=${maxResultCount}`
     );

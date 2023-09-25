@@ -71,8 +71,8 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        //[Authorize]
-        //[Member]
+        [Authorize]
+        [Member]
         public async Task<IActionResult> RemoveProduct(int id)
         {
             if (!ModelState.IsValid)

@@ -27,6 +27,8 @@ import { VariationUpdateItemComponent } from './variation-update-item/variation-
 import { ProductCreateModule } from './product-create/product-create.module';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from 'src/app/shared/http/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,16 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     ProductCreateModule,
     ToastModule,
   ],
-  providers: [DialogService, MessageService, ConfirmationService],
+  providers: [
+    DialogService, 
+    MessageService, 
+    ConfirmationService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ProductModule {}

@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DropdownModule } from 'primeng/dropdown';
@@ -20,6 +20,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ProductDetailComponent } from './shop/product-detail/product-detail.component';
 import { CartComponent } from './catalog/cart/cart.component';
 import { ShopLayoutComponent } from './shop/shop-layout/shop-layout.component';
+import { TokenInterceptor } from './shared/http/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,13 @@ import { ShopLayoutComponent } from './shop/shop-layout/shop-layout.component';
     CarouselModule,
     PaginatorModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

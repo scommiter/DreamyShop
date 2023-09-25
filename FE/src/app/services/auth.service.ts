@@ -31,4 +31,19 @@ export class AuthService {
   private createCompleteRoute = (route: string, envAddress: string) => {
     return `${envAddress}/${route}`;
   };
+
+  public getToken(): string | null {
+    return localStorage.getItem('TOKEN');
+  }
+
+  public isAuthenticated(): boolean {
+    // get the token
+    const token = this.getToken();
+    // return a boolean indicating whether or not the token is expired
+    return tokenNotExpired(token);
+  }
 }
+function tokenNotExpired(token: string | null): boolean {
+  throw new Error('Function not implemented.');
+}
+

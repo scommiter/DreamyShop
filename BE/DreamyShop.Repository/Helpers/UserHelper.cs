@@ -68,7 +68,7 @@ namespace DreamyShop.Repository.Helpers
                 FullName = u.FullName,
                 Avatar = u.Avatar,
                 Phone = u.Phone,
-                RoleTypes = u.Roles.Where(r => r.RoleType != (byte)RoleType.Customer).Select(r => r.RoleType).ToList()
+                RoleTypes = u.Roles.Select(r => r.RoleType).ToList()
             }).FirstOrDefault();
             if (user == null)
             {
