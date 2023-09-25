@@ -120,16 +120,22 @@ export class ProductComponent implements OnInit, OnDestroy {
       header: 'Xác nhận',
       icon: 'pi pi-info-circle',
       accept: () => {
-        this.messageService.add({
-          severity: 'info',
-          summary: 'Xác nhận',
-          detail: 'Xóa thành công',
-        });
         this.productService.deleteProduct(id).subscribe({
           next: () => {
             this.getAllProducts();
+            this.messageService.add({
+              severity: 'info',
+              summary: 'Xác nhận',
+              detail: 'Xóa thành công',
+            });
           },
-          error: (err) => {},
+          error: (err) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Không thể xóa',
+              detail: 'Bạn không có quyền xóa',
+            });
+          },
         });
       },
       reject: (type: any) => {

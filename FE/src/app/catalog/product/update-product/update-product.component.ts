@@ -260,17 +260,28 @@ export class UpdateProductComponent implements OnInit {
       .subscribe({
         next: () => {
           this.ref.close(this);
-          this.show();
+          this.showSuccess();
         },
-        error: (err) => {},
+        error: (err) => {
+          this.showEror();
+        },
       });
     this.updateCompleted.emit();
   }
-  show() {
+
+  showSuccess() {
     this.messageService.add({
       severity: 'success',
       summary: 'Thành công',
       detail: 'Cập nhật sản phẩm thành công',
+    });
+  }
+
+  showEror() {
+    this.messageService.add({
+      severity: 'erorr',
+      summary: 'Thất bại',
+      detail: 'Cập nhật sản phẩm thất bại. Hãy kiểm tra quyền của tài khoản.',
     });
   }
 

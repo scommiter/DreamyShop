@@ -27,6 +27,8 @@ import { UserCreateComponent } from './user-create/user-create.component';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { InputMaskModule } from 'primeng/inputmask';
+import { HasRoleDirective } from 'src/app/shared/directives/has-role.directive';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { InputMaskModule } from 'primeng/inputmask';
     AssignRoleComponent,
     UserEditComponent,
     UserCreateComponent,
+    HasRoleDirective
   ],
   imports: [
     CommonModule,

@@ -6,7 +6,10 @@ import { LoginComponent } from './login.component';
 import { LoginRoutingModule } from './login-routing.module';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, LoginRoutingModule],
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule, 
+    LoginRoutingModule],
   declarations: [LoginComponent],
   providers: [AuthService],
 })

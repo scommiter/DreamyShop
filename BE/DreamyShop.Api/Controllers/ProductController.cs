@@ -3,7 +3,6 @@ using DreamyShop.Domain.Shared.Dtos;
 using DreamyShop.Domain.Shared.Dtos.Product;
 using DreamyShop.Logic.Conditions;
 using DreamyShop.Logic.Product;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using AuthorizeAttribute = DreamyShop.Api.Authorization.AuthorizeAttribute;
 
@@ -45,8 +44,8 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpPost("create"), DisableRequestSizeLimit]
-        //[Authorize]
-        //[Member]
+        [Authorize]
+        [Member]
         public async Task<IActionResult> CreateProduct([FromBody] ProductCreateDto productCreateUpdateDto)
         {
             if (!ModelState.IsValid)
@@ -58,8 +57,8 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        //[Authorize]
-        //[Member]
+        [Authorize]
+        [Member]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductUpdateDto productCreateUpdateDto)
         {
             if (!ModelState.IsValid)
@@ -97,6 +96,8 @@ namespace DreamyShop.Api.Controllers
         }
 
         [HttpPost("uploadMultipleImage"), DisableRequestSizeLimit]
+        [Authorize]
+        [Member]
         public async Task<IActionResult> UploadMultipleFile(int productId)
         {
             if (!ModelState.IsValid)

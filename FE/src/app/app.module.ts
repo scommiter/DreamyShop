@@ -21,6 +21,9 @@ import { ProductDetailComponent } from './shop/product-detail/product-detail.com
 import { CartComponent } from './catalog/cart/cart.component';
 import { ShopLayoutComponent } from './shop/shop-layout/shop-layout.component';
 import { TokenInterceptor } from './shared/http/token.interceptor';
+import { JwtModule } from '@auth0/angular-jwt';
+
+const tokenGetter = () => () => localStorage.getItem('TOKEN')!;
 
 @NgModule({
   declarations: [
@@ -34,6 +37,11 @@ import { TokenInterceptor } from './shared/http/token.interceptor';
     ShopLayoutComponent,
   ],
   imports: [
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter(),
+      }
+    }),
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,

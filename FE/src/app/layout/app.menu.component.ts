@@ -1,6 +1,8 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -9,7 +11,10 @@ import { LayoutService } from './service/app.layout.service';
 export class AppMenuComponent implements OnInit {
   model: any[] = [];
 
-  constructor(public layoutService: LayoutService) {}
+  constructor(
+    public layoutService: LayoutService,  
+    private jwtHelper: JwtHelperService,
+    private authService: AuthService) {}
 
   ngOnInit() {
     this.model = [
@@ -49,16 +54,6 @@ export class AppMenuComponent implements OnInit {
         ],
       },
       {
-        label: 'Quản lý shop',
-        items: [
-          {
-            label: 'Người dùng',
-            icon: 'pi pi-fw pi-user',
-            routerLink: ['/admin/user'],
-          },
-        ],
-      },
-      {
         label: 'Kho',
         items: [
           {
@@ -84,5 +79,33 @@ export class AppMenuComponent implements OnInit {
         ],
       },
     ];
+    this.checkToken();
+  }
+
+  checkToken(){
+    const token = this.authService.getToken();
+    if(token != null){
+      const decodedToken = this.jwtHelper.decodeToken(token as string);
+      const userRoles = decodedToken.RoleTypes;
+      //if has role admin
+      if (userRoles.includes(1)) {
+        this.addMenu();
+      }
+    }
+  }
+
+  addMenu() {
+    this.model.push( 
+      {
+        label: 'Quản lý shop',
+        items: [
+          {
+            label: 'Người dùng',
+            icon: 'pi pi-fw pi-user',
+            routerLink: ['/admin/user'],
+          },
+        ],
+      }
+    );
   }
 }
