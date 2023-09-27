@@ -567,3 +567,10 @@ E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\MediatR.dll
 E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.CQRS.Logic.dll
 E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.CQRS.Logic.pdb
 E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\MediatR.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.Extensions.Caching.StackExchangeRedis.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Pipelines.Sockets.Unofficial.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\StackExchange.Redis.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.CQRS.Logic.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\DreamyShop.CQRS.Logic.pdb

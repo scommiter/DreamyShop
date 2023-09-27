@@ -1,0 +1,8 @@
+version: "3.8"
+
+services: 
+  redisDb:
+    container_name: redisDb
+    restart: always
+    ports:
+     - "6379:6379"

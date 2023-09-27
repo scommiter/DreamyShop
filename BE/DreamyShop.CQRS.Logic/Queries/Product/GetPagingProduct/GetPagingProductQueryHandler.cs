@@ -1,6 +1,7 @@
 ﻿using DreamyShop.Common.Caches;
 using DreamyShop.Common.Constants;
 using DreamyShop.Common.Results;
+using DreamyShop.Domain;
 using DreamyShop.Domain.Shared.Dtos;
 using DreamyShop.Domain.Shared.Dtos.Category;
 using DreamyShop.Domain.Shared.Dtos.Product;
@@ -40,15 +41,57 @@ namespace DreamyShop.CQRS.Logic.Queries.Product.GetPagingProduct
                                             ProductId = b.ProductId
                                         });
 
+                //var queryLambda = _context.Products.Join(_context.Manufacturers,
+                //                          a => a.ManufacturerId,
+                //                          m => m.Id,
+                //                          (a, m) => new { a, m })
+                //                    .Join(_context.ProductCategories,
+                //                          am => am.a.CategoryId,
+                //                          pc => pc.Id,
+                //                          (am, pc) => new { am.a, am.m, pc })
+                //                    .GroupJoin(_context.ProductVariants,
+                //                               ampc => ampc.a.Id,
+                //                               b => b.ProductId,
+                //                               (ampc, b) => new { ampc.a, ampc.m, ampc.pc, b })
+                //                    .SelectMany(ampcb => ampcb.b.DefaultIfEmpty(),
+                //                                (ampcb, b) => new { ampcb.a, ampcb.m, ampcb.pc, b })
+                //                    .GroupJoin(_context.ProductVariantValues,
+                //                               ampcb => ampcb.b!.Id,
+                //                               c => c.ProductVariantId,
+                //                               (ampcb, c) => new { ampcb.a, ampcb.m, ampcb.pc, ampcb.b, c })
+                //                    .SelectMany(ampcbc => ampcbc.c.DefaultIfEmpty(),
+                //                                (ampcbc, c) => new { ampcbc.a, ampcbc.m, ampcbc.pc, ampcbc.b, c })
+                //                    .GroupJoin(_context.ProductAttributeValues,
+                //                               ampcbc => ampcbc.c!.ProductAttributeValueId,
+                //                               d => d.Id,
+                //                               (ampcbc, d) => new { ampcbc.a, ampcbc.m, ampcbc.pc, ampcbc.b, ampcbc.c, d })
+                //                    .SelectMany(ampcbcd => ampcbcd.d.DefaultIfEmpty(),
+                //                                (ampcbcd, d) => new
+                //                                {
+                //                                    ampcbcd.a.Id,
+                //                                    ampcbcd.a.Name,
+                //                                    ManufacturerName = ampcbcd.m.Name,
+                //                                    CategoryName = ampcbcd.pc.Name,
+                //                                    ampcbcd.a.Code,
+                //                                    ampcbcd.a.Slug,
+                //                                    ProductVariantId = ampcbcd.b!.Id,
+                //                                    ampcbcd.b.SKU,
+                //                                    ampcbcd.b.Quantity,
+                //                                    ampcbcd.b.Price,
+                //                                    ampcbcd.c!.ProductAttributeValueId,
+                //                                    d!.Value
+                //                                });
+
+
                 var query = (from p in _context.Products
                              join m in _context.Manufacturers on p.ManufacturerId equals m.Id
                              join c in _context.ProductCategories on p.CategoryId equals c.Id
                              join pv in _context.ProductVariants on p.Id equals pv.ProductId into pvN
                              from pv in pvN.DefaultIfEmpty()
                              join ip in _context.ImageProducts on p.Id equals ip.ProductId into ipvN
-                from ip in ipvN.DefaultIfEmpty()
+                             from ip in ipvN.DefaultIfEmpty()
                              join pvv in _context.ProductVariantValues on pv.Id equals pvv.ProductVariantId into pvvN
-                from pvv in pvvN.DefaultIfEmpty()
+                             from pvv in pvvN.DefaultIfEmpty()
                              join pav in _context.ProductAttributeValues on pvv.ProductAttributeValueId equals pav.Id into pavN
                              from pav in pavN.DefaultIfEmpty()
                              select new
