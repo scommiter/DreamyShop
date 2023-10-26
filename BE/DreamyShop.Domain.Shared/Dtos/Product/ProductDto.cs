@@ -26,6 +26,23 @@ namespace DreamyShop.Domain.Shared.Dtos.Product
         public DateTime DateUpdated { get; set; }
     }
 
+    public class ProductProcDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public DateTime DateCreated { get; set; }
+        public string ManufacturerName { get; set; }
+        public string CategoryName { get; set; }
+        public string Code { get; set; }
+        public string Slug { get; set; }
+        public int ProductVariantId { get; set; }
+        public string SKU { get; set; }
+        public int Quantity { get; set; }
+        public double Price { get; set; }
+        public int ProductAttributeValueId { get; set; }
+        public string Value { get; set; }
+    }
+
     public class ProductAttributeDisplayDto
     {
         public List<string>? AttributeNames { get; set; }

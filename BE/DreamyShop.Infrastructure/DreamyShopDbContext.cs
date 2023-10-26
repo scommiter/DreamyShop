@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DreamyShop.Domain;
+using DreamyShop.Domain.Shared.Dtos.Product;
 using Microsoft.EntityFrameworkCore;
 
 namespace DreamyShop.EntityFrameworkCore
@@ -43,6 +44,12 @@ namespace DreamyShop.EntityFrameworkCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ProductProcDto>(e =>
+            {
+                e.HasNoKey(); // chỉ định rằng DTO này không có khoá chính
+                e.ToView(null); // không map DTO này với bất kỳ bảng hoặc view nào
+            });
+
             modelBuilder.Entity<ProductVariantValue>()
                 .HasKey(pvv => new { 
                     pvv.ProductVariantId, 

@@ -29,89 +29,89 @@ namespace DreamyShop.Api.Controllers
             return Ok(result.Result);
         }
 
-        [HttpGet("getAllDisplay")]
-        public async Task<IActionResult> GetAllProductDisplay([FromQuery] PagingRequest pagingRequest)
-        {
-            var result = await _productService.GetAllProductDisplayPaging(pagingRequest);
-            return Ok(result.Result);
-        }
+        //[HttpGet("getAllDisplay")]
+        //public async Task<IActionResult> GetAllProductDisplay([FromQuery] PagingRequest pagingRequest)
+        //{
+        //    var result = await _productService.GetAllProductDisplayPaging(pagingRequest);
+        //    return Ok(result.Result);
+        //}
 
-        [HttpGet("getProduct/{productId}")]
-        public async Task<IActionResult> GetProductById(int productId)
-        {
-            var result = await _productService.GetProductById(productId);
-            return Ok(result.Result);
-        }
+        //[HttpGet("getProduct/{productId}")]
+        //public async Task<IActionResult> GetProductById(int productId)
+        //{
+        //    var result = await _productService.GetProductById(productId);
+        //    return Ok(result.Result);
+        //}
 
-        [HttpPost("create"), DisableRequestSizeLimit]
-        [Authorize]
-        [Member]
-        public async Task<IActionResult> CreateProduct([FromBody] ProductCreateDto productCreateUpdateDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var result = await _productService.CreateProduct(productCreateUpdateDto);
-            return Ok(result.Result);
-        }
+        //[HttpPost("create"), DisableRequestSizeLimit]
+        //[Authorize]
+        //[Member]
+        //public async Task<IActionResult> CreateProduct([FromBody] ProductCreateDto productCreateUpdateDto)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    var result = await _productService.CreateProduct(productCreateUpdateDto);
+        //    return Ok(result.Result);
+        //}
 
-        [HttpPut("{id}")]
-        [Authorize]
-        [Member]
-        public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductUpdateDto productCreateUpdateDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var result = await _productService.UpdateProduct(id, productCreateUpdateDto);
-            return Ok(result);
-        }
+        //[HttpPut("{id}")]
+        //[Authorize]
+        //[Member]
+        //public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductUpdateDto productCreateUpdateDto)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    var result = await _productService.UpdateProduct(id, productCreateUpdateDto);
+        //    return Ok(result);
+        //}
 
-        [HttpDelete("{id}")]
-        [Authorize]
-        [Member]
-        public async Task<IActionResult> RemoveProduct(int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var result = await _productService.RemoveProduct(id);
-            return Ok(result);
-        }
+        //[HttpDelete("{id}")]
+        //[Authorize]
+        //[Member]
+        //public async Task<IActionResult> RemoveProduct(int id)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    var result = await _productService.RemoveProduct(id);
+        //    return Ok(result);
+        //}
 
-        [HttpPut("searchCondition")]
-        public async Task<IActionResult> SearchProduct([FromForm] SearchProductCondition searchProductCondition, [FromQuery] PagingRequest pagingRequest)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            var result = await _productService.SearchProduct(searchProductCondition, pagingRequest);
-            if (result.Result == null)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result);
-        }
+        //[HttpPut("searchCondition")]
+        //public async Task<IActionResult> SearchProduct([FromForm] SearchProductCondition searchProductCondition, [FromQuery] PagingRequest pagingRequest)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return BadRequest(ModelState);
+        //    var result = await _productService.SearchProduct(searchProductCondition, pagingRequest);
+        //    if (result.Result == null)
+        //    {
+        //        return BadRequest(result);
+        //    }
+        //    return Ok(result);
+        //}
 
-        [HttpPost("uploadMultipleImage"), DisableRequestSizeLimit]
-        [Authorize]
-        [Member]
-        public async Task<IActionResult> UploadMultipleFile(int productId)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var formCollection = await Request.ReadFormAsync();
-            var files = formCollection.Files.ToList();
-            var result = await _productService.UploadMultipleImage(files, productId);
-            if (result.Result == null)
-            {
-                return BadRequest(result);
-            }
-            return Ok(result);
-        }
+        //[HttpPost("uploadMultipleImage"), DisableRequestSizeLimit]
+        //[Authorize]
+        //[Member]
+        //public async Task<IActionResult> UploadMultipleFile(int productId)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    var formCollection = await Request.ReadFormAsync();
+        //    var files = formCollection.Files.ToList();
+        //    var result = await _productService.UploadMultipleImage(files, productId);
+        //    if (result.Result == null)
+        //    {
+        //        return BadRequest(result);
+        //    }
+        //    return Ok(result);
+        //}
     }
 }

@@ -367,6 +367,14 @@
             "Microsoft.AspNetCore.Http.Features": {
               "target": "Package",
               "version": "[5.0.17, )"
+            },
+            "Z.EntityFramework.Plus.EFCore": {
+              "target": "Package",
+              "version": "[6.100.0.5, )"
+            },
+            "linq2db.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.0, )"
             }
           },
           "imports": [
