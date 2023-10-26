@@ -563,3 +563,6 @@ E:\MyProject\DREAMY\DreamyShop\BE\DreamyShop.Api\obj\Debug\net6.0\ref\DreamyShop
 E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.Extensions.Caching.StackExchangeRedis.dll
 E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Pipelines.Sockets.Unofficial.dll
 E:\MyProject\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\StackExchange.Redis.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Microsoft.Extensions.Caching.StackExchangeRedis.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\Pipelines.Sockets.Unofficial.dll
+Z:\Project\DreamyShop\BE\DreamyShop.Api\bin\Debug\net6.0\StackExchange.Redis.dll
